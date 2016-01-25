@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="bootstrap-master/dist/css/bootstrap.css">
+<script type="text/javascript" src="angular.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+
+</head>
+<body>
+<center>
+<div ng-app="expenseManagerApp" style="width:400px" class = "panel panel-default">
+	 <div class ="panel-heading"><h2>Expense Manager Application</h2> </div>
+	<div ng-controller="showIncomeExpenseController">
+	<table class="table table-stripped" style="width:400px">
+		<tr>
+			<th>Total Income</th>
+			<th>Total Expenses</th>
+			<th>Total Balance</th>	
+		</tr>
+		<tr>
+			<td>{{totalIncome}}</td>
+			<td>{{totalExpenses}}</td>
+			<td>{{balance}}</td>
+		</tr>
+	</table>
+		
+	<table class="table table-stripped" style="width:400px">
+	<tr>
+		<th><button ng-click="showIncomeDetails()">Show Income</button></th>
+		<th><button ng-click="showExpenseDetails()">Show Expenses</button></th>
+	</tr>
+	</table>
+
+		
+	<div ng-show="showIncome">
+		<h3>Income Details</h3>
+		<table class="table table-stripped" style="width:400px">
+			<tr>
+				<th>Payer</th>
+				<th>Amount</th>
+				<th>Date</th>
+				<th>Mode Of Payment</th>	
+			</tr>
+			<tr>
+				<td>{{IncomeDetails.payer}}</td>
+				<td>{{IncomeDetails.amount}}</td>
+				<td>{{IncomeDetails.date}}</td>
+				<td>{{IncomeDetails.modeOfPayment}}</td>
+			</tr>
+		</table>
+	</div>
+		
+	<div ng-hide="showExpense">
+		<h3>Expense Details</h3>
+		<table class="table table-stripped" style="width:400px">
+			<tr>
+				<th>Payee</th>
+				<th>Amount</th>
+				<th>Date</th>
+				<th>Mode Of Payment</th>	
+			</tr>
+			<tr>
+				<td>{{ExpenseDetails.payee}}</td>
+				<td>{{ExpenseDetails.amount}}</td>
+				<td>{{ExpenseDetails.date}}</td>
+				<td>{{ExpenseDetails.modeOfPayment}}</td>
+			</tr>
+		</table>
+	</div>
+    
+
+</div>
+</center>
+</body>
+</html>
