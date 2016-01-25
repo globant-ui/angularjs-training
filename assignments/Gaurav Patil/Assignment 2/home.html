@@ -1,0 +1,60 @@
+<html ng-app="expensesApp">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div ng-controller="controller">
+<center>
+<h2>Expenses Application</h2>
+<h3>
+	<div>
+  		Total Income :  <span ng-bind="total_income()"></span>
+	</div>
+</h3>
+<h3>
+	<div>
+  		Total Expenses :  <span ng-bind="total_exp()"></span>
+	</div>
+</h3>
+
+<h3> 
+	<div>
+  		Total Balance :  <span ng-bind="total_bal()"></span>
+	</div>
+</h3>
+
+<p>
+<div>
+<button class = "btn" ng-click="in = true">Show/Hide Income</button>
+<button class = "btn" ng-click="in = false">Show/Hide Expenses</button>		
+</div>
+<br><br>
+<table  ng-show="in" border="2" width="200">
+
+<td><b>Income Type</b></td>
+<td><b>Value</b></td>
+  <tr ng-repeat="x in income_array">
+
+    <td><b><span ng-bind="x.name"></span></b></td>
+    <td><b><span ng-bind="x.value"></span></b></td>
+  </tr>
+</table>
+<br>
+<table ng-show="!in" border="2" width="200">
+<td><b>Expenses Type</b></td>
+<td><b>Value</b></td>
+  <tr ng-repeat="x in exp_array">
+    <td><b><span ng-bind="x.name"></b></span></td>
+    <td><b><span ng-bind="x.value"></b></span></td>
+  </tr>
+</table>
+</center>
+</p>
+
+</div>
+<script src="controller.js"></script>
+
+</body>
+</html>
