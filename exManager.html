@@ -1,0 +1,90 @@
+<html>
+<head>
+	<title></title>
+	<script src="D:\Angular js Assignment\angular-1.4.9\angular.min.js"></script>
+	<script src="exApp.js"></script>
+	<script src="exCtrl.js"></script>
+</head>
+
+<body>
+	<div id="main-container" ng-app="exManager" ng-controller="expensecntr as excontrol">
+		<div id="header" style="width:100%; border-bottom:1px solid grey "> <h2 style="text-align:center; margin-bottom=12px"> Expense Manager </h2></div>
+
+		<div id="middle"style="width:100%; margin-top:2px;  border:1px solid grey; height:150px ">
+			<div id="left" style=" margin: 20px;" >  
+				<label> Total Income : </label> <span ng-bind= tot_income  >  </span><br>
+				<label> Total Expense : </label> <span ng-bind= tot_expense >  </span><br><br>
+				<label> Total Balance : </label> <span ng-bind= total > </span><br>
+			</div>
+
+			<div style="margin-top: 2px; margin-left:20px">
+				<button ng-click= "exvisible= true; clicked=true " >  Expense</button> 
+				<button ng-click= "exvisible= false; clicked=true " > Income </button>
+			</div>
+		</div>
+
+		<div id="content" style="clear:both; width:100%; margin-top:2px; height:300px; border:1px solid grey;" >
+			<table style=" margin-left:20px;" name="expense" ng-show="exvisible">
+				<th style=" margin-left:20px;"> Expense information </th>
+				<tr ng-repeat="(key, val  ) in expenses ">
+					<td   ng-bind="key" >  </td>
+					<td  ng-bind="val" style="padding-left:40px"> </td>
+				</tr>
+				<tr  style="height:4px; font-style:italic">
+					<td> Total Expense </td>
+					<td ng-bind= tot_expense   style="padding-left:40px"> </td>
+				</tr>
+			</table>
+
+
+
+			<table  style=" margin-left:20px;" name="income" ng-hide = "exvisible">
+
+				<th style=" margin-left:20px;"> Income Information </th>
+				<tr ng-repeat="(key, val ) in income ">
+					<td  ng-bind="key"> </td>
+					<td ng-bind="val"  style="padding-left:40px"> </td>
+				</tr>
+
+				<tr style="height:4px; font-style:italic">
+					<td >Total Income </td>
+					<td ng-bind= tot_income   style="padding-left:40px"> </td>
+				</tr>
+
+			</table> 
+		</div>
+	</div>
+
+	<script>
+
+		var app = angular.module("exManager", []);
+		app.controller("expensecntr",[ "$scope", function($scope) {
+			$scope.total=0;
+			$scope.total_expense=0;
+			$scope.total_income=0;
+
+			$scope.exvisible=false;
+			$scope.clicked=false;
+
+			$scope.expenses= new Object();
+			$scope.expenses.Rent= 5000;
+			$scope.expenses.Travel =3000;
+			$scope.expenses.Party = 4000;
+			$scope.expenses.Studies	= 1000;
+			$scope.expenses.Shopping =10000;
+
+			$scope.income= new Object();
+			$scope.income.Salary = 40000;
+			$scope.income.Business = 20000;
+			$scope.income.Deposites = 5000;
+
+			$scope.tot_income=$scope.income["Salary"] +	$scope.income["Business"]+	$scope.income["Deposites"] ;
+			$scope.tot_expense = $scope.expenses["Rent"]+	$scope.expenses["Travel"] +	$scope.expenses["Party"] +	$scope.expenses["Studies"]	+ $scope.expenses["Shopping"] ;
+
+			$scope.total = $scope.tot_income - $scope.tot_expense;
+		}]);
+
+	</script>
+
+</body>
+</html>
