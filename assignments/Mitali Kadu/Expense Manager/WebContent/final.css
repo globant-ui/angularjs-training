@@ -1,0 +1,88 @@
+.main {
+    height: 100vh;
+    width: 1080px;
+    margin-left: 10%;
+}
+#upper {
+    background-color: #00006c;
+    height: 84px;
+    min-height : 83px;
+    width: 100%;
+}
+
+#lower {
+    height: 100%;
+    width: 80%;
+    background-color: #f4f4f4;
+    position:  absolute;
+}
+
+.heading
+{
+	font-family: sans-serif;
+	font-weight: 600;
+	color: white;
+	text-align: center;
+	padding-top : 20px;
+	font-size: 26px;
+}
+.block_letters
+{
+	font-size: 26px;
+	color: #4E4A4A; 
+	background-color : #bcbcbc;
+	font-weight: 500; 
+	font-family: Expert-Sans-Light, verdana, arial, helvetica, clean, sans-serif;
+	margin-top : 10px;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#report
+{
+	border : 1px solid black;
+	padding : 5px;
+}
+#report td
+{
+	border : 1px solid black;
+	padding : 5px;
+}
+#report th
+{
+	border : 1px solid black;
+	background-color : #bcbcbc;
+	text-align : center;
+	padding : 5px;
+}
+
+
+.input_tables td
+{
+padding-top : .3em;
+padding-left : .5em;
+padding-bottom : .3em;
+}
+
+.error_msg
+{
+color  :red;
+font-size : 14px;
+padding-bottom : 7px;
+}
+
+.tabs
+{
+display : inline-block;
+height : 45px;
+width : 270px;
+margin-left : 60px;
+padding-top : 10px;
+margin-top : 10px;
+text-align : center;
+color : black;
+border-radius : 10px;
+background-color: #bcbcbc;
+font-size: 17px;
+}
