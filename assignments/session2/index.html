@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.8/angular.js" data-semver="1.4.8"></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body ng-controller="MainCtrl">
+    <button ng-click="showIncome()">Show Income</button>
+    <button ng-click="showExpense()">Show Expense</button>
+  <div ng-if="isShowExpense">  
+  <table style="width:100%" border="1px" class="tableFormat">
+  <tr>
+    <th>Id</th>
+    <th>payer</th>
+    <th>payee</th>
+    <th>category</th>
+    <th>subCategory</th>
+    <th>amount</th>
+    <th>date</th> 
+    <th>modeOfPayment</th>
+    <th>noteType</th>
+  </tr>
+  <tr ng-repeat="expense in expenses">
+    <td>{{expense.transactionId}}</td>
+    <td>{{expense.payer}}</td> 
+    <td>{{expense.payee}}</td>
+    <td>{{expense.category}}</td>
+    <td>{{expense.subCategory}}</td>
+    <td>{{expense.amount}}</td>
+    <td>{{expense.date}}</td>
+    <td>{{expense.modeOfPayment}}</td>
+    <td>{{expense.noteType}}</td>
+  </tr>
+</table>
+</div>
+<div ng-if="isShowIncome">  
+  <table style="width:100%" border="1px" class="tableFormat">
+  <tr>
+    <th>Id</th>
+    <th>payer</th>
+    <th>payee</th>
+    <th>category</th>
+    <th>subCategory</th>
+    <th>amount</th>
+    <th>date</th> 
+    <th>modeOfPayment</th>
+    <th>noteType</th>
+  </tr>
+  <tr ng-repeat="income in incomes">
+    <td>{{income.transactionId}}</td>
+    <td>{{income.payer}}</td> 
+    <td>{{income.payee}}</td>
+    <td>{{income.category}}</td>
+    <td>{{income.subCategory}}</td>
+    <td>{{income.amount}}</td>
+    <td>{{income.date}}</td>
+    <td>{{income.modeOfPayment}}</td>
+    <td>{{income.noteType}}</td>
+  </tr>
+</table>
+</div>
+</body>
+</html>
