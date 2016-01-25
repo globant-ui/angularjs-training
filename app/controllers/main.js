@@ -68,21 +68,20 @@ angular.module("myapp", []).controller("mainctrl", function($scope) {
     }
     
     $scope.calculatetotalIncome = function(){
-        var totalIncome = 0;
+        $scope.totalIncome = 0;
         $scope.IncomeTransactions.forEach(function(element) {
-            totalIncome = totalIncome + element.amount;
+            $scope.totalIncome = parseFloat($scope.totalIncome) + parseFloat(element.amount);
         }, this);
-        $scope.totalIncome = totalIncome;
     }
     
     $scope.calculatetotalExpense = function(){
         $scope.totalExpense = 0;
         $scope.ExpenseTransactions.forEach(function(element) {
-            $scope.totalExpense = $scope.totalExpense + element.amount;
+            $scope.totalExpense = parseFloat($scope.totalExpense) + parseFloat(element.amount);
         }, this);
     }
     
     $scope.calculatetotalBalance = function(){
-        $scope.totalBalance = $scope.totalIncome - $scope.totalExpense;
+        $scope.totalBalance = parseFloat($scope.totalIncome) - parseFloat($scope.totalExpense);
     }
 });
