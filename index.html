@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  	<title>http request</title>
+
+  <script src="js/angular.min.js"></script> 
+  	<script src="js/angular-ui-router.js"></script>
+	<script src="js/angular-animate.min.js"></script>
+
+
+	
+
+ 
+	<script src="app.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/mycss.css">
+	
+	
+	<style>
+	
+	</style>
+
+</head>
+
+<body>
+
+	<div ng-app="myApp" ng-controller="customersCtrl"> 	
+	
+	<div class="header">
+		
+		<div class="container">
+			<a href="#/" class="logo">Angular </a>
+			
+			<ul class="nav">
+							
+				<li> <a ui-sref="home"> Home </a> </li>				
+			</ul>
+				
+			<div class="clearFix"></div>
+			
+		</div> <!-- container -->
+		
+		
+	</div>
+	
+	<div id="content">
+
+		<div class="container">
+			
+			<div class="view" ui-view style="width:100%;">
+
+			</div>  
+		<div class="clearFix"></div>
+
+		</div><!--container view-->
+
+	</div><!--content-->
+	
+	
+</div>
+
+<script>
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
