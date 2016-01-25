@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <script data-require="angular.js@1.4.8" data-semver="1.4.8" src="https://code.angularjs.org/1.4.8/angular.js"></script>
+      <link rel="stylesheet" href="css/style.css" />
+      <link rel="stylesheet" href="css/bootstrap.css" />
+      <script src="app.js"></script>
+  </head>
+
+  <body ng-app="myapp" ng-controller="mycontroller">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="#" class="navbar-brand">Angular</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="container mtop text-center">
+    <h1>Expense Manager Description</h1>
+    
+    <div>
+     <table class="table table-striped table-bordered mtop">
+        <thead>
+          <tr>
+            <th>Total Income</th>
+            <th>Total Expense</th>
+            <th>Total Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> {{sumOfIncome}}</td>
+            <td> {{sumOfExpense}}</td>
+            <td>{{sumOfIncome - sumOfExpense}} </td>
+          </tr>
+        </tbody>
+      </table>
+    <button class="btn btn-primary"  ng-click="showIncome();">Show Income</button>
+    <button class="btn btn-primary" ng-click="showExpense()">Show Expense </button>    
+    <div ng-show="showExpenseTable"> 
+    <h2>Expense Details</h2>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Rent</th>
+            <th>Travel</th>
+            <th>Party</th>
+            <th>Office</th>
+            <th>Study</th>
+            <th>Shopping</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat = 'list in expenseArray'>
+            <td>{{list.rent}}</td>
+            <td>{{list.travel}}</td>
+            <td>{{list.party}}</td>
+            <td>{{list.office}}</td>
+            <td>{{list.study}}</td>
+            <td>{{list.shopping}}</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>   
+    <div ng-show="showIncomeTable"> 
+    <h2>Income Details</h2>    
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Salary</th>
+            <th>Business</th>
+            <th>Intrest on deposit</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+           <tr ng-repeat = 'list in incomeArray'>
+            <td>{{list.salary}}</td>
+            <td>{{list.business}}</td>
+            <td>{{list.intrest_on_deposit}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    
+    </div>
+    </div>      
+  </body>
+
+</html>
