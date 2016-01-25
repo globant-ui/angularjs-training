@@ -1,0 +1,74 @@
+<html>
+<script type="text/javascript" src="angular.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+<style type="text/css">
+	button{
+		padding: 10px;
+		margin-left: 20px;
+	}
+	table {
+   		border-collapse: collapse;
+   		width: 50%;
+   		height: 50px;
+	}
+	table td, table th {
+		border: 2px solid black;
+		 padding: 10px;
+		 text-align: center;
+	}
+</style>
+<body ng-app="ExpenseManager">
+	<h2>Expense Manager</h2>
+	-------------------------------------------------------------------------------------------
+
+	<div ng-controller = "ExpenseCtrl">
+
+		<div>
+			<h4> Total Income = {{totalIncome}}  </h4> 
+			<h4> Total Expense = {{totalExpense}} </h4>
+			<h4> Balance Left = {{balance}}</h4>
+		</div>
+		<div>
+			<button ng-click = "income_show = true;"> Show Income </button>
+			<button ng-click = "income_show = false;"> Show Expense </button>
+		</div>
+		<div ng-show = "!income_show">
+			<h3>Expense Details </h3>
+			<table >
+				<thead><tr><th>Id</th>
+				<th>Amount</th>
+				<th>Category</th>
+				<th>Date</th>
+				<th>Mode</th></tr></thead>
+
+				<tr ng-repeat = "exp in expense">
+					<td ng-bind = "exp.id"></td>
+					<td ng-bind = "exp.amount"></td>
+					<td ng-bind = "exp.category"></td>
+					<td ng-bind = "exp.date | date"></td>
+					<td ng-bind = "exp.mode"></td>
+				</tr>
+			</table>
+		</div>
+
+		<div ng-show = "income_show">
+			<h3> Income Details </h3>
+			<table >
+				<thead><tr><th>Id</th>
+				<th>Amount</th>
+				<th>Source</th>
+				<th>Date</th>
+				<th>Mode</th></tr></thead>
+
+				<tr ng-repeat = "inc in income">
+					<td ng-bind = "inc.id"></td>
+					<td ng-bind = "inc.amount"></td>
+					<td ng-bind = "inc.source"></td>
+					<td ng-bind = "inc.date"></td>
+					<td ng-bind = "inc.mode"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
