@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+   
+   <head>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+   </head>
+   
+   <body ng-app = "myapp">
+      
+      <div ng-controller = "mainctrl" class="container">
+         <div class="row">
+             <h3> Expense Manager </h3>
+         </div>
+         <div class="row">
+             <div class="col-xs-4">
+                 <button type="button" class="btn btn-default" ng-click="showIncome()">Income</button>
+             </div>
+             <div class="col-xs-4">
+                 <button type="button" class="btn btn-default" ng-click="showExpense()">Expense</button>
+             </div>
+         </div>
+         <div class="row">
+             <h2>Details</h2>
+             <p>Total Income : {{totalIncome}} </p>           
+             <p>Total Expense : {{totalExpense}} </p>
+             <p>Total Balance : {{totalBalance}} </p>
+             <table class="table">
+                <thead>
+                    <tr>
+                        <th>TransID</th>
+                        <th>Payer</th>
+                        <th>Payee</th>
+                        <th>Category</th>
+                        <th>SubCategory</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>ModeOfPayment</th>
+                        <th>Notes</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tr ng-repeat="x in TransValue">
+                        <td>{{ x.transactionId }}</td>
+                        <td>{{ x.payer }}</td>
+                        <td>{{ x.payee }}</td>
+                        <td>{{ x.category }}</td>
+                        <td>{{ x.subCategory }}</td>
+                        <td>{{ x.amount }}</td>
+                        <td>{{ x.date }}</td>
+                        <td>{{ x.modeOfPayment }}</td>
+                        <td>{{ x.notes }}</td>
+                        <td>{{ x.type }}</td>
+                    </tr>
+                </tbody>
+            </table>
+         </div>
+         
+      </div>   
+      <script type="text/javascript" src="../app/controllers/main.js"></script>
+      
+   </body>
+</html>
