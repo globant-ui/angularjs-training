@@ -1,17 +1,8 @@
-var app = angular.module('myApp',[]);
-
-app.controller('myControl',function($scope){
+var app = angular.module('myApp',[]).controller('myControl',function($scope){
  
   
    
-            $scope.ShowIncome = function () {
-              $scope.IsVisible = false;
-            }
-            
-            $scope.ShowExpance = function(){
-              $scope.IsVisible = true;  
-            }
-    
+           
      $scope.expenseData = [
         {
             name: 'Gaurishankar',

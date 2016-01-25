@@ -11,14 +11,14 @@
    
     <div ng-app="myApp" ng-controller="myControl">
         
-        <input type="button" value="Show Income" ng-click="ShowIncome()" />
-        <input type="button" value="Show Expence" ng-click="ShowExpance()" />
+        <input type="button" value="Show Income" ng-click="IsVisible = false" />
+        <input type="button" value="Show Expence" ng-click="IsVisible = true" />
         <br />
         <br />
         <div ng-show = "IsVisible"> 
         
         
-        <table border="2px"  ng-init="clkIndex=-1" >
+        <table border="2px" >
         <tr>
             <th>Name</th>
             <th>HRA</th>
@@ -39,7 +39,7 @@
     </table>
         </div>
         <div ng-hide = "IsVisible">
-        <table border="2px"  ng-init="clkIndex=-1" >
+        <table border="2px">
         <tr>
             <th>Name</th>
             <th>Income</th>
