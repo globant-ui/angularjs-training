@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="styles/main.scss">
+    <link rel="stylesheet" href="styles/customstyles.css">
+    <link href="styles/angular-datepicker.css" rel="stylesheet" type="text/css" />
+    <script src="lib/jquery.min.js" data-semver="2.1.1" data-require="jquery@*"></script>
+   <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css" />
+   <link type="text/css" rel="stylesheet" href="styles/datepicker.css" />
+  </head>
+
+  <body ng-app="expManagerApp">
+
+    <div ng-controller="expManagerCtrl">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" href="#/">Expnese Managment</a>
+      </div>
+      </div>
+        <div class="container">
+          <p>
+        <label> Type</label>
+         <select ng-model="expDetails.type" ng-options="c for c in expenceType">
+        <option value="">-- Source Type --</option>
+        <option value="$index">-- Source Type --</option></select>
+      </p>
+      <p>
+        <label> Payer</label>
+        <input required="required" type="text" ng-model="expDetails.payer" placeholder="Enter Amount Here..." required/>
+      </p>
+         <p>
+        <label> Payee</label>
+        <input required="required" type="text" ng-model="expDetails.payee" placeholder="Enter Amount Here..." required/>
+      </p>
+      <p>
+      <label> Category</label>
+       <select ng-model="expDetails.categorytype" ng-options="c for c in categoryType">
+        <option value="">-- Source Type --</option>
+        <option value="$index">-- Source Type --</option></select>
+    </p>
+
+    <p>
+      <label> Amount</label>
+      <input required="required" type="number" ng-model="expDetails.amount" placeholder="Enter Amount Here..." required/>
+    </p>
+    <p>
+      <label> Date</label>
+        <input type="text" datepicker="" ng-model="expDetails.date" dp-format="dd/mm/yyyy" />
+    </p>
+
+    <p>
+     <label> Mode of Payment</label>
+       <select ng-model="expDetails.modeofpayment" ng-options="c for c in modeofPayment">
+        <option value="">-- Source Type --</option>
+        <option value="$index">-- Source Type --</option></select>
+    </p>
+
+    <p>
+      <label> Note</label><textarea ng-model="expDetails.note"></textarea>
+    </p>
+    <p>
+      <input type="submit" class="btn default" ng-click="addIncome()" value="{{buttonValue}}" />
+       <input type="submit" class="btn cancel" value="Clear" />
+    </p>
+  </div>
+  </div>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+
+     <script src="app.js"></script>
+     <script src="controller/expManagerCtrl.js"></script>
+     <script src="directives/datepickerDirective.js"></script>
+     <script src="bootstrap-datepicker.js"></script>
+  </body>
+
+</html>
+
+<!-- refresh
+maintain data on ui
+navigation
+blocking users
+
+mvc
+mvvc -->
