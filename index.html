@@ -18,51 +18,92 @@
             <a class="navbar-brand" href="#/">Expnese Managment</a>
       </div>
       </div>
-        <div class="container">
-          <p>
+      <div class="container">
+         <form name="expensedetailForm">
+        <p>
         <label> Type</label>
-         <select ng-model="expDetails.type" ng-options="c for c in expenceType">
-        <option value="">-- Source Type --</option>
+         <select ng-model="expDetails.type" name="type"class="form-control" ng-options="c for c in expenceType" required>
+        <option value="">-- Type --</option>
         <option value="$index">-- Source Type --</option></select>
+         <span class="error-color" ng-show="expensedetailForm.type.$error.required && expensedetailForm.type.$dirty">Type required</span>
       </p>
       <p>
         <label> Payer</label>
-        <input required="required" type="text" ng-model="expDetails.payer" placeholder="Enter Amount Here..." required/>
+        <input type="text" name="payer" class="form-control" ng-model="expDetails.payer" placeholder="Enter Payer Name...!"  required/>
+        <span class="error-color" ng-show="expensedetailForm.payer.$error.required && expensedetailForm.payer.$dirty">Payer Name equired</span>
       </p>
          <p>
         <label> Payee</label>
-        <input required="required" type="text" ng-model="expDetails.payee" placeholder="Enter Amount Here..." required/>
+        <input type="text" class="form-control" name="payee" ng-model="expDetails.payee" placeholder="Enter Payee  Name...!" required/>
+          <span class="error-color" ng-show="expensedetailForm.payee.$error.required && expensedetailForm.payee.$dirty">Payee Name required</span>
       </p>
       <p>
       <label> Category</label>
-       <select ng-model="expDetails.categorytype" ng-options="c for c in categoryType">
-        <option value="">-- Source Type --</option>
+       <select name="categorytype" class="form-control" ng-model="expDetails.categorytype" ng-options="c for c in categoryType" required>
+        <option value="">-- Category Type --</option>
         <option value="$index">-- Source Type --</option></select>
+           <span class="error-color" ng-show="expensedetailForm.categorytype.$error.required && expensedetailForm.categorytype.$dirty">Category required</span>
     </p>
 
     <p>
       <label> Amount</label>
-      <input required="required" type="number" ng-model="expDetails.amount" placeholder="Enter Amount Here..." required/>
+        <input type="text" class="form-control" placeholder="digits here plz" name="amount" ng-model="expDetails.amount" required ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" />
+        <span class="error-color" ng-show="expensedetailForm.amount.$error.pattern">Positive Numbers only, please.</span>
+
     </p>
     <p>
       <label> Date</label>
-        <input type="text" datepicker="" ng-model="expDetails.date" dp-format="dd/mm/yyyy" />
+        <input type="text" datepicker="" class="form-control" name="dates" ng-model="expDetails.date" dp-format="dd/mm/yyyy" required placeholder="select date" />
+         <span class="error-color" ng-show="expensedetailForm.dates.$error.required">Date required</span>
     </p>
 
     <p>
      <label> Mode of Payment</label>
-       <select ng-model="expDetails.modeofpayment" ng-options="c for c in modeofPayment">
-        <option value="">-- Source Type --</option>
-        <option value="$index">-- Source Type --</option></select>
+       <select ng-model="expDetails.modeofpayment" class="form-control" ng-options="c for c in modeofPayment">
+        <option value="">-- Payment Type --</option>
+        <option value="$index">-- Payment Type --</option></select>
     </p>
 
     <p>
-      <label> Note</label><textarea ng-model="expDetails.note"></textarea>
+      <label> Note</label><textarea type="text" class="form-control" name="note" ng-model="expDetails.note" ng-maxlength="50" required></textarea><span class="error-color" ng-show="expensedetailForm.note.$error.maxlength">Max Lenght 50 characters</span>
+      <span class="error-color" ng-show="expensedetailForm.note.$error.required">Note required</span>
     </p>
     <p>
       <input type="submit" class="btn default" ng-click="addIncome()" value="{{buttonValue}}" />
        <input type="submit" class="btn cancel" value="Clear" />
     </p>
+  </form>
+  <div ng-show="expenseData.length != 0">
+    <table class="table">
+        <tr>
+          <th class="table-head">.</th>
+          <th  class="table-head">Type</th>
+          <th  class="table-head">Payer</th>
+          <th  class="table-head">Payee</th>
+          <th  class="table-head">Category</th>
+          <th  class="table-head">Amount</th>
+          <th  class="table-head">Date</th>
+          <th  class="table-head">Mode Of Payment</th>
+          <th  class="table-head">Note</th>
+           <th  class="table-head">Edit</th>
+            <th  class="table-head">Delete</th>
+
+        </tr>
+        <tr ng-repeat="exp in expenseData track by $index">
+          <td>{{$index + 1}}</td>
+          <td >{{exp.type}}</td>
+          <td >{{exp.payer}}</td>
+          <td >{{exp.payee}}</td>
+          <td >{{exp.categorytype}}</td>
+          <td >{{exp.amount}}</td>
+          <td >{{exp.date}}</td>
+          <td >{{exp.modeofpayment}}</td>
+          <td >{{exp.note}}</td>
+          <td><button ng-click="">Edit</button></td>
+          <td><button ng-click="">Delete</button></td>
+        </tr>
+    </table>
+  </div>
   </div>
   </div>
   <script src="bower_components/jquery/dist/jquery.js"></script>
