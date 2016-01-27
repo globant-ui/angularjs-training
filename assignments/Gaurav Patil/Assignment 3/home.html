@@ -1,0 +1,128 @@
+<html ng-app="expensesApp">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+    <div ng-controller="controller">
+        <center>
+            <h2>Expenses Application</h2>
+            <h3>
+	<div>
+  		Total Income :  <span ng-bind="total_income()"></span>
+	</div>
+</h3>
+            <h3>
+	<div>
+  		Total Expenses :  <span ng-bind="total_exp()"></span>
+	</div>
+</h3>
+
+            <h3> 
+	<div>
+  		Total Balance :  <span ng-bind="total_bal()"></span>
+	</div>
+</h3>
+
+            <p>
+                <div>
+                    <button class="btn" ng-click="in = true">Show/Hide Income</button>
+                    <button class="btn" ng-click="in = false">Show/Hide Expenses</button>
+                </div>
+                <br>
+                <form name="myForm">
+                    <div>
+                        Income Category
+                        <select name="inc_cat" ng-options="name for name in income_category" ng-model="income.category"> </select> 
+                       Income Value  <input type="number" ng-model="income.value">
+                        <button class="btn" ng-click="addIncome()">Add Income</button>
+                    </div>
+                    <br>
+                    <div>
+                        Expense Category
+                        <select ng-options="name for name in exp_catogory" ng-model="exp.category"></select>
+                        Date
+                        <input type="date" ng-model="exp.date"> Expense Value
+                        <input type="number" ng-model="exp.value"> Payee
+                        <input type="text" ng-model="exp.payee">
+
+                        <button class="btn" ng-click="addExpense()">Add Expense</button>
+                    </div>
+                </form>
+                <br>
+                <br>
+       
+                <table class="datagrid" ng-show="in"  width="700">
+
+                    <td><b>Income Type</b>
+                    </td>
+                    <td><b>Value</b>
+                    </td>
+                    <td><b>Edit Type</b>
+                    </td>
+                    <td><b>Delete</b>
+                    </td>
+                    <tr ng-repeat="x in income_array">
+
+                        <td><b><span ng-bind="x.category"></span></b>
+                        </td>
+                        <td><b><span ng-bind="x.value"></span></b>
+                        </td>
+                        <td>
+                            <button class="btn" ng-click="editIncome($index)">Edit</button>
+                        </td>
+                        <td>
+                            <button class="btn" ng-click="deleteIncome($index)">Delete</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <br>
+ 
+                                <table class="datagrid" ng-show="!in" width="900">
+                    <td><b>Expenses Type</b>
+                    </td>
+                    <td><b>Value</b>
+                    </td>
+                    <td><b>Date</b>
+                    </td>
+                    <td><b>Payee</b>
+                    </td>
+                    <td><b>Edit</b>
+                    </td>
+                    <td><b>Delete</b>
+                    </td>
+                    <tr ng-repeat="x in exp_array">
+                        <td><b><span ng-bind="x.category"></b>
+                            </span>
+                        </td>
+                        <td><b><span ng-bind="x.value"></b>
+                            </span>
+                        </td>
+                        <td><b><span ng-bind="x.date"></b>
+                            </span>
+                        </td>
+                        <td><b><span ng-bind="x.payee"></b>
+                            </span>
+                        </td>
+                        <td>
+                            <button  class="btn" ng-click="editExp($index)">Edit</button>
+                        </td>
+                        <td>
+                            <button  class="btn" ng-click="deleteExp($index)">Delete</button>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+        </center>
+        </p>
+
+
+    <script src="controller.js"></script>
+
+</body>
+
+</html>
