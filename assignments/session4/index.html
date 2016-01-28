@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.8/angular.js" data-semver="1.4.8"></script>
+    <script src="app.js"></script>
+    <script src="service.js"></script>
+  </head>
+
+  <body ng-controller="MainCtrl">
+
+  <form name="userForm" ng-submit="submitForm()" novalidate>
+      ID: <input style="margin-top: 10px" type="number" ng-model="user.transactionId" /><br />
+      Payer: <input style="margin-top: 10px" type="text" ng-model="user.payer" /><br />
+      Payee: <input style="margin-top: 10px" type="text" ng-model="user.payee"/><br />
+      Category:
+      <select style="margin-top: 10px" ng-model="user.category">
+          <option value="category1">Category1</option>
+          <option value="category2">Category2</option>
+      </select><br>
+      SubCategory:
+      <select style="margin-top: 10px" ng-model="user.subCategory">
+          <option value="subcategory1">Sub category1</option>
+          <option value="subcategory2">Sub category2</option>
+      </select><br>
+      Amount: <input  style="margin-top: 10px" type="number" name = "amount"  ng-model="user.amount" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01"/><br />
+      <span ng-show = "!userForm.amount.$valid" class="error-block" >Invalid amount! <br /></span>
+      Date: <input style="margin-top: 10px" type="datetime-local" ng-model="user.date" placeholder="yyyy-MM-ddTHH:mm:ss" min="2001-01-01T00:00:00" max="2016-12-31T00:00:00" required /><br />
+      Mode Of Payment:
+      <select style="margin-top: 10px" ng-model="user.modeOfPayment">
+          <option value="cash">Cash</option>
+          <option value="electronic_transfer">Electronic Transfer</option>
+          <option value="cheque">cheque</option>
+          <option value="credit_card">Credit card</option>
+      </select><br>
+      Note Type: <input name = "noteType" style="margin-top: 10px" type="text" ng-model="user.noteType" ng-maxlength="20"/><br />
+      <p ng-show="userForm.noteType.$error.maxlength" class="error-block">Note type exceed 20 char limit</p>
+      <input style="margin-top: 10px" type="button" ng-click="reset()" value="Reset" />
+      <input style="margin-top: 10px" type="submit" ng-click="updateIncome(user)" value="Save to Income" />
+      <input style="margin-top: 10px" type="submit" ng-click="updateExpense(user)" value="Save to Expense" />
+
+  </form>
+
+    <button style="margin-top: 10px" ng-click="showIncome()">Show Income</button>
+    <button style="margin-top: 10px" ng-click="showExpense()">Show Expense</button>
+  <div ng-if="isShowExpense">  
+  <table style="width:100%" border="1px" class="tableFormat">
+  <tr>
+    <th>Id</th>
+    <th>payer</th>
+    <th>payee</th>
+    <th>category</th>
+    <th>subCategory</th>
+    <th>amount</th>
+    <th>date</th> 
+    <th>modeOfPayment</th>
+    <th>noteType</th>
+    <th>Operation</th>
+  </tr>
+  <tr ng-repeat="expense in expenses">
+    <td>{{expense.transactionId}}</td>
+    <td>{{expense.payer}}</td> 
+    <td>{{expense.payee}}</td>
+    <td>{{expense.category}}</td>
+    <td>{{expense.subCategory}}</td>
+    <td>{{expense.amount}}</td>
+    <td>{{expense.date}}</td>
+    <td>{{expense.modeOfPayment}}</td>
+    <td>{{expense.noteType}}</td>
+    <td><button ng-click = "deleteExpenseRecord(expense)">Delete</button></td>
+  </tr>
+</table>
+</div>
+<div ng-if="isShowIncome">  
+  <table style="width:100%" border="1px" class="tableFormat">
+  <tr>
+    <th>Id</th>
+    <th>payer</th>
+    <th>payee</th>
+    <th>category</th>
+    <th>subCategory</th>
+    <th>amount</th>
+    <th>date</th> 
+    <th>modeOfPayment</th>
+    <th>noteType</th>
+    <th>Operation</th>
+  </tr>
+  <tr ng-repeat="income in incomes">
+    <td>{{income.transactionId}}</td>
+    <td>{{income.payer}}</td> 
+    <td>{{income.payee}}</td>
+    <td>{{income.category}}</td>
+    <td>{{income.subCategory}}</td>
+    <td>{{income.amount}}</td>
+    <td>{{income.date}}</td>
+    <td>{{income.modeOfPayment}}</td>
+    <td>{{income.noteType}}</td>
+    <td><button ng-click = "deleteIncomeRecord(income)">Delete</button></td>
+  </tr>
+</table>
+</div>
+</body>
+</html>
