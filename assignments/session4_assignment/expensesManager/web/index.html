@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="expenseManagementApp">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Expense Manager</title>
+
+    </head>
+    <body>        
+        Welcome to Expense Management System
+        <br><br>        
+            <div ng-controller="mainController as cntrl">
+                <div>
+                    Total Income Amount:
+                    <input disabled="true" type= "text" name="incomeAmount" ng-model="cntrl.amountData.totalIncomeAmount" style = "margin-top: 15px;margin-left: 20px;margin-right: 20px;">
+                    Total Expense Amount:
+                    <input disabled="true" type= "text" name="expenseAmount" ng-model="cntrl.amountData.totalExpenseAmount" style = "margin-top: 15px;margin-left: 20px;margin-right: 20px;"">
+                    Available Balance:
+                    <input disabled="true" type= "text" name="balanceAmount" ng-model="cntrl.amountData.availableBalance" style = "margin-top: 15px;margin-left: 20px;margin-right: 20px;"">
+                </div>
+                <br></br>
+                <div>
+                    <button ng-click="cntrl.showTable=1" style = "margin-left: 100px; height:35px; width:150px">Show Income</button>
+                    <button ng-click="cntrl.showTable=2" style = "margin-left: 100px; height:35px; width:150px">show Expense</button>
+                </div>
+                <form name="addEditForm">
+                   <div>
+                        Transaction Note :
+                        <input type= "text" required ng-maxlength="20" ng-model="cntrl.transaction.notes" style = "margin-top: 15px;margin-left: 10px;">
+                    </div>
+                    <div>
+                        Transaction Amount:
+                        <input type= "text" required ng-pattern="/^[1-9][0-9]{0,2}(?:,?[0-9]{3}){0,3}(?:\.[0-9]{1,2})?$/" name="amount" ng-maxlength="10" ng-model="cntrl.transaction.amount" style = "margin-top: 15px;margin-left: 35px;">
+                        <span ng-show="addEditForm.amount.$error.pattern" style="color:red">This Field Accepts Only Numbers</span>
+                    </div>
+                    <div>
+                        <label for="transactionCategory"> Transaction Category: </label>
+                        <select required style = "margin-top: 15px;margin-left: 30px; width: 170px;" ng-model="cntrl.transaction.category">
+                            <option value="" >Please Select</option>
+                            <option value="Rent">Deposit</option>
+                            <option value="Interest">Interest</option>
+                            <option value="Business">Business</option>
+                            <option value="Salary">Salary</option>
+                            <option value="Rent">Rent</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Party">Party</option>
+                            <option value="Office">Office</option>
+                            <option value="Studies">Studies</option>>
+                            <option value="Shopping">Shopping</option>                            
+                        </select>
+                    </div>
+                    <div>
+                        <label for="transactionSubcategory"> Transaction Sub-Category: </label>
+                        <select required style = "margin-top: 15px;margin-left: 30px; width: 170px;" ng-change="cntrl.transaction.parentCategoryName=cntrl.transaction.category" ng-model="cntrl.transaction.subCategory.subCategoryName">
+                            <option value="" >Please Select</option>
+                            <option value="Salary">Salary</option>
+                            <option value="Lic Agent">Lic Agent</option>
+                            <option value="Interest">Interest</option> 
+                            <option value="Fixed Deposit">Fixed Deposit </option>
+                            <option value="House Rent">House Rent</option>
+                            <option value="Out Of City">Out Of City</option> 
+                            <option value="Personal Party">Personal Party</option>
+                            <option value="Lunch and Snacks">Lunch and Snacks</option>
+                            <option value="Professional">Professional</option>
+                            <option value="Clothes and Accessories">Clothes and Accessories</option>
+                        </select>
+                    </div>
+                    <div>
+                        Transaction Date:
+                       <input type="date" name="" style = "margin-top: 15px;" ng-model="cntrl.transaction.date" placeholder="{{date | date:'yyyy-MM-dd'}}" min="2016-01-01" max="2017-12-31" required />
+                    </div>
+                    <div>
+                        Transaction Payee:
+                       <input type= "text" required ng-maxlength="20" ng-model="cntrl.transaction.payee" style = "margin-top: 15px;margin-left: 10px;">
+                    </div>
+                    <div>
+                        Transaction Payer:
+                       <input type= "text" required ng-maxlength="20" ng-model="cntrl.transaction.payer" style = "margin-top: 15px;margin-left: 10px;">
+                    </div>
+                    <div>
+                        Mode of Payment:
+                        <input required type="radio" ng-model="cntrl.transaction.mop" name="paymontMode" value="Cash"> Cash
+                        <input required type="radio" ng-model="cntrl.transaction.mop" name="paymontMode" value="Credit Card"> Credit Card
+                        <input required type="radio" ng-model="cntrl.transaction.mop" name="paymontMode" value="Debit Card"> Debit Card
+                        <input required type="radio" ng-model="cntrl.transaction.mop" name="paymontMode" value="Cheque"> Cheque
+                        <input required type="radio" ng-model="cntrl.transaction.mop" name="paymontMode" value="Electronic Transfer"> Electronic Transfer
+                    </div>
+                    <div>
+                         Type of Transaction:
+                        <input required type="radio" ng-model="cntrl.transaction.type" name="transactionType" value="Income"> Income
+                        <input required type="radio" ng-model="cntrl.transaction.type" name="transactionType" value="Expense"> Expense
+                    </div>
+                    <div>
+                    <button ng-hide="cntrl.editTransactionFlag == true" ng-disabled="addEditForm.$invalid" ng-click="cntrl.addTransaction()" style = "margin-left: 100px;margin-top: 20px; height:35px; width:150px">Add Transaction</button>
+                    </div>
+                    <div>
+                        <button ng-show="cntrl.editTransactionFlag == true" ng-disabled="addEditForm.$invalid" ng-click="cntrl.setTransaction(transaction)" style = "margin-left: 100px;margin-top: 20px; height:35px; width:120px">Edit Transaction</button>
+                        <button ng-show="cntrl.editTransactionFlag == true" ng-click="cntrl.cancelTransaction()" style = "margin-left: 120px; height:35px; width:120px">Cancel</button>
+                    </div>
+                </form>
+                <br></br>
+                <div ng-show="cntrl.showTable===1">                   
+                    <div>
+                        <h2>Income Table</h2>
+                    </div>
+                    <div>
+                        <div>
+                            <table width="95%" align="left" cellspacing="0"  cellpadding="0" border="1">
+                                <colspan>
+                                    <col width="15%">
+                                    <col width="10%">
+                                    <col width="5%">
+                                    <col width="10%">                                    
+                                    <col width="10%">
+                                    <col widht="10%">
+                                    <col widht="10%">
+                                    <col widht="10%">
+                                    <col width="5%">
+                                </colspan>
+                                <tr>
+                                    <th><a href="" ng-click="cntrl.sortBy('notes')">Income Notes</a></th>
+                                    <th>Income Date</th>
+                                    <th><a href="" ng-click="cntrl.sortBy('amount')">Income Amount</a></th>
+                                    <th><a href ="" ng-click="cntrl.sortBy('category')">Income Category</a></th>
+                                    <th><a href ="" ng-click="cntrl.sortBy('subCategory.subCategory')">Income Sub-Category</a></th>
+                                    <th><a href ="" ng-click="cntrl.sortBy('payee')">Income Payee</a></th>
+                                    <th><a href ="" ng-click="cntrl.sortBy('payer')">Income Payer</a></th>
+                                    <th><a href ="" ng-click="cntrl.sortBy('mop')">Mode of Payment</a></th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr ng-repeat ="income in cntrl.transactionDetails|filter:{type:'Income'}|orderBy:cntrl.column:cntrl.descending">
+                                    <td ng-bind="income.notes">
+                                    </td>
+                                    <td ng-bind="income.date|date:'dd/mm/yyyy @ h:mma'">
+                                    </td>
+                                    <td ng-bind="income.amount | currency">
+                                    </td>
+                                    <td ng-bind="income.category">
+                                    </td>
+                                    <td ng-bind="income.subCategory.subCategoryName">
+                                    </td>
+                                    <td ng-bind="income.payer">
+                                    </td>
+                                    <td ng-bind="income.payee">
+                                    </td>
+                                    <td ng-bind="income.mop">
+                                    </td>
+                                    <td>
+                                        <a href="" ng-click="cntrl.editTransaction(income)"> Edit </a> &nbsp&nbsp <a href="" ng-click="cntrl.deleteTransaction(income)"> Delete </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>  
+                <div ng-show="cntrl.showTable===2">
+                     <div>
+                        <h2>Expense Table</h2>
+                    </div>
+                    <div>
+                        <div>
+                            <table width="95%" align="left" cellspacing="0"  cellpadding="0" border="1">
+                                <colspan>
+                                    <col width="15%">
+                                    <col width="10%">
+                                    <col width="5%">
+                                    <col width="10%">                                    
+                                    <col width="10%">
+                                    <col widht="10%">
+                                    <col widht="10%">
+                                    <col widht="10%">
+                                    <col width="5%">
+                                </colspan>
+                                <tr>
+                                    <th><a href="" ng-click="cntrl.sortBy('notes')">Expense Notes</a></th>
+                                    <th>Expense Date</th>
+                                    <th><a href="" ng-click="cntrl.sortBy('amount')">Expense Amount</a></th>
+                                    <th><a href ="" ng-click="cntrl.sortBy('category')">Expense Category</a></th>
+                                    <th><a href ="" ng-click="cntrl.sortBy('subCategory.subCategoryName')">Expense Sub-Category</a></th>
+                                    <th><a href ="" ng-click="cntrl.sortBy('payee')">Expense Payee</a></th>
+                                    <th><a href ="" ng-click="cntrl.sortBy('payer')">Expense Payer</a></th>
+                                    <th><a href ="" ng-click="cntrl.sortBy('mop')">Mode of Payment</a></th>
+                                    <th>Action</th>                                    
+                                </tr>
+                                <tr ng-repeat ="expense in cntrl.transactionDetails|filter:{type:'Expense'}|orderBy:cntrl.column:cntrl.descending">
+                                    <td ng-bind="expense.notes">
+                                    </td>
+                                    <td ng-bind="expense.date|date:'dd/mm/yyyy @ h:mma'">
+                                    </td>
+                                    <td ng-bind="expense.amount | currency">
+                                    </td>
+                                    <td ng-bind="expense.category">
+                                    </td>
+                                    <td ng-bind="expense.subCategory.subCategoryName">
+                                    </td>
+                                    <td ng-bind="expense.payer">
+                                    </td>
+                                    <td ng-bind="expense.payee">
+                                    </td>
+                                    <td ng-bind="expense.mop">
+                                    </td>
+                                    <td>
+                                        <a href="" ng-click="cntrl.editTransaction(expense)"> Edit </a> &nbsp&nbsp <a href="" ng-click="cntrl.deleteTransaction(expense)"> Delete </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="lib/angular.min.js" type="text/javascript"></script>
+            <script src="js/app.js" type="text/javascript"></script>
+            <script src="js/services/transactionSetrvice.js" type="text/javascript"></script>
+            <script src="js/controllers/mainController.js" type="text/javascript"></script>
+    </body>
+</html>
