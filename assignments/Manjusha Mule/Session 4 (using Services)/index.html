@@ -122,7 +122,7 @@
 					<td> {{exp.date | date:"MM/dd/yyyy 'at' h:mma"}} </td>
 					<td ng-bind = "exp.mode"></td>
 					<td><button class="btn btn-default" ng-click="EnableEdit(exp,$index);"><span class="glyphicon glyphicon-pencil"></span>  Edit</button></td>
-					<td><button class="btn btn-default" ng-click="deleteExp($index);">Delete</button></td>
+					<td><button class="btn btn-default" ng-click="deleteExp($index,income_show);">Delete</button></td>
 				</tr>
 			</table>
 		</div>
@@ -145,7 +145,7 @@
 					<td>{{inc.date | date:"MM/dd/yyyy 'at' h:mma"}}</td>
 					<td ng-bind = "inc.mode"></td>
 					<td><button class="btn btn-default" ng-click="EnableEdit(inc,$index);">Edit</button></td>
-					<td><button class="btn btn-default" ng-click="delete($index,income_show);">Delete</button></td>
+					<td><button class="btn btn-default" ng-click="deleteExp($index,income_show);">Delete</button></td>
 				</tr>
 			</table>
 		</div>
