@@ -1,0 +1,41 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.menu-back-color{
+    background-color: #09a687;
+}
+.table-back-color{
+    background-color: #09ac7c;
+     margin: 5px;
+}
+.table-item{
+       margin-left: 50px !important;
+}
+.table-item-list{
+       margin-left: 75px !important;
+}
+li {
+    float: left;
+}
+
+li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #09ac7c;
+}
+.btn-margin{
+     margin-top: 10px;
+}
+.error-color{
+    color:#FF0000;
+
+}
