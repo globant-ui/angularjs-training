@@ -34,41 +34,43 @@
       <p>
         <label> Payer</label>
         <input type="text" name="payer" class="form-control" ng-model="expDetails.payer" placeholder="Enter Payer Name...!"  required/>
-        <span class="error-color" ng-show="expensedetailForm.payer.$error.required">Payer Name equired</span>
+        <span class="error-color" ng-show="errors.requiredPayerName">Payer Name equired</span>
       </p>
          <p>
         <label> Payee</label>
         <input type="text" class="form-control" name="payee" ng-model="expDetails.payee" placeholder="Enter Payee  Name...!" required/>
-          <span class="error-color" ng-show="expensedetailForm.payee.$error.required">Payee Name required</span>
+          <span class="error-color" ng-show="errors.requiredPayeeName">Payee Name required</span>
       </p>
       <p>
       <label> Category</label>
        <select name="categorytype" class="form-control" ng-model="expDetails.categorytype" ng-options="c for c in categoryType" required>
         <option value="">-- Category Type --</option> </select>
-           <span class="error-color" ng-show="expensedetailForm.categorytype.$error.required">Category required</span>
+           <span class="error-color" ng-show="errors.requiredCatName">Category required</span>
     </p>
 
     <p>
       <label> Amount</label>
-        <input type="text" class="form-control" placeholder="Enter Numeric value" name="amount" ng-model="expDetails.amount" required ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" />
-        <span class="error-color" ng-show="expensedetailForm.amount.$error.pattern">Positive Numbers only, please.</span>
+        <input type="text" class="form-control" placeholder="Enter Numeric value" name="amount"
+        ng-model="expDetails.amount" required ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" />
+        <span class="error-color" ng-show="errors.requiredAmount">Positive Numbers only, please.</span>
 
     </p>
     <p>
       <label> Date</label>
         <input type="text" datepicker="" class="form-control" name="dates" ng-model="expDetails.date" dp-format="dd/mm/yyyy" required placeholder="select date" />
-         <span class="error-color" ng-show="expensedetailForm.dates.$error.required">Date required</span>
+         <span class="error-color" ng-show="errors.requiredDate">Date required</span>
     </p>
 
     <p>
      <label> Mode of Payment</label>
        <select ng-model="expDetails.modeofpayment" class="form-control" ng-options="c for c in modeofPayment">
-        <option value="">-- Payment Type --</option> </select>
+        <option value="">-- Payment Type --</option></select>
+        <span class="error-color" ng-show="errors.modeofPayment">Mode Of Payment required</span>
     </p>
 
     <p>
-      <label> Note</label><textarea type="text" class="form-control" name="note" ng-model="expDetails.note" ng-maxlength="50" required></textarea><span class="error-color" ng-show="expensedetailForm.note.$error.maxlength">Max Lenght 50 characters</span>
-      <span class="error-color" ng-show="expensedetailForm.note.$error.required">Note required</span>
+      <label> Note</label><textarea type="text" class="form-control" name="note" ng-model="expDetails.note" required></textarea><span class="error-color" ng-show="errors.noteLength">Max Lenght 50 characters</span>
+      <span class="error-color" ng-show="errors.note">Note required</span>
     </p>
     <p>
       <input type="submit" class="btn default" ng-click="addIncome()" value="{{buttonValue}}" />
@@ -76,7 +78,7 @@
     </p>
   </form>
   <div ng-show="expenseData.length != 0">
-<label>Search: <input ng-model="search.$"></label>
+    <label>Search: <input ng-model="search.$"></label>&nbsp;&nbsp;&nbsp;<label>Current Balance:{{currentBalance}}</label>
     <table class="table">
         <tr>
           <th class="table-head">.</th>
@@ -120,9 +122,10 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
 
      <script src="app.js"></script>
+      <script src="services/expense_mgt_service.js"></script>
      <script src="controller/expManagerCtrl.js"></script>
      <script src="directives/datepickerDirective.js"></script>
-     <script src="services/expense_mgt_service.js"></script>
+
      <script src="bootstrap-datepicker.js"></script>
   </body>
 
