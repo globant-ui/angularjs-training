@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="styles/main.scss">
+    <link rel="stylesheet" href="styles/customstyles.css">
+    <link href="styles/angular-datepicker.css" rel="stylesheet" type="text/css" />
+    <script src="lib/jquery.min.js" data-semver="2.1.1" data-require="jquery@*"></script>
+   <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css" />
+   <link type="text/css" rel="stylesheet" href="styles/datepicker.css" />
+  </head>
+
+  <body ng-app="expManagerApp">
+
+    <div ng-controller="expManagerCtrl">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" href="#/">Expnese Managment</a>
+      </div>
+      </div>
+      <div class="container">
+        <form name="expensedetailForm">
+         <div>
+            <ul>
+              <li ng-repeat="exp in expenceType">
+                <label style="margin-right: 50px;">
+                    <input type="radio" ng-model="$parent.type"
+                    name="type" value="{{exp.type}}" required="required"/>
+                    {{exp.type}}
+                </label>
+              </li>
+            </ul>
+          </div>
+      <p>
+        <label> Payer</label>
+        <input type="text" name="payer" class="form-control" ng-model="expDetails.payer" placeholder="Enter Payer Name...!"  required/>
+        <span class="error-color" ng-show="errors.requiredPayerName">Payer Name equired</span>
+      </p>
+         <p>
+        <label> Payee</label>
+        <input type="text" class="form-control" name="payee" ng-model="expDetails.payee" placeholder="Enter Payee  Name...!" required/>
+          <span class="error-color" ng-show="errors.requiredPayeeName">Payee Name required</span>
+      </p>
+      <p>
+      <label> Category</label>
+       <select name="categorytype" class="form-control" ng-model="expDetails.categorytype" ng-options="c for c in categoryType" required>
+        <option value="">-- Category Type --</option> </select>
+           <span class="error-color" ng-show="errors.requiredCatName">Category required</span>
+    </p>
+
+    <p>
+      <label> Amount</label>
+        <input type="text" class="form-control" placeholder="Enter Numeric value" name="amount"
+        ng-model="expDetails.amount" required ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" />
+        <span class="error-color" ng-show="errors.requiredAmount">Positive Numbers only, please.</span>
+
+    </p>
+    <p>
+      <label> Date</label>
+        <input type="text" datepicker="" class="form-control" name="dates" ng-model="expDetails.date" dp-format="dd/mm/yyyy" required placeholder="select date" />
+         <span class="error-color" ng-show="errors.requiredDate">Date required</span>
+    </p>
+
+    <p>
+     <label> Mode of Payment</label>
+       <select ng-model="expDetails.modeofpayment" class="form-control" ng-options="c for c in modeofPayment">
+        <option value="">-- Payment Type --</option></select>
+        <span class="error-color" ng-show="errors.modeofPayment">Mode Of Payment required</span>
+    </p>
+
+    <p>
+      <label> Note</label><textarea type="text" class="form-control" name="note" ng-model="expDetails.note" required></textarea><span class="error-color" ng-show="errors.noteLength">Max Lenght 50 characters</span>
+      <span class="error-color" ng-show="errors.note">Note required</span>
+    </p>
+    <p>
+      <input type="submit" class="btn default" ng-click="addIncome()" value="{{buttonValue}}" />
+       <input type="submit" class="btn cancel" ng-click="clear()" value="Clear" />
+    </p>
+  </form>
+  <div ng-show="expenseData.length != 0">
+    <label>Search: <input ng-model="search.$"></label>&nbsp;&nbsp;&nbsp;<label>Current Balance:{{currentBalance}}</label>
+    <table class="table">
+        <tr>
+          <th class="table-head">.</th>
+          <th  class="table-head">Type</th>
+          <th  class="table-head">Payer</th>
+          <th  class="table-head">Payee</th>
+          <th  class="table-head">Category</th>
+          <th  class="table-head">Amount</th>
+          <th  class="table-head">Date</th>
+          <th  class="table-head">Mode Of Payment</th>
+          <th  class="table-head">Note</th>
+           <th  class="table-head">Edit</th>
+            <th  class="table-head">Delete</th>
+
+        </tr>
+        <tr ng-repeat="exp in expenseData | filter:search:strict">
+          <td>{{$index + 1}}</td>
+          <td >{{exp.type}}</td>
+          <td >{{exp.payer}}</td>
+          <td >{{exp.payee}}</td>
+          <td >{{exp.categorytype}}</td>
+          <td >{{exp.amount}}</td>
+          <td >{{exp.date}}</td>
+          <td >{{exp.modeofpayment}}</td>
+          <td >{{exp.note}}</td>
+          <td><button ng-click="editExpenseData(exp)">Edit</button></td>
+          <td><button ng-click="deleteExpenseData(exp)">Delete</button></td>
+        </tr>
+    </table>
+  </div>
+  </div>
+  </div>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+
+     <script src="app.js"></script>
+      <script src="services/expense_mgt_service.js"></script>
+     <script src="controller/expManagerCtrl.js"></script>
+     <script src="directives/datepickerDirective.js"></script>
+
+     <script src="bootstrap-datepicker.js"></script>
+  </body>
+
+</html>
+
+<!-- refresh
+maintain data on ui
+navigation
+blocking users
+
+mvc
+mvvc -->

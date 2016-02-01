@@ -1,0 +1,55 @@
+{
+  "id": "1",
+  "name": "Wisconsin Horses",
+  "created_at": 1447695716,
+  "updated_at": 1447695716,
+  "current_balance": 7000,
+    "expensesData": [
+        {
+            "transactionId" : 1,
+            "amount" : "1000",
+            "categorytype" : "Internet Bills",
+            "date" : "12/01/2016",
+            "note" : "Internet Bills",
+            "payee" : "Roy",
+            "payer" : "Rahul",
+            "type" : "Expense",
+            "modeofpayment" : "cash"
+
+        },
+         {
+            "transactionId" : 2,
+            "amount" : "2000",
+            "categorytype" : "Recharge",
+            "date" : "25/01/2016",
+            "note" : "Mobile Recharge",
+            "payee" : "Roy",
+            "payer" : "Rahul",
+            "type" : "Expense",
+            "modeofpayment" : "Credit Card"
+        },
+        {
+            "transactionId" : 3,
+            "amount" : "9000",
+            "categorytype" : "Other",
+            "date" : "1/01/2016",
+            "note" : "Payement",
+            "payee" : "Roy",
+            "payer" : "Rahul",
+            "type" : "Income",
+            "modeofpayment" : "Online"
+        },
+        {
+            "transactionId" : 4,
+            "amount" : "1000",
+            "categorytype" : "Other",
+            "date" : "1/01/2016",
+            "note" : "Payement",
+            "payee" : "Roys",
+            "payer" : "Rahul",
+            "type" : "Income",
+            "modeofpayment" : "Online"
+        }
+    ]
+
+}
