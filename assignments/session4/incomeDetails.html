@@ -1,0 +1,30 @@
+<h1>Income Details</h1>
+
+<div>  
+  <table style="width:100%" border="1px" class="tableFormat">
+  <tr>
+    <th>Id</th>
+    <th>payer</th>
+    <th>payee</th>
+    <th>category</th>
+    <th>subCategory</th>
+    <th>amount</th>
+    <th>date</th> 
+    <th>modeOfPayment</th>
+    <th>noteType</th>
+    <th>Operation</th>
+  </tr>
+  <tr ng-repeat="income in incomes">
+    <td>{{income.transactionId}}</td>
+    <td>{{income.payer}}</td> 
+    <td>{{income.payee}}</td>
+    <td>{{income.category}}</td>
+    <td>{{income.subCategory}}</td>
+    <td>{{income.amount}}</td>
+    <td>{{income.date}}</td>
+    <td>{{income.modeOfPayment}}</td>
+    <td>{{income.noteType}}</td>
+    <td><button ng-click = "deleteIncomeRecord(income)">Delete</button></td>
+  </tr>
+</table>
+</div>

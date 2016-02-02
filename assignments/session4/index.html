@@ -7,13 +7,25 @@
     <script>document.write('<base href="' + document.location + '" />');</script>
     <link rel="stylesheet" href="style.css" />
     <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.8/angular.js" data-semver="1.4.8"></script>
+    <!-- <script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.js"</script>-->
+    <script src="angular-route.js"></script>
     <script src="app.js"></script>
     <script src="service.js"></script>
   </head>
 
   <body ng-controller="MainCtrl">
 
-  <form name="userForm" ng-submit="submitForm()" novalidate>
+  <div> 
+      <div id="navigation">
+      <a href="#/addDetails">Add</a>  
+      <a href="#/expenseDetails">Expense</a>
+      <a href="#/incomeDetails">Income</a>
+  </div>
+    
+    <div ng-view></div>
+</div>
+  
+  <!-- <form name="userForm" ng-submit="submitForm()" novalidate>
       ID: <input style="margin-top: 10px" type="number" ng-model="user.transactionId" /><br />
       Payer: <input style="margin-top: 10px" type="text" ng-model="user.payer" /><br />
       Payee: <input style="margin-top: 10px" type="text" ng-model="user.payee"/><br />
@@ -43,11 +55,11 @@
       <input style="margin-top: 10px" type="submit" ng-click="updateIncome(user)" value="Save to Income" />
       <input style="margin-top: 10px" type="submit" ng-click="updateExpense(user)" value="Save to Expense" />
 
-  </form>
+  </form> -->
 
-    <button style="margin-top: 10px" ng-click="showIncome()">Show Income</button>
-    <button style="margin-top: 10px" ng-click="showExpense()">Show Expense</button>
-  <div ng-if="isShowExpense">  
+    <!-- <button style="margin-top: 10px" ng-click="showIncome()">Show Income</button>
+    <button style="margin-top: 10px" ng-click="showExpense()">Show Expense</button> -->
+  <!-- <div ng-if="isShowExpense">  
   <table style="width:100%" border="1px" class="tableFormat">
   <tr>
     <th>Id</th>
@@ -74,8 +86,8 @@
     <td><button ng-click = "deleteExpenseRecord(expense)">Delete</button></td>
   </tr>
 </table>
-</div>
-<div ng-if="isShowIncome">  
+</div> -->
+<!-- <div ng-if="isShowIncome">  
   <table style="width:100%" border="1px" class="tableFormat">
   <tr>
     <th>Id</th>
@@ -102,6 +114,6 @@
     <td><button ng-click = "deleteIncomeRecord(income)">Delete</button></td>
   </tr>
 </table>
-</div>
+</div> -->
 </body>
 </html>

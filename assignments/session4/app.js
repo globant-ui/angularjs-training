@@ -1,4 +1,22 @@
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['ngRoute']);
+
+app.config(function ($routeProvider) {
+    $routeProvider.
+    when('/expenseDetails', {
+        templateUrl: 'expenseDetails.html',
+    }).
+    when('/incomeDetails', {
+        templateUrl: 'incomeDetails.html',
+        controller: 'MainCtrl'
+    }).
+    when('/addDetails', {
+        templateUrl: 'addDetails.html',
+        controller: 'MainCtrl'
+    }).
+    otherwise({
+        redirectTo: '/addDetails'
+    });
+});
 
 app.controller('MainCtrl',function($scope,updateService) {
   $scope.user = {};
@@ -143,8 +161,4 @@ app.controller('MainCtrl',function($scope,updateService) {
   }];
 });
 
-/*app.factory('update',function(){
-    return function() {
-        console.log("update service called");
-    }
-});*/
+
