@@ -1,0 +1,19 @@
+ $scope.expensedata = [{
+     payer: 'Purva',
+     payee: 'Anil',
+     category: 'Business',
+     ModeofPayment: 'Bank',
+     Amount: 5000,
+     Notes: 'Added amount',
+     Type: 'Expense'
+
+ }, {
+     payer: 'prachi',
+     payee: 'Anuj',
+     category: 'Share Market',
+     ModeofPayment: 'Cash',
+     Amount: 400,
+     Notes: 'Added Cash',
+     Type: 'Expense'
+
+ }];

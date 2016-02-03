@@ -1,0 +1,19 @@
+{
+    "incomedata": [{
+        "payer": "Mugdha",
+        "payee": "sayali",
+        "category": "Business",
+        "ModeofPayment": "Bank",
+        "Amount": 2000,
+        "Notes": "Added amount",
+        "Type": "Income"
+    }, {
+        "payer": "Rishi",
+        "payee": "Vidya",
+        "category": "Share Market",
+        "ModeofPayment": "Cash",
+        "Amount": 300,
+        "Notes": "Added Cash",
+        "Type": "Income"
+    }]
+}
