@@ -1,0 +1,312 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <h3>Total Income:{{totalincome}}</h3></div>
+        <div class="col-lg-4">
+            <h3>Total Expense:{{totalexpense}}</h3></div>
+        <div class="col-lg-4">
+            <h3>Total Balance:{{totalincome-totalexpense}}</h3></div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-lg-4">
+            <button type="button" class="btn btn-primary" ng-click="showIncomeBox()">Show Income</button>
+        </div>
+        <div class="col-lg-4">
+            <button type="button" class="btn btn-primary" ng-click="showExpendBox()">Show Expense</button>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="row" ng-show="incometable">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Payer</th>
+                    <th>Payee</th>
+                    <th>Category</th>
+                    <th>Mode of Payment</th>
+                    <th>Amount</th>
+                    <th>Notes</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="inc in incomedata">
+                    <th>{{inc.payer}}</th>
+                    <td>{{inc.payee}}</td>
+                    <td>{{inc.category}}</td>
+                    <td>{{inc.ModeofPayment}}</td>
+                    <td>{{inc.Amount}}</td>
+                    <td>{{inc.Notes}}</td>
+                    <td><a ng-href="#" ng-click="editRow(inc, $index)">Edit</a></td>
+                    <td><a ng-href="#" ng-click="removeRow(inc, $index)">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+    <div class="row" ng-show="expensetable">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Payer</th>
+                    <th>Payee</th>
+                    <th>Category</th>
+                    <th>Mode of Payment</th>
+                    <th>Amount</th>
+                    <th>Notes</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="exp in expensedata">
+                    <th>{{exp.payer}}</th>
+                    <td>{{exp.payee}}</td>
+                    <td>{{exp.category}}</td>
+                    <td>{{exp.ModeofPayment}}</td>
+                    <td>{{exp.Amount}}</td>
+                    <td>{{exp.Notes}}</td>
+                    <td><a ng-href="#" ng-click="editRow(exp, $index)">Edit</a></td>
+                    <td><a ng-href="#" ng-click="removeRow(exp, $index)">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+    <div class="row" ng-show="showIncome_Box">
+        <div class="inputbox" style="margin:0 auto;">
+            <h2>Add Income Details</h2>
+            <form class="form-horizontal" name="myForm" role="form">
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" name="payer" class="form-control" placeholder="Payer" ng-model="payer" ng-maxlength="15" required>
+                        <div style="color:red;width:100%">
+                            <span ng-show="myForm.payer.$error.maxlength">Maximum 15 characters allowed. </span>
+                            <span ng-show="myForm.payer.$error.required && !myForm.payer.$pristine">Payer name is required.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" name="payee" class="form-control" placeholder="Payee" ng-maxlength="15" ng-model="payee" required>
+                        <div style="color:red;width:100%">
+                            <span ng-show="myForm.payee.$error.maxlength">Maximum 15 characters allowed. </span>
+                            <span ng-show="myForm.payee.$error.required && !myForm.payee.$pristine">Payee name is required.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-12 customlabel">Category:</label>
+                    <div class="col-lg-12">
+                        <select name="category" class="form-control" ng-model="category" required>
+                            <option>Business</option>
+                            <option>Share Market</option>
+                            <option>Market</option>
+                        </select>
+                        <div style="color:red;width:100%">                            
+                            <span ng-show="myForm.category.$error.required && !myForm.category.$pristine">PLease select Category</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-12 customlabel">Mode of Payment:</label>
+                    <div class="col-lg-12">
+                        <select class="form-control" name="modeofpayment" ng-model="modeofpayment" required>
+                            <option>Bank</option>
+                            <option>Cash</option>
+                            <option>DD</option>
+                        </select>
+                         <div style="color:red;width:100%">                            
+                            <span ng-show="myForm.modeofpayment.$error.required && !myForm.modeofpayment.$pristine">PLease select Mode of Payment</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="number" name="amount" class="form-control" placeholder="Amount" ng-model="amount" required>
+                        <div style="color:red;width:100%">
+                            <span ng-show="myForm.amount.$error.required && !myForm.amount.$pristine">Please enter Number.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" name="notes" class="form-control" placeholder="Notes" ng-model="notes" required>
+                        <div style="color:red;width:100%">                           
+                            <span ng-show="myForm.notes.$error.required && !myForm.notes.$pristine">Please enter notes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-lg-12">
+                        <button type="button" class="btn btn-primary" ng-click="addIncomeData()">Add Income</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="row" ng-show="showEditIncome_Box">
+        <div class="inputbox" style="margin:0 auto;">
+            <h2>Edit Income Details</h2>
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Payer" ng-model="incpayer">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Payee" ng-model="incpayee">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-12 customlabel">Category:</label>
+                    <div class="col-lg-12">
+                        <select class="form-control" ng-model="inccategory">
+                            <option>Business</option>
+                            <option>Share Market</option>
+                            <option>Market</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-12 customlabel">Mode of Payment:</label>
+                    <div class="col-lg-12">
+                        <select class="form-control" ng-model="incmodeofpayment">
+                            <option>Bank</option>
+                            <option>Cash</option>
+                            <option>DD</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Amount" ng-model="incAmount">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Notes" ng-model="incnotes">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-lg-12">
+                        <button type="button" class="btn btn-primary" ng-click="updateIncomeData()">Update Income</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row" ng-show="showEditExpense_Box">
+        <div class="inputbox" style="margin:0 auto;">
+            <h2>Edit Expense Details</h2>
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Payer" ng-model="exppayer">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Payee" ng-model="exppayee">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-12 customlabel">Category:</label>
+                    <div class="col-lg-12">
+                        <select class="form-control" ng-model="expcategory">
+                            <option>shopping</option>
+                            <option>loan</option>
+                            <option>bank</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-12 customlabel">Mode of Payment:</label>
+                    <div class="col-lg-12">
+                        <select class="form-control" ng-model="expmodeofpayment">
+                            <option>Bank</option>
+                            <option>Cash</option>
+                            <option>DD</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Amt" ng-model="expAmount">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Notes" ng-model="expnotes">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-lg-12">
+                        <button type="submit" class="btn btn-primary" ng-click="updateExpenseData()">Update Expense</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row" ng-show="showExpend_Box">
+        <div class="inputbox" style="margin:0 auto;">
+            <h2>Add Expense Details</h2>
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Payer" ng-model="payer">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Payee" ng-model="payee">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-12 customlabel">Category:</label>
+                    <div class="col-lg-12">
+                        <select class="form-control" ng-model="category">
+                            <option>shopping</option>
+                            <option>loan</option>
+                            <option>bank</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-12 customlabel">Mode of Payment:</label>
+                    <div class="col-lg-12">
+                        <select class="form-control" ng-model="modeofpayment">
+                            <option>Bank</option>
+                            <option>Cash</option>
+                            <option>DD</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Amount" ng-model="amount">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <input type="text" class="form-control" placeholder="Notes" ng-model="notes">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-lg-12">
+                        <button type="submit" class="btn btn-primary" ng-click="addExpenseData()">Add Expense</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
