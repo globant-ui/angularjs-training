@@ -1,0 +1,17 @@
+.jumbotron .container{
+	text-align:center;
+}
+
+.btn-group-lg > .btn, .btn-lg{
+  margin: 0 4px;
+}
+
+.placeholder{color: grey;}
+select option{color: grey;}
+
+.red{
+	color:red;
+}
+hr{
+	float:left;
+}
