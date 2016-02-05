@@ -1,0 +1,134 @@
+<div class="row" id="expenseTable">
+	<div class="col-md-12">
+		<div class="col-md-3">
+			<label for="CategoryFilterExpense" class="" placeholder="Category Filter">Category Filter</label>
+			<select data-ng-model="categoryFilter" id="CategoryFilterExpense" class="form-control placeholder">
+				<option value="">All</option>
+				<option value="Home">Home</option>
+				<option value="Office">Office</option>
+				<option value="Travel">Travel</option>
+				<option value="Shopping">Shopping</option>
+			</select>
+		</div>
+		<div class="col-md-3">
+			<label for="SubCategoryFilterExpense" class="" placeholder="Sub Category Filter">Sub Category Filter</label>
+			<select data-ng-model="subCategoryFilter" id='SubCategoryFilterExpense' class="form-control placeholder">
+				<option value="">All</option>
+				<option value="Rent">Rent</option>
+				<option value="Grocery">Grocery</option>
+				<option value="Studies">Studies</option>
+			</select>
+		</div>
+	  <table class="table">
+	  <caption><h3>Expense Details</h3></caption>
+		<thead>
+		  <tr>
+			<th>#</th>
+			<th>Payer</th>
+			<th>Payee</th>
+			<th>Category</th>
+			<th>Sub Category</th>
+			<th>Amount</th>
+			<th>Date</th>
+			<th>Mode of payment</th>
+			<th>Notes</th>
+			<th>Edit</th>
+			<th>Remove</th>
+		  </tr>
+		</thead>
+		<tbody>
+			<tr data-ng-repeat="expenseNode in expenses | filter:categoryFilter | filter:subCategoryFilter">
+				<td data-ng-bind-template="{{$index + 1}}"></td>
+				<td data-ng-bind="expenseNode.payer"></td>
+				<td data-ng-bind="expenseNode.payee"></td>
+				<td data-ng-bind="expenseNode.category"></td>
+				<td data-ng-bind="expenseNode.subcategory"></td>
+				<td data-ng-bind="expenseNode.amount"></td>
+				<td data-ng-bind="expenseNode.date"></td>
+				<td data-ng-bind="expenseNode.modeofpayment"></td>
+				<td data-ng-bind="expenseNode.notes"></td>
+				<td data-ng-click="editNode(expenseNode)"><button type="button" class="btn btn-xs btn-link">Edit</button></td>
+				<td data-ng-click="deleteNode(expenseNode)"><button type="button" class="btn btn-xs btn-link">Delete</button></td>
+			</tr>
+		</tbody>
+	  </table>
+	</div>
+	<br/><br/>
+	<div class="col-md-6 col-md-offset-3" data-ng-show="editExpenseDetailsShow">
+	 <form class="form-signin" id="editExpenseForm" name="editExpenseDetailsForm" novalidate>
+		<h2 class="form-signin-heading">Edit expense details</h2>
+		<label for="editexpensePayer" class="sr-only">Payer</label>
+		<input type="text" name="Payer" data-ng-model="editExpenseObj.payer" id="editexpensePayer" class="form-control" placeholder="Payer" required autofocus>
+		<span class="red" ng-show="editExpenseDetailsForm.Payer.$touched && editExpenseDetailsForm.Payer.$invalid">
+			<span ng-show="editExpenseDetailsForm.Payer.$error.required">*Payer is required.</span><br/>
+		</span>
+		<br/>
+		<label for="editexpensePayee" class="sr-only">Payee</label>
+		<input type="text" name="payee" data-ng-model="editExpenseObj.payee" id="editexpensePayee" class="form-control" placeholder="Payee" required>
+		<span class="red" ng-show="editExpenseDetailsForm.payee.$touched && editExpenseDetailsForm.payee.$invalid">
+			<span ng-show="editExpenseDetailsForm.payee.$error.required">*Payee is required.</span><br/>
+		</span>
+		<br/>
+		<label for="editexpenseCategory" class="sr-only">Category</label>
+		<select class="form-control placeholder" name="category" data-ng-model="editExpenseObj.category" id="editexpenseCategory" placeholder="Category" required>
+			<option hidden>Category</option>
+			<option value="Home">Home</option>
+			<option value="Office">Office</option>
+			<option value="Travel">Travel</option>
+			<option value="Shopping">Shopping</option>
+		</select>
+		<span class="red" ng-show="editExpenseDetailsForm.category.$touched && editExpenseDetailsForm.category.$invalid">
+			<span ng-show="editExpenseDetailsForm.category.$error.required">*Category is required.</span><br/>
+		</span>
+		<br/>
+		<label for="editexpenseSubCategory" class="sr-only">Sub Category</label>
+		<select class="form-control placeholder" name="subCategory" data-ng-model="editExpenseObj.subcategory" id="editexpenseSubCategory" placeholder="Sub Category" required>
+			<option hidden >Sub Category</option>
+			<option value="Rent">Rent</option>
+			<option value="Grocery">Grocery</option>
+			<option value="Studies">Studies</option>
+		</select>
+		<span class="red" ng-show="editExpenseDetailsForm.subCategory.$touched && editExpenseDetailsForm.subCategory.$invalid">
+			<span ng-show="editExpenseDetailsForm.subCategory.$error.required">*Sub Category is required.</span><br/>
+		</span>
+		<br/>
+		<label for="editexpenseAmount" class="sr-only">Amount</label>
+		<input type="number" data-ng-model="editExpenseObj.amount" id="editexpenseAmount" class="form-control" placeholder="Amount" name="amount" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required>
+		<span class="red" ng-show="editExpenseDetailsForm.amount.$touched && editExpenseDetailsForm.amount.$invalid">
+			<span ng-show="editExpenseDetailsForm.amount.$error.required">*Amout is required.</span>
+			<span ng-show="editExpenseDetailsForm.amount.$error.number">*Amout should be entered in numbers.</span> 
+			<span ng-show="editExpenseDetailsForm.amount.$error.pattern">*Amout should have maximum 2 decimal places.</span> <br/>
+		</span>
+		<br/>
+		<label for="editexpensedatetimepicker4" class="sr-only">Date</label>
+		<input type='text' class="form-control" data-ng-model="editExpenseObj.date" id='editexpensedatetimepicker4' placeholder="Date" required />
+		<script type="text/javascript">   
+			$(function () {
+				$('#editexpensedatetimepicker4').datetimepicker();
+			});
+		</script>
+		<br/>
+		<label for="editexpenseModeOfPayment" class="sr-only">Mode of payment</label>
+		<select class="form-control placeholder" name="modeOfPayment" data-ng-model="editExpenseObj.modeofpayment" id="editexpenseModeOfPayment" placeholder="Mode of payment" required>
+			<option hidden>Mode of payment</option>
+			<option value="credit card">credit card</option>
+			<option value="cash">cash</option>
+			<option value="electronic transfer">electronic transfer</option>
+		</select>
+		<span class="red" ng-show="editExpenseDetailsForm.modeOfPayment.$touched && editExpenseDetailsForm.modeOfPayment.$invalid">
+			<span ng-show="editExpenseDetailsForm.modeOfPayment.$error.required">*Mode of payment is required.</span><br/>
+		</span>
+		<br/>
+		<label for="editexpenseNotes" class="sr-only">Notes</label>
+		<input type="text" data-ng-model="editExpenseObj.notes" id="editexpenseNotes" class="form-control" placeholder="Notes" name="notes" maxlength="20" required>
+		<span class="red" ng-show="editExpenseDetailsForm.notes.$touched && editExpenseDetailsForm.notes.$invalid">
+			<span ng-show="editExpenseDetailsForm.notes.$error.required">*Notes are required.</span><br/>
+		</span>
+		<br/>
+		<div class="col-md-6 col-md-offset-3">
+			<input class="btn btn-lg btn-primary btn-block" ng-disabled="editExpenseDetailsForm.$invalid" type="submit" data-ng-click="updateEditExpense()" value="Update">
+		</div>
+		<br/><br/>
+	 </form>
+	</div>
+</div>

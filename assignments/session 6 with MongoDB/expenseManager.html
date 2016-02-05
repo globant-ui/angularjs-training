@@ -1,0 +1,60 @@
+<!doctype html>
+<html data-ng-app="expenceManager">
+	<head>
+		<title>Expense Manager</title>
+		<script type="text/javascript" src="script/libs/jQuery1.12.min.js"></script>
+		<script type="text/javascript" src="script/libs/moment.min.js"></script>
+		<script type="text/javascript" src="script/libs/bootstrap.min.js"></script>
+		<script type="text/javascript" src="script/libs/bootstrap-datetimepicker.min.js"></script>
+		<script type="text/javascript" src="script/libs/angular1.4.min.js"></script>
+		<script type="text/javascript" src="script/libs/angular-route.js"></script>
+		<script type="text/javascript" src="script/app.js"></script>
+		<script type="text/javascript" src="script/expenseManager.js"></script>
+		<link rel="stylesheet" type="text/css" href="style/externals/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="style/externals/bootstrap-datetimepicker.min.css">
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+	</head>
+	<body  data-ng-controller="expenceController" >
+		<div class="jumbotron">
+		  <div class="container">
+			<h1><i>Expense Manager</i></h1>
+			<br/>
+			<div class="row">
+				<div class="col-sm-4">
+				  <div class="panel panel-primary">
+					<div class="panel-heading">
+					  <h3 class="panel-title">Total Income</h3>
+					</div>
+					<div class="panel-body" data-ng-bind-template="{{totalIncome | number : 2}}"></div>
+				  </div>
+				</div>
+				<div class="col-sm-4">
+				  <div class="panel panel-primary">
+					<div class="panel-heading">
+					  <h3 class="panel-title">Total Expenses</h3>
+					</div>
+					<div class="panel-body" data-ng-bind-template="{{totalExpense | number : 2}}"></div>
+				  </div>
+				</div>
+				<div class="col-sm-4">
+				  <div class="panel panel-primary">
+					<div class="panel-heading">
+					  <h3 class="panel-title">Total Balance</h3>
+					</div>
+					<div class="panel-body" data-ng-bind-template="{{totalIncome - totalExpense | number : 2}}"></div>
+				  </div>
+				</div>
+			</div>
+			<a class="btn btn-lg btn-primary" href='#/addIncome' data-ng-click="addIncome()">Add Income</a>
+			<a class="btn btn-lg btn-info" href='#/addExpense' data-ng-click="addExpense()">Add Expense</a>
+			<a class="btn btn-lg btn-primary" href='#/showIncome' data-ng-click="showIncome()">Show Income</a>
+			<a class="btn btn-lg btn-info" href='#/showExpense' data-ng-click="showExpense()">Show Expense</a>
+		  </div>
+		</div>	
+
+		<div class="container">
+			<div data-ng-view></div>
+		</div>
+
+	</body>
+</html>
