@@ -1,6 +1,7 @@
 var myapp = angular.module("expenseManagerApp",[]);
 
-myapp.controller("showIncomeExpenseController",['$scope','expenseManagerIncomeService','expenseManagerExpenseService',function($scope,expenseManagerIncomeService,expenseManagerExpenseService){
+
+myapp.controller("showIncomeExpenseController",['$scope','$http','expenseManagerIncomeService','expenseManagerExpenseService',function($scope,$http,expenseManagerIncomeService,expenseManagerExpenseService){
 	$scope.selfData="Ashwini";
 	$scope.showIncome = false;
 	$scope.showExpense = true;
@@ -14,21 +15,54 @@ myapp.controller("showIncomeExpenseController",['$scope','expenseManagerIncomeSe
 	$scope.balance = "150000";
 	$scope.totalExpenses = "1500";
 	$scope.totalIncome = "15000";
-	$scope.incomeData  = [ 
-	{transactionId:"1",payer:"Globant",payee:"Ashwini",category:"Salary",subcategory:"Full Time",amount:20000,date:"01-01-2016",modeOfPayment:"electronic_transfer",notes:"Cash deposited",type:"Income"}];
-	$scope.expenseData  = [ 
-	{transactionId:"2",payer:"Ashwini",payee:"IdeaCellular",category:"Bill",subcategory:"Electronic",amount:10000,date:"24-01-2016",modeOfPayment:"cheque",notes:"Paying bill",type:"Expense"}];
+	$scope.noIncomeData = false;
+	$scope.noExpenseData = false;
 	
-	$scope.showIncomeDetails = function(){
-		expenseManagerIncomeService.showIncomeDetails($scope);		
+
+	
+		
+	$scope.showIncomeDetails = function(callFromEdit){
+		if(callFromEdit == 1 ) {
+			$http({
+				method: 'PUT',
+				url: 'https://api.myjson.com/bins/4esbx',
+				data: angular.toJson($scope.incomeData)
+			})
+			.then(function(response){
+				console.log("done");
+			});			
+		} 
+		expenseManagerIncomeService.getIncomeData()
+		.then(function(data){
+			if(typeof data === 'object') {
+				$scope.incomeData = data;
+				expenseManagerIncomeService.showIncomeDetails($scope);	
+			} else {
+				$scope.noIncomeData = true;
+				$scope.noExpenseData = false;
+				console.log('error');
+			}
+		},function(error) {
+			$scope.noIncomeData = true;
+			$scope.noExpenseData = false;
+			console.log(error);
+		}); 		
 	}
 
 	$scope.addIncome = function(){
 		expenseManagerIncomeService.addIncome($scope);		
 	}
 
-	$scope.addIncomeSave = function(index){
-		expenseManagerIncomeService.addIncomeSave($scope,index);		
+	$scope.addIncomeSave = function(){
+		expenseManagerIncomeService.addIncomeSave($scope);	
+		$http({
+			method: 'PUT',
+			url: 'https://api.myjson.com/bins/4esbx',
+			data: angular.toJson($scope.incomeData)
+		})
+		.then(function(response){
+			console.log("done");
+		});
 	}
 
 	$scope.editIncome = function(index){
@@ -37,14 +71,39 @@ myapp.controller("showIncomeExpenseController",['$scope','expenseManagerIncomeSe
 
 
 	$scope.deleteIncome = function(index){
-		expenseManagerIncomeService.deleteIncome($scope,index);		
+		expenseManagerIncomeService.deleteIncome($scope,index);
+			
 	}
 
 
 	/**************** Expense Details **********************/
 
-	$scope.showExpenseDetails = function(){
-		expenseManagerExpenseService.showExpenseDetails($scope);		
+	$scope.showExpenseDetails = function(callFromEdit){
+		if(callFromEdit == 1 ) {	
+			$http({
+				method: 'PUT',
+				url: 'https://api.myjson.com/bins/1s12d',
+				data: angular.toJson($scope.expenseData)
+			})
+			.then(function(response){
+				console.log("done");
+			});
+		}	
+		expenseManagerExpenseService.getExpenseData()
+		.then(function(data){
+			if(typeof data === 'object') {
+				$scope.expenseData = data;
+				expenseManagerExpenseService.showExpenseDetails($scope);
+			} else {
+				console.log('error');
+				$scope.noExpenseData = true;
+				$scope.noIncomeData = false;
+			}
+		},function(error) {
+			console.log(error);
+			$scope.noExpenseData = true;
+			$scope.noIncomeData = false;
+		});	
 	}
 
 	$scope.addExpense = function(){
@@ -52,16 +111,25 @@ myapp.controller("showIncomeExpenseController",['$scope','expenseManagerIncomeSe
 	}
 
 	$scope.addExpenseSave = function(){
-		expenseManagerExpenseService.addExpenseSave($scope);		
+		expenseManagerExpenseService.addExpenseSave($scope);	
+		$http({
+			method: 'PUT',
+			url: 'https://api.myjson.com/bins/1s12d',
+			data: angular.toJson($scope.expenseData)
+		})
+		.then(function(response){
+			console.log("done");
+		});
 	}
 
 	$scope.editExpense = function(index){
-		expenseManagerExpenseService.editExpense($scope,index);		
+		expenseManagerExpenseService.editExpense($scope,index);	
 	}
 
 
 	$scope.deleteExpense = function(index){
-		expenseManagerExpenseService.deleteExpense($scope,index);		
+		expenseManagerExpenseService.deleteExpense($scope,index);
+				
 	}
 
 }]);

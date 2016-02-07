@@ -1,0 +1,52 @@
+{
+ "expenseData": [
+	{
+		"transactionId":"1",
+		"payer":"Ashwini",
+		"payee":"Neha",
+		"category":"Shopping",
+		"subcategory":"Emergency",
+		"amount":"2000",
+		"date":"01-01-2016",
+		"modeOfPayment":"electronic_transfer",
+		"notes":"Cash deposited",
+		"type":"Expense"
+	},
+	{
+		"transactionId":"2",
+		"payer":"Ashwini",
+		"payee":"IdeaCellular",
+		"category":"Bill",
+		"subcategory":"Electronic",
+		"amount":"2000",
+		"date":"21-02-2016",
+		"modeOfPayment":"electronic_transfer",
+		"notes":"Paying bill",
+		"type":"Expense"
+	},
+	{
+		"transactionId":"3",
+		"payer":"Ashwini",
+		"payee":"BOI",
+		"category":"Loan Installment",
+		"subcategory":"Edu Loan",
+		"amount":"2000",
+		"date":"01-12-2015",
+		"modeOfPayment":"electronic_transfer",
+		"notes":"Installment Deposited",
+		"type":"Expense"
+	},
+	{
+		"transactionId":"4",
+		"payer":"Ashwini",
+		"payee":"LIC",
+		"category":"Saving",
+		"subcategory":"Policies",
+		"amount":"200000",
+		"date":"22-02-2016",
+		"modeOfPayment":"electronic_transfer",
+		"notes":"Investment",
+		"type":"Expense"
+	}
+ ]
+}	

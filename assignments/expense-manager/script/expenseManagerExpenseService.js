@@ -1,5 +1,5 @@
 
-myapp.service("expenseManagerExpenseService",function(){
+myapp.service("expenseManagerExpenseService",function($http,$q){
 	this.showExpenseDetails = function(scope){
 		scope.showIncome= false;
 		scope.showExpense= false;
@@ -19,13 +19,34 @@ myapp.service("expenseManagerExpenseService",function(){
 	this.editExpense = function(scope,index){
 		scope.showAddExpense = true;
 		scope.addNewExpense = scope.expenseData[index];
+		scope.addNewExpense.amount = parseInt(scope.expenseData[index].amount);
+
 		scope.addNewExpense.indexData = true;
 	}
 	this.deleteExpense = function(scope,index) {
-		scope.expenseData.splice(scope.expenseData[index],1);
+		scope.expenseData.splice(index,1);
+		$http({
+			method: 'PUT',
+			url: 'https://api.myjson.com/bins/1s12d',
+			data: angular.toJson(scope.expenseData)
+		})
+		.then(function(response){
+			console.log("done");
+		});
 		scope.showIncome= false;
 		scope.showAddIncome= false;
 		scope.addNewExpense = {transactionId:"",payer:"",payee:"",category:"",subcategory:"",amount:"",date:"",modeOfPayment:"",notes:"",type:""};
-		scope.showAddExpense = true;
 	}	
+	this.getExpenseData = function() {
+		return $http.get('https://api.myjson.com/bins/1s12d')
+		.then(function(response){	
+			if(typeof response.data === 'object') {
+				return response.data;	
+			} else {
+				$q.reject(response.data);
+			}
+		},function errorCallback(response) {
+			$q.reject(response.data);
+		});
+	}
 });
