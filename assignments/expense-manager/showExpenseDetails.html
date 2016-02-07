@@ -1,0 +1,91 @@
+<h3 ng-show="noExpenseData">Oops! No expense details found!!!</h3>	
+<div ng-hide="showExpense" class="text-center"> 
+	<h3 class="panel-heading">Expense Details</h3>
+	<button ng-click="addExpense()" class="btn-primary">Add Expense</button>
+	<table class="table table-stripped" style="width:1000px">
+		<tr>
+			<th class="text-center">Payee</th>
+			<th class="text-center">Amount</th>
+			<th class="text-center">Date</th>
+			<th class="text-center">Mode Of Payment</th>	
+			<th class="text-center"></th>
+			<th class="text-center"></th>
+		</tr>
+		<tr ng-repeat="expense in expenseData">
+			<td>{{expense.payee}}</td>
+			<td>{{expense.amount}}</td>
+			<td>{{expense.date}}</td>
+			<td>{{expense.modeOfPayment}}</td>
+			<td ng-click="editExpense($index)"><i class="glyphicon glyphicon-edit"></i></td>
+			<td ng-click="deleteExpense($index)"><i class="glyphicon glyphicon-trash"></i></td>
+		</tr>
+	</table>
+</div>
+
+
+
+<div ng-show="showAddExpense" class="text-center">
+	<form name="expenseForm">
+	<h3 class="panel-heading">Add Expense Details</h3>
+	<table class="table table-stripped" style="width:1000px">
+		<tr>
+			<td><input type="text" name="expensePayee" ng-model="addNewExpense.payee" placeholder="Enter Payee Name" required>
+			<span style="color:red" ng-show="expenseForm.expensePayee.$dirty && expenseForm.expensePayee.$invalid">
+                Payee is required
+            </span></td>
+			<input ng-model="addNewExpense.payee" hidden value="{{selfData}}">
+		</tr>
+		<tr>
+			<td>
+				<select ng-model="addNewExpense.category">
+				  <option value="">Enter Category Name</option>
+		          <option ng-repeat="types in category" value="{{types}}">
+		            {{types}}
+		          </option>
+		        </select>
+	    	</td>
+		</tr>
+		<tr>
+			<td>
+				<select ng-model="addNewExpense.subcategory">
+					<option value="">Enter Sub-Category</option>
+		          <option ng-repeat="types in subcategory" value="{{types}}">
+		            {{types}}
+		          </option>
+		        </select>
+	    	</td>
+		</tr>
+		<tr>
+			<td><input type="number" name="expenseAmount" ng-model="addNewExpense.amount" placeholder="Enter Amount" ng-pattern="/^[0-9]{1,7}$/" step="0.01" required><span style="color:red" ng-show="expenseForm.expenseAmount.$dirty && expenseForm.expenseAmount.$invalid">
+                Amount is invalid
+            </span></td>
+		</tr>
+		<tr>
+			<td><input name="expenseDate" ng-model="addNewExpense.date" placeholder="Enter Date" required><span style="color:red" ng-show="expenseForm.expenseDate.$dirty && expenseForm.expenseDate.$invalid">
+                Date is required
+            </span></td>
+		</tr>
+		<tr>
+			<td>
+				<select name="expenseModeOfPayment" ng-model="addNewExpense.modeOfPayment" required>
+					<option value="">Enter Mode Of Payment</option>
+		          <option ng-repeat="modes in modeOfPayment" value="{{modes}}">
+		            {{modes}}
+		          </option>
+		        </select>
+	    	<span style="color:red" ng-show="expenseForm.expenseModeOfPayment.$dirty && expenseForm.expenseModeOfPayment.$invalid">
+                Mode of Payment is required
+            </span></td>
+		</tr>
+		<tr>
+			<td><input name="notes" ng-model="addNewExpense.notes" placeholder="Enter Notes" ng-maxlength="20">
+			<span style="color:red" ng-show="expenseForm.notes.$dirty && expenseForm.notes.$invalid">
+                Notes should not exceed 20 characters
+            </span></td>
+			<input ng-model="addNewExpense.type" hidden value="Income">
+		</tr>
+		<tr><td><button ng-click="addExpenseSave()" ng-hide="addNewExpense.indexData" ng-disabled="expenseForm.$invalid" class="btn-primary">Submit</button></td></tr>
+		<tr><td><button ng-click="showExpenseDetails(1)" ng-show="addNewExpense.indexData" class="btn-primary">Done</button></td></tr>
+	</table>
+	</form>
+</div>

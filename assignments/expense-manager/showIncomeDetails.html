@@ -1,0 +1,89 @@
+<h3 ng-show="noIncomeData">Oops! No income details found!!!</h3>
+<div ng-show="showIncome" class="text-center">
+	<h3 class="panel-heading">Income Details</h3>
+	<button ng-click="addIncome()" class="btn-primary">Add Income</button>
+	<table class="table table-stripped" style="width:1000px">
+		<tr>
+			<th class="text-center">Payer</th>
+			<th class="text-center">Amount</th>
+			<th class="text-center">Date</th>
+			<th class="text-center">Mode Of Payment</th>	
+			<th class="text-center"></th>
+			<th class="text-center"></th>
+		</tr>
+		<tr ng-repeat="income in incomeData">
+			<td>{{income.payer}}</td>
+			<td>{{income.amount}}</td>
+			<td>{{income.date}}</td>
+			<td>{{income.modeOfPayment}}</td>
+			<td ng-click="editIncome($index)"><i class="glyphicon glyphicon-edit"></i></td>
+			<td ng-click="deleteIncome($index)"><i class="glyphicon glyphicon-trash"></i></td>
+		</tr>
+	</table>
+</div>
+
+<div ng-show="showAddIncome" class="text-center">
+	<form name="incomeForm">
+	<h3 class="panel-heading">Add Income Details</h3>
+	<table class="table table-stripped" style="width:1000px">
+		<tr>
+			<td><input type="text" name="incomePayer" ng-model="addNew.payer" placeholder="Enter Payer Name" required>
+			<span style="color:red" ng-show="incomeForm.incomePayer.$dirty && incomeForm.incomePayer.$invalid">
+                Payer is required
+            </span></td>
+			<input ng-model="addNew.payee" hidden value="{{selfData}}">
+		</tr>
+		<tr>
+			<td>
+				<select ng-model="addNew.category">
+				  <option value="">Enter Category Name</option>
+		          <option ng-repeat="types in category" value="{{types}}">
+		            {{types}}
+		          </option>
+		        </select>
+	    	</td>
+		</tr>
+		<tr>
+			<td>
+				<select ng-model="addNew.subcategory">
+					<option value="">Enter Sub-Category</option>
+		          <option ng-repeat="types in subcategory" value="{{types}}">
+		            {{types}}
+		          </option>
+		        </select>
+	    	</td>
+		</tr>
+		<tr>
+			<td><input type="number" name="incomeAmount" ng-model="addNew.amount" placeholder="Enter Amount" ng-pattern="/^[0-9]{1,7}$/" step="0.01" required><span style="color:red" ng-show="incomeForm.incomeAmount.$dirty && incomeForm.incomeAmount.$invalid">
+                Amount is invalid
+            </span></td>
+		</tr>
+		<tr>
+			<td><input name="incomeDate" ng-model="addNew.date" placeholder="Enter Date" required><span style="color:red" ng-show="incomeForm.incomeDate.$dirty && incomeForm.incomeDate.$invalid">
+                Date is required
+            </span></td>
+		</tr>
+		<tr>
+			<td>
+				<select name="incomeModeOfPayment" ng-model="addNew.modeOfPayment" required>
+					<option value="">Enter Mode Of Payment</option>
+		          <option ng-repeat="modes in modeOfPayment" value="{{modes}}">
+		            {{modes}}
+		          </option>
+		        </select>
+	    	<span style="color:red" ng-show="incomeForm.incomeModeOfPayment.$dirty && incomeForm.incomeModeOfPayment.$invalid">
+                Mode of Payment is required
+            </span></td>
+		</tr>
+		<tr>
+			<td><input name="notes" ng-model="addNew.notes" placeholder="Enter Notes" ng-maxlength="20">
+			<span style="color:red" ng-show="incomeForm.notes.$dirty && incomeForm.notes.$invalid">
+                Notes should not exceed 20 characters
+            </span></td>
+			<input ng-model="addNew.type" hidden value="Income">
+		</tr>
+		<tr><td><button ng-click="addIncomeSave()" ng-hide="addNew.indexData" ng-disabled="incomeForm.$invalid" class="btn-primary">Submit</button></td></tr>
+		<tr><td><button ng-click="showIncomeDetails(1)" ng-show="addNew.indexData" class="btn-primary">Done</button></td></tr>
+	</table>
+	</form>
+</div>

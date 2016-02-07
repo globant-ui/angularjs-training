@@ -1,0 +1,32 @@
+<h3 class="panel-heading">Income Details Source Wise</h3>
+<table class="table table-stripped" style="width:1000px">
+	<tr>
+		<th class="text-center">Payer</th>
+		<th class="text-center">Amount</th>
+		<th class="text-center">Date</th>
+		<th class="text-center">Mode Of Payment</th>	
+	</tr>
+	<tr ng-repeat="income in sortedIncomeResult">
+		<td>{{income.payer}}</td>
+		<td>{{income.amount}}</td>
+		<td>{{income.date}}</td>
+		<td>{{income.modeOfPayment}}</td>
+	</tr>
+</table>
+
+<h3 class="panel-heading">Expense Details Category Wise</h3>
+<table class="table table-stripped" style="width:1000px">
+	<tr>
+		<th class="text-center">Payee</th>
+		<th class="text-center">Amount</th>
+		<th class="text-center">Date</th>
+		<th class="text-center">Mode Of Payment</th>	
+		
+	</tr>
+	<tr ng-repeat="expense in sortedExpenseResult">
+		<td>{{expense.payee}}</td>
+		<td>{{expense.amount}}</td>
+		<td>{{expense.date}}</td>
+		<td>{{expense.modeOfPayment}}</td>
+	</tr>
+</table>

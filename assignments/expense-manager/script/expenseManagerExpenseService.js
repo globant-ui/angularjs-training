@@ -8,6 +8,7 @@ myapp.service("expenseManagerExpenseService",function($http,$q){
 	}
 	this.addExpense = function(scope){
 		scope.showAddExpense = true;
+		scope.showExpense = true;
 		scope.addNewExpense = {transactionId:"",payer:"",payee:"",category:"",subcategory:"",amount:"",date:"",modeOfPayment:"",notes:"",type:""};
 	}
 	this.addExpenseSave = function(scope) {
