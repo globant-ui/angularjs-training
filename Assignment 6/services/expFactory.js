@@ -1,5 +1,5 @@
 
-app.factory("expFactory", function($http) {
+app.factory("expFactory", function($http, $q) {
 	var factory= {};
 	var Transaction = {};
 	var msg;
@@ -9,17 +9,23 @@ app.factory("expFactory", function($http) {
 
 	factory.getTrans= function()
 	{
+		var def = $q.defer();
+
         $http.get("json/expData.json")
 		.then(function(response)
 		{
-		Transaction.data=response.data;
-		balance();
+			Transaction.data=response.data;
+			balance();
+			def.resolve(response);
+			console.log("Resolved...")
 			return Transaction;
 
 		},
 		function(response)
 		{
 			msg="Something Went Wrong !";
+			console.log(msg);
+			def.reject("Failed to get albums");
 		});
 		return	Transaction;
 	}

@@ -16,7 +16,7 @@
     "payee"  : "Robin",
     "category" : "Interest",
     "subCategory" : "Mutual Fund",
-    "amount" : 30000,
+    "amount" : 90000,
     "date" : "30-jan-2016",
     "modeOfPayment" : "Cash",
     "transType" : "income"
