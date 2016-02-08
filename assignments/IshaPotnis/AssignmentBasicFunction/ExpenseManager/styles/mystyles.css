@@ -1,0 +1,10 @@
+.alignment {
+    margin: auto;
+    width: 50%;
+    border: 3px solid #428bca;
+    padding: 10px;
+}
+            
+.control-label{
+    margin-left: 150px;
+}
