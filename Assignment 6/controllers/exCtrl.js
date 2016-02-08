@@ -10,6 +10,11 @@
         	templateUrl: 'views/expense.html'
      		//   controller: 'expensecntr'
       		}).
+    	when('/report', {
+        	templateUrl: 'views/report.html'
+     		//   controller: 'expensecntr'
+      		}).
+
       		otherwise({
         		redirectTo: '/index.html'
 

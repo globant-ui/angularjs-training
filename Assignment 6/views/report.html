@@ -1,5 +1,5 @@
-<table  name="income"  ng-hide=exvisible >
-                <caption style="text-align: center;font-weight: bold;">Income information</caption>                
+<table  name="income" >
+                <caption style="text-align: center;font-weight: bold;">Transaction information</caption>                
                 <tr>
                   <th>TransactionId  </th>
                   <th style="padding-left:10px; font-weight: bold">Payer  </th>
@@ -17,7 +17,7 @@
 <!-- <p>Income {{ Transaction.data }}</p>         
   -->   
                 <tbody class="table-striped">        
-                <tr ng-repeat=" key in Transaction.data " ng-if="key.transType=='income' && exvisible==false">
+                <tr ng-repeat=" key in Transaction.data ">
                   <td  ng-bind="key.transactionId"> </td>
                   <td  ng-bind="key.payer" style="padding-left:10px"> </td>
                   <td  ng-bind="key.payee" style="padding-left:10px"> </td>
