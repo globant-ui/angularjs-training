@@ -1,28 +1,12 @@
-
 var app = angular.module("expensesApp", []);
 
 app.controller("controller", function($scope) {
-    // $scope.income_array = [10,15,20,30];
-    // $scope.exp_array = [5,10,15,20];
+
     $scope.index = "";
     $scope.income_array = [];
-    $scope.exp_catogory = ["Rent","Travel","Party","Office","Others"];
+    $scope.exp_category = ["Rent","Travel","Party","Office","Others"];
     $scope.income_category = ["Salary","Business","Interest","Others"];
-    // [
-    // 	{
-    // 		"name" : "Business",
-    // 		"value": 30
-    // 	},
-    // 	{
-    // 		"name" : "Interest",
-    // 		"value": 50
-    // 	},
-    // 	{
-    // 		"name" : "Others",
-    // 		"value": 100
-    // 	}
-
-    // ];
+    $scope.income_mode = ['Credit Card','Cash','Electronic Transfer'];
 
     $scope.total_income = function(){
          var total_in = 0;  
@@ -33,25 +17,6 @@ app.controller("controller", function($scope) {
 }
 
     $scope.exp_array = [];
-    // [
-    // 	{
-    // 		"name" : "Rent",
-    // 		"value": 20
-    // 	},
-    // 	{
-    // 		"name" : "Travel",
-    // 		"value": 30
-    // 	},
-    // 	{
-    // 		"name" : "Party",
-    // 		"value": 20
-    // 	},
-    // 	{
-    // 		"name" : "Shopping",
-    // 		"value": 50
-    // 	},
-
-    // ];
 
      $scope.total_exp = function(){
          var total_ex = 0;  
@@ -70,15 +35,22 @@ $scope.addIncome = function(){
             var newItem ={};
             newItem.category= $scope.income.category;
             newItem.value=$scope.income.value;
+            newItem.date = $scope.income.date;
+            newItem.mode = $scope.income.mode;
             $scope.income_array.push(newItem); 
     } else {
             var newItem ={};
             newItem.category= $scope.income.category;
             newItem.value=$scope.income.value;
+            newItem.date = $scope.income.date;
+            newItem.mode = $scope.income.mode;
             $scope.income_array[$scope.index] = newItem;
     }
     $scope.index = "";
     $scope.income.value = "";
+    $scope.income.date= "";
+    $scope.income.mode = "";
+    $scope.income.category = "";
 };
 
 $scope.addExpense = function(){
@@ -109,6 +81,8 @@ $scope.editIncome = function(ind){
        $scope.index = ind;
        $scope.income.category = $scope.income_array[$scope.index].category;
        $scope.income.value = $scope.income_array[$scope.index].value;
+       $scope.income.date = $scope.income_array[$scope.index].date;
+       $scope.income.mode = $scope.income_array[$scope.index].mode;
 };
 
 $scope.deleteIncome = function(ind){

@@ -1,87 +1,19 @@
-var app = angular.module("expensesApp", []);
-
-app.service('updateService', function() {
-    this.index = '';
-    this.income_array = [];
-    this.income_temp = {
-        category: '',
-        value: '',
-        date: '',
-        mode: ''
-    };
-
-    this.exp_array = [];
-    this.exp_temp = {
-        date: '',
-        value: '',
-        category: '',
-        payee: ''
-    };
-
-
-    this.addIncome = function() {
-
-        if (this.index == undefined || this.index === "") {
-            this.income_array.push(this.income_temp);
-        } else {
-            this.income_array[this.index] = this.income_temp;
-        }
-        this.index = "";
-        this.income_temp = {
-            category: '',
-            value: '',
-            date: '',
-            mode: ''
-        };
-    };
-
-
-
-    this.addExpense = function() {
-        if (this.index === "") {
-            this.exp_array.push(this.exp_temp);
-        } else {
-            this.exp_array[this.index] = this.exp_temp;
-        }
-        this.index = "";
-        this.exp_temp = {
-            date: '',
-            value: '',
-            category: '',
-            payee: ''
-        };
-
-    };
-
-
-    this.deleteIncome = function() {
-        this.income_array.splice(this.index, 1);
-    };
-
-
-    this.deleteExpense = function() {
-        this.exp_array.splice(this.index, 1);
-    };
-
-});
-
-
-app.controller("controller", function($scope, updateService) {
+var app = angular.module("expensesApp", ['ngRoute']);
+	app.controller("controller", function($scope, updateService) {
     $scope.index = "";
     updateService.index = $scope.index;
 
     $scope.income_category = ["Salary", "Business", "Interest", "Others"];
-    $scope.income_mode = ['Credit Card','Cash','Electronic Transfer'];
     $scope.income_array = updateService.income_array;
     $scope.income_temp = new Object();
     $scope.income_temp = {
         category: '',
         value: '',
         date: '',
-        mode: ''
+        note: ''
     };
 
-    $scope.exp_category = ["Rent", "Travel", "Party", "Office", "Others"];
+    $scope.exp_catogory = ["Rent", "Travel", "Party", "Office", "Others"];
     $scope.exp_array = updateService.exp_array;
     $scope.exp_temp = new Object();
     $scope.exp_temp = {
@@ -98,7 +30,7 @@ app.controller("controller", function($scope, updateService) {
             category: '',
             value: '',
             category: '',
-            mode: ''
+            note: ''
         };
 
 
@@ -139,15 +71,14 @@ app.controller("controller", function($scope, updateService) {
         $scope.exp_array = updateService.exp_array;
     };
 
-            $scope.total_income = function(){
+        $scope.total_income = function(){
              var total_in = 0;  
             for ( var i = 0, _len = $scope.income_array.length; i < _len; i++ ) {
                 total_in += $scope.income_array[i].value;
             }
         return total_in;
     }
-
-             $scope.total_exp = function(){
+          $scope.total_exp = function(){
              var total_ex = 0;  
             for ( var i = 0, _len = $scope.exp_array.length; i < _len; i++ ) {
                 total_ex += $scope.exp_array[i].value;
