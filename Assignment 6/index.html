@@ -71,7 +71,7 @@
     </nav><!-- /.navbar -->
 
     <div class="container"  style="margin-left: 0;margin-right: 0;padding-left: 0;padding-right: 0; width:1320px">
-      <div class="row row-offcanvas row-offcanvas-right" style="float: left;display: inline-block;width: 76%;">
+      <div class="row row-offcanvas row-offcanvas-right" style="float: left;display: inline-block;width: 76%;;min-height: 500px;">
         <div class="col-xs-12 col-sm-9" style="width:100%">
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
@@ -218,7 +218,7 @@
 
 <!-- Right pannel -->
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" style="float:right">
-          <div class="list-group" ng-init="tab=1" style="padding-top:15px;">
+          <div class="list-group" ng-init="tab=0" style="padding-top:15px;">
             <a href="#income"  class="list-group-item"  ng-class="{ 'active':tab===1 }" ng-click= "exvisible=false; clicked=true; tab=1; searchForm=false; startTrans=false;">Income</a>
             <a href="#expense"  class="list-group-item" ng-class="{ 'active':tab===2 }" ng-click= "exvisible= true; clicked=true; tab=2; searchForm=false; startTrans=false; " >Expense</a>
             <a href="#form"  class="list-group-item" ng-class="{ 'active':tab===3 }" ng-click= "tab=3; startTrans=true;  searchForm=false;" >Add Transaction</a>
