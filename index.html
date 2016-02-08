@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="libs/angular.min.js"></script>
+    <script src="libs/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <script src="expense/expenseSrv.js"></script>
+    <script src="expense/ExpenseCtrl.js"></script>
+    <script src="income/incomeSrv.js"></script>
+    <script src="income/IncomeCtrl.js"></script>
+    <script src="dashboard/DashboardCtrl.js"></script>
+    <script src="reports/ReportCtrl.js"></script>
+</head>
+<body ng-app="expenseManagerApp">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#dashboard" class="navbar-brand">Expense Manager</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="#expense">Expense</a></li>
+                    <li><a href="#income">Income</a></li>
+                    <li><a href="#report">Reports</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mtop text-center">
+        <!--Here All the views will load-->
+        <div ng-view></div>
+    </div>
+</body>
+</html>
