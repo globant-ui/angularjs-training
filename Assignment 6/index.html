@@ -173,7 +173,7 @@
                 <div class="form-group row">
                   <label  class="col-sm-2 form-control-label">Date</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="dd:mm:yy:--:--" name=date  ng-model="newTrans.date" required>
+                    <input type="text" class="form-control" placeholder="dd-mm-yy:--:--" name=date  ng-model="newTrans.date" required>
                   </div>
                   <span ng-show="trForm.date.$error.required  && trForm.amount.$touched"  style="color:red ">Date rquired. </span> 
                 </div>                
@@ -223,7 +223,8 @@
             <a href="#expense"  class="list-group-item" ng-class="{ 'active':tab===2 }" ng-click= "exvisible= true; clicked=true; tab=2; searchForm=false; startTrans=false; " >Expense</a>
             <a href="#form"  class="list-group-item" ng-class="{ 'active':tab===3 }" ng-click= "tab=3; startTrans=true;  searchForm=false;" >Add Transaction</a>
             <a href="#search"  class="list-group-item" ng-class="{ 'active':tab===4 }" ng-click= "tab=4; searchForm=true; startTrans=false;" >Edit Transaction</a>
-            <a href="#report"  class="list-group-item" ng-class="{ 'active':tab===5 }" ng-click= "tab=5;  startTrans=false;" >Show Report</a> 
+            <a href="#report"  class="list-group-item" ng-class="{ 'active':tab===5 }" ng-click= "tab=5;  startTrans=false; searchForm=false;" >Show Report</a> 
+            <a href="#catreport"  class="list-group-item" ng-class="{ 'active':tab===6 }" ng-click= "tab=6;  startTrans=false; searchForm=false;" >Show Report By Category</a>
 <!--            <a href="#search"  class="list-group-item" ng-class="{ 'active':tab===5 }" ng-click= "tab=5; searchForm=true; deleteTrans=true; startTrans=false;" >Delete Transaction</a> -->
 
           </div>       

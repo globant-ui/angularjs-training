@@ -15,6 +15,12 @@
      		//   controller: 'expensecntr'
       		}).
 
+    	when('/catreport', {
+        	templateUrl: 'views/catreport.html'
+     		//   controller: 'expensecntr'
+      		}).
+
+
       		otherwise({
         		redirectTo: '/index.html'
 
