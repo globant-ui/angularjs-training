@@ -1,0 +1,35 @@
+[
+    {
+    "transactionId" : "A121",
+    "payer" : "Jack Frost",
+    "payee"  : "Eugen",
+    "category" : "Loan",
+    "subCategory" : "HomeLoan",
+    "amount" : 40000,
+    "date" : "28-jan-2016",
+    "modeOfPayment" : "Cash",
+    "transType" : "expense"
+    },
+    {
+    "transactionId" : "A122",
+    "payer" : "John",
+    "payee"  : "Robin",
+    "category" : "Interest",
+    "subCategory" : "Mutual Fund",
+    "amount" : 30000,
+    "date" : "30-jan-2016",
+    "modeOfPayment" : "Cash",
+    "transType" : "income"
+    },
+    {
+    "transactionId" : "A123",
+    "payer" : "Walle",
+    "payee"  : "Eve",
+    "category" : "Other",
+    "subCategory" : "Gift",
+    "amount" : 25000,
+    "date" : "28-Feb-2016",
+    "modeOfPayment" : "Online",
+    "transType" : "expense"
+    }
+]
