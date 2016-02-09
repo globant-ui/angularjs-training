@@ -3,11 +3,16 @@ myapp.service('ExpenseListService', ['$http', '$q', '$rootScope', '$templateCach
     var targetUrl = 'https://demo4989304.mockable.io/expenseTransactions';
 
     var expenselist;
+    
     this.getExpense = function() {
-      expenselist = $http.get(targetUrl);
-    //   console.log("#data received: " + JSON.stringify(expenselist));
-
-    //   console.log(JSON.stringify(expenselist));
-      return expenselist;
-    };
+        expenselist = $http.get(targetUrl);
+        return expenselist;
+    },
+    
+    this.addExpense = function(item) {
+        // console.log("add expense");
+        // console.log($rootScope.ExpenseTransactions);
+        $rootScope.ExpenseTransactions.push(item);
+    }
+    
   }]);

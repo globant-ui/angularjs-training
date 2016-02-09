@@ -1,28 +1,28 @@
-myapp.controller("mainctrl", function($scope, IncomeListService, ExpenseListService) {
+myapp.controller("mainctrl", function($scope, $rootScope, IncomeListService, ExpenseListService) {
     $scope.t = {};
     $scope.TransValue = null;
     $scope.add = true;
     $scope.view = true;
-    $scope.incomeCount = 2;
-    $scope.expenseCount = 2;
-    $scope.modifyflag = false;
-    // $scope.count = 0;
+    $rootScope.incomeCount = 2;
+    $rootScope.expenseCount = 2;
     
     var incomeSuccess = function(respData){
-      console.log('Response: ',respData.data);
-      $scope.IncomeTransactions =  respData.data;
+    //   console.log('Response: ',respData.data);
+      $rootScope.IncomeTransactions =  respData.data;
+    //   console.log($rootScope.IncomeTransactions[0]);
     }
     var incomeFailure = function(errorData){
       console.log('Error Response: ',errorData);  
     }
+    
     IncomeListService.getIncome().then(incomeSuccess,incomeFailure);
     
     var expenseSuccess = function(respData){
     //   console.log('Response: ',respData.data);
-      $scope.ExpenseTransactions =  respData.data;
+      $rootScope.ExpenseTransactions =  respData.data;
     }
     var expenseFailure = function(errorData){
-    //   console.log('Error Response: ',errorData);  
+      console.log('Error Response: ',errorData);  
     }
     ExpenseListService.getExpense().then(expenseSuccess,expenseFailure);
     
@@ -53,9 +53,9 @@ myapp.controller("mainctrl", function($scope, IncomeListService, ExpenseListServ
     
     $scope.calculatetotalIncome = function(){
         $scope.totalIncome = 0;
-        $scope.IncomeTransactions.forEach(function(element) {
-            $scope.totalIncome = parseFloat($scope.totalIncome) + parseFloat(element.amount);
-        }, this);
+        // $scope.IncomeTransactions.forEach(function(element) {
+        //     $scope.totalIncome = parseFloat($scope.totalIncome) + parseFloat(element.amount);
+        // }, this);
         
     }
     
@@ -72,9 +72,9 @@ myapp.controller("mainctrl", function($scope, IncomeListService, ExpenseListServ
     
     $scope.modify = function(type,id){
         if (type == "income") {
-            $scope.t = $scope.IncomeTransactions[id];
+            $scope.t = $rootScope.IncomeTransactions[id];
         } else {
-            $scope.t = $scope.ExpenseTransactions[id];
+            $scope.t = $rootScope.ExpenseTransactions[id];
         }
         $scope.add = true;
         $scope.view = false;
@@ -104,20 +104,18 @@ myapp.controller("mainctrl", function($scope, IncomeListService, ExpenseListServ
     }
     
     $scope.submit = function(){
-        if ($scope.modifyflag == "true") {
-           console.log("modifyflag");
-           $scope.modifyflag = false;
+        if ($scope.t.type == "income") {
+            // $scope.IncomeTransactions.push($scope.t);
+            // $scope.incomeCount = $scope.incomeCount + 1;
+            IncomeListService.addIncome($scope.t, $rootScope.incomeCount);
+            $rootScope.incomeCount = $rootScope.incomeCount + 1;
         } else {
-            console.log($scope.modifyflag);
-            if ($scope.t.type == "income") {
-                $scope.IncomeTransactions.push($scope.t);
-                $scope.incomeCount = $scope.incomeCount + 1;
-            } else {
-                $scope.ExpenseTransactions.push($scope.t);
-                $scope.expenseCount = $scope.expenseCount + 1;                
-            }            
+            // $scope.ExpenseTransactions.push($scope.t);
+            // $scope.expenseCount = $scope.expenseCount + 1;
+            ExpenseListService.addExpense($scope.t, $rootScope.expenseCount);
+            $rootScope.expenseCount = $rootScope.expenseCount + 1;    
         }
-        // console.log($scope.IncomeTransactions);
+        // console.log($scope.IncomeTransactions[1]);
         this.calculatetotalIncome();
         this.calculatetotalExpense();
         this.calculatetotalBalance();
