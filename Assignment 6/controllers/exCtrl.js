@@ -48,6 +48,9 @@
 
 	$scope.editID="";
 	$scope.formsub=false;
+	$scope.startAdd=false;
+	$scope.startEdit=false;
+	$scope.startDelete=false;	
 
 
 	$scope.Transaction=expFactory.getTrans();
@@ -67,7 +70,7 @@
 
 	$scope.addTrans = function(newTrans)
 	{	
-		$scope.Transaction = expFactory.addTrans(newTrans);
+		$scope.Transaction = expFactory.addTrans(newTrans, $scope.startAdd, $scope.startEdit);
 		console.log("Inside addTrans cntrl "+$scope.Transaction[$scope.Transaction.length-1]);
 		$scope.newTrans=null;
 		balance();
@@ -75,13 +78,17 @@
 		$scope.reset();
 	};
 
-	$scope.deleteTrans = function(searchId)
+	$scope.deleteTransaction = function(searchId)
 	{
+		if(searchId==null || searchId=="undefined"){
+			alert("Enter proper Transaction Id !"); return;
+		}
 		var confirmdel=confirm("Are Sure to Delete the Transaction "+searchId+" ? ");
 		if(confirmdel) {
 		$scope.Transaction = expFactory.deleteTrans(searchId);
 		console.log("Transaction Deleted  ... "+searchId);
 		balance();
+		$scope.reset();
 		}
 	};
 
@@ -94,9 +101,10 @@
 	};
 
 	$scope.editTrans = function(currentTrans)
-	{
+	{		
 		console.log("Transaction To be Edited ... "+currentTrans.transType);
-
+		$scope.startAdd=false;
+		$scope.startEdit=true; 
 		$scope.editID=expFactory.editTrans(currentTrans);
 		console.log("Search Successfull"+$scope.editID);
 		$scope.searchfound=true;

@@ -14,7 +14,7 @@
 </div>
 </div>
 
-<table  name="income" >
+<table >
                 <caption style="text-align: center;font-weight: bold; font-size: 18px">Transaction information</caption>                
                 <tr>
                   <th>TransactionId  </th>
@@ -43,7 +43,8 @@
                   <td  ng-if="key.category  == searchText || searchText=='all'"   ng-bind="key.date" style="padding-left:10px"> </td>
                   <td  ng-if="key.category == searchText || searchText=='all'"   ng-bind="key.modeOfPayment" style="padding-left:10px"> </td>
                   <td  ng-if="key.category  == searchText || searchText=='all'"   ng-bind="key.transType" > </td>
-                  <td  ng-if="key.category == searchText || searchText=='all'"   ng-click="editTrans(key.transactionId)"  style="padding-left:10px" ><button>Edit </button></td>
+                  <td  ng-if="key.category == searchText || searchText=='all'"   ng-click=" editTrans(key.transactionId)"  style="padding-left:10px" ><button>Edit </button></td>
+                  <td  ng-if="key.category == searchText || searchText=='all'" ng-click="deleteTransaction(key.transactionId)" style="padding-left:10px"><button>Delete</button></td>
                 </tr>
                 </tbody> 
 

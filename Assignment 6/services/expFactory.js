@@ -50,28 +50,41 @@ app.factory("expFactory", function($http, $q) {
 		return sum;
 	}
 
-	factory.addTrans = function(newTrans)
+	factory.addTrans = function(newTrans, startAdd, startEdit)
 	{
-		for(var i=0; i<Transaction.data.length; i++)
-		{
-			if(Transaction.data[i].transactionId == newTrans.transactionId )
-			{
-				edited=true;
-				Transaction.data[i].payer=newTrans.payer;
-				Transaction.data[i].payee = newTrans.payee;
-				Transaction.data[i].category=newTrans.category;
-				Transaction.data[i].subCategory=newTrans.subCategory;
-				Transaction.data[i].amount=newTrans.amount;
-				Transaction.data[i].date=newTrans.date;
-				Transaction.data[i].modeOfPayment= newTrans.modeOfPayment;
-				Transaction.data[i].transType = newTrans.transType;				
+		newTrans.date=factory.convertDate(newTrans.date);
+		console.log("TypeOf Newdate"+typeof(newTrans.date))
 
-				edited=true;
-				break;
+		if(startAdd==false && startEdit==true)
+		{			
+			for(var i=0; i<Transaction.data.length; i++)
+			{ 
+				if(Transaction.data[i].transactionId == newTrans.transactionId )
+				{	
+					edited=true;
+					Transaction.data[i].payer=newTrans.payer;
+					Transaction.data[i].payee = newTrans.payee;
+					Transaction.data[i].category=newTrans.category;
+					Transaction.data[i].subCategory=newTrans.subCategory;
+					Transaction.data[i].amount=newTrans.amount;
+					console.log("Transaction.data[i].date"+Transaction.data[i].date+"---"+typeof(Transaction.data[i].date));
+					console.log("newTrans.date"+newTrans.date+"---"+typeof(newTrans.date));
+					Transaction.data[i].date=newTrans.date;
+					Transaction.data[i].modeOfPayment= newTrans.modeOfPayment;
+					Transaction.data[i].transType = newTrans.transType;				
+
+					edited=true;
+					break;
+				}
 			}
+			if(edited===false)	
+			console.log("Transaction Not Found...");
 		}
-		if(edited===false)	Transaction.data.push(newTrans);
-		console.log("In Add trans 4"+newTrans.transType);
+
+		if(startAdd==true && startEdit==false)
+		{			
+				Transaction.data.push(newTrans);
+		}
 		edited=false;
 		return Transaction;
 	};
@@ -115,11 +128,14 @@ app.factory("expFactory", function($http, $q) {
 	factory.setForm=function(searchTrans )
 	{
 		var setForm=false;
+
 		for(var i=0; i<Transaction.data.length; i++)
 		{
 			console.log("In Add trans 2");
 			if(Transaction.data[i].transactionId == searchTrans)
 			{
+				var strtodate=factory.toDate(Transaction.data[i].date);
+console.log("Date  :"+Transaction.data[i].date+"Date in date format"+strtodate);				
 				edited=true;
 				console.log("In Add trans 3");
 				newTrans.transactionId=Transaction.data[i].transactionId;				
@@ -128,10 +144,10 @@ app.factory("expFactory", function($http, $q) {
 				newTrans.category = Transaction.data[i].category;
 				newTrans.subCategory = Transaction.data[i].subCategory;
 				newTrans.amount = Transaction.data[i].amount;
-				newTrans.date =Transaction.data[i].date;
+				newTrans.date =strtodate;
 				newTrans.modeOfPayment=Transaction.data[i].modeOfPayment;
 				newTrans.transType=Transaction.data[i].transType;				
-				setForm=true;
+				setForm=true;				
 				break;
 			}
 		}
@@ -140,5 +156,24 @@ app.factory("expFactory", function($http, $q) {
  		else {console.log("Something wrong in setForm...");}
 
 	};
+
+
+	factory.convertDate=function(inputFormat) 
+	{
+console.log("Inside Conver Date..."+inputFormat);		
+  		function pad(s) 
+  		{ 
+  			return (s < 10) ? '0' + s : s; 
+  		}
+  		var d = new Date(inputFormat);
+
+  		return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-');
+	};
+	
+	factory.toDate=function(dateStr) {
+console.log("Inside toDate...")		
+    	var parts = dateStr.split("-");
+    	return new Date(parts[2], parts[1] - 1, parts[0]);
+	}
 	return factory;
 });

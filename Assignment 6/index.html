@@ -76,7 +76,7 @@
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p> 
-<!-- Balance Information -->
+<!-- Balance Information  <p>StarAdd Ans startEdit {{ startAdd}} --- {{startEdit}}</p>-->
           <div class="jumbotron" style="padding:0; background-color:#fff">
             <div class="row" style="padding-left: 75px;" >
               <br> 
@@ -106,26 +106,29 @@
                 <div class="form-group row">
                   <label  class="col-sm-2 form-control-label">Enter Transaction Id</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" maxlength="20" placeholder="Enter Transaction Id" name="transId" ng-model="newTrans.transactionId" required>
+                    <input type="text" class="form-control" ng-maxlength="20" placeholder="Enter Transaction Id" name="transId" ng-model="newTrans.transactionId" required>
                   </div>
-                  <span ng-show="trForm.transId.$error.required && trForm.transId.$touched "  style="color:red ">Transaction Id rquired. </span>
+                  <span ng-show="trForm.transId.$error.required && trForm.transId.$touched "  style="color:red">Transaction Id rquired. </span>
+                  <span ng-show="trForm.transId.$error.maxlength  && !trForm.transId.$pristine"  style="color:red">Maxlength reached. </span>                  
                 </div>
 
 
                 <div class="form-group row">
                   <label  class="col-sm-2 form-control-label">Payer</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" maxlength="20"   placeholder="Payer" name="payer" ng-model="newTrans.payer"  required>
+                    <input type="text" class="form-control" ng-maxlength="20"   placeholder="Payer" name="payer" ng-model="newTrans.payer"  required>
                   </div>
-                  <span ng-show=" trForm.payer.$error.required && trForm.payer.$touched "  style="color:red " style="color:red ">Payer Name rquired.</span>
+                  <span ng-show=" trForm.payer.$error.required && trForm.payer.$touched "  style="color:red, margin-left: 170px;  " style="color:red ">Payer Name rquired.</span>
+                  <span ng-show="trForm.payer.$error.maxlength  && !trForm.payer.$pristine"  style="color:red, margin-left: 170px;  ">Maxlength reached. </span>                  
                 </div>
 
                 <div class="form-group row">
                   <label  class="col-sm-2 form-control-label">Payee</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" maxlength="20"   placeholder="Payee"  name="payee" ng-model="newTrans.payee"  required>
+                    <input type="text" class="form-control" ng-maxlength="20"   placeholder="Payee"  name="payee" ng-model="newTrans.payee"  required>
                   </div>
-                  <span ng-show="trForm.payee.$error.required && trForm.payee.$touched " style="color:red ">Payee Name rquired. </span>
+                  <span ng-show="trForm.payee.$error.required && trForm.payee.$touched " style="color:red; margin-left: 170px;  ">Payee Name rquired. </span>
+                  <span ng-show="trForm.payee.$error.maxlength  && !trForm.payee.$pristine"  style="color:red; margin-left: 170px;  ">Maxlength reached. </span>              
                 </div>
 
                 <div class="form-group row">
@@ -163,19 +166,20 @@
                 <div class="form-group row">
                   <label  class="col-sm-2 form-control-label">Amount</label>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" maxlength="20"   placeholder="Enter Amount" name=amount min=0 ng-model="newTrans.amount" required>
+                    <input type="number" class="form-control" ng-maxlength="20"   placeholder="Enter Amount" name=amount min=0 ng-model="newTrans.amount" required>
                   </div>
-                  <span ng-show="trForm.amount.$error.required  && trForm.amount.$touched"  style="color:red ">Amount rquired. </span> 
-                  <span ng-show="trForm.amount.$error.maxlength  && trForm.amount.$touched"  style="color:red ">Maxlength reached. </span>                                   
+                  <span  ng-show="trForm.amount.$error.required  && trForm.amount.$touched"  style="color:red;margin-left: 170px; ">Amount rquired. </span>
+                  <span  style="margin-left: 170px;" ng-show="trForm.amount.$error.maxlength  && !trForm.amount.$pristine"  style="color:red;margin-left: 170px; ">Maxlength reached. </span>                                               
                 </div>
 
 
                 <div class="form-group row">
                   <label  class="col-sm-2 form-control-label">Date</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="dd-mm-yy:--:--" name=date  ng-model="newTrans.date" required>
+                    <input type="date" class="form-control" placeholder="dd-mm-yy:--:--" name=date  ng-model="newTrans.date" required>
                   </div>
-                  <span ng-show="trForm.date.$error.required  && trForm.amount.$touched"  style="color:red ">Date rquired. </span> 
+                  <span   ng-show="trForm.date.$error.required  && trForm.amount.$touched"  style="color:red; margin-left: 170px;  ">Date rquired. </span> 
+                  <span  ng-show="trForm.date.$error.maxlength  && !trForm.date.$pristine"  style="color:red; margin-left: 170px;  ">Maxlength reached. </span>                  
                 </div>                
 
                 <div class="form-group row">
@@ -204,8 +208,8 @@
                 <div class="form-group row">
                   <div class="col-sm-offset-2 col-sm-10">
                     <button type="reset" ng-click="reset();" class="btn btn-secondary">Reset</button>
+                    <button type="button" ng-show="startDelete==true && startAdd==false" ng-click="deleteTransaction(newTrans.transactionId);" ng-show="searchForm===true"  class="btn btn-secondary" style="padding-left:10px">Delete</button> 
                     <button type="submit" ng-click="formsub=true;" class="btn btn-secondary" style="padding-left:10px">Submit</button>
-<!--                    <button  ng-show="searchForm===true" ng-click="deleteTrans(trForm.transId);deleteTrans=false" class="btn btn-secondary" style="padding-left:10px">Delete</button> -->
                   </div>
                 </div>
 
@@ -221,14 +225,13 @@
           <div class="list-group" ng-init="tab=0" style="padding-top:15px;">
             <a href="#income"  class="list-group-item"  ng-class="{ 'active':tab===1 }" ng-click= "exvisible=false; clicked=true; tab=1; searchForm=false; startTrans=false;">Income</a>
             <a href="#expense"  class="list-group-item" ng-class="{ 'active':tab===2 }" ng-click= "exvisible= true; clicked=true; tab=2; searchForm=false; startTrans=false; " >Expense</a>
-            <a href="#form"  class="list-group-item" ng-class="{ 'active':tab===3 }" ng-click= "tab=3; startTrans=true;  searchForm=false;" >Add Transaction</a>
-            <a href="#search"  class="list-group-item" ng-class="{ 'active':tab===4 }" ng-click= "tab=4; searchForm=true; startTrans=false;" >Edit Transaction</a>
-            <a href="#report"  class="list-group-item" ng-class="{ 'active':tab===5 }" ng-click= "tab=5;  startTrans=false; searchForm=false;" >Show Report</a> 
-            <a href="#catreport"  class="list-group-item" ng-class="{ 'active':tab===6 }" ng-click= "tab=6;  startTrans=false; searchForm=false;" >Show Report By Category</a>
-<!--            <a href="#search"  class="list-group-item" ng-class="{ 'active':tab===5 }" ng-click= "tab=5; searchForm=true; deleteTrans=true; startTrans=false;" >Delete Transaction</a> -->
+            <a href="#form"  class="list-group-item" ng-class="{ 'active':tab===3 }" ng-click= "tab=3; startAdd=true; startDelete=false;  startEdit=false; startTrans=true;  searchForm=false;" >Add Transaction</a>
+            <a href="#search"  class="list-group-item" ng-class="{ 'active':tab===4 }" ng-click= "tab=4; startAdd=false; startEdit=true;startDelete=false;  searchForm=true; startTrans=false;" >Edit Transaction</a>
+            <a href="#search"  class="list-group-item"  ng-class="{ 'active':tab===5 }" ng-click= "tab=5; searchForm=true; startDelete=true;startAdd=false; startTrans=false;" >Delete Transaction</a>             
+            <a href="#report"  class="list-group-item" ng-class="{ 'active':tab===6 }" ng-click= "tab=6;  startTrans=false; searchForm=false;" >Show Report</a> 
+            <a href="#catreport"  class="list-group-item" ng-class="{ 'active':tab===7 }" ng-click= "tab=7;  startTrans=false; searchForm=false;" >Show Report By Category</a>
 
           </div>       
-
 
         </div><!--/.sidebar-offcanvas-->
 

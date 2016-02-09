@@ -1,3 +1,5 @@
+
+
 <table name="exp" ng-show="exvisible ">
        <caption style="text-align: center;font-weight: bold; font-size: 18px">Expense information</caption>
        <tr>
@@ -26,8 +28,8 @@
                 <td  ng-bind="key.date" style="padding-left:10px"> </td>
                 <td  ng-bind="key.modeOfPayment" style="padding-left:10px"> </td>
                 <td  ng-bind="key.transType" > </td>
-                <td  ng-click="editTrans(key.transactionId); startTrans=true;"  style="padding-left:10px" ><button>Edit </button></td>
-                <td ng-click="deleteTrans(key.transactionId)" style="padding-left:10px"><button>Delete</button></td>
+                <td  ng-click="editTrans(key.transactionId);startTrans=true;" style="padding-left:10px" ><button>Edit </button></td>
+                <td style="padding-left:10px"><button ng-click="deleteTransaction(key.transactionId)" >Delete</button></td>
         </tr>
         </div> 
 </table>
