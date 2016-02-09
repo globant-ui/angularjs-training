@@ -58,6 +58,7 @@
                     <b> Expense Value </b>
                     <input type="number" name="amount_exp" ng-pattern="/^\s*(?=.*[0-9])\d*(?:\.\d{1,2})?\s*$/" ng-model="exp_temp.value" required>
                     <br>
+                    
                     <span style="color:red" ng-show="exp_form.amount_exp.$error.pattern">Invalid Amount.</span>
                     <b> Payee</b>
                     <input type="text" ng-model="exp_temp.payee">

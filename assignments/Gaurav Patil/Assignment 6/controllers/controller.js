@@ -4,13 +4,14 @@ var app = angular.module("expensesApp", ['ngRoute']);
     updateService.index = $scope.index;
 
     $scope.income_category = ["Salary", "Business", "Interest", "Others"];
+    $scope.income_mode = ['Credit Card','Cash','Electronic Transfer'];
     $scope.income_array = updateService.income_array;
     $scope.income_temp = new Object();
     $scope.income_temp = {
         category: '',
         value: '',
         date: '',
-        note: ''
+        mode: ''
     };
 
     $scope.exp_catogory = ["Rent", "Travel", "Party", "Office", "Others"];
@@ -30,7 +31,7 @@ var app = angular.module("expensesApp", ['ngRoute']);
             category: '',
             value: '',
             category: '',
-            note: ''
+            mode: ''
         };
 
 
