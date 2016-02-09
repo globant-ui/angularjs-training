@@ -1,0 +1,101 @@
+<div class = "container" >
+  <div class="row" style="border-radius :10px; background-color:grey;">
+  <h2 style="margin-left :50px; margin-bottom : 20px; color:white">Expense Manager</h2>
+    </div>
+    <div style="margin-top :15px;">
+      <label> Total Income = {{total.income}}</label>  
+       <label style="margin-left :40px;">Total Expense = {{total.expense}}</label>
+       <label style="margin-left :40px;">Balance Left = {{total.balance}}</label>
+    </div>
+    <div class = "choiceOfSelection">
+      <button class="btn btn-default choice" ng-click = "income_show = true;" ui-sref="income"> Add Income </button>
+      <button class="btn btn-default choice" ng-click = "income_show = false;" ui-sref="expense"> Add Expense </button>
+    </div>
+
+    <div class="col-xs-4 formClass">
+      <h3 style="margin-left : 75px; padding:10px;" ng-hide="income_show">Expense Details</h3>
+      <h3 style="margin-left : 75px; padding:10px;" ng-show="income_show">Income Details</h3>
+      <form name = "detailsForm" novalidate >
+        <div class="form-group">
+          <label>Enter Amount : </label>
+          <input type = "text" name="amount" class="required" required ng-model="Transaction.amount" ng-pattern = "/^[0-9]{1,7}(\.[0-9]+)?$/"   ng-focus="amountBlur=false;"
+                   ng-blur="amountBlur=true;"/><br>
+          <span style="color:red" ng-show="detailsForm.amount.$error.required && (detailsForm.amount.$dirty || submitted);">Amount is required.</span>
+                    <span style="color:red" ng-show="detailsForm.amount.$error.pattern">Invalid Amount.</span>
+        </div>
+        <div class="form-group">
+          <label>Select Category :</label>
+          <select  class="required" ng-hide = "income_show" required ng-options = "category for category in categories_exp" ng-model="Transaction.category" ng-selected = "Rent">
+
+            <!-- <option value="category">{{category}}</option> -->
+          </select>
+          <select class="required"  ng-show = "income_show" required ng-options = "category for category in categories_inc" ng-model="Transaction.category">
+            <!-- <option value="category">{{category}}</option> -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Select date :</label>
+          <input type = "date" required ng-model = "Transaction.date" />
+        </div>
+        <div class="form-group">
+          <label>Select mode of payment : </label>
+          <select  class="required" required ng-options = "payment for payment in modeOfPayment" ng-model= "Transaction.mode">
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Add Note :</label>
+          <textarea rows="2" cols="30" name = "note" maxlength = "20" ng-model = "Transaction.note" ng-focus="commentFocus=true;" ng-blur="commentFocus=false;"></textarea>
+           <span ng-show="detailsForm.note.$dirty && commentFocus">(Note should not exceed limit of 20 characters.)</span>
+        </div>
+        <button class="btn btn-default"  ng-disabled="detailsForm.$invalid" ng-hide = "edit" ng-click = "addExpense(income_show);" > Add </button>
+        <button  class="btn btn-default" ng-disabled="detailsForm.$invalid" ng-show = "edit"  ng-click = "editExp(income_show);">Save</button>
+        <button class="btn btn-default" ng-click = "reset();"  > Cancel </button>
+      </form> 
+    </div>
+
+    <!-- <div ng-show = "!income_show && expense.length>0">
+      <h3 class="title">Expense Details </h3>
+      <table class="table table-bordered">
+        <thead><tr><th>Id</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Date</th>
+        <th>Mode</th>
+        <th>Edit</th>
+        <th>Delete</th></tr></thead>
+
+        <tr ng-repeat = "exp in expense">
+          <td ng-bind = " $index + 1 "></td>
+          <td ng-bind = "exp.amount | number:2"></td>
+          <td ng-bind = "exp.category"></td>
+          <td> {{exp.date | date:"MM/dd/yyyy 'at' h:mma"}} </td>
+          <td ng-bind = "exp.mode"></td>
+          <td><button class="btn btn-default" ng-click="EnableEdit(exp,$index);"><span class="glyphicon glyphicon-pencil"></span>  Edit</button></td>
+          <td><button class="btn btn-default" ng-click="deleteExp($index,income_show);">Delete</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <div ng-show = "income_show && income.length > 0">
+      <h3 class="title"> Income Details </h3>
+      <table class="table table-bordered">
+        <thead><tr><th>Id</th>
+        <th>Amount</th>
+        <th>Source</th>
+        <th>Date</th>
+        <th>Mode</th>
+        <th>Edit</th>
+        <th>Delete</th></tr></thead>
+
+        <tr ng-repeat = "inc in income">
+          <td ng-bind = "$index + 1"></td>
+          <td ng-bind = "inc.amount"></td>
+          <td ng-bind = "inc.category"></td>
+          <td>{{inc.date | date:"MM/dd/yyyy 'at' h:mma"}}</td>
+          <td ng-bind = "inc.mode"></td>
+          <td><button class="btn btn-default" ng-click="EnableEdit(inc,$index);">Edit</button></td>
+          <td><button class="btn btn-default" ng-click="deleteExp($index,income_show);">Delete</button></td>
+        </tr>
+      </table>
+    </div> -->
+  </div>
