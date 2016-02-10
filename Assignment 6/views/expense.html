@@ -17,8 +17,7 @@
         </tr>
         <div>
 
-        <tr ng-repeat=" key in Transaction.data  " ng-if="key.transType=='expense' ">
-            {{key }}
+        <tr ng-repeat=" key in Transaction.data | filter:'expense' " >
 	        <td  ng-bind="key.transactionId"> </td>
                 <td  ng-bind="key.payer" style="padding-left:10px"> </td>
                 <td  ng-bind="key.payee" style="padding-left:10px"> </td>

@@ -20,6 +20,12 @@
      		//   controller: 'expensecntr'
       		}).
 
+    	when('/monthreport', {
+        	templateUrl: 'views/monthreport.html'
+     		//   controller: 'expensecntr'
+      		}).
+
+
 
       		otherwise({
         		redirectTo: '/index.html'

@@ -2,7 +2,7 @@
 <label class="col-sm-2 form-control-label">Show By Category</label>
 <div class="col-sm-10">
   <select class="form-control" style="width: 250px;" placeholder="Select Category"  name="Searchcategory" ng-model="searchText" >
-      <option value="all" selected>Show All</option>
+      <option value="" selected>Select Category</option>
       <option value="Interest">Interest</option>
       <option value="Shares">Shares</option>
       <option value="Health">Health</option>
@@ -31,8 +31,7 @@
                 </tr>
 
 <!-- <p>Income {{ Transaction.data }}</p>         
-  -->   
-                <tbody class="table-striped">        
+           <tbody class="table-striped">        
                 <tr ng-repeat=" key in Transaction.data " >
                   <td  ng-if="key.category == searchText" ng-bind="key.transactionId"> </td>
                   <td  ng-if="key.category == searchText || searchText=='all'" ng-bind="key.payer" style="padding-left:10px"> </td>
@@ -45,6 +44,22 @@
                   <td  ng-if="key.category  == searchText || searchText=='all'"   ng-bind="key.transType" > </td>
                   <td  ng-if="key.category == searchText || searchText=='all'"   ng-click=" editTrans(key.transactionId)"  style="padding-left:10px" ><button>Edit </button></td>
                   <td  ng-if="key.category == searchText || searchText=='all'" ng-click="deleteTransaction(key.transactionId)" style="padding-left:10px"><button>Delete</button></td>
+                </tr>
+                </tbody> 
+-->
+                <tbody class="table-striped">        
+                <tr ng-repeat=" key in Transaction.data | filter: searchText" >
+                  <td  ng-bind="key.transactionId"> </td>
+                  <td  ng-bind="key.payer" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.payee" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.category" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.subCategory" style="padding-left:10px"> </td>
+                  <td  style="padding-left:10px">{{ key.amount | number:2}} </td>
+                  <td  ng-bind="key.date" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.modeOfPayment" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.transType" > </td>
+                  <td  ng-click=" editTrans(key.transactionId)"  style="padding-left:10px" ><button>Edit </button></td>
+                  <td  ng-click="deleteTransaction(key.transactionId)" style="padding-left:10px"><button>Delete</button></td>
                 </tr>
                 </tbody> 
 
