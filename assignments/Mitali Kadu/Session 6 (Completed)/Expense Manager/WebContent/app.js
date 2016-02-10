@@ -76,7 +76,7 @@ myApp.service('incomeService', function($http) {
    this.total_balance = this.total_income - this.total_expense;
    if (this.edit_income === "") {
     this.incomes.push(this.temp_2);
-    alert("adding");
+
 
    } else {
 

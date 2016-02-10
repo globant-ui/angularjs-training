@@ -21,14 +21,14 @@ income.controller('incomeController', function($scope, incomeService, $http, myS
 
  $scope.add_income = function() {
   incomeService.temp_2 = $scope.temp_2;
-  alert("add income");
+
   if ($scope.edit_income === "") {
    $http({
     method: 'POST',
     url: 'http://demo3547198.mockable.io/income',
     data: $scope.temp_2
    }).then(function successCallback(response) {
-    alert("here");
+
     $scope.message = response.data;
     incomeService.incomes.push($scope.message);
     incomeService.total_income = incomeService.total_income + $scope.message.amount;
