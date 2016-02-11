@@ -2,11 +2,10 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<script type="text/javascript" src="script/angular.min.js"></script>
-<script type="text/javascript" src="script/angular-route.js"></script>
-<script type="text/javascript" src="script/main.js"></script>
-<script type="text/javascript" src="script/expenseManagerIncomeService.js"></script>
-<script type="text/javascript" src="script/expenseManagerExpenseService.js"></script>
+<script type="text/javascript" src="script/library/angular.min.js"></script>
+<script type="text/javascript" src="script/library/angular-route.js"></script>
+<script type="text/javascript" src="script/expenseManagerScripts/main.js"></script>
+<script type="text/javascript" src="script/expenseManagerScripts/expenseManagerIncomeExpenseService.js"></script>
 <base href="/6thSession/">
 </head>
 <body>
@@ -30,8 +29,8 @@
 		
 		<table class="table table-stripped" style="width:1000px">
 			<tr>
-				<td class="text-center"><a href="showIncomeDetails" class="nav nav-pills">Income</a></td>
-				<td class="text-center"><a href="showExpenseDetails" class="nav nav-pills">Expenses</a></td>
+				<td class="text-center"><a href="showIncomeExpenseDetails/income" class="nav nav-pills">Income</a></td>
+				<td class="text-center"><a href="showIncomeExpenseDetails/expense" class="nav nav-pills">Expenses</a></td>
 				<td class="text-center"><a href="showReportsDetails" class="nav nav-pills">Reports</a></td>
 			</tr>
 		</table>

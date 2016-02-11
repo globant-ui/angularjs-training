@@ -1,0 +1,104 @@
+<h3 ng-show="noTransactionData">Oops! No {{transType.substring(0,1).toUpperCase()+transType.substring(1)}} details found!!!</h3>
+<div ng-show="showTransaction" class="text-center">
+	<h3 class="panel-heading">{{transType.substring(0,1).toUpperCase()+transType.substring(1)}} Details</h3>
+	<button ng-click="addTransaction()" class="btn-primary">Add {{transType.substring(0,1).toUpperCase()+transType.substring(1)}}</button>
+	<table class="table table-stripped" style="width:1000px">
+		<tr>
+			<th class="text-center" ng-show="showPayer">Payer</th>
+			<th class="text-center" ng-show="showPayee">Payee</th>
+			<th class="text-center">Amount</th>
+			<th class="text-center">Date</th>
+			<th class="text-center">Mode Of Payment</th>	
+			<th class="text-center"></th>
+			<th class="text-center"></th>
+		</tr>
+		<tr ng-repeat="transData in transactionData">
+			{{transData}}
+			<td ng-show="showPayer">{{transData.payer}}</td>
+			<td ng-show="showPayee">{{transData.payee}}</td>
+			<td>{{transData.amount}}</td>
+			<td>{{transData.date}}</td>
+			<td>{{transData.modeOfPayment}}</td>
+			<td ng-click="editTransaction($index)"><i class="glyphicon glyphicon-edit"></i></td>
+			<td ng-click="deleteTransaction($index)"><i class="glyphicon glyphicon-trash"></i></td>
+		</tr>
+	</table>
+</div>
+
+<div ng-show="showAddTransaction" class="text-center">
+	<form name="transactionForm">
+	<h3 class="panel-heading">Add Income Details</h3>
+	<table class="table table-stripped" style="width:1000px">
+		<tr>
+			<td ng-show="showPayer">
+				<input type="text" name="incomeExpensePayer" ng-model="addNew.payer" placeholder="Enter Payer Name">
+				<span style="color:red" ng-show="transactionForm.incomeExpensePayer.$dirty && transactionForm.incomePayer.$invalid">
+                	Payer is required
+           		</span>
+            	<input ng-model="addNew.payee" hidden ng-value="{{selfData}}">
+
+        	</td>
+
+        	<td ng-show="showPayee">
+        		<input type="text" name="incomeExpensePayee" ng-model="addNew.payee" placeholder="Enter Payee Name">
+				<span style="color:red" ng-show="transactionForm.incomeExpensePayee.$dirty && transactionForm.incomePayee.$invalid">
+               		Payee is required
+            	</span>
+            	<input ng-model="addNew.payer" hidden ng-value="{{selfData}}">
+				
+            </td>
+			
+		</tr>
+		<tr>
+			<td>
+				<select ng-model="addNew.category">
+				  <option value="">Enter Category Name</option>
+		          <option ng-repeat="types in category" value="{{types}}">
+		            {{types}}
+		          </option>
+		        </select>
+	    	</td>
+		</tr>
+		<tr>
+			<td>
+				<select ng-model="addNew.subcategory">
+					<option value="">Enter Sub-Category</option>
+		          <option ng-repeat="types in subcategory" value="{{types}}">
+		            {{types}}
+		          </option>
+		        </select>
+	    	</td>
+		</tr>
+		<tr>
+			<td><input type="number" name="incomeExpenseAmount" ng-model="addNew.amount" placeholder="Enter Amount" ng-pattern="/^[0-9]{1,7}$/" step="0.01"><span style="color:red" ng-show="transactionForm.incomeExpenseAmount.$dirty && transactionForm.incomeExpenseAmount.$invalid">
+                Amount is invalid
+            </span></td>
+		</tr>
+		<tr>
+			<td><input name="incomeExpenseDate" ng-model="addNew.date" placeholder="Enter Date"><span style="color:red" ng-show="transactionForm.incomeExpenseDate.$dirty && transactionForm.incomeExpenseDate.$invalid">
+                Date is required
+            </span></td>
+		</tr>
+		<tr>
+			<td>
+				<select name="incomeModeOfPayment" ng-model="addNew.modeOfPayment">
+					<option value="">Enter Mode Of Payment</option>
+		          <option ng-repeat="modes in modeOfPayment" value="{{modes}}">
+		            {{modes}}
+		          </option>
+		        </select>
+	    	<span style="color:red" ng-show="transactionForm.incomeModeOfPayment.$dirty && transactionForm.incomeModeOfPayment.$invalid">
+                Mode of Payment is required
+            </span></td>
+		</tr>
+		<tr>
+			<td><input name="notes" ng-model="addNew.notes" placeholder="Enter Notes" ng-maxlength="20">
+			<span style="color:red" ng-show="transactionForm.notes.$dirty && transactionForm.notes.$invalid">
+                Notes should not exceed 20 characters
+            </span></td>
+		</tr>
+		<tr><td><button ng-click="addTransactionSave()" ng-hide="addNew.indexData"  class="btn-primary">Submit</button></td></tr>
+		<tr><td><button ng-click="showIncomeExpenseDetails(1)" ng-show="addNew.indexData" class="btn-primary">Done</button></td></tr>
+	</table>
+	</form>
+</div>
