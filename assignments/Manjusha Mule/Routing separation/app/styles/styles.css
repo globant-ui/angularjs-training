@@ -1,0 +1,30 @@
+table {
+   		border-collapse: collapse;
+   		width: 50%;
+   		height: 50px;
+	}
+	table td, table th {
+		border: 2px solid black;
+		 padding: 10px;
+		 text-align: center;
+	}
+	.choiceofSelection{
+		margin-left: 400px;
+		margin-bottom: 30px;
+	}
+	.title{
+		//margin-top: 450px;
+		float: left;
+    	margin-left: 450px;
+	}
+	.choice{
+		padding: 10px ;
+		margin-right: 20px;
+	}
+	.formClass{
+		margin-left: 350px;
+		border: 1px solid black;
+		padding: 20px;
+		margin-bottom: 20px;
+	}
+	.required:after { content:"*"; color:red; }
