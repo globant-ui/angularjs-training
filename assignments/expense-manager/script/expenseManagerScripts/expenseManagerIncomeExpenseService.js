@@ -1,6 +1,7 @@
 
 myapp.service("expenseManagerIncomeExpenseService",function($http,$q){
-	
+	this.incomeData = this.expenseData = {};
+
 	this.showIncomeExpenseDetails = function(scope){
 		scope.showTransaction = true;
 		scope.showAddTransaction= false;
@@ -62,18 +63,21 @@ myapp.service("expenseManagerIncomeExpenseService",function($http,$q){
 				});	
 	}
 
-	this.storeIncomeExpenseData = function(scope){
+	this.storeIncomeData = function(scope){
+		this.incomeData = scope.incomeData;
+		//this.expenseData = scope.expenseData;
+	}
 
-		$http({
-			method: 'GET',
-			url: scope.data_source
-		})
-		.then(function(response){
-			if(typeof response.data === 'object' ) {
-				console.log(response.data);
-				return response.data;
-			}	
-		});
+	this.storeExpenseData = function(scope){
+		this.expenseData = scope.expenseData;
+	}
+	
+	this.getIncomeData = function(){
+		return this.incomeData;
+	}
+
+	this.getExpenseData = function(){
+		return this.expenseData;
 	}
 
 });

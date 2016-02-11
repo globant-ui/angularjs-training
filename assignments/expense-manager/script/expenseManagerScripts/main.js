@@ -20,27 +20,35 @@ myapp.controller("showIncomeExpenseController",['$scope','$http','expenseManager
 	$scope.selfData = "Ashwini";	
 
 	//cases according to income or expense
+
 	if($routeParams.transactionType == 'income') {
-		$scope.data_source = 'https://api.myjson.com/bins/4esbx';
-		expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
-		.then(function(data){
-			if(typeof data === 'object') {
-				$scope.incomeData = data;
-				$scope.showPayer = true;
-				$scope.showIncomeExpenseDetails();
-			} 
-		});
-			 
+		$scope.incomeData = expenseManagerIncomeExpenseService.getIncomeData();
+		if(Object.keys($scope.incomeData).length === 0){
+			$scope.data_source = 'https://api.myjson.com/bins/4esbx';
+			expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
+			.then(function(data){
+				if(typeof data === 'object') {
+					$scope.incomeData = data;
+					expenseManagerIncomeExpenseService.storeIncomeData($scope);
+					$scope.showPayer = true;
+					$scope.showIncomeExpenseDetails();
+				} 
+			});
+		}			 
 	} else if($routeParams.transactionType == 'expense') {
-		$scope.data_source = 'https://api.myjson.com/bins/4h045';
-		expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
-		.then(function(data){
-			if(typeof data === 'object') {
-				$scope.expenseData = data;
-				$scope.showPayee = true;		
-				$scope.showIncomeExpenseDetails();	
-			} 
-		});	
+		$scope.expenseData = expenseManagerIncomeExpenseService.getExpenseData();
+		if(Object.keys($scope.expenseData).length === 0){
+			$scope.data_source = 'https://api.myjson.com/bins/4h045';
+			expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
+			.then(function(data){
+				if(typeof data === 'object') {
+					$scope.expenseData = data;
+					expenseManagerIncomeExpenseService.storeExpenseData($scope);
+					$scope.showPayee = true;		
+					$scope.showIncomeExpenseDetails();	
+				} 
+			});	
+		} 
 	} 
 
 
@@ -60,7 +68,7 @@ myapp.controller("showIncomeExpenseController",['$scope','$http','expenseManager
 		} else if($routeParams.transactionType == 'expense') {
 			$scope.transactionData = $scope.expenseData;
 		} 
-		console.log($scope.transactionData);
+		
 		expenseManagerIncomeExpenseService.showIncomeExpenseDetails($scope);					
 	}
 
@@ -91,6 +99,7 @@ myapp.controller("showIncomeExpenseController",['$scope','$http','expenseManager
 		expenseManagerIncomeExpenseService.deleteTransaction($scope,index);		
 	}
 	
+	$scope.showIncomeExpenseDetails();
 }]);
 
 myapp.controller("showReportController",['$scope','expenseManagerIncomeExpenseService',function($scope,expenseManagerIncomeExpenseService){
