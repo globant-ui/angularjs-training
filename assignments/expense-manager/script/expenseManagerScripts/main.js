@@ -111,26 +111,46 @@ myapp.controller("showReportController",['$scope','expenseManagerIncomeExpenseSe
 	  }
 	}
 
-	$scope.data_source = 'https://api.myjson.com/bins/4esbx';
-	expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
-	.then(function(data){
-		console.log(data);
-		if(typeof data === 'object') {
-			transactionResult = data;
-			transactionResult.sort(keysrt('payer'));
-			$scope.sortedIncomeResult = transactionResult;
-		} 
-	});
+	transactionResult = expenseManagerIncomeExpenseService.getIncomeData();
+
+	if(Object.keys(transactionResult).length === 0){
+		$scope.data_source = 'https://api.myjson.com/bins/4esbx';
+		expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
+		.then(function(data){
+			if(typeof data === 'object') {
+				transactionResult = data;
+				$scope.incomeData = data;
+				expenseManagerIncomeExpenseService.storeIncomeData($scope);
+				transactionResult.sort(keysrt('payer'));
+				$scope.sortedIncomeResult = transactionResult;
+			} 
+		});
+	} else {
+		transactionResult.sort(keysrt('payer'));
+		$scope.sortedIncomeResult = transactionResult;
+	}
+
 	
-	$scope.data_source = 'https://api.myjson.com/bins/4h045';
-	expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
-	.then(function(data){
-		if(typeof data === 'object') {
-			transactionResult = data;
-			transactionResult.sort(keysrt('category'));
-			$scope.sortedExpenseResult = transactionResult;
-		} 
-	});	
+
+	
+	transactionResult = expenseManagerIncomeExpenseService.getExpenseData();
+	if(Object.keys(transactionResult).length === 0){
+		$scope.data_source = 'https://api.myjson.com/bins/4h045';
+		expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
+		.then(function(data){
+			if(typeof data === 'object') {
+				transactionResult = data;
+				$scope.expenseData = data;
+				expenseManagerIncomeExpenseService.storeExpenseData($scope);
+				transactionResult.sort(keysrt('category'));
+				$scope.sortedExpenseResult = transactionResult;
+			} 
+		});	
+	} else {
+		transactionResult.sort(keysrt('category'));
+		$scope.sortedExpenseResult = transactionResult;
+	}
+	
 	
 
 }]);
