@@ -1,4 +1,4 @@
-	var app = angular.module("exManager", ['ngRoute']);
+    var app = angular.module("exManager", ['ngRoute']);
 
 	app.config(['$routeProvider', function($routeProvider) {
     	$routeProvider.
@@ -57,9 +57,16 @@
 	$scope.startAdd=false;
 	$scope.startEdit=false;
 	$scope.startDelete=false;	
+    var promise;
+        
 
-
-	$scope.Transaction=expFactory.getTrans();
+	promise=expFactory.getTrans();
+    promise.then(function(data){
+        console.log("Inside .... Promise ");
+        $scope.Transaction=data;       
+        console.log("Transaction data :  "+$scope.Transaction);        
+    });
+    
 	console.log("From Controller : "+$scope.Transaction);
 
 	$scope.Test=function(){

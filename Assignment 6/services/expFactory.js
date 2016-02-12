@@ -18,7 +18,7 @@ app.factory("expFactory", function($http, $q) {
 			balance();
 			def.resolve(response);
 			console.log("Resolved...")
-			return Transaction;
+			//return def.promise;
 
 		},
 		function(response)
@@ -27,7 +27,8 @@ app.factory("expFactory", function($http, $q) {
 			console.log(msg);
 			def.reject("Failed to get albums");
 		});
-		return	Transaction;
+		//return	Transaction;
+        return def.promise;
 	}
 
 	factory.balance=function()

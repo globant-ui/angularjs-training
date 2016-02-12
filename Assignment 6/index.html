@@ -22,30 +22,6 @@
       <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
       <!-- Custom styles for this template -->
       <link href="css/expcss.css" rel="stylesheet">
-
-  <style>
-  table, th, td {
-      border-collapse: collapse;
-      width: 100%;
-  }
-
-  th {
-      height: 50px;
-  }
-
-  th, td {
-      padding: 15px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-  }
-
-
-  tr:nth-child(even){background-color: #f2f2f2}
-
-  tr:hover{background-color:#f5f5f5}
-
-
-  </style>
   </head>
 
   <body  ng-app="exManager" ng-controller="expensecntr as excontrol">
@@ -179,7 +155,7 @@
                     <input type="date" class="form-control" placeholder="dd-mm-yy:--:--" name=date  ng-model="newTrans.date" required>
                   </div>
                   <span   ng-show="trForm.date.$error.required  && trForm.amount.$touched"  style="color:red; margin-left: 170px;  ">Date rquired. </span> 
-                  <span  ng-show="trForm.date.$error.maxlength  && !trForm.date.$pristine"  style="color:red; margin-left: 170px;  ">Maxlength reached. </span>                  
+                  <span  ng-show="trForm.date.$error.maxlength  && !trForm.date.$pristine"  style="color:red; margin-left: 170px;  ">Maxlength reached. </span>
                 </div>                
 
                 <div class="form-group row">
