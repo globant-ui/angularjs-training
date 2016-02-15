@@ -1,0 +1,21 @@
+<div >
+<div class="row" style="border-radius :10px; background-color:grey;">
+  <h2 style="margin-left :50px; margin-bottom : 20px; color:white">Expense Manager</h2>
+    </div>
+    <div style="background-color : #d3d3d3;   height: 60px;">
+    <div class = "choiceOfSelection" >
+      <button class="btn btn-default choice" ng-class="{active: $state.includes('income')} "   ui-sref="income"> Add Income </button>
+      <button class="btn btn-default choice" ng-class="{active: $state.includes('expense')}"  ui-sref="expense"> Add Expense </button>
+    </div>
+    <!-- <ul>
+    <li ui-sref="income">Add Income </li>
+    <li ui-sref="expense"> Add Expense</li>
+    </ul>
+     --></div>
+
+    <div align="center" style="margin-top :15px;">
+      <label><span> Income : {{total.income}}</span></label>  
+       <label style="margin-left :40px;"> Expense : {{total.expense}}</label>
+       <label style="margin-left :40px;">Balance : {{total.balance}}</label>
+    </div>
+  </div>

@@ -1,0 +1,39 @@
+<div class="col-xs-4 formClass">
+      <h3 style="margin-left : 75px; padding:10px;">Income Details</h3>
+      <form name = "detailsForm" novalidate >
+        <div class="form-group">
+          <label>Enter Amount : </label>
+          <input type = "text" name="amount" class="required" required ng-model="Transaction.amount" ng-pattern = "/^[0-9]{1,7}(\.[0-9]+)?$/"   ng-focus="amountBlur=false;"
+                   ng-blur="amountBlur=true;"/><br>
+          <span style="color:red" ng-show="detailsForm.amount.$error.required && (detailsForm.amount.$dirty || submitted);">Amount is required.</span>
+                    <span style="color:red" ng-show="detailsForm.amount.$error.pattern">Invalid Amount.</span>
+        </div>
+        <div class="form-group">
+          <label>Select Category :</label>
+          <!-- <select  class="required" ng-hide = "income_show" required ng-options = "category for category in categories_exp" ng-model="Transaction.category" ng-selected = "Rent">
+
+            
+          </select> -->
+          <select class="required"  required ng-options = "category for category in categories_inc" ng-model="Transaction.category">
+            <!-- <option value="category">{{category}}</option> -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Select date :</label>
+          <input type = "date" required ng-model = "Transaction.date" />
+        </div>
+        <div class="form-group">
+          <label>Select mode of payment : </label>
+          <select  class="required" required ng-options = "payment for payment in modeOfPayment" ng-model= "Transaction.mode">
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Add Note :</label>
+          <textarea rows="2" cols="30" name = "note" maxlength = "60" ng-model = "Transaction.note" ng-focus="commentFocus=true;" ng-blur="commentFocus=false;"></textarea>
+           <span ng-show="detailsForm.note.$dirty && commentFocus">(Note should not exceed limit of 20 characters.)</span>
+        </div>
+        <button class="btn btn-default"  ng-disabled="detailsForm.$invalid" ng-hide = "edit" ng-click = "addExpense();" > Add </button>
+        <button  class="btn btn-default" ng-disabled="detailsForm.$invalid" ng-show = "edit"  ng-click = "editExp();">Save</button>
+        <button class="btn btn-default" ng-click = "reset();"  > Cancel </button>
+      </form> 
+    </div>
