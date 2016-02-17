@@ -26,7 +26,11 @@ angular.module('myAppApp')
                                 // console.log(incomeItem);
                                 return response.data;
                             } else {
-                                expenseItem.push(response.data);
+                                expenseItem = $.map(response.data, function(value,index){
+                                    return [value];
+                                });
+                                // console.log(incomeItem);
+                                return response.data;
                             }
                         } else {
                             return $q.reject(response.data);

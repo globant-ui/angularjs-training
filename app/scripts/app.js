@@ -24,7 +24,7 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/view', {
+      .when('/view/:type', {
         templateUrl: 'views/table.html',
         controller: 'TableCtrl',
         controllerAs: 'table'
