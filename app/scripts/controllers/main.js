@@ -1,14 +1,7 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name myAppApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the myAppApp
- */
 angular.module('myAppApp')
-  .controller('MainCtrl', function ($scope, dataService, $window) {
+  .controller('MainCtrl', function ($scope, incomeService, expenseService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -17,14 +10,39 @@ angular.module('myAppApp')
     
     console.log("hi in main controller");
     //add form view
-
-    $scope.t = {};
+    var incomeURLPath;
+    var expenseURLPath;
     
-    $scope.submit = function(){
-        var url = "http://localhost:9000/#/view"
-        dataService.postData($scope.t, $scope.t.type);
-        dataService.update();
-        $window.location.href = url;
+    incomeURLPath = "https://demo4989304.mockable.io/incomeTransactions";
+    expenseURLPath = "https://demo4989304.mockable.io/expenseTransactions";
+    
+    $scope.setIncomeData = function(){
+        incomeService.setData(incomeURLPath, $scope.type)
+            .then(function(data){
+               if(data != null){
+                   console.log("income set");
+               } else {
+                   console.log("Data is not as expected");
+               }
+            }, function(){
+                console.log("Error in promise");
+            });
     }
+    
+    $scope.setExpenseData = function(){
+        expenseService.setData(expenseURLPath, $scope.type)
+            .then(function(data){
+               if(data != null){
+                   console.log("expense set");
+               } else {
+                   console.log("Data is not as expected");
+               }
+            }, function(){
+                console.log("Error in promise");
+            });
+    }
+    
+    $scope.setIncomeData();
+    $scope.setExpenseData();
     
   });

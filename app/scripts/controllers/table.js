@@ -1,3 +1,5 @@
+/* global expenseURLPath */
+/* global incomeURLPath */
 'use strict';
 
 /**
@@ -8,7 +10,7 @@
  * Controller of the myAppApp
  */
 angular.module('myAppApp')
-  .controller('TableCtrl', ['$scope', 'dataService', '$route', '$routeParams', function ($scope, dataService, $route, $routeParams) {
+  .controller('TableCtrl', ['$scope', 'incomeService', 'expenseService', '$route', '$routeParams', function ($scope, incomeService, expenseService, $route, $routeParams) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -16,45 +18,33 @@ angular.module('myAppApp')
     ];
     
     console.log("Hi in income controller");
-    $scope.IncomeArray = [];
-    $scope.ExpenseArray = [];
     $scope.type = $routeParams.type;
-    var URLPath;
+    $scope.TransValue;
     
-    if ($scope.type == 'income') {
-        URLPath = "https://demo4989304.mockable.io/incomeTransactions";
-    } else {
-        URLPath = "https://demo4989304.mockable.io/expenseTransactions";
+    $scope.getIncomeData = function(){
+        $scope.TransValue = incomeService.postData(null);
+    }
+    
+    $scope.getExpenseData = function(){
+        $scope.TransValue = expenseService.postData(null);
     }
 
-    $scope.getIncomeData = function(){
-        dataService.getData(URLPath, $scope.type)
-            .then(function(data){
-               if(data != null){
-                   $scope.TransValue = data;
-                //    $scope.IncomeArray = data;
-                //    console.log($scope.TransValue);
-               } else {
-                   console.log("Data is not as expected");
-               }
-            }, function(){
-                console.log("Error in promise");
-            });
-    }
-    
     $scope.modify = function(){
         // console.log("in modify");
     }
     
-    $scope.del = function(){
-        console.log("delete");
+    $scope.del = function(type, id){
+        if (type == 'income') {
+            incomeService.deleteData(id);
+        } else {
+            expenseService.deleteData(id);
+        }
     }
     
-    $scope.update = function(){
-        
-    }
-        
-    $scope.getIncomeData();
-    
+    if ($scope.type == 'income') {
+       $scope.getIncomeData();
+    } else {
+        $scope.getExpenseData();        
+    }  
   }]);
   

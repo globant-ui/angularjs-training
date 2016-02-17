@@ -20,9 +20,14 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/addTrans.html',
+        templateUrl: 'views/entry.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
+      })    
+      .when('/add', {
+        templateUrl: 'views/addTrans.html',
+        controller: 'AddCtrl',
+        controllerAs: 'add'
       })
       .when('/view/:type', {
         templateUrl: 'views/table.html',
