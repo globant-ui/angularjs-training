@@ -8,11 +8,6 @@
         </div>
     </div>
     <div class="row">
-        <button type="button" class="btn btn-warning" ng-click="modify(x.type,x.transactionId)">Modify</button>
-        <button type="button" class="btn btn-danger" ng-click="del(x.type,x.transactionId)">Delete</button>
-        <button id="save-btn" type="button" class="btn btn-success" ng-click="del(x.type,x.transactionId)" style="display: none">Save</button>
-    </div>
-    <div class="row">
          <table class="table">
             <thead>
                 <tr>
@@ -26,20 +21,25 @@
                     <th>ModeOfPayment</th>
                     <th>Notes</th>
                     <th>Type</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                <tr ng-repeat="x in TransValue">
                     <td>{{ x.transactionId }}</td>
-                    <td><input class="form-control" type="text" value="{{ x.payer }}"></td>
-                    <td><input class="form-control" type="text" value="{{ x.payee }}"></td>
-                    <td><input class="form-control" type="text" value="{{ x.category }}"></td>
-                    <td><input class="form-control" type="text" value="{{ x.subCategory }}"></td>
-                    <td><input class="form-control" type="text" value="{{ x.amount }}"></td>
-                    <td><input class="form-control" type="text" value="{{ x.date }}"></td>
-                    <td><input class="form-control" type="text" value="{{ x.modeOfPayment }}"></td>
-                    <td><input class="form-control" type="text" value="{{ x.notes }}"></td>
-                    <td><input class="form-control" type="text" value="{{ x.type }}"></td>
+                    <td>{{ x.payer }}</td>
+                    <td>{{ x.payee }}</td>
+                    <td>{{ x.category }}</td>
+                    <td>{{ x.subCategory }}</td>
+                    <td>{{ x.amount }}</td>
+                    <td>{{ x.date }}</td>
+                    <td>{{ x.modeOfPayment }}</td>
+                    <td>{{ x.notes }}</td>
+                    <td>{{ x.type }}</td>
+                    <td>
+                        <button type="button" class="btn btn-warning" ng-click="modify(x.type,x.transactionId)">Modify</button>
+                        <button type="button" class="btn btn-danger" ng-click="del(x.type,x.transactionId)">Delete</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

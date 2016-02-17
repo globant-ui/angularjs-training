@@ -20,6 +20,9 @@ angular.module('myAppApp')
     console.log("Hi in income controller");
     $scope.type = $routeParams.type;
     $scope.TransValue;
+    $scope.totalIncome = 0;
+    $scope.totalEcpense = 0;
+    $scope.totalBalance = 0;
    
     $scope.getIncomeData = function(){
         $scope.TransValue = incomeService.postData(null);
