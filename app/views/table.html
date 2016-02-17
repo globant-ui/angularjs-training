@@ -1,0 +1,47 @@
+<div id="view" ng-hide="add">
+    <div class="row">
+         <div class="col-xs-4">
+            <h2>Details</h2>
+            <p>Total Income : {{totalIncome}} </p>           
+            <p>Total Expense : {{totalExpense}} </p>
+            <p>Total Balance : {{totalBalance}} </p>
+        </div>
+    </div>
+    <div class="row">
+         <table class="table">
+            <thead>
+                <tr>
+                    <th>TransID</th>
+                    <th>Payer</th>
+                    <th>Payee</th>
+                    <th>Category</th>
+                    <th>SubCategory</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>ModeOfPayment</th>
+                    <th>Notes</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="x in TransValue">
+                    <td>{{ x.transactionId }}</td>
+                    <td>{{ x.payer }}</td>
+                    <td>{{ x.payee }}</td>
+                    <td>{{ x.category }}</td>
+                    <td>{{ x.subCategory }}</td>
+                    <td>{{ x.amount }}</td>
+                    <td>{{ x.date }}</td>
+                    <td>{{ x.modeOfPayment }}</td>
+                    <td>{{ x.notes }}</td>
+                    <td>{{ x.type }}</td>
+                    <td>
+                        <button type="button" class="btn btn-warning" ng-click="modify(x.type,x.transactionId)">Modify</button>
+                        <button type="button" class="btn btn-danger" ng-click="del(x.type,x.transactionId)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<div>
