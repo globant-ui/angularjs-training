@@ -20,7 +20,7 @@ angular.module('myAppApp')
     console.log("Hi in income controller");
     $scope.type = $routeParams.type;
     $scope.TransValue;
-    
+   
     $scope.getIncomeData = function(){
         $scope.TransValue = incomeService.postData(null);
     }
@@ -31,6 +31,7 @@ angular.module('myAppApp')
 
     $scope.modify = function(){
         // console.log("in modify");
+        $('#save-btn').show();
     }
     
     $scope.del = function(type, id){
