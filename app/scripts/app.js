@@ -34,6 +34,16 @@ angular
         controller: 'TableCtrl',
         controllerAs: 'table'
       })
+      .when('/view/:type/:id/edit', {
+        templateUrl: 'views/table.html',
+        controller: 'EditCtrl',
+        controllerAs: 'table'
+      })
+      .when('/view/:type/:id/delete', {
+        templateUrl: 'views/table.html',
+        controller: 'DltCtrl',
+        controllerAs: 'table'
+      })
       .otherwise({
         redirectTo: '/'
       });
