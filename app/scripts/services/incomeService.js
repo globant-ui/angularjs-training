@@ -3,6 +3,7 @@
 angular.module('myAppApp')
   .factory('incomeService', ['$http', '$q', function($http, $q){
         var incomeData = [];
+        var id;
         
         return{
             setData:function(targetUrl,type) {
@@ -12,6 +13,7 @@ angular.module('myAppApp')
                             incomeData = $.map(response.data, function(value,index){
                                 return [value];
                             });
+                            id = incomeData.length;
                             return response.data;
                         } else {
                             return $q.reject(response.data);
@@ -20,20 +22,31 @@ angular.module('myAppApp')
                         return $q.reject(response.data);
                     });
             },
-            
+             
             postData : function(item) {
-                console.log(incomeData);
                 if (item == null) {
                     return incomeData;
                 } else {
+                    id = id + 1;
+                    item.transactionId = id.toString();
                     incomeData.push(item);
+                    console.log(incomeData);
                     return incomeData;
                 }
             },
             
             deleteData : function(id){
-                console.log(incomeData);
-                delete incomeData[id];
+                var arrayId = 0;
+            
+                incomeData.forEach(function(element) {
+                    if(incomeData[arrayId].transactionId == id){
+                       id = arrayId;
+                    }
+                    arrayId = arrayId + 1;
+                }, this);
+                
+                incomeData.splice(id,1);
+                
                 return incomeData;
             }
         }

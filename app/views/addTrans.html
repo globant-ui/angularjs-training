@@ -6,8 +6,8 @@
        <div class="col-xs-5">
            <form role="form" ng-submit="submit()">
                <div class="form-group">
-                   <label>Transaction Id :</label>
-                   <input type="text" class="form-control" placeholder="id" ng-model="t.transactionId" ng-disabled="true" ng-value="0">
+                   <!--<label>Transaction Id :</label>-->
+                   <input type="hidden" ng-model="t.transactionId" ng-init="t.transactionId=0;" ng-bind="t.transactionId" ng-value="t.transactionId">
                </div>
                <div class="form-group">
                    <label>Payer : </label>
