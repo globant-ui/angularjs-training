@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myAppApp')
-  .controller('DltCtrl', ['$scope', 'incomeService', 'expenseService', '$route', '$routeParams', function ($scope, incomeService, expenseService, $route, $routeParams) {
+  .controller('DltCtrl', ['$scope', 'incomeService', 'expenseService', '$route', '$routeParams', '$rootElement', '$location', function ($scope, incomeService, expenseService, $route, $routeParams, $rootElement, $location) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -14,8 +14,10 @@ angular.module('myAppApp')
     $scope.del = function(){
         if ($scope.type == 'income') {
             incomeService.deleteData($scope.id);
+            $location.path('/income');
         } else {
             expenseService.deleteData($scope.id);
+            $location.path('/expense');
         }
     }
     

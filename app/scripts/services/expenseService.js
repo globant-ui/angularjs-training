@@ -48,6 +48,18 @@ angular.module('myAppApp')
                 expenseData.splice(id,1);
                 
                 return expenseData;
+            },
+            
+            getData : function(id){
+                var arrayId = 0;
+                expenseData.forEach(function(element) {
+                    if(element.transactionId == id){
+                        id = arrayId;
+                    }
+                    arrayId = arrayId + 1;
+                }, this);
+                
+                return expenseData[id];
             }
         }
   }]);

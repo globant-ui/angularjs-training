@@ -73,7 +73,7 @@ summarized income details from each source.
 Navigate to appropriate page when a link in navigation panel is clicked.
 
 
-Session 8
+Session 7
 Create a settings page to add recurring income/expense details.
 Provide recurring type as monthly, yearly.  
 create a “expense notification panel” directive which is tied to an endpoint and is used to display upcoming expenses based on the recurring expenses that we have added. It keeps polling to that endpoint. Results returned from the endpoint are displayed in the panel.

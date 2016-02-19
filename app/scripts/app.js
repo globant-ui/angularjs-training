@@ -29,17 +29,17 @@ angular
         controller: 'AddCtrl',
         controllerAs: 'add'
       })
-      .when('/view/:type', {
+      .when('/:type', {
         templateUrl: 'views/table.html',
         controller: 'TableCtrl',
         controllerAs: 'table'
       })
-      .when('/view/:type/:id/edit', {
-        templateUrl: 'views/table.html',
+      .when('/:type/:id/edit', {
+        templateUrl: 'views/addTrans.html',
         controller: 'EditCtrl',
         controllerAs: 'table'
       })
-      .when('/view/:type/:id/delete', {
+      .when('/:type/:id/delete', {
         templateUrl: 'views/table.html',
         controller: 'DltCtrl',
         controllerAs: 'table'

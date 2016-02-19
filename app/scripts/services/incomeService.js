@@ -14,7 +14,7 @@ angular.module('myAppApp')
                                 return [value];
                             });
                             id = incomeData.length;
-                            return response.data;
+                            return JSON.stringify(response.data);
                         } else {
                             return $q.reject(response.data);
                         }
@@ -39,7 +39,7 @@ angular.module('myAppApp')
                 var arrayId = 0;
             
                 incomeData.forEach(function(element) {
-                    if(incomeData[arrayId].transactionId == id){
+                    if(element.transactionId == id){
                        id = arrayId;
                     }
                     arrayId = arrayId + 1;
@@ -48,6 +48,23 @@ angular.module('myAppApp')
                 incomeData.splice(id,1);
                 
                 return incomeData;
+            },
+            
+            getData : function(id){
+                var arrayId = 0;
+                incomeData.forEach(function(element) {
+                    if(element.transactionId == id){
+                        id = arrayId;
+                    }
+                    arrayId = arrayId + 1;
+                }, this);
+                
+                return incomeData[id];
+            },
+            
+            editData : function(item){
+                console.log(item.transactionId);
+                
             }
         }
   }]);
