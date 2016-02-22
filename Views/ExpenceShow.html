@@ -1,0 +1,258 @@
+<h2>Expense Details</h2>
+    <table   style=" margin-left:20px;" name="expanse" border="1" >
+        
+            <tr>
+                <th>TransactionId</th>
+                <th>Payer</th>
+                <th>Payee</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Mode Of Payment</th>
+                <th></th>
+                <th></th>
+            </tr>
+       
+      
+            <tr ng-repeat='list in expenseArray'>
+                <td>{{list.transactionId}}</td>
+                <td>{{list.payer}}</td>
+                <td>{{list.payee}}</td>
+                <td>{{list.category}}</td>
+                <td>{{list.amount}}</td>
+                <td>{{list.date}}</td>
+                <td>{{list.modeOfPayment}}</td>
+                <td>
+                    <button ng-click="compose(list)">Edit</button>
+                </td>
+                <td>
+                    <button  ng-click="removeExpense($index)">Delete</button>
+                </td>
+            </tr>
+        
+    </table>
+
+<button type="button" ng-click="AddNewExpenseBtn()"><span></span>Add New Expense</button>
+
+<!--Add Expense Form-->
+
+<div  ng-if="expVisible">
+<h1>Add Transaction </h1>
+
+    <form name="expensedetailForm">
+      <table style="width:50%;" border="0">     
+          
+                
+        <tr>
+            <td>
+              <label> Transaction ID</label>
+            </td>
+            <td>
+              <input type="text" name="transactionId" ng-model="expDetails.transactionId" placeholder="Enter Traction ID...!"  required/>
+            </td>
+            <td>
+              <span  ng-show="expensedetailForm.transactionId.$error.required && expensedetailForm.transactionId.$dirty">Traction ID equired</span>
+            </td>
+           </tr>
+          
+          
+           <tr>
+            <td>
+              <label> Payer</label>
+            </td>
+            <td>
+              <input type="text" name="payer" ng-model="expDetails.payer" placeholder="Enter Payer Name...!"  required/>
+            </td>
+            <td>
+              <span  ng-show="expensedetailForm.payer.$error.required && expensedetailForm.payer.$dirty">Payer Name equired</span>
+            </td>
+           </tr>
+           
+                   
+           <tr>
+            <td>            
+              <label> Payee</label>
+            </td>
+            <td>
+              <input type="text"  name="payee" ng-model="expDetails.payee" placeholder="Enter Payee  Name...!" required/>
+            </td>
+            <td>
+              <span ng-show="expensedetailForm.payee.$error.required && expensedetailForm.payee.$dirty">Payee Name required</span>
+            </td>
+           </tr>   
+                   
+                   
+           <tr>
+            <td>
+              <label> Category</label>
+            </td>
+            <td>
+              <input type="text"  name="categorytype" ng-model="expDetails.categorytype" placeholder="Enter Category Type...!" required/>
+            </td>
+            <td>
+              <span ng-show="expensedetailForm.categorytype.$error.required && expensedetailForm.categorytype.$dirty">Category required</span>
+            </td>    
+           </tr>
+
+           <tr>
+            <td>
+              <label> Amount</label>
+            </td>
+            <td>
+              <input type="number" placeholder="Enter Numeric value" name="amount" ng-model="expDetails.amount" required ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" min="0" />
+            </td>
+            <td>
+              <span ng-show="expensedetailForm.amount.$error.pattern">Positive Numbers only, please.</span>
+            </td>
+           </tr>
+
+
+           <tr>
+            <td>
+              <label> Date</label>
+            </td>
+            <td>
+              
+              <input type="text" ng-model="expDetails.date" placeholder="10-09-15" required>
+            </td>
+            <td>
+              <span ng-show="expensedetailForm.dates.$error.required  && expensedetailForm.dates.$dirty">Date required</span>
+            </td>
+           </tr>
+
+           <tr>
+            <td>
+              <label> Mode of Payment</label>
+            </td>
+            <td>
+                <input type="text"  name="modeofpayment" ng-model="expDetails.modeofpayment" placeholder="Enter Mode of Payment...!" required/>
+              
+            </td>
+            <td>
+              <span ng-show="expensedetailForm.modeofpayment.$error.required && expensedetailForm.modeofpayment.$dirty">Mode of Payment required</span>
+            </td>
+           </tr>
+
+          
+           <tr>
+            <td>
+              <button type="submit" ng-click="addExpense(expDetails);" ng-disabled="expensedetailForm.$pristine || expensedetailForm.$dirty && expensedetailForm.$invalid">Add Income</button>
+            </td>
+            
+           </tr>
+                
+        </table>
+    </form> 
+</div>    
+
+<!--Edit Income Form-->
+
+<div  ng-if="editable">
+<h1>Edit Transaction </h1>
+
+    <form name="expensedetailFormEdit">
+      <table style="width:50%;" border="0">     
+          
+                
+        <tr>
+            <td>
+              <label> Transaction ID</label>
+            </td>
+            <td>
+              <input type="text" name="transactionId" ng-model="expDetailsEdit.transactionId" placeholder="Enter Traction ID...!"  required/>
+            </td>
+            <td>
+              <span  ng-show="expensedetailFormEdit.transactionId.$error.required && expensedetailFormEdit.transactionId.$dirty">Traction ID equired</span>
+            </td>
+           </tr>
+          
+          
+           <tr>
+            <td>
+              <label> Payer</label>
+            </td>
+            <td>
+              <input type="text" name="payer" ng-model="expDetailsEdit.payer" placeholder="Enter Payer Name...!"  required/>
+            </td>
+            <td>
+              <span  ng-show="expensedetailFormEdit.payer.$error.required && expensedetailFormEdit.payer.$dirty">Payer Name equired</span>
+            </td>
+           </tr>
+           
+                   
+           <tr>
+            <td>            
+              <label> Payee</label>
+            </td>
+            <td>
+              <input type="text"  name="payee" ng-model="expDetailsEdit.payee" placeholder="Enter Payee  Name...!" required/>
+            </td>
+            <td>
+              <span ng-show="expensedetailFormEdit.payee.$error.required && expensedetailFormEdit.payee.$dirty">Payee Name required</span>
+            </td>
+           </tr>   
+                   
+                   
+           <tr>
+            <td>
+              <label> Category</label>
+            </td>
+            <td>
+                <input type="text"  name="categorytype" ng-model="expDetailsEdit.categorytype" placeholder="Enter Category Type...!" required/>
+              
+            </td>
+            <td>
+              <span ng-show="expensedetailFormEdit.categorytype.$error.required && expensedetailFormEdit.categorytype.$dirty">Category required</span>
+            </td>    
+           </tr>
+
+           <tr>
+            <td>
+              <label> Amount</label>
+            </td>
+            <td>
+              <input type="number" placeholder="Enter Numeric value" name="amount" ng-model="expDetailsEdit.amount" required ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" min="0" />
+            </td>
+            <td>
+              <span ng-show="expensedetailFormEdit.amount.$error.pattern">Positive Numbers only, please.</span>
+            </td>
+           </tr>
+
+
+           <tr>
+            <td>
+              <label> Date</label>
+            </td>
+            <td>
+              <input type="text" ng-model="expDetailsEdit.date" placeholder="10-09-15" required>        
+            
+            </td>
+            <td>
+              <span ng-show="expensedetailFormEdit.dates.$error.required  && expensedetailFormEdit.dates.$dirty">Date required</span>
+            </td>
+           </tr>
+
+           <tr>
+            <td>
+              <label> Mode of Payment</label>
+            </td>
+            <td>
+              <input type="text"  name="modeofpayment" ng-model="expDetailsEdit.modeofpayment" placeholder="Enter Mode of Payment...!" required/>
+            </td>
+            <td>
+              <span ng-show="expensedetailFormEdit.modeofpayment.$error.required && expensedetailFormEdit.modeofpayment.$dirty">Mode of Payment required</span>
+            </td>
+           </tr>
+
+          
+           <tr>
+            <td>
+              <button type="submit" ng-click="saveComposition();" >Save Income</button>
+            </td>
+            
+           </tr>
+                
+        </table>
+    </form> 
+</div>    
+

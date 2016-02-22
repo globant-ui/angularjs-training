@@ -1,0 +1,34 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Expence Manager</title>
+</head>
+  <body>
+    <h1>Expence Manager</h1>
+   
+
+   
+    <div ng-app="myApp" >
+        <p><a href = "#dashboard">Expanse Manager</a></p>
+        <p><a href = "#income">Income</a></p>
+        <p><a href = "#expense">Expance</a></p>
+       <div ng-view>        
+       </div>
+    </div>
+  </body>
+
+
+    <script src="Scripts/Angular/angular.js"></script>
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>-->
+    <!--<script src="https://code.angularjs.org/1.4.9/"></script>-->
+    <script src="Scripts/Angular/angular-route.js"></script>
+    <script src="Scripts/app.js"></script>
+    <script src="Scripts/Controller/dashController.js"></script>
+    <script src="Scripts/Controller/expController.js"></script>
+    <script src="Scripts/Services/Expense/expService.js"></script>
+    <script src="Scripts/Controller/incomeController.js"></script>
+    <script src="Scripts/Services/Income/incService.js"></script>
+    
+    
+    
+</html>
