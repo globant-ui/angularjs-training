@@ -1,9 +1,9 @@
 'use strict';
 
-describe('Controller: AboutCtrl', function () {
+describe('Controller: IncomeDetailsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('iemApp'));
+  beforeEach(module('myApp'));
 
   var AboutCtrl,
     scope;
@@ -11,12 +11,12 @@ describe('Controller: AboutCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    AboutCtrl = $controller('AboutCtrl', {
+    AboutCtrl = $controller('IncomeDetailsCtrl', {
       $scope: scope
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('varible initialization done', function () {
+    expect();
   });
 });

@@ -9,19 +9,16 @@
    
   </head>
   <body>
-   
-    
-
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-            <ul class="navbar-nav">
-              <a href="#/addDetails">Add</a>  
-              <a href="#/expenseDetails">Expense</a>
-              <a href="#/incomeDetails">Income</a>
-            </ul>
+              <ul class="navbar-nav">
+                <a href="#/addDetails">Add</a>  
+                <a href="#/expenseDetails">Expense</a>
+                <a href="#/incomeDetails">Income</a>
+              </ul>
           </div>
-
+          <center>
           <div ng-view></div>
+         </center>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -42,6 +39,8 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/service.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/expenseDetailsController.js"></script>
+        <script src="scripts/controllers/incomeDetailsController.js"></script>
         <!-- endbuild -->
 </body>
 </html>

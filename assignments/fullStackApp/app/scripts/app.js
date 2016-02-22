@@ -21,11 +21,11 @@ angular
     $routeProvider.
     when('/expenseDetails', {
         templateUrl: 'views/expenseDetails.html',
-        controller: 'MainCtrl'
+        controller: 'ExpenseDetailsCtrl'
     }).
     when('/incomeDetails', {
         templateUrl: 'views/incomeDetails.html',
-        controller: 'MainCtrl'
+        controller: 'IncomeDetailsCtrl'
     }).
     when('/addDetails', {
         templateUrl: 'views/addDetails.html',
