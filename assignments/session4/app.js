@@ -4,6 +4,7 @@ app.config(function ($routeProvider) {
     $routeProvider.
     when('/expenseDetails', {
         templateUrl: 'expenseDetails.html',
+        controller: 'MainCtrl'
     }).
     when('/incomeDetails', {
         templateUrl: 'incomeDetails.html',
@@ -159,6 +160,18 @@ app.controller('MainCtrl',function($scope,updateService) {
     modeOfPayment:"cash",
     noteType:"income"
   }];
+});
+
+app.directive('myDirective', function() {
+  return {
+    template: 'Name: My custom directive1'
+  };
+});
+
+app.directive('myDirective', function() {
+  return {
+    template: 'Name: My custom directive2'
+  };
 });
 
 
