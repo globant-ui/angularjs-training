@@ -1,0 +1,36 @@
+<div id="expenseShow" ng-controller="expenseController">
+  <table class="datagrid" align="center" width="900">
+         <td><b>Expenses Type</b>
+         </td>
+         <td><b>Value</b>
+         </td>
+         <td><b>Date</b>
+         </td>
+         <td><b>Payee</b>
+         </td>
+         <td><b>Edit</b>
+         </td>
+         <td><b>Delete</b>
+         </td>
+         <tr ng-repeat="x in exp_array">
+         <td><b><span ng-bind="x.category"></b>
+         </span>
+         </td>
+         <td><b><span ng-bind="x.value"></b>
+         </span>
+         </td>
+         <td><b>
+         {{x.date | date:"MM/dd/yyyy 'at' h:mma"}}</b>
+         </td>
+         <td><b><span ng-bind="x.payee"></b>
+         </span>
+         </td>
+         <td>
+         <button  class="btn" ng-click="editExpense($index)">Edit</button>
+         </td>
+         <td>
+         <button  class="btn" ng-click="deleteExpense($index)">Delete</button>
+         </td>
+         </tr>
+         </table>
+</div>
