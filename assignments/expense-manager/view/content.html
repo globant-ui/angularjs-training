@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+	<div class="panel-heading text-center"><h3 class="panel-heading">Recurring {{transType.substring(0,1).toUpperCase()+transType.substring(1)}} Details</h3></div>
+	<table class="table table-stripped" style="width:1000px">
+		<tr>
+			<th class="text-center" ng-show="showPayer">Payer</th>
+			<th class="text-center" ng-show="showPayee">Payee</th>
+			<th class="text-center">Amount</th>
+			<th class="text-center">Date</th>
+			<th class="text-center">Mode Of Payment</th>
+			<th class="text-center">Recurring Type</th>
+		</tr>
+		<tr ng-repeat="recurData in recurringData" ng-if="recurData.recurringType=='Monthly'" style="background-color:#FDF29F;">
+			<td ng-show="showPayer">{{recurData.payer}}</td>
+			<td ng-show="showPayee">{{recurData.payee}}</td>
+			<td>{{recurData.amount}}</td>
+			<td>{{recurData.date}}</td>
+			<td>{{recurData.modeOfPayment}}</td>
+			<td>{{recurData.recurringType}}</td>
+		</tr>
+		<tr ng-repeat="recurData in recurringData" ng-if="recurData.recurringType=='Yearly'" style="background-color:#BEF8FA;">
+			<td ng-show="showPayer">{{recurData.payer}}</td>
+			<td ng-show="showPayee">{{recurData.payee}}</td>
+			<td>{{recurData.amount}}</td>
+			<td>{{recurData.date}}</td>
+			<td>{{recurData.modeOfPayment}}</td>
+			<td>{{recurData.recurringType}}</td>
+		</tr>
+	</table>
+</div>

@@ -13,7 +13,7 @@ myapp.service("expenseManagerIncomeExpenseService",function($http,$q){
 	}
 
 	this.addTransactionSave = function(scope) {	
-		scope.transactionData.push(scope.addNew);
+		scope.transactionData.push(scope.addNew);	
 		scope.addNew = {transactionId:"",payer:"",payee:"",category:"",subcategory:"",amount:"",date:"",modeOfPayment:"",notes:"",transType:""};	
 		scope.showAddTransaction = false;
 		$http({
@@ -65,7 +65,6 @@ myapp.service("expenseManagerIncomeExpenseService",function($http,$q){
 
 	this.storeIncomeData = function(scope){
 		this.incomeData = scope.incomeData;
-		//this.expenseData = scope.expenseData;
 	}
 
 	this.storeExpenseData = function(scope){
@@ -78,6 +77,22 @@ myapp.service("expenseManagerIncomeExpenseService",function($http,$q){
 
 	this.getExpenseData = function(){
 		return this.expenseData;
+	}
+
+	this.getCurrentDate = function(){
+		var today = new Date();
+	    var dd = today.getDate();
+	    var mm = today.getMonth()+1; //January is 0!
+
+	    var yyyy = today.getFullYear();
+	    if(dd<10){
+	        dd='0'+dd
+	    } 
+	    if(mm<10){
+	        mm='0'+mm
+	    } 
+	    var today = dd+'-'+mm+'-'+yyyy;
+	    return today;
 	}
 
 });
