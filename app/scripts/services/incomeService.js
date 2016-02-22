@@ -11,6 +11,7 @@ angular.module('myAppApp')
                     .then(function(response){
                         if(typeof response.data === 'object'){
                             incomeData = $.map(response.data, function(value,index){
+                                value.date = new Date(value.date);
                                 return [value];
                             });
                             id = incomeData.length;
@@ -65,6 +66,20 @@ angular.module('myAppApp')
             editData : function(item){
                 console.log(item.transactionId);
                 
+            },
+            
+            getReportData : function(incategory){
+                var reportData = [];
+                var out = [];
+                var total = 0;
+                incomeData.forEach(function(element) {
+                    if(element.category == incategory){
+                        reportData.push(element);
+                        total = total + parseInt(element.amount);
+                    } 
+                }, this);
+                out.push(reportData,total);
+                return out;
             }
         }
   }]);

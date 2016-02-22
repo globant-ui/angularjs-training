@@ -23,11 +23,21 @@ angular
         templateUrl: 'views/entry.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
-      })    
+      })
+      .when('/dashboard', {
+        templateUrl: 'views/dashboard.html',
+        controller: 'DashboardCtrl',
+        controllerAs: 'dashboard'
+      })
       .when('/add', {
         templateUrl: 'views/addTrans.html',
         controller: 'AddCtrl',
         controllerAs: 'add'
+      })
+      .when('/reports', {
+        templateUrl: 'views/reports.html',
+        controller: 'ReportCtrl',
+        controllerAs: 'report'
       })
       .when('/:type', {
         templateUrl: 'views/table.html',

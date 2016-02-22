@@ -41,7 +41,7 @@ angular.module('myAppApp')
                 console.log("Error in promise");
             });
     }
-    
+        
     $scope.setIncomeData();
     $scope.setExpenseData();
     

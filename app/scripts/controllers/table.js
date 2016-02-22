@@ -15,6 +15,7 @@ angular.module('myAppApp')
    
     $scope.getIncomeData = function(){
         $scope.TransValue = incomeService.postData(null);
+        console.log($scope.TransValue);
     }
     
     $scope.getExpenseData = function(){
@@ -23,7 +24,7 @@ angular.module('myAppApp')
 
     if ($scope.type == 'income') {
        $scope.getIncomeData();
-    } else {
+    } else if($scope.type == 'expense'){
         $scope.getExpenseData();        
     }  
   }]);

@@ -1,5 +1,5 @@
 angular.module('myAppApp')
-.controller('CalCtrl', function ($scope, incomeService, expenseService) {
+.controller('DashboardCtrl', function ($scope, incomeService, expenseService) {
     $scope.showModal = false;
     $scope.totalIncome = 0;
     $scope.totalExpense = 0;
@@ -16,23 +16,24 @@ angular.module('myAppApp')
     }
     
     $scope.calculateIncome = function(){
-        console.log("sdsd");
+        // console.log("sdsd");
         IncomeData.forEach(function(element) {
-            $scope.totalIncome = $scope.totalIncome + element.amount;
+            $scope.totalIncome = $scope.totalIncome + parseInt(element.amount);
         }, this);
     }
     
     $scope.calculateExpense = function(){
         ExpenseData.forEach(function(element) {
-            $scope.totalExpense = $scope.totalExpense + element.amount;
+            $scope.totalExpense = $scope.totalExpense + parseInt(element.amount);
         }, this);
     }
     
-    // $scope.calculateBalance = function(){
-    //     $scope.totalBalance = $scope.totalIncome + $scope.
-    // }
+    $scope.calculateBalance = function(){
+        $scope.totalBalance = $scope.totalIncome - $scope.totalExpense;
+    }
     
     $scope.calculateIncome();
     $scope.calculateExpense();
+    $scope.calculateBalance();
     
   });

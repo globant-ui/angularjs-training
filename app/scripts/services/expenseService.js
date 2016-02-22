@@ -11,6 +11,7 @@ angular.module('myAppApp')
                     .then(function(response){
                         if(typeof response.data === 'object'){
                             expenseData = $.map(response.data, function(value,index){
+                                value.date = new Date(value.date);
                                 return [value];
                             });
                             id = expenseData.length;
@@ -60,6 +61,24 @@ angular.module('myAppApp')
                 }, this);
                 
                 return expenseData[id];
+            },
+            
+            editData : function(item){
+                console.log(item.transactionId);
+            },
+            
+            getReportData : function(incategory){
+                var reportData = [];
+                var out = [];
+                var total = 0;
+                expenseData.forEach(function(element) {
+                    if(element.category == incategory){
+                        reportData.push(element);
+                        total = total + parseInt(element.amount);
+                    } 
+                }, this);
+                out.push(reportData,total);
+                return out;
             }
         }
   }]);
