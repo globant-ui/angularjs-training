@@ -1,0 +1,60 @@
+<div>
+	<div>
+		<h3 align="center"> Income Details </h3>
+			<table class="table table-bordered reportTable" align="center">
+				<thead><tr><th>Source</th>
+				<th>Total Amount</th>
+				</tr></thead>
+
+				<tr>
+					<td> Salary </td>
+					<td ng-bind="total.sal"></td>
+				</tr>
+
+				<tr>
+					<td> Business </td>
+					<td ng-bind="total.business"></td>
+				</tr>
+
+				<tr>
+					<td> Interest </td>
+					<td ng-bind="total.interest"></td>
+				</tr>
+
+				<tr>
+					<td> Other </td>
+					<td ng-bind="total.other"></td>
+				</tr>
+			</table>
+
+	</div>
+
+	<div>
+		<h3 align="center"> Expense Details </h3>
+			<table class="table table-bordered reportTable" align="center">
+				<thead><tr><th>Category</th>
+				<th>Total Amount</th>
+				</tr></thead>
+
+				<tr>
+					<td> Rent </td>
+					<td ng-bind="expTotal.rent"></td>
+				</tr>
+
+				<tr>
+					<td> Travel </td>
+					<td ng-bind="expTotal.travel"></td>
+				</tr>
+
+				<tr>
+					<td> Office </td>
+					<td ng-bind="expTotal.office"></td>
+				</tr>
+
+				<tr>
+					<td> Studies </td>
+					<td ng-bind="expTotal.studies"></td>
+				</tr>
+			</table>
+	</div>
+</div>
