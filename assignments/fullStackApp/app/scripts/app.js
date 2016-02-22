@@ -9,25 +9,29 @@
  * Main module of the application.
  */
 angular
-  .module('iemApp', [
+  .module('myApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
   ])
   .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
+    $routeProvider.
+    when('/expenseDetails', {
+        templateUrl: 'views/expenseDetails.html',
         controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+    }).
+    when('/incomeDetails', {
+        templateUrl: 'views/incomeDetails.html',
+        controller: 'MainCtrl'
+    }).
+    when('/addDetails', {
+        templateUrl: 'views/addDetails.html',
+        controller: 'MainCtrl'
+    }).
+    otherwise({
+        redirectTo: '/addDetails'
+    });
+});
