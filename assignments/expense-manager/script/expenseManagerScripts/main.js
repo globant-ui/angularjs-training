@@ -26,22 +26,35 @@ myapp.controller("showIncomeExpenseController",['$scope','$http','expenseManager
 	var recurringIncomeUrl = 'https://api.myjson.com/bins/3wbg3';
 	var recurringExpenseUrl = 'https://api.myjson.com/bins/4o6j7';
 
-	
-	//cases according to income or expense
+	function getTransactionData(transactionType) {
 
-	if($routeParams.transactionType == 'income') {
-		$scope.incomeData = expenseManagerIncomeExpenseService.getIncomeData();
-		if(Object.keys($scope.incomeData).length === 0){
-			$scope.data_source = incomeUrl;
+		if(transactionType == 'income') {
+			$scope.incomeData = expenseManagerIncomeExpenseService.getIncomeData();
+			$scope.recurringData = expenseManagerIncomeExpenseService.getRecurringIncomeData();
+			$scope.tempData = $scope.incomeData;
+			$scope.showPayer = true;
+			$scope.data_source = incomeUrl;			
+		} else if(transactionType == 'expense') {
+			$scope.expenseData = expenseManagerIncomeExpenseService.getExpenseData();
+			$scope.recurringData = expenseManagerIncomeExpenseService.getRecurringExpenseData();
+			$scope.tempData = $scope.expenseData;
+			$scope.showPayee = true;
+			$scope.data_source = expenseUrl;	
+		}
+		
+		if(Object.keys($scope.tempData).length === 0){
 			expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
 			.then(function(data){
 				if(typeof data === 'object') {
-					$scope.incomeData = data;
-					expenseManagerIncomeExpenseService.storeIncomeData($scope);
-					$scope.showPayer = true;
-
+					$scope.tempData = data;
+					if(transactionType == 'income') {
+						expenseManagerIncomeExpenseService.storeIncomeData($scope);	
+						$scope.data_source = recurringIncomeUrl;
+					} else {
+						expenseManagerIncomeExpenseService.storeExpenseData($scope);	
+						$scope.data_source = recurringExpenseUrl;
+					}
 					// getting recurring income information 
-					$scope.data_source = recurringIncomeUrl;
 					expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
 					.then(function(data){
 						if(typeof data === 'object') {
@@ -56,54 +69,39 @@ myapp.controller("showIncomeExpenseController",['$scope','$http','expenseManager
 								recurDate = recurDate.substring(3, 5);
 							  return recurDate == mm || obj.recurringType == 'Yearly';
 							});	
-
+							if(transactionType == 'income') {
+								expenseManagerIncomeExpenseService.storeRecurringIncomeData($scope);
+							} else {
+								expenseManagerIncomeExpenseService.storeRecurringExpenseData($scope);
+							}
 							$scope.showDirective = true;
-							
 						} 
 					});
+					if(transactionType == 'income') {
+						$scope.incomeData = $scope.tempData;
+					} else {
+						$scope.expenseData = $scope.tempData;
+					}
 					$scope.showIncomeExpenseDetails();
 				} 
 			});
-		}	
+		}
 
-		
+		if(transactionType == 'income') {
+			$scope.incomeData = $scope.tempData;
+		} else {
+			$scope.expenseData = $scope.tempData;
+		}
+		if($scope.recurringData.length>0) {
+			$scope.showDirective = true;
+		}
+	}
+	//cases according to income or expense
 
+	if($routeParams.transactionType == 'income') {
+		getTransactionData('income');
 	} else if($routeParams.transactionType == 'expense') {
-		$scope.expenseData = expenseManagerIncomeExpenseService.getExpenseData();
-		if(Object.keys($scope.expenseData).length === 0){
-			$scope.data_source = expenseUrl;
-			expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
-			.then(function(data){
-				if(typeof data === 'object') {
-					$scope.expenseData = data;
-					expenseManagerIncomeExpenseService.storeExpenseData($scope);
-					$scope.showPayee = true;	
-
-					// getting recurring income information 
-					$scope.data_source = recurringExpenseUrl;
-					expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
-					.then(function(data){
-						if(typeof data === 'object') {
-							var today = new Date();
-						    var mm = today.getMonth()+1; //January is 0!
-						    if(mm<10){
-						        mm='0'+mm
-						    } 
-						    
-							$scope.recurringData = data.filter(function( obj ) {
-								var recurDate = obj.date;
-								recurDate = recurDate.substring(3, 5);
-							  return recurDate == mm || obj.recurringType == 'Yearly';
-							});	
-
-							$scope.showDirective = true;
-							
-						} 
-					});	
-					$scope.showIncomeExpenseDetails();	
-				} 
-			});	
-		} 
+		getTransactionData('expense');
 	}
 
 
@@ -136,42 +134,45 @@ myapp.controller("showIncomeExpenseController",['$scope','$http','expenseManager
 		expenseManagerIncomeExpenseService.addTransaction($scope);		
 	}
 
+	function callAddRecurringTransactionSave(data,transactionType,isRecurring){
+
+		if(isRecurring == true && data!=null) {
+			$scope.transactionData = data;
+			$scope.addNew.recurringType = $scope.selectedRecurringType.name;
+		}
+		
+		if(transactionType == 'income'){
+			$scope.addNew.payee="Ashwini";
+			$scope.addNew.transType="income";
+		} else {
+			$scope.addNew.payer="Ashwini";
+			$scope.addNew.transType="expense";
+		}
+
+		$scope.addNew.transactionId = $scope.transactionData.length + 1;						
+		
+		if(Object.keys($scope.transactionData).length === 0){
+			$scope.transactionData = [];
+		}
+		expenseManagerIncomeExpenseService.addTransactionSave($scope);
+		return true;
+	}
+
 	$scope.addTransactionSave = function(){
 
 		if($routeParams.transactionType == 'income') {
-			$scope.addNew.payee = "Ashwini";
-			$scope.addNew.transType = "income";	 
-			if(Object.keys($scope.transactionData).length === 0){
-				$scope.transactionData = [];
-			}
-			expenseManagerIncomeExpenseService.addTransactionSave($scope);	
+			$scope.data_source = incomeUrl;
+			callAddRecurringTransactionSave(null,'income',false);
 		} else if($routeParams.transactionType == 'expense') {
-			$scope.addNew.payer = "Ashwini";
-			$scope.addNew.transType = "expense";
-			if(Object.keys($scope.transactionData).length === 0){
-				$scope.transactionData = [];
-			}
-			expenseManagerIncomeExpenseService.addTransactionSave($scope);
+			$scope.data_source = expenseUrl;
+			callAddRecurringTransactionSave(null,'expense',false);
 		} else if($routeParams.transactionType == 'recurring') {
 			if( $scope.recurringType == 'income' ) { //income
 				$scope.data_source = recurringIncomeUrl;
 				expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
 				.then(function(data){
 					if(typeof data === 'object') {
-						$scope.transactionData = data;
-						$scope.addNew.payee="Ashwini";
-						$scope.addNew.transType="income";
-						$scope.addNew.transactionId = $scope.transactionData.length + 1;						
-						
-						//get current date
-						var currentDt = expenseManagerIncomeExpenseService.getCurrentDate();
-						$scope.addNew.date = currentDt;
-						$scope.addNew.recurringType = $scope.selectedRecurringType.name;
-						
-						if(Object.keys($scope.transactionData).length === 0){
-							$scope.transactionData = [];
-						}
-						expenseManagerIncomeExpenseService.addTransactionSave($scope);
+						callAddRecurringTransactionSave(data,'income',true);
 					} 
 				});
 			} else { // expense
@@ -179,22 +180,7 @@ myapp.controller("showIncomeExpenseController",['$scope','$http','expenseManager
 				expenseManagerIncomeExpenseService.getIncomeExpenseData($scope)
 				.then(function(data){
 					if(typeof data === 'object') {
-						$scope.transactionData = data;
-						$scope.addNew.payer="Ashwini";
-						$scope.addNew.transType="expense";
-						$scope.addNew.transactionId = $scope.transactionData.length + 1;						
-						
-						//get current date
-						var currentDt = expenseManagerIncomeExpenseService.getCurrentDate();
-						console.log(currentDt);
-						$scope.addNew.date = currentDt;
-						$scope.addNew.recurringType = $scope.selectedRecurringType.name;
-						console.log($scope.addNew.recurringType);
-
-						if(Object.keys($scope.transactionData).length === 0){
-							$scope.transactionData = [];
-						}
-						expenseManagerIncomeExpenseService.addTransactionSave($scope);
+						callAddRecurringTransactionSave(data,'expense',true);
 					} 
 				});
 			}
@@ -205,10 +191,16 @@ myapp.controller("showIncomeExpenseController",['$scope','$http','expenseManager
 	}
 
 	$scope.editTransaction = function(index){
+
 		expenseManagerIncomeExpenseService.editTransaction($scope,index);		
 	}
 
 	$scope.deleteTransaction = function(index){
+		if($scope.transType == 'income'){
+			$scope.data_source = incomeUrl;
+		} else {
+			$scope.data_source = expenseUrl;
+		}
 		expenseManagerIncomeExpenseService.deleteTransaction($scope,index);		
 	}
 	

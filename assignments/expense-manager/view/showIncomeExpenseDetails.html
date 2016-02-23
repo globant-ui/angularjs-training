@@ -1,7 +1,8 @@
 <h3 ng-show="noTransactionData">Oops! No {{transType.substring(0,1).toUpperCase()+transType.substring(1)}} details found!!!</h3>
 <div ng-show="showTransaction" class="panel panel-default">
 	<div class="panel-heading text-center"><h3 class="panel-heading">{{transType.substring(0,1).toUpperCase()+transType.substring(1)}} Details</h3></div>
-	<button ng-click="addTransaction()" class="btn-primary">Add {{transType.substring(0,1).toUpperCase()+transType.substring(1)}}</button>
+	<br>
+	<button ng-click="addTransaction()" class="btn btn-primary">Add {{transType.substring(0,1).toUpperCase()+transType.substring(1)}}</button>
 	<table class="table table-stripped" style="width:1000px">
 		<tr>
 			<th class="text-center" ng-show="showPayer">Payer</th>
@@ -88,7 +89,7 @@
                 Amount is invalid
             </span></td>
 		</tr>
-		<tr ng-hide="showRecurring">
+		<tr>
 			<td><input name="incomeExpenseDate" ng-model="addNew.date" placeholder="Enter Date"><span style="color:red" ng-show="transactionForm.incomeExpenseDate.$dirty && transactionForm.incomeExpenseDate.$invalid">
                 Date is required
             </span></td>

@@ -28,16 +28,17 @@
 				<td class="text-center">{{balance}}</td>
 			</tr>
 		</table>
-
-		<table class="table table-stripped nav-center" style="width:1000px">
-			<tr>
-				<td class="text-center"><a href="#/showIncomeExpenseDetails/income" class="nav nav-pills">Income</a></td>
-				<td class="text-center"><a href="#/showIncomeExpenseDetails/expense" class="nav nav-pills">Expenses</a></td>
-				<td class="text-center"><a href="#/showReportsDetails" class="nav nav-pills">Reports</a></td>
-				<td class="text-center"><a href="#/showIncomeExpenseDetails/recurring" class="nav nav-pills">Recurring Transactions</a></td>
-			</tr>
-		</table>
-
+		<div class="panel panel-default">
+				<table class="table table-stripped panel-heading text-center" style="width:1000px" >
+					<tr>
+						<td class="text-center"><a href="#/showIncomeExpenseDetails/income" class="nav nav-pills">Income</a></td>
+						<td class="text-center"><a href="#/showIncomeExpenseDetails/expense" class="nav nav-pills">Expenses</a></td>
+						<td class="text-center"><a href="#/showReportsDetails" class="nav nav-pills">Reports</a></td>
+						<td class="text-center"><a href="#/showIncomeExpenseDetails/recurring" class="nav nav-pills">Recurring Transactions</a></td>
+					</tr>
+				</table>
+			
+		</div>
   		<ng-view></ng-view>
 
 	</div>

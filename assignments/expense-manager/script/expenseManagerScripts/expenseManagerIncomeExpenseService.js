@@ -1,6 +1,7 @@
 
 myapp.service("expenseManagerIncomeExpenseService",function($http,$q){
 	this.incomeData = this.expenseData = {};
+	this.recurringIncomeData = this.recurringExpenseData = [];
 
 	this.showIncomeExpenseDetails = function(scope){
 		scope.showTransaction = true;
@@ -64,11 +65,11 @@ myapp.service("expenseManagerIncomeExpenseService",function($http,$q){
 	}
 
 	this.storeIncomeData = function(scope){
-		this.incomeData = scope.incomeData;
+		this.incomeData = scope.tempData;
 	}
 
 	this.storeExpenseData = function(scope){
-		this.expenseData = scope.expenseData;
+		this.expenseData = scope.tempData;
 	}
 	
 	this.getIncomeData = function(){
@@ -79,7 +80,23 @@ myapp.service("expenseManagerIncomeExpenseService",function($http,$q){
 		return this.expenseData;
 	}
 
-	this.getCurrentDate = function(){
+
+	this.storeRecurringIncomeData = function(scope){
+		this.recurringIncomeData = scope.recurringData;
+	}
+
+	this.getRecurringIncomeData = function(){
+		return this.recurringIncomeData;
+	}
+
+	this.storeRecurringExpenseData = function(scope){
+		this.recurringExpenseData = scope.recurringData;
+	}
+
+	this.getRecurringExpenseData = function(){
+		return this.recurringExpenseData;
+	}
+	/*this.getCurrentDate = function(){
 		var today = new Date();
 	    var dd = today.getDate();
 	    var mm = today.getMonth()+1; //January is 0!
@@ -93,6 +110,6 @@ myapp.service("expenseManagerIncomeExpenseService",function($http,$q){
 	    } 
 	    var today = dd+'-'+mm+'-'+yyyy;
 	    return today;
-	}
+	}*/
 
 });
