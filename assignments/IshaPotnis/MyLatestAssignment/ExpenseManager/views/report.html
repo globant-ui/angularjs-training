@@ -1,0 +1,54 @@
+  <pre>
+                <h4>     Total Income = <span ng-bind = "money.income"></span>                          Total Expense = {{money.expense}}                          Total saving = {{money.savings}}</h4>
+            </pre>
+<div class="jumbotron text-center">
+    <h1>Report Page</h1>
+        <div align = 'center'>
+		    <ul>
+		        <form>
+		           
+		            <input id="expense" type="button" name="content" class="btn btn-primary" ng-click="show_expense()" value=" Show/Hide Expense">
+		        </form>
+		    </ul>
+		</div>
+        <div id = 'Income-table'  ng-show="toggleVariable">
+            <table id = 'tab1'class="table">
+                <tr>
+                     <th>Income</th>
+            <th>Amount</th>
+            <th>Mode of Payment</th>
+            <th>Date</th>
+            <th>Payer</th>
+     
+                </tr>
+                <tr ng-repeat="ar in income">
+                 <td>{{ar.subcategory}}</td>
+            <td>{{ar.amount}}</td>
+            <td>{{ar.mode}}</td>
+            <td>{{ar.date}}</td>
+            <td>{{ar.person}}</td> 
+                </tr>
+            </table>
+        </div>
+        <div id = 'Expense-table' ng-hide ="toggleVariable">
+            <table id="tab2" class="table">
+                <tr>
+                    <th>Expense</th>
+                    <th>Amount</th>
+                    <th>Mode of Payment</th>
+                    <th>Date</th>
+                    <th>Payee</th>
+                </tr>
+                <tr ng-repeat="ar in expense">
+                <td>{{ar.subcategory}}</td>
+            <td>{{ar.amount}}</td>
+            <td>{{ar.mode}}</td>
+            <td>{{ar.date}}</td>
+            <td>{{ar.person}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+            
