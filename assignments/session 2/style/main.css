@@ -1,0 +1,30 @@
+.container{
+	text-align:center;
+}
+
+table {
+    width:100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+table.table-head tr:nth-child(even) {
+    background-color: #eee;
+}
+table.table-head tr:nth-child(odd) {
+   background-color:#fff;
+}
+table.table-head th	{
+    background-color: black;
+    color: white;
+}
+
+.topBar span{
+	padding:25px;
+}
+  

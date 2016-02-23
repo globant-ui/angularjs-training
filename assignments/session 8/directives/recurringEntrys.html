@@ -1,0 +1,40 @@
+<div>
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <button data-toggle="collapse" data-target="#collapse1" class="btn-link" style="color:black;"><i style="color:blue;">Click here</i> to see upcoming Recurring Entrys</button>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <div class="panel-body">
+	        <table class="table">
+			<thead>
+				<tr>
+					<th>Payer</th>
+					<th>Payee</th>
+					<th>Amount</th>
+					<th>Recurring type</th>
+					<th>Date</th>
+					<th>Notes</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="listNode in listData" ng-if="listNode.type == expType">
+					<td data-ng-bind="listNode.payer"></td>
+					<td data-ng-bind="listNode.payee"></td>
+					<td data-ng-bind="listNode.amount"></td>
+					<td data-ng-bind="listNode.recType"></td>
+					<td data-ng-bind="listNode.date"></td>
+					<td data-ng-bind="listNode.notes"></td>
+					<td data-ng-click="deleteRecurringEntry(listNode)"><button type="button"  class="btn btn-xs btn-link">Delete</button></td>
+				</tr>
+			</tbody>
+		  </table>
+	  </div>
+        <!-- <div class="panel-footer">Panel Footer</div> -->
+      </div>
+    </div>
+  </div>
+</div>

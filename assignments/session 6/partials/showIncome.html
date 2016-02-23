@@ -1,0 +1,133 @@
+<div class="row"  id="incomeTable">
+	<div class="col-md-12">
+		<div class="col-md-3">
+			<label for="CategoryFilterIncome" class="" placeholder="Category Filter">Category Filter</label>
+			<select data-ng-model="categoryFilter" id="CategoryFilterIncome" class="form-control placeholder">
+				<option value="">All</option>
+				<option value="Salary">Salary</option>
+				<option value="Business">Business</option>
+				<option value="Interest on deposits">Interest on deposits</option>
+			</select>
+		</div>
+		<div class="col-md-3">
+			<label for="SubCategoryFilterIncome" class="" placeholder="Sub Category Filter">Sub Category Filter</label>
+			<select data-ng-model="subCategoryFilter" id="SubCategoryFilterIncome" class="form-control placeholder">
+				<option value="">All</option>
+				<option value="Daily">Daily</option>
+				<option value="Weekly">Weekly</option>
+				<option value="Monthly">Monthly</option>
+			</select>
+		</div>
+	    
+	  <table class="table">
+	  <caption><h3>Income Details</h3></caption>
+		<thead>
+		  <tr>
+			<th>Id</th>
+			<th>Payer</th>
+			<th>Payee</th>
+			<th>Category</th>
+			<th>Sub Category</th>
+			<th>Amount</th>
+			<th>Date</th>
+			<th>Mode of payment</th>
+			<th>Notes</th>
+			<th>Edit</th>
+			<th>Remove</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr data-ng-repeat="incomeNode in income | filter:categoryFilter | filter:subCategoryFilter">
+			<td data-ng-bind="incomeNode.transactionid"></td>
+			<td data-ng-bind="incomeNode.payer"></td>
+			<td data-ng-bind="incomeNode.payee"></td>
+			<td data-ng-bind="incomeNode.category"></td>
+			<td data-ng-bind="incomeNode.subcategory"></td>
+			<td data-ng-bind="incomeNode.amount"></td>
+			<td data-ng-bind="incomeNode.date"></td>
+			<td data-ng-bind="incomeNode.modeofpayment"></td>
+			<td data-ng-bind="incomeNode.notes"></td>
+			<td data-ng-click="editNode(incomeNode)"><button type="button" class="btn btn-xs btn-link">Edit</button></td>
+			<td data-ng-click="deleteNode(incomeNode)"><button type="button" class="btn btn-xs btn-link">Delete</button></td>
+		</tr>
+		</tbody>
+	  </table>
+	</div>
+	<br/><br/>
+	<div class="col-md-6 col-md-offset-3" data-ng-show="editIncomeDetailsShow">
+	 <form class="form-signin" id="editIncomeForm" name="editIncomeDetailsForm" novalidate>
+		<h2 class="form-signin-heading">Edit income details</h2>
+		<label for="editincomePayer" class="sr-only">Payer</label>
+		<input type="text" name="Payer" data-ng-model="editIncomeObj.payer" id="editincomePayer" class="form-control" placeholder="Payer" required autofocus>
+		<span class="red" ng-show="editIncomeDetailsForm.Payer.$touched && editIncomeDetailsForm.Payer.$invalid">
+			<span ng-show="editIncomeDetailsForm.Payer.$error.required">*Payer is required.</span><br/>
+		</span>
+		<br/>
+		<label for="editincomePayee" class="sr-only">Payee</label>
+		<input type="text" name="payee" data-ng-model="editIncomeObj.payee" id="editincomePayee" class="form-control" placeholder="Payee" required>
+		<span class="red" ng-show="editIncomeDetailsForm.payee.$touched && editIncomeDetailsForm.payee.$invalid">
+			<span ng-show="editIncomeDetailsForm.payee.$error.required">*Payee is required.</span><br/>
+		</span>
+		<br/>
+		<label for="editincomeCategory" class="sr-only">Category</label>
+		<select class="form-control placeholder" name="category" data-ng-model="editIncomeObj.category" id="editincomeCategory" placeholder="Category" required>
+			<option hidden>Category</option>
+			<option value="Salary">Salary</option>
+			<option value="Business">Business</option>
+			<option value="Interest on deposits">Interest on deposits</option>
+		</select>
+		<span class="red" ng-show="editIncomeDetailsForm.category.$touched && editIncomeDetailsForm.category.$invalid">
+			<span ng-show="editIncomeDetailsForm.category.$error.required">*Category is required.</span><br/>
+		</span>
+		<br/>
+		<label for="editincomeSubCategory" class="sr-only">Sub Category</label>
+		<select class="form-control placeholder" name="subCategory" data-ng-model="editIncomeObj.subcategory" id="editincomeSubCategory" placeholder="Sub Category" required>
+			<option hidden >Sub Category</option>
+			<option value="Daily">Daily</option>
+			<option value="Weekly">Weekly</option>
+			<option value="Monthly">Monthly</option>
+		</select>
+		<span class="red" ng-show="editIncomeDetailsForm.subCategory.$touched && editIncomeDetailsForm.subCategory.$invalid">
+			<span ng-show="editIncomeDetailsForm.subCategory.$error.required">*Sub Category is required.</span><br/>
+		</span>
+		<br/>
+		<label for="editincomeAmount" class="sr-only">Amount</label>
+		<input type="number" data-ng-model="editIncomeObj.amount" id="editincomeAmount" class="form-control" placeholder="Amount" name="amount" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required>
+		<span class="red" ng-show="editIncomeDetailsForm.amount.$touched && editIncomeDetailsForm.amount.$invalid">
+			<span ng-show="editIncomeDetailsForm.amount.$error.required">*Amout is required.</span>
+			<span ng-show="editIncomeDetailsForm.amount.$error.number">*Amout should be entered in numbers.</span> 
+			<span ng-show="editIncomeDetailsForm.amount.$error.pattern">*Amout should have maximum 2 decimal places.</span> <br/>
+		</span>
+		<br/>
+		<label for="editincomedatetimepicker4" class="sr-only">Date</label>
+		<input type='text' class="form-control" data-ng-model="editIncomeObj.date" id='editincomedatetimepicker4' placeholder="Date" required />
+		<script type="text/javascript">   
+			$(function () {
+				$('#editincomedatetimepicker4').datetimepicker();
+			});
+		</script>
+		<br/>
+		<label for="editincomeModeOfPayment" class="sr-only">Mode of payment</label>
+		<select class="form-control placeholder" name="modeOfPayment" data-ng-model="editIncomeObj.modeofpayment" id="editincomeModeOfPayment" placeholder="Mode of payment" required>
+			<option hidden>Mode of payment</option>
+			<option value="credit card">credit card</option>
+			<option value="cash">cash</option>
+			<option value="electronic transfer">electronic transfer</option>
+		</select>
+		<span class="red" ng-show="editIncomeDetailsForm.modeOfPayment.$touched && editIncomeDetailsForm.modeOfPayment.$invalid">
+			<span ng-show="editIncomeDetailsForm.modeOfPayment.$error.required">*Mode of payment is required.</span><br/>
+		</span>
+		<br/>
+		<label for="editincomeNotes" class="sr-only">Notes</label>
+		<input type="text" data-ng-model="editIncomeObj.notes" id="editincomeNotes" class="form-control" placeholder="Notes" name="notes" maxlength="20" required>
+		<span class="red" ng-show="editIncomeDetailsForm.notes.$touched && editIncomeDetailsForm.notes.$invalid">
+			<span ng-show="editIncomeDetailsForm.notes.$error.required">*Notes are required.</span><br/>
+		</span>
+		<br/>
+		<div class="col-md-6 col-md-offset-3">
+			<input class="btn btn-lg btn-primary btn-block" ng-disabled="editIncomeDetailsForm.$invalid" type="submit" data-ng-click="updateEditIncome()" value="Update">
+		</div>
+		<br/><br/>
+	 </form>
+	</div>
+</div>

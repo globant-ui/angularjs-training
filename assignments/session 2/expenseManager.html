@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Expense Manager</title>
+		<script type="text/javascript" src="script/angular1.4.min.js"></script>
+		<script type="text/javascript" src="script/expenseManager.js"></script>
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+	</head>
+	<body data-ng-app="expenceManager">
+		<div data-ng-controller="expenceController" class="container">
+			<h1>My Expense Manager</h1>
+			<br/>
+			<div class="topBar">
+				<span data-ng-bind-template="Total Income {{totalIncome}}"></span>
+				<span data-ng-bind-template="Total expenses {{totalExpense}}"></span>
+				<span data-ng-bind-template="Total balance {{totalIncome - totalExpense}}"></span>
+			</div>
+			<br/>
+			<button data-ng-click="toggleIncExpState = true">Show Income</button>
+			<button data-ng-click="toggleIncExpState = false">Show Expense</button>
+			<br/><br/>
+			<table id="incomeReport" class="table-head" data-ng-show="toggleIncExpState">
+				<caption><h3>Income Details</h3></caption>
+				<tr>
+					<th>Id</th>
+					<th>Payer</th>
+					<th>Payee</th>
+					<th>Category</th>
+					<th>Sub Category</th>
+					<th>Amount</th>
+					<th>Date</th>
+					<th>Mode of payment</th>
+					<th>Notes</th>
+				</tr>
+				<tr data-ng-repeat="incomeNode in income">
+					<td data-ng-bind="incomeNode.transactionid"></td>
+					<td data-ng-bind="incomeNode.payer"></td>
+					<td data-ng-bind="incomeNode.payee"></td>
+					<td data-ng-bind="incomeNode.category"></td>
+					<td data-ng-bind="incomeNode.subcategory"></td>
+					<td data-ng-bind="incomeNode.amount"></td>
+					<td data-ng-bind="incomeNode.date"></td>
+					<td data-ng-bind="incomeNode.modeofpayment"></td>
+					<td data-ng-bind="incomeNode.notes"></td>
+				</tr>
+			</table>
+			
+			<table id="expenseReport" class="table-head" data-ng-show="toggleIncExpState == false">
+				<caption><h3>Expense Details</h3></caption>
+				<tr>
+					<th>Id</th>
+					<th>Payer</th>
+					<th>Payee</th>
+					<th>Category</th>
+					<th>Sub Category</th>
+					<th>Amount</th>
+					<th>Date</th>
+					<th>Mode of payment</th>
+					<th>Notes</th>
+				</tr>
+				<tr data-ng-repeat="expenseNode in expenses">
+					<td data-ng-bind="expenseNode.transactionid"></td>
+					<td data-ng-bind="expenseNode.payer"></td>
+					<td data-ng-bind="expenseNode.payee"></td>
+					<td data-ng-bind="expenseNode.category"></td>
+					<td data-ng-bind="expenseNode.subcategory"></td>
+					<td data-ng-bind="expenseNode.amount"></td>
+					<td data-ng-bind="expenseNode.date"></td>
+					<td data-ng-bind="expenseNode.modeofpayment"></td>
+					<td data-ng-bind="expenseNode.notes"></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,75 @@
+<div class="row" id="addIncomeData" data-ng-if="toggleAddIncExpState">
+	<div class="col-md-6 col-md-offset-3">
+	 <form class="form-signin" id="addIncomeForm" name="addIncomeDetailsForm" novalidate>
+		<h2 class="form-signin-heading">Add income details</h2>
+		<label for="incomePayer" class="sr-only">Payer</label>
+		<input type="text" data-ng-model="addIncomeObj.payer" name="Payer" id="incomePayer" class="form-control" placeholder="Payer" required autofocus>
+		<span class="red" ng-show="addIncomeDetailsForm.Payer.$touched && addIncomeDetailsForm.Payer.$invalid">
+			<span ng-show="addIncomeDetailsForm.Payer.$error.required">*Payer is required.</span><br/>
+		</span>
+		<br/>
+		<label for="incomePayee" class="sr-only">Payee</label>
+		<input type="text" data-ng-model="addIncomeObj.payee" name="payee" id="incomePayee" class="form-control" placeholder="Payee" required>
+		<span class="red" ng-show="addIncomeDetailsForm.payee.$touched && addIncomeDetailsForm.payee.$invalid">
+			<span ng-show="addIncomeDetailsForm.payee.$error.required">*Payee is required.</span><br/>
+		</span>
+		<br/>
+		<label for="incomeCategory" class="">Category</label>
+		<select class="form-control placeholder" name="category" data-ng-model="addIncomeObj.category" id="incomeCategory" placeholder="Category" required>
+			<option value="Salary">Salary</option>
+			<option value="Business">Business</option>
+			<option value="Interest on deposits">Interest on deposits</option>
+		</select>
+		<span class="red" ng-show="addIncomeDetailsForm.category.$touched && addIncomeDetailsForm.category.$invalid">
+			<span ng-show="addIncomeDetailsForm.category.$error.required">*Category is required.</span><br/>
+		</span>
+		<br/>
+		<label for="incomeSubCategory"  class="">Sub Category</label>
+		<select class="form-control placeholder" name="subCategory" data-ng-model="addIncomeObj.subcategory" id="incomeSubCategory" placeholder="Sub Category" required>
+			<option value="Daily">Daily</option>
+			<option value="Weekly">Weekly</option>
+			<option value="Monthly">Monthly</option>
+		</select>
+		<span class="red" ng-show="addIncomeDetailsForm.subCategory.$touched && addIncomeDetailsForm.subCategory.$invalid">
+			<span ng-show="addIncomeDetailsForm.subCategory.$error.required">*Sub Category is required.</span><br/>
+		</span>
+		<br/>
+		<label for="incomeAmount" class="sr-only">Amount</label>
+		<input type="number" name="amount" data-ng-model="addIncomeObj.amount" id="incomeAmount" class="form-control" placeholder="Amount" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required>
+		<span class="red" ng-show="addIncomeDetailsForm.amount.$touched && addIncomeDetailsForm.amount.$invalid">
+			<span ng-show="addIncomeDetailsForm.amount.$error.required">*Amout is required.</span>
+			<span ng-show="addIncomeDetailsForm.amount.$error.number">*Amout should be entered in numbers.</span> 
+			<span ng-show="addIncomeDetailsForm.amount.$error.pattern">*Amout should have maximum 2 decimal places.</span> <br/>
+		</span>
+		<br/>
+		<label for="incomedatetimepicker4" class="sr-only">Date</label>
+		<input type='text' class="form-control" id='incomedatetimepicker4' placeholder="Date" required />
+		<script type="text/javascript">   
+			$(function () {
+				$('#incomedatetimepicker4').datetimepicker();
+			});
+		</script>
+		<br/>
+		<label for="incomeModeOfPayment" class="">Mode of payment</label>
+		<select name="modeOfPayment" class="form-control placeholder" data-ng-model="addIncomeObj.modeofpayment" id="incomeModeOfPayment" placeholder="Mode of payment" required>
+			<option value="credit card">credit card</option>
+			<option value="cash">cash</option>
+			<option value="electronic transfer">electronic transfer</option>
+		</select>
+		<span class="red" ng-show="addIncomeDetailsForm.modeOfPayment.$touched && addIncomeDetailsForm.modeOfPayment.$invalid">
+			<span ng-show="addIncomeDetailsForm.modeOfPayment.$error.required">*Mode of payment is required.</span><br/>
+		</span>
+		<br/>
+		<label for="incomeNotes" class="sr-only">Notes</label>
+		<input name="notes" type="text" data-ng-model="addIncomeObj.notes" id="incomeNotes" class="form-control" placeholder="Notes"  maxlength="20" required>
+		<span class="red" ng-show="addIncomeDetailsForm.notes.$touched && addIncomeDetailsForm.notes.$invalid">
+			<span ng-show="addIncomeDetailsForm.notes.$error.required">*Notes are required.</span><br/>
+		</span>
+		<br/>
+		<div class="col-md-6 col-md-offset-3">
+			<input type="submit" ng-disabled="addIncomeDetailsForm.$invalid" class="btn btn-lg btn-primary btn-block" data-ng-click="updateIncome()" value="Update">
+		</div>
+		<br/><hr><br/>
+	 </form>
+	</div>
+</div>
