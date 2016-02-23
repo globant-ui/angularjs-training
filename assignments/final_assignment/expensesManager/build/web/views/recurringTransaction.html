@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<div class="cardview" ng-repeat="transaction in ngModel |limitTo:4">
+    <p><span class="test">Category:{{transaction.category}}</span></p>
+    <p><span class="test">Amount:{{transaction.amount}}</span></p>
+    <p><span class="test">Date:{{transaction.date| date:'dd MMMM yyyy @ h:mma'}}</span></p>
+    <p><span class="test">Notes:{{transaction.notes}}</span></p>
+    <p><span class="test">Type:{{transaction.type}}</span></p>
+    <p><span class="test">Recurring Type:{{transaction.recurringType}}</span></p>
+    <p><button  class="button" ng-click="addRecurringTransaction($index)">Add</button>
+    <button  class="button" ng-click="deleteRecurringTransaction($index)">Delete</button></p>
+</div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div>                   
+    <div>
+        <h2>Reports</h2>
+    </div>
+    <div>
+        <div>
+            <div>
+                Search Transaction:
+                <input type= "text" ng-model="searchTransactionText" ng-change="filterData()" style="margin-bottom: 10px;">
+                Amount:
+                <input disabled="true" type= "text" ng-model="searchTransactionAmount" style="margin-left: 20px;">
+            </div>
+
+            <table width="95%" align="left" cellspacing="0"  cellpadding="0" border="1">
+                <colspan>
+                    <col width="15%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">                                    
+                    <col width="10%">
+                    <col widht="15%">
+                    <col widht="15%">
+                    <col widht="10%">
+                </colspan>
+                <tr>
+                    <th><a href="" ng-click="sortBy('notes')">Notes</a></th>
+                    <th><a href="" ng-click="sortBy('date')">Date</a></th>
+                    <th><a href="" ng-click="sortBy('amount')">Amount</a></th>
+                    <th><a href ="" ng-click="sortBy('category')">Category</a></th>
+                    <th><a href ="" ng-click="sortBy('subCategory.subCategory')">Sub-Category</a></th>
+                    <th><a href ="" ng-click="sortBy('payee')">Payee</a></th>
+                    <th><a href ="" ng-click="sortBy('payer')">Payer</a></th>
+                    <th><a href ="" ng-click="sortBy('mop')">Mode of Payment</a></th>
+
+                </tr>
+                <tr ng-repeat ="transaction in filteredTransactionArray= (transactionDetails|orderBy:column:descending|filter:{category:searchTransactionText})">
+                    <td ng-bind="transaction.notes">
+                    </td>
+                    <td ng-bind="transaction.date | date:'dd/mm/yyyy @ h:mma'">
+                    </td>
+                    <td ng-bind="transaction.amount | currency:'&#8377;'">
+                    </td>
+                    <td ng-bind="transaction.category">
+                    </td>
+                    <td ng-bind="transaction.subCategory.subCategoryName">
+                    </td>
+                    <td ng-bind="transaction.payer">
+                    </td>
+                    <td ng-bind="transaction.payee">
+                    </td>
+                    <td ng-bind="transaction.mop">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>  
