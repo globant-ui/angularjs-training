@@ -5,6 +5,10 @@ app.factory("expFactory", function($http, $q) {
 	var msg;
 
 	var newTrans={};
+    var notifyArr=[
+        {category:"Maintenance", subCategory:"Vehicle", amount:10000,date:new Date("2016-03-11"), transType : "expense", reccur:"Yearly"}        
+    ];
+
 	var edited=false;
 
 	factory.getTrans= function()
@@ -18,7 +22,7 @@ app.factory("expFactory", function($http, $q) {
 			balance();
 			def.resolve(response);
 			console.log("Resolved...")
-			//return def.promise;
+			return Transaction;
 
 		},
 		function(response)
@@ -27,8 +31,7 @@ app.factory("expFactory", function($http, $q) {
 			console.log(msg);
 			def.reject("Failed to get albums");
 		});
-		//return	Transaction;
-        return def.promise;
+		return	Transaction;
 	}
 
 	factory.balance=function()
@@ -68,7 +71,9 @@ app.factory("expFactory", function($http, $q) {
 					Transaction.data[i].category=newTrans.category;
 					Transaction.data[i].subCategory=newTrans.subCategory;
 					Transaction.data[i].amount=newTrans.amount;
-					console.log("Transaction.data[i].date"+Transaction.data[i].date+"---"+typeof(Transaction.data[i].date));
+                    
+console.log("Transaction.data[i].date"+Transaction.data[i].date+"---"+typeof(Transaction.data[i].date));
+                    
 					console.log("newTrans.date"+newTrans.date+"---"+typeof(newTrans.date));
 					Transaction.data[i].date=newTrans.date;
 					Transaction.data[i].modeOfPayment= newTrans.modeOfPayment;
@@ -158,6 +163,15 @@ console.log("Date  :"+Transaction.data[i].date+"Date in date format"+strtodate);
 
 	};
 
+    factory.notifySet=function(notify){
+        notifyArr.push(notify);
+        return notifyArr;    
+    };
+    
+    factory.getNotify = function()
+    {
+        return(notifyArr);        
+    };
 
 	factory.convertDate=function(inputFormat) 
 	{

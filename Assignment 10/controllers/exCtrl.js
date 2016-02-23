@@ -1,5 +1,3 @@
-    var app = angular.module("exManager", ['ngRoute']);
-
 	app.config(['$routeProvider', function($routeProvider) {
     	$routeProvider.
     	when('/income', {
@@ -24,8 +22,10 @@
         	templateUrl: 'views/monthreport.html'
      		//   controller: 'expensecntr'
       		}).
-
-
+    	when('/setting', {
+        	templateUrl: 'views/setting.html',
+     		   controller: 'notifyctrl'
+      		}).        
 
       		otherwise({
         		redirectTo: '/index.html'
@@ -56,19 +56,13 @@
 	$scope.formsub=false;
 	$scope.startAdd=false;
 	$scope.startEdit=false;
-	$scope.startDelete=false;	
-    var promise;
-        
+	$scope.startDelete=false;	    
+    $scope.notify={}
 
-	promise=expFactory.getTrans();
-    promise.then(function(data){
-        console.log("Inside .... Promise ");
-        $scope.Transaction=data;       
-        console.log("Transaction data :  "+$scope.Transaction);        
-    });
-    
+	$scope.Transaction=expFactory.getTrans();
 	console.log("From Controller : "+$scope.Transaction);
-
+        
+        
 	$scope.Test=function(){
 		console.log("Inside test");
 		console.log($scope.Transaction);
@@ -134,21 +128,20 @@
 
 }]);
 
-/*
-app.controller("pannelController", ["$scope", function($scope){
-$scope.tab=1;
 
-$scope.setTab=function(tabValue){
-	$scope.tab=tabValue;
-	console.log("Inside setTab ");
-};
+app.directive("notification", function(){
+    console.log("Inside Directive ... ");
+    return {       
+        restrict:"E",
+        require: '^ngModel',
+        scope: {
+                    bindedModel: "=ngModel",
+            data:'='
+                },
 
-$scope.isTab=function(tabValue){
-		console.log("Inside istab ");
-	if($scope.tab===tabValue) return true;
-	else return false;
-};
+        templateUrl:"views/notification.html",
 
-}]);
+    };
+    
+});
 
-*/

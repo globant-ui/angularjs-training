@@ -13,15 +13,41 @@
       <script src="https://code.angularjs.org/1.4.9/angular-route.js"></script>
       
 <!--      <script src="controllers\exApp.js"></script> -->
+      <script src="controllers/exApp.js"></script>
+      <script src="services/expFactory.js"></script>        
       <script src="controllers/exCtrl.js"></script>
-      <script src="services/expFactory.js"></script>
-
+      <script src="controllers/notifyCtrl.js"></script>
+        
       <!-- Bootstrap core CSS -->
       <link href="css/bootstrap.min.css" rel="stylesheet">
       <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
       <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
       <!-- Custom styles for this template -->
       <link href="css/expcss.css" rel="stylesheet">
+
+  <style>
+  table, th, td {
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  th {
+      height: 50px;
+  }
+
+  th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+  }
+
+
+  tr:nth-child(even){background-color: #f2f2f2}
+
+  tr:hover{background-color:#f5f5f5}
+
+
+  </style>
   </head>
 
   <body  ng-app="exManager" ng-controller="expensecntr as excontrol">
@@ -206,13 +232,28 @@
             <a href="#search"  class="list-group-item"  ng-class="{ 'active':tab===5 }" ng-click= "tab=5; searchForm=true; startDelete=true;startAdd=false; startTrans=false;" >Delete Transaction</a>             
             <a href="#report"  class="list-group-item" ng-class="{ 'active':tab===6 }" ng-click= "tab=6;  startTrans=false; searchForm=false;" >Show Report</a> 
             <a href="#catreport"  class="list-group-item" ng-class="{ 'active':tab===7 }" ng-click= "tab=7;  startTrans=false; searchForm=false;" >Show Report By Category</a>
+            <a href="#setting"  class="list-group-item" ng-class="{ 'active':tab===8 }" ng-click= "tab=8;  startTrans=false; searchForm=false;" >Settings</a>
 <!--            <a href="#monthreport"  class="list-group-item" ng-class="{ 'active':tab===8 }" ng-click= "tab=8;  startTrans=false; searchForm=false;" >Month Report</a>    -->        
 
           </div>       
 
         </div><!--/.sidebar-offcanvas-->
-
-      <hr style="clear:both">
+       
+        <div ng-controller="notifyctrl">
+            <div style="clear:both">
+                <notification  data="notifyArr"></notification>
+            </div>
+        </div>
+      
+      <div>
+      </div>
+ <!--     
+    <div ng-controller="notifyctrl">
+        <div my-directive class='directive'></div>
+        
+    </div>
+      -->
+      <hr style="clear:both; margin-top: 180px;">
 
       <footer style="float:right">
         <p>&copy; 2016 Company, Inc.</p>
