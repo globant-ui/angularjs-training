@@ -1,5 +1,11 @@
 angular.module('myAppApp')
 .controller('DashboardCtrl', function ($scope, incomeService, expenseService) {
+    this.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
+    
     $scope.showModal = false;
     $scope.totalIncome = 0;
     $scope.totalExpense = 0;
