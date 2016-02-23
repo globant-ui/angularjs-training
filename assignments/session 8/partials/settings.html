@@ -1,0 +1,66 @@
+<div class="row" id="settings" data-ng-show="true">
+	<div class="col-md-6 col-md-offset-3">
+	 <form class="form-signin" id="settingsForm" name="settingsDetailsForm" novalidate>
+		<h2 class="form-signin-heading">Add recurring income/expense</h2>
+		<label for="incomePayer" class="sr-only">Payer</label>
+		<input type="text" data-ng-model="recurringEntryObj.payer" name="Payer" id="incomePayer" class="form-control" placeholder="Payer" required autofocus>
+		<span class="red" ng-show="settingsDetailsForm.Payer.$touched && settingsDetailsForm.Payer.$invalid">
+			<span ng-show="settingsDetailsForm.Payer.$error.required">*Payer is required.</span><br/>
+		</span>
+		<br/>
+		<label for="incomePayee" class="sr-only">Payee</label>
+		<input type="text" data-ng-model="recurringEntryObj.payee" name="payee" id="incomePayee" class="form-control" placeholder="Payee" required>
+		<span class="red" ng-show="settingsDetailsForm.payee.$touched && settingsDetailsForm.payee.$invalid">
+			<span ng-show="settingsDetailsForm.payee.$error.required">*Payee is required.</span><br/>
+		</span>
+		<br/>
+		<label for="expType" class="">Type</label>
+		<select class="form-control placeholder" name="expType" data-ng-model="recurringEntryObj.type" id="expType" placeholder="Type" required>
+			<option value="Income">Income</option>
+			<option value="Expense">Expense</option>
+		</select>
+		<span class="red" ng-show="settingsDetailsForm.expType.$touched && addIncomeDetailsForm.expType.$invalid">
+			<span ng-show="addIncomeDetailsForm.expType.$error.required">*Expense Type is required.</span><br/>
+		</span>
+		<br/>
+		<label for="recType" class="">Recurring Type</label>
+		<select class="form-control placeholder" name="recType" data-ng-model="recurringEntryObj.recType" id="recType" placeholder="Type" required>
+			<option value="Monthly">Monthly</option>
+			<option value="Yearly">Yearly</option>
+		</select>
+		<span class="red" ng-show="settingsDetailsForm.recType.$touched && addIncomeDetailsForm.recType.$invalid">
+			<span ng-show="addIncomeDetailsForm.recType.$error.required">*Recurring Type is required.</span><br/>
+		</span>
+		<br/>
+		<label for="incomeAmount" class="sr-only">Amount</label>
+		<input type="number" name="amount" data-ng-model="recurringEntryObj.amount" id="incomeAmount" class="form-control" placeholder="Amount" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required>
+		<span class="red" ng-show="settingsDetailsForm.amount.$touched && settingsDetailsForm.amount.$invalid">
+			<span ng-show="settingsDetailsForm.amount.$error.required">*Amout is required.</span>
+			<span ng-show="settingsDetailsForm.amount.$error.number">*Amout should be entered in numbers.</span> 
+			<span ng-show="settingsDetailsForm.amount.$error.pattern">*Amout should have maximum 2 decimal places.</span> <br/>
+		</span>
+		<br/>
+		<label for="incomedatetimepicker5" class="sr-only">Date</label>
+		<input type='text' class="form-control" id='incomedatetimepicker5' placeholder="Date" required />
+		<script type="text/javascript">   
+			$(function () {
+				$('#incomedatetimepicker5').datetimepicker({
+	                viewMode: 'days',
+	                format: 'DD/MM'
+	            });
+			});
+		</script>
+		<br/>
+		<label for="incomeNotes" class="sr-only">Notes</label>
+		<input name="notes" type="text" data-ng-model="recurringEntryObj.notes" id="incomeNotes" class="form-control" placeholder="Notes"  maxlength="20" required>
+		<span class="red" ng-show="settingsDetailsForm.notes.$touched && settingsDetailsForm.notes.$invalid">
+			<span ng-show="settingsDetailsForm.notes.$error.required">*Notes are required.</span><br/>
+		</span>
+		<br/>
+		<div class="col-md-6 col-md-offset-3">
+			<input type="submit" ng-disabled="settingsDetailsForm.$invalid" class="btn btn-lg btn-primary btn-block" data-ng-click="addRecurringEntry()" value="Add Recurring Entry">
+		</div>
+		<br/><hr><br/>
+	 </form>
+	</div>
+</div>
