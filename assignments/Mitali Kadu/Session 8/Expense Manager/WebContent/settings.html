@@ -1,0 +1,97 @@
+<p class="block_letters" style="width:100%;">Add Recurring Expenses</p>
+
+<form name="expense_form">
+    <table class="input_tables">
+        <tr>
+            <td>Enter the amount :</td>
+            <td><input type="number" name="expense_amount" ng-pattern="/^([^-]?[0-9]*(\.[0-9]([0-9])?)?)$/" placeholder="Enter the expense" ng-model="temp_3.amount" min="0.01">
+                <span ng-show="!temp_3.amount" class="error_msg">*</span>
+            <span ng-messages="expense_form.expense_amount.$error" class="error_msg">
+            <span ng-message="pattern">Enter only positive numbers upto 2 decimals</span>
+            </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Category :</td>
+            <td>
+                <select name="expense" ng-model="temp_3.category">
+                    <option value="">-- select --</option>
+                    <option>Rent</option>
+                    <option>Travel</option>
+                    <option>Party</option>
+                    <option>Office</option>
+                    <option>Study</option>
+                    <option>Shopping</option>
+                </select>
+                <span ng-show="!temp_3.category" class="error_msg">*</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Interval :</td>
+            <td>
+                <select name="temp_3.interval" ng-model="temp_3.interval">
+                    <option value="">-- select --</option>
+                    <option>Monthly</option>
+                    <option>Yearly</option>
+                </select>
+                <span ng-show="!temp_3.interval" class="error_msg">*</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Mode of payment :</td>
+            <td>
+                <select name="mode_of_payment" ng-model="temp_3.payment">
+                    <option value="">------ select ------</option>
+                    <option>Credit Card</option>
+                    <option>Cash</option>
+                    <option>Electronic transfer</option>
+                </select>
+                <span ng-show="!temp_3.payment" class="error_msg">*</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Date :</td>
+            <td><input type="datetime-local" name="date" ng-model="temp_3.date"/>
+                <span ng-show="!temp_3.date" class="error_msg">*</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Notes :</td>
+            <td><input type="text" name="expense_notes" ng-model="temp_3.notes" ng-maxlength="20"/>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="button" value="Add"
+                       ng-disabled="!temp_3.date || !temp_3.amount || !temp_3.category || !temp_3.payment"
+                       ng-click="add_rec_expense()"
+                       style="width: 120px;"></td>
+            <td><input type="button" value="Rec-Expenses" ng-click="show_rec_expense()"
+                       style="width: 120px;"></td>
+        </tr>
+    </table>
+</form>
+<div ng-show="rec_expense_table">
+    <p class="block_letters" style="width:100%;">Recurring Expense Table</p>
+    <table style="width : 80%" id="report">
+        <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Mode of Payment</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Notes</th>
+        </tr>
+        <tr ng-repeat="expense in rec_expenses track by $index">
+            <td>{{expense.date | date: 'yyyy-MM-dd (HH:mm)'}}</td>
+            <td>{{expense.amount}}</td>
+            <td>{{expense.category}}</td>
+            <td>{{expense.payment}}</td>
+            <td><input type="button" ng-click="edit_expense_form($index)" value = "Edit" /></td>
+            <td><input type="button" ng-click="delete_expense_form($index)" value = "Delete" /></td>
+            <td>{{expense.notes}}</td>
+        </tr>
+    </table>
+</div>
+
