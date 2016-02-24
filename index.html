@@ -8,13 +8,28 @@
    
 
    
-    <div ng-app="myApp" >
-        <p><a href = "#dashboard">Expanse Manager</a></p>
-        <p><a href = "#income">Income</a></p>
-        <p><a href = "#expense">Expance</a></p>
-       <div ng-view>        
+    <div ng-app="myApp" ng-controller="DashboardCtrl" >
+        <table style=" margin-left:20px; padding:10px; width:700px;"   >
+            <tr>
+        <th><p><a href = "#dashboard">Expanse Manager</a></p></th>
+        <th><p><a href = "#income">Income</a></p></th>
+        <th><p><a href = "#expense">Expance</a></p></th>
+        <th><p><a href = "#setting">Setting</a></p></th>
+                </tr>
+        </table>
+       <div ng-view>    
+           
+           
+           
        </div>
+         <div  ng-controller="settingCtrl">
+                
+                    <notification  data="notifyArray"></notification>
+                
+            </div>
+        
     </div>
+     
   </body>
 
 
@@ -28,6 +43,7 @@
     <script src="Scripts/Services/Expense/expService.js"></script>
     <script src="Scripts/Controller/incomeController.js"></script>
     <script src="Scripts/Services/Income/incService.js"></script>
+    <script src="Scripts/Controller/settingController.js"></script>
     
     
     

@@ -1,0 +1,85 @@
+
+  
+    <form  name="settingForm" >
+     <table>
+         <tr>
+            <td>
+              <label>Category</label>
+            </td>
+            <td>
+              <select placeholder="Category"  name="category" ng-model="notify.category" >
+                      <option value="" selected>Open this select menu</option>
+                      <option value="Interest">Interest</option>
+                      <option value="Shares">Shares</option>
+                      <option value="Health">Health</option>
+                      <option value="Travel">Travel</option>
+                      <option value="Food">Food</option>
+                      <option value="Maintenance">Maintenance</option>
+                  </select>
+            </td>
+            
+           </tr>
+                 
+         
+            <tr>
+            <td>
+              <label >SubCategory</label>
+            </td>
+            <td>
+              <select placeholder="SubCategory"   name=subcat ng-model="notify.subCategory" >
+                      <option value="" selected>Open this select menu</option>
+                      <option value="Fix Deposite">Fix Deposite</option>
+                      <option value="Equity">Equity</option>
+                      <option value="Commodity">Commodity</option>                      
+                      <option value="Family">Family</option>
+                      <option value="Business Trip">Business Trip</option>
+                      <option value="Hotel">Hotel</option>
+                      <option value="Party">Party</option>
+                      <option value="Vehicle">Vehicle</option>
+                  </select>
+            </td>
+            
+           </tr>            
+                       
+                
+                
+            <tr>
+            <td>
+             <label>Transaction Type</label>
+            </td>
+            <td>
+              <select  placeholder="Transaction Type"  name="transtype" ng-model="notify.transType" >
+                      <option value="" selected>Open this select menu</option>
+                      <option value="income">Income</option>
+                      <option value="expense">Expense</option>
+                  </select>
+            </td>
+            
+           </tr>             
+                                
+               
+             <tr>
+            <td>
+             <label>Reccuring Type</label>
+            </td>
+            <td>
+              <select  placeholder="Recurring Type"  name="reccur" ng-model="notify.reccur" >
+                      <option value="" selected>Open this select menu</option>
+                      <option value="monthly">Monthly</option>
+                      <option value="Yearly">Yearly</option>
+                  </select>
+            </td>
+            
+           </tr>   
+         
+             
+          <tr>
+            <td>
+              <button type="submit" ng-click="addNotification(notify);">Add Income</button>
+            </td>
+            
+           </tr>
+             
+     </table>        
+ </form>
+    

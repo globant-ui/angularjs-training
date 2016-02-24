@@ -18,6 +18,10 @@ app.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'views/ExpenceShow.html',
         controller: 'ExpenseCtrl'
       }).
+      when('/setting', {
+        templateUrl: 'views/Setting.html',
+        controller: 'settingCtrl'
+      }).
       otherwise({
         redirectTo: '/Views/Dashboard.html'
       });
