@@ -1,0 +1,35 @@
+
+	table td, table th {
+		 text-align: center;
+	}
+	.Selection{
+		margin-left: 505px;
+		margin-bottom: 30px;
+		 
+	}
+	
+	.selectedMenu{
+		padding: 10px ;
+		margin-right: 20px;
+		height:100%;
+		background-color: transparent;
+    	border: none;
+    	color: white;
+        font-size: 17px;
+      
+	}
+	.formClass{
+		    margin-left: 445px;
+		border: 1px solid black;
+		padding: 20px;
+		margin-bottom: 20px;
+		//margin-top: -615px;
+	}
+	.required:after { content:"*"; color:red; }
+	
+	
+	.active {
+		background-color: #e6e6e6;
+	}
+
+	

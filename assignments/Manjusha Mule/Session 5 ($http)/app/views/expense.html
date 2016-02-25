@@ -1,0 +1,27 @@
+<div style="margin-left:90px; margin-right:90px;">
+
+<div ng-show =  "expense.length>0" >
+			<h3 class="title">Expense Details </h3>
+			<table class="table table-bordered">
+				<thead><tr><th>Id</th>
+				<th>Amount</th>
+				<th>Category</th>
+				<th>Date</th>
+				<th>Mode</th>
+				<th>Note</th>
+				<th>Edit</th>
+				<th>Delete</th></tr></thead>
+
+				<tr ng-repeat = "exp in expense">
+					<td ng-bind = " $index + 1 "></td>
+					<td ng-bind = "exp.amount | number:2"></td>
+					<td ng-bind = "exp.category"></td>
+					<td> {{exp.date | date:"MM/dd/yyyy 'at' h:mma"}} </td>
+					<td ng-bind = "exp.mode"></td>
+					<td ng-bind = "exp.note"></td>
+					<td><button class="btn btn-default" ng-click="EnableEdit(exp,$index);"><span class="glyphicon glyphicon-pencil"></span>  Edit</button></td>
+					<td><button class="btn btn-default" ng-click="deleteExp($index,exp.amount);">Delete</button></td>
+				</tr>
+			</table>
+</div>
+</div>

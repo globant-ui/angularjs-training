@@ -1,0 +1,49 @@
+<html>
+<!--<script type="text/javascript" src="angular.min.js"></script>-->
+<!-- <link type="text/css" href ="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel = "stylesheet" /> -->
+ <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="styles/common.less"/>
+ <link rel="stylesheet" href="styles/styles.css"/>
+<!-- <link rel="stylesheet" href="styles/main.css"/>
+ -->
+
+
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+
+<script type="text/javascript" src="scripts/app.js"></script>
+
+
+<!-- <script type="text/javascript" src="angular.min.js"></script>
+<script type="text/javascript" src="angular-route.min.js"></script> -->
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+ --><!-- <script type="text/javascript" src="service.js"></script> -->
+ <script type="text/javascript" src="scripts/services/expenseService.js"></script>
+ <script type="text/javascript" src="scripts/services/editDeleteService.js"></script>
+<script type="text/javascript" src="scripts/controllers/ExpenseCtrl.js"></script>
+<script type="text/javascript" src="scripts/controllers/IncomeCtrl.js"></script>
+<script type="text/javascript" src="scripts/controllers/showIncomeCtrl.js"></script>
+<script type="text/javascript" src="scripts/controllers/showExpenseCtrl.js"></script>
+<script type="text/javascript" src="scripts/controllers/showBalanceCtrl.js"></script>
+<script type="text/javascript" src="scripts/controllers/reportsCtrl.js"></script>
+
+
+
+
+<!-- <script type="text/javascript" src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+ -->
+ <base href="/"></base>
+<body ng-app="ExpenseManager"  >
+  <div >
+  <div ui-view="balanceView"></div>
+  <div ui-view="formView"></div>
+  <div ui-view="displayView"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+table {
+   		border-collapse: collapse;
+   		width: 50%;
+   		height: 50px;
+	}
+	table td, table th {
+		border: 2px solid black;
+		 padding: 10px;
+		 text-align: center;
+	}
+	.choiceofSelection{
+		margin-left: 550px;
+		margin-bottom: 30px;
+		 
+	}
+	.title{
+		//margin-top: 450px;
+		float: left;
+    	margin-left: 450px;
+	}
+	.choice{
+		padding: 10px ;
+		margin-right: 20px;
+		height:100%;
+		    background-color: transparent;
+    	border: none;
+    	color: white;
+        font-size: 17px;
+      /*  &:active {
+      background-color: #E1F0FF !important;
+   		 }*/
+      
+	}
+	.formClass{
+		    margin-left: 445px;
+		border: 1px solid black;
+		padding: 20px;
+		margin-bottom: 20px;
+	}
+	.required:after { content:"*"; color:red; }
+	.choice:active{background-color: "grey";}
+	
+	.active {
+		background-color: #0000;
+	}

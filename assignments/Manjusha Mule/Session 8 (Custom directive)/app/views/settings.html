@@ -1,0 +1,51 @@
+<div class="col-xs-4 formClass">
+ 	<h3 align="center">Recurring  Details</h3>
+ 	 <form name = "detailsForm" novalidate align="center" >
+     <table class="formTable " align="center">     
+       <tr>
+         <td> <label>Category  </label></td>
+          <td><select  class="required" required ng-model="recurring.category">
+          	<option value="Income">Income</option>
+          	<option value="Expense">Expense</option>
+          </select></td>
+        </tr>
+
+        <tr>
+         <td> <label>Enter Amount </label></td>
+          <td><input type = "number" name="amount" class="required" required  ng-pattern = "/^[0-9]{1,7}(\.[0-9]+)?$/" ng-model="recurring.amount"  ng-focus="amountBlur=false;" ng-blur="amountBlur=true;"/></td>
+        </tr>
+       
+        <tr>
+          <td><label>Date</label></td>
+          <td><input type="date" ng-model="recurring.date"/></td>
+        </tr>
+
+        <tr>
+         <td> <label>Type</label></td>
+          <td><select  class="required" required ng-model="recurring.type">
+          <!-- 	<option value="daily">Daily</option> -->
+          	<option value="Monthly">Monthly</option>
+            <option value="Quarterly">Quarterly</option>
+          	<option value="Yearly">Yearly</option>
+          </select></td>
+        </tr>
+
+         <tr>
+          <td><label>Add Note </label></td>
+          <td><textarea rows="2" cols="30" name = "note" maxlength = "60" ng-model="recurring.note" ng-focus="commentFocus=true;" ng-blur="commentFocus=false;"></textarea></td>
+        </tr>
+        
+        <tr>
+          <td></td>
+           <td><span ng-show="detailsForm.note.$dirty && commentFocus">(Note should not exceed 20 characters.)</span></td>
+        </tr>
+
+
+      </table>
+
+      <br>
+       <button class="btn btn-default"  ng-disabled="detailsForm.$invalid"  ng-click = "addRecurring();" > Add </button>
+       <button class="btn btn-default"  ng-click = "reset();" > Cancel </button>
+      </form>
+
+</div>
