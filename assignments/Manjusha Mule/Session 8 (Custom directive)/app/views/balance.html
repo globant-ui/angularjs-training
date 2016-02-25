@@ -1,0 +1,23 @@
+<div >
+<div class="row header">
+  <h2 class="title">Expense Manager</h2>
+  </div>
+    <div class = "navigation">
+    <div class = "Selection">
+      <button class="btn btn-default selectedMenu" ng-class="{active:$state.includes('income')}" ui-sref="income"> Add Income </button>
+      <button class="btn btn-default selectedMenu" ng-class="{active:$state.includes('expense')}" ui-sref="expense"> Add Expense </button>
+       <button class="btn btn-default selectedMenu" ng-class="{active:$state.includes('report')}" ui-sref="report">Report</button>
+       <span  ui-sref="settings" ><img src="images/settings.png"></span>
+    </div>
+   </div>
+
+    <div class = "showBalance" align="center">
+      <label><span> Income : {{total.income}}</span></label>  
+       <label  class="balance_Panel" > Expense : {{total.expense}}</label>
+       <label  class="balance_Panel" >Balance : {{total.balance}}</label>
+    </div>
+    <div >
+      <h3 align="center"> Notifications</h3>
+      <div recurring-widget ng-model="recurringList"></div>
+    </div>
+  </div>
