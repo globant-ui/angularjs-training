@@ -7,7 +7,7 @@
 
 myApp.factory("recurringTransactionService", ['transactionService', '$rootScope', function(transactionService, $rootScope) { 
         var recurringTransactionDetails = [{
-                transactionID: 1,
+                transactionID: 101,
                 payer: 'Globant',
                 payee: 'self',
                 category: 'Salary',
@@ -22,10 +22,10 @@ myApp.factory("recurringTransactionService", ['transactionService', '$rootScope'
                 type: 'Income',
                 recurringType: 'Monthly'
             }, {
-                transactionID: 2,
+                transactionID: 102,
                 payer: 'self',
                 payee: 'Satish Joshi',
-                category: 'Rent',
+                category: 'Hose 1Rent',
                 subCategory: {
                     parentcategoryName: 'Rent',
                     subCategoryName: 'House Rent'
@@ -37,7 +37,7 @@ myApp.factory("recurringTransactionService", ['transactionService', '$rootScope'
                 type: 'Income',
                 recurringType: 'Monthly'
             }, {
-                transactionID: 3,
+                transactionID: 103,
                 payer: 'self',
                 payee: 'Miami',
                 category: 'Monthly Emi',
@@ -52,7 +52,7 @@ myApp.factory("recurringTransactionService", ['transactionService', '$rootScope'
                 type: 'Expense',
                 recurringType: 'Monthly'
             }, {
-                transactionID: 4,
+                transactionID: 104,
                 payer: 'self',
                 payee: 'LIC',
                 category: 'Investment',
@@ -67,7 +67,7 @@ myApp.factory("recurringTransactionService", ['transactionService', '$rootScope'
                 type: 'Expense',
                 recurringType: 'Yearly'
             }, {
-                transactionID: 5,
+                transactionID: 105,
                 payer: 'self',
                 payee: 'Reliance Fund',
                 category: 'Investment',
@@ -77,12 +77,60 @@ myApp.factory("recurringTransactionService", ['transactionService', '$rootScope'
                 },
                 amount: 10000,
                 mop: 'Electronic Transfer',
-                date: new Date("january 22, 2016 16:13:00"),
+                date: new Date("march 22, 2016 16:13:00"),
                 notes: 'Office study books',
                 type: 'Expense',
                 recurringType: 'Quarterly'
 
-            }];
+            },{
+                transactionID: 106,
+                payer: 'self',
+                payee: 'Kotak Fund',
+                category: 'Investment',
+                subCategory: {
+                    parentcategoryName: 'Investment',
+                    subCategoryName: 'Mutual fund'
+                },
+                amount: 20000,
+                mop: 'Electronic Transfer',
+                date: new Date("march 2, 2016 16:13:00"),
+                notes: 'Office study books',
+                type: 'Expense',
+                recurringType: 'Monthly'
+
+            },{
+                transactionID: 107,
+                payer: 'self',
+                payee: 'LIC',
+                category: 'Investment',
+                subCategory: {
+                    parentcategoryName: 'Investment',
+                    subCategoryName: 'Lic'
+                },
+                amount: 2000,
+                mop: 'Electronic Transfer',
+                date: new Date("march 1, 2016 16:13:00"),
+                notes: 'Office study books',
+                type: 'Expense',
+                recurringType: 'Monthly'
+
+            },{
+                transactionID: 108,
+                payer: 'self',
+                payee: 'Satish Joshi',
+                category: 'Hose 2 Rent',
+                subCategory: {
+                    parentcategoryName: 'Rent',
+                    subCategoryName: 'House Rent'
+                },
+                amount: 18000,
+                mop: 'Electronic Transfer',
+                date: new Date("march 1, 2016 16:13:00"),
+                notes: 'House rent',
+                type: 'Income',
+                recurringType: 'Monthly'
+            },
+        ];
         return{
             getRecurringTransactionList: function() {
                 return recurringTransactionDetails;

@@ -202,7 +202,7 @@ myApp.factory("transactionService", ['$http', '$q', function($http, $q) {
                 transactionCopy.notes = transaction.notes;
                 transactionCopy.amount = transaction.amount;
                 transactionCopy.category = transaction.category;
-                transactionCopy.date = transaction.date;
+                transactionCopy.date = new Date(transaction.date);
                 transactionCopy.payee = transaction.payee;
                 transactionCopy.payer = transaction.payer;
                 transactionCopy.type = transaction.type;
