@@ -1,0 +1,12 @@
+.cardview{
+    width: 240px;
+    background: #ADE5EC;
+    border: 1px solid;
+    padding: 5px;
+    margin:20px;
+    float:left;
+}
+.button{
+    background: whitesmoke;
+    margin-left: 10px; height:30px; width:70px
+}

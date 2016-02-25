@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div>                   
+    <div>
+        <h2>Income Table</h2>
+    </div>
+    <div>
+        <div>
+            <div>
+                Search Expense:
+                <input type= "text" ng-model="searchIncomeText" ng-change="filter()" style="margin-bottom: 10px;">
+            </div>
+            <table width="95%" align="left" cellspacing="0"  cellpadding="0" border="1">
+                <colspan>
+                    <col width="15%">
+                    <col width="10%">
+                    <col width="5%">
+                    <col width="10%">                                    
+                    <col width="10%">
+                    <col widht="10%">
+                    <col widht="10%">
+                    <col widht="10%">
+                    <col width="5%">
+                </colspan>
+                <tr>
+                    <th><a href="" ng-click="sortBy('notes')">Income Notes</a></th>
+                    <th><a href="" ng-click="sortBy('date')">Income Date</a></th>
+                    <th><a href="" ng-click="sortBy('amount')">Income Amount</a></th>
+                    <th><a href ="" ng-click="sortBy('category')">Income Category</a></th>
+                    <th><a href ="" ng-click="sortBy('subCategory.subCategory')">Income Sub-Category</a></th>
+                    <th><a href ="" ng-click="sortBy('payee')">Income Payee</a></th>
+                    <th><a href ="" ng-click="sortBy('payer')">Income Payer</a></th>
+                    <th><a href ="" ng-click="sortBy('mop')">Mode of Payment</a></th>
+                    <th>Action</th>
+                </tr>
+                <tr ng-repeat ="income in transactionDetails|filter:{type:'Income'}|orderBy:column:descending|filter:searchIncomeText">
+                    <td ng-bind="income.notes">
+                    </td>
+                    <td ng-bind="income.date | date:'dd MMMM yyyy @ h:mma'">
+                    </td>
+                    <td ng-bind="income.amount | currency:'&#8377;'">
+                    </td>
+                    <td ng-bind="income.category">
+                    </td>
+                    <td ng-bind="income.subCategory.subCategoryName">
+                    </td>
+                    <td ng-bind="income.payer">
+                    </td>
+                    <td ng-bind="income.payee">
+                    </td>
+                    <td ng-bind="income.mop">
+                    </td>
+                    <td>
+                        <a href="" ng-click="editTransaction(income)"> Edit </a> &nbsp&nbsp <a href="" ng-click="deleteTransaction(income)"> Delete </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>  

@@ -1,0 +1,141 @@
+[{
+"transactionID": 1,
+        "payer": "Globant",
+        "payee": "self",
+        "category": "Salary",
+        "subCategory": {
+        "parentcategoryName": "Salary",
+                "subCategoryName": "Salary"
+        },
+        "amount": 50000,
+        "mop": "Electronic Transfer",
+        "date":"january 23, 2016 14:13:00",
+        "notes": "Ontime",
+        "type": "Income"
+        }, {
+"transactionID": 2,
+        "payer": "LIC",
+        "payee": "self",
+        "category": "Business",
+        "subCategory": {
+        "parentcategoryName": "Business",
+                "subCategoryName": "Lic Agent"
+        },
+        "amount": 20000,
+        "mop": "Electronic Transfer'",
+        "date": "january 25, 2016 11:13:00",
+        "notes": "Less business",
+        "type": "Income"
+        }, {
+"transactionID": 3,
+        "payer": "Bank Of Maharashtra",
+        "payee": "self",
+        "category": "Interest",
+        "subCategory": {
+        "parentcategoryName": "Interest",
+                "subCategoryName": "Interest"
+        },
+        "amount": 10000,
+        "mop": "Electronic Transfer",
+        "date":"january 26, 2016 10:13:00",
+        "notes": "4.5% of intrest recieved",
+        "type": "Income"
+        }, {
+"transactionID": 4,
+        "payer": "Bank Of Maharashtra",
+        "payee": "self",
+        "category": "Deposit",
+        "subCategory": {
+        "parentcategoryName": "Deposit",
+                "subCategoryName": "Fixed Deposit"
+        },
+        "amount": 5000,
+        "mop": "Cheqe",
+        "date": "january 01, 2016 19:13:00",
+        "notes": "4.5% of intrest recieved",
+        "type": "Income"
+        }, {
+"transactionID": 5,
+        "payer": "self",
+        "payee": "Satish Joshi",
+        "category": "Rent",
+        "subCategory": {
+        "parentcategoryName": "Rent",
+                "subCategoryName": "House Rent"
+        },
+        "amount": 10000,
+        "mop": "Credit Card",
+        "date": "january 25, 2016 16:13:00",
+        "notes": "House rent",
+        "type": "Expense"
+        }, {
+"transactionID": 6,
+        "payer": "self",
+        "payee": "PURPLE",
+        "category": "Travel",
+        "subCategory": {
+        "parentcategoryName": "Travel",
+                "subCategoryName": "Out Of City"
+        },
+        "amount": 5000,
+        "mop": "Cash",
+        "date": "january 27, 2016 16:13:00",
+        "notes": "Travel to home",
+        "type": "Expense"
+        }, {
+"transactionID": 7,
+        "payer": "self",
+        "payee": "Miami",
+        "category": "Party",
+        "subCategory": {
+        "parentcategoryName": "Party",
+                "subCategoryName": "Personal Party"
+        },
+        "amount": 10000,
+        "mop": "Cash",
+        "date": "january 14, 2016 16:13:00",
+        "notes": "other expenses",
+        "type": "Expense"
+        }, {
+"transactionID": 8,
+        "payer": "self",
+        "payee": "Prachi restaurant",
+        "category": "Office",
+        "subCategory": {
+        "parentcategoryName": "Office",
+                "subCategoryName": "Lunch and Snacks"
+        },
+        "amount": 2000,
+        "mop": "Debit Card",
+        "date":"january 28, 2016 16:13:00",
+        "notes": "lunch and snax",
+        "type": "Expense"
+        }, {
+"transactionID": 9,
+        "payer": "self",
+        "payee": "Mnd Tree",
+        "category": "Studies",
+        "subCategory": {
+        "parentcategoryName": "Studies",
+                "subCategoryName": "Professional"
+        },
+        "amount": 10000,
+        "mop": "Electronic Transfer",
+        "date": "january 22, 2016 16:13:00",
+        "notes": "Office study books",
+        "type": "Expense"
+        }, {
+"transactionID": 10,
+        "payer": "self",
+        "payee": "Pantaloons",
+        "category": "Shopping",
+        "subCategory": {
+        "parentcategoryName": "Shopping",
+                "subCategoryName": "Clothes and Accessories"
+        },
+        "amount": 10000,
+        "mop": "Credit Card",
+        "date": "january 21, 2016 16:13:00",
+        "notes": "Holiday shopping",
+        "type": "Expense"
+}]

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<div>
+    <div>
+        <h2>Expense Table</h2>
+    </div>
+    <div>
+        <div>            
+            <div>
+                Search Expense:
+                <input type= "text" ng-model="searchExpenseText" ng-change="filter()" style="margin-bottom: 10px;">
+            </div>
+            <table width="95%" align="left" cellspacing="0"  cellpadding="0" border="1">
+                <colspan>
+                    <col width="15%">
+                    <col width="10%">
+                    <col width="5%">
+                    <col width="10%">                                    
+                    <col width="10%">
+                    <col widht="10%">
+                    <col widht="10%">
+                    <col widht="10%">
+                    <col width="5%">
+                </colspan>
+                <tr>
+                    <th><a href="" ng-click="sortBy('notes')">Expense Notes</a></th>
+                    <th><a href="" ng-click="sortBy('date')">Expense Date</a></th>
+                    <th><a href="" ng-click="sortBy('amount')">Expense Amount</a></th>
+                    <th><a href ="" ng-click="sortBy('category')">Expense Category</a></th>
+                    <th><a href ="" ng-click="sortBy('subCategory.subCategoryName')">Expense Sub-Category</a></th>
+                    <th><a href ="" ng-click="sortBy('payee')">Expense Payee</a></th>
+                    <th><a href ="" ng-click="sortBy('payer')">Expense Payer</a></th>
+                    <th><a href ="" ng-click="sortBy('mop')">Mode of Payment</a></th>
+                    <th>Action</th>                                    
+                </tr>                
+                <tr ng-repeat ="expense in transactionDetails|filter:{type:'Expense'}|orderBy:column:descending|filter:searchExpenseText">
+                    <td ng-bind="expense.notes">
+                    </td>
+                    <td ng-bind="expense.date|date:'dd MMMM yyyy @ h:mma'">
+                    </td>
+                    <td ng-bind="expense.amount | currency:'&#8377;'">
+                    </td>
+                    <td ng-bind="expense.category">
+                    </td>
+                    <td ng-bind="expense.subCategory.subCategoryName">
+                    </td>
+                    <td ng-bind="expense.payer">
+                    </td>
+                    <td ng-bind="expense.payee">
+                    </td>
+                    <td ng-bind="expense.mop">
+                    </td>
+                    <td>
+                        <a href="" ng-click="editTransaction(expense)"> Edit </a> &nbsp&nbsp <a href="" ng-click="deleteTransaction(expense)"> Delete </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
