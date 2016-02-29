@@ -1,0 +1,128 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+      <link rel="stylesheet" href="styles/style.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="expensesApp" background="display.jpg" style="position:relative">
+    <div ng-controller="controller">
+        <div id="table1">
+            <center>
+                <h2>Expenses Application</h2>
+                <h3>
+                  Total Income :   <span ng-bind="total_income()"></span>
+               </h3>
+                <h3>
+                  Total Expenses :  <span ng-bind="total_exp()"></span>
+               </h3>
+                <h3>
+                  Total Balance :  <span ng-bind="total_bal()"></span>
+               </h3>
+        </div>
+        <p>
+            <div id="table2">
+                <button class="btn" ng-click="displayIncome()" onclick="window.location.href='#/income'">Show/Hide Income</button>
+                <button class="btn" ng-click="displayExpense()" onclick="window.location.href='#/expense'">Show/Hide Expenses</button>
+            </div>
+            <div id="table3">
+                <button class="btn" ng-click="displayRecurring()" onclick="window.location.href='#/recurring'">Add Recurring</button>
+                <button class="btn" ng-click="displaySummary()" onclick="window.location.href='#/summary'">Summary</button>
+            </div>
+            <br>
+
+            <form name="myForm" ng-submit="addIncome()">
+                <div id="income">
+                    <b>Income Category</b>
+                    <select name="inc_cat" ng-options="name for name in income_category" ng-model="income_temp.category" required> </select>
+                    <br>
+                    <b>Date</b>
+                    <input type="date" ng-model="income_temp.date" required>
+                    <br>
+                    <b>Income Value </b>
+                    <input type="number" name="amount" ng-model="income_temp.value" ng-pattern="/^\s*(?=.*[0-9])\d*(?:\.\d{1,2})?\s*$/" required>
+                    <br>
+                    <span style="color:red" ng-show="myForm.amount.$error.pattern">Invalid Amount.</span>
+                    <b>Mode of Payment</b>
+                    <select name="inc_mode" ng-options="name for name in income_mode" ng-model="income_temp.mode"></select>
+                    <br>
+                    <input type="submit" class="btn" ng-disabled="myForm.$invalid" value="Add Income">
+                    </button>
+                </div>
+                <br>
+            </form>
+
+            <form name="exp_form" ng-submit="addExpense()">
+                <div id="expense">
+                    <b>Expense Category</b>
+                    <select ng-options="name for name in exp_catogory" ng-model="exp_temp.category" required></select>
+                    <br>
+                    <b>Date</b>
+                    <input type="date" ng-model="exp_temp.date" required>
+                    <br>
+                    <b>Expense Value</b>
+                    <input type="number" name="amount_exp" ng-pattern="/^\s*(?=.*[0-9])\d*(?:\.\d{1,2})?\s*$/" ng-model="exp_temp.value" required>
+                    <br>
+                    <span style="color:red" ng-show="exp_form.amount_exp.$error.pattern">Invalid Amount.</span>
+                    <b>Payee</b>
+                    <input type="text" ng-model="exp_temp.payee" required>
+                    <br>
+                    <input type="submit" class="btn" ng-disabled="exp_form.$invalid" value="Add Expense">
+                    </button>
+                </div>
+            </form>
+            <br>
+            <br>
+            <br>
+            <div ng-show="in">
+                <div ng-view="incomeShow"></div>
+            </div>
+            <div ng-show="ex">
+              <div ng-view="expenseShow"></div>
+             </div>
+             <div ng-show="recur">
+              <div ng-view="recurringShow"></div>
+             </div>
+             <div ng-show="sum">
+              <div ng-view="summary"></div>
+             </div>
+    </div>
+
+    </center>
+    </p>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/Services/updateService.js"></script>
+        <script src="scripts/Services/recurringService.js"></script>
+        <script src="scripts/controllers/controller.js"></script>
+        <script src="scripts/controllers/incomeController.js"></script>
+        <script src="scripts/controllers/expenseController.js"></script>
+        <script src="scripts/controllers/recurringDirective.js"></script>
+
+        <!-- endbuild -->
+</body>
+</html>

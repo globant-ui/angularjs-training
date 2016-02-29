@@ -1,0 +1,36 @@
+<div id="incomeShow" ng-controller="incomeController">
+         <table class="datagrid" align="center" width="900">
+         <td><b>Income Type</b>
+         </td>
+         <td><b>Value</b>
+         </td>
+         <td><b>Date</b>
+         </td>
+         <td><b>Note</b>
+         </td>
+         <td><b>Message</b>
+         </td>
+         <td><b>Edit</b>
+         </td>
+         <td><b>Delete</b>
+         </td>
+         <tr ng-repeat="x in income_array">
+         <td><b><span ng-bind="x.category"></span></b>
+         </td>
+         <td><b><span ng-bind="x.value"></span></b>
+         </td>
+         <td><b>{{x.date | date:"MM/dd/yyyy 'at' h:mma"}}</b>
+         </td>
+         <td><b><span ng-bind="x.mode"></span></b>
+         </td>
+         <td><b><span ng-bind="x.message"></span></b>
+         </td>
+         <td>
+         <button class="btn" ng-click="editIncome($index)">Edit</button>
+         </td>
+         <td>
+         <button class="btn" ng-click="deleteIncome($index)">Delete</button>
+         </td>
+         </tr>
+         </table>
+</div>      
