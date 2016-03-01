@@ -1,7 +1,7 @@
 <h1>Income Details</h1>
 
-<div>  
-  <table style="width:100%" border="1px" class="tableFormat">
+<div class="table-responsive">  
+  <table class="table table-striped table-hover">
   <tr>
     <th>Id</th>
     <th>payer</th>
@@ -24,7 +24,7 @@
     <td>{{income.date}}</td>
     <td>{{income.modeOfPayment}}</td>
     <td>{{income.noteType}}</td>
-    <td><button ng-click = "deleteIncomeRecord(income)">Delete</button></td>
+    <td><button class="btn btn-danger" ng-click = "deleteIncomeRecord(income)">Delete</button></td>
   </tr>
 </table>
 </div>

@@ -8,11 +8,7 @@
 angular.module('myApp')
     .factory('updateService', function () {
 
-        var updateService = {
-/*Get expense record array service*/
-            getExpenseRecords:function(){
-
-                return [
+        var expenseRecords = [
     {
     transactionId:1,
     payer:"vijay",
@@ -57,11 +53,8 @@ angular.module('myApp')
     modeOfPayment:"cash",
     noteType:"expense"
   }];
-            },
-/*Get Income record array service*/
- getIncomeRecords:function(){
 
-                return [
+  var incomeRecords = [
     {
     transactionId:1,
     payer:"vijay",
@@ -106,10 +99,25 @@ angular.module('myApp')
     modeOfPayment:"cash",
     noteType:"income"
   }];
+
+        var updateService = {
+/*Get expense record array service*/
+            getExpenseRecords:function(){
+
+                return expenseRecords;
             },
-            update:function(array,user){
+/*Get Income record array service*/
+ getIncomeRecords:function(){
+
+                return incomeRecords;
+            },
+            update:function(isUpdateIncome,user){
                 console.log("update service called");
-                array.push(user);
+                if(isUpdateIncome) {
+                    incomeRecords.push(user);
+                } else {
+                    expenseRecords.push(user);
+                }
             },
             delete:function(records,record){
                 console.log("delete service called");

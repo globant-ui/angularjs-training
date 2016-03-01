@@ -16,15 +16,17 @@ angular.module('myApp').controller('MainCtrl',function($scope,updateService) {
 
     $scope.updateIncome = function(user) {
         console.log("update income"+$scope.userForm.$valid);
+        var isUpdateIncome = true;
         if($scope.userForm.$valid) {
-            updateService.update($scope.incomes,user);
+            updateService.update(isUpdateIncome,user);
+            console.log("reset");
             $scope.reset();
         }
     }
 
     $scope.updateExpense = function(user) {
         if($scope.userForm.$valid) {
-            updateService.update($scope.expenses,user);
+            updateService.update(false,user);
             $scope.reset();
         }
     }

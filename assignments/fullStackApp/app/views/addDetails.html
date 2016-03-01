@@ -1,33 +1,39 @@
-<h1>Add details</h1>
+<h1>Add Details</h1>
 
-<form name="userForm" ng-submit="submitForm()" novalidate>
-      ID: <input style="margin-top: 10px" type="number" ng-model="user.transactionId" /><br />
-      Payer: <input style="margin-top: 10px" type="text" ng-model="user.payer" /><br />
-      Payee: <input style="margin-top: 10px" type="text" ng-model="user.payee"/><br />
-      Category:
+<form class="form-horizontal form-group" role="form" name="userForm" ng-submit="submitForm()" novalidate>
+      <label class="control-label">ID: </label>
+      <input  style="margin-top: 10px" type="number" ng-model="user.transactionId" /><br />
+      <label class="control-label">Payer: </label>
+      <input style="margin-top: 10px" type="text" ng-model="user.payer" /><br />
+      <label class="control-label">Payee: </label>
+      <input style="margin-top: 10px" type="text" ng-model="user.payee"/><br />
+      <label class="control-label">Category: </label>
       <select style="margin-top: 10px" ng-model="user.category">
           <option value="category1">Category1</option>
           <option value="category2">Category2</option>
       </select><br>
-      SubCategory:
+      <label class="control-label">Subcategory:: </label>
       <select style="margin-top: 10px" ng-model="user.subCategory">
           <option value="subcategory1">Sub category1</option>
           <option value="subcategory2">Sub category2</option>
       </select><br>
-      Amount: <input  style="margin-top: 10px" type="number" name = "amount"  ng-model="user.amount" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01"/><br />
+      <label class="control-label">Amount: </label>
+      <input  style="margin-top: 10px" type="number" name = "amount"  ng-model="user.amount" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01"/><br />
       <span ng-show = "!userForm.amount.$valid" class="error-block" >Invalid amount! <br /></span>
-      Date: <input style="margin-top: 10px" type="datetime-local" ng-model="user.date" placeholder="yyyy-MM-ddTHH:mm:ss" min="2001-01-01T00:00:00" max="2016-12-31T00:00:00" required /><br />
-      Mode Of Payment:
+      <label class="control-label">Date: </label>
+      <input style="margin-top: 10px" type="datetime-local" ng-model="user.date" placeholder="yyyy-MM-ddTHH:mm:ss" min="2001-01-01T00:00:00" max="2016-12-31T00:00:00" required /><br />
+      <label class="control-label">Mode of payement: </label>
       <select style="margin-top: 10px" ng-model="user.modeOfPayment">
           <option value="cash">Cash</option>
           <option value="electronic_transfer">Electronic Transfer</option>
           <option value="cheque">cheque</option>
           <option value="credit_card">Credit card</option>
       </select><br>
-      Note Type: <input name = "noteType" style="margin-top: 10px" type="text" ng-model="user.noteType" ng-maxlength="20"/><br />
+      <label class="control-label">Note type: </label>
+      <input name = "noteType" style="margin-top: 10px" type="text" ng-model="user.noteType" ng-maxlength="20"/><br />
       <p ng-show="userForm.noteType.$error.maxlength" class="error-block">Note type exceed 20 char limit</p>
-      <input style="margin-top: 10px" type="button" ng-click="reset()" value="Reset" />
-      <input style="margin-top: 10px" type="submit" ng-click="updateIncome(user)" value="Save to Income" />
-      <input style="margin-top: 10px" type="submit" ng-click="updateExpense(user)" value="Save to Expense" />
+      <input style="margin-top: 10px" type="button" class="btn btn-success" ng-click="reset()" value="Reset" />
+      <input style="margin-top: 10px" type="submit" class="btn btn-success" ng-click="updateIncome(user)" value="Save to Income" />
+      <input style="margin-top: 10px" type="submit" class="btn btn-success" ng-click="updateExpense(user)" value="Save to Expense" />
 
   </form>
