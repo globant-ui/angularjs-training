@@ -31,7 +31,7 @@
     "jshint-stylish": "^1.0.0",
     "karma": "0.12.*",
     "karma-cli": "*",
-    "karma-jasmine": "0.1.*",
+    "karma-jasmine": "^0.1.6",
     "karma-phantomjs-launcher": "*"
   },
   "engines": {

@@ -11,11 +11,11 @@ angular.module('myAppApp')
     $scope.totalExpense = 0;
     $scope.totalBalance = $scope.totalIncome + $scope.totalExpense;
     
-    var IncomeData;
-    var ExpenseData;
+    $scope.IncomeData;
+    $scope.ExpenseData;
     
-    IncomeData = incomeService.postData(null);
-    ExpenseData =  expenseService.postData(null);
+    $scope.IncomeData = incomeService.postData(null);
+    $scope.ExpenseData =  expenseService.postData(null);
     
     $scope.toggleModal = function(){
         $scope.showModal = !$scope.showModal;
@@ -23,13 +23,13 @@ angular.module('myAppApp')
     
     $scope.calculateIncome = function(){
         // console.log("sdsd");
-        IncomeData.forEach(function(element) {
+        $scope.IncomeData.forEach(function(element) {
             $scope.totalIncome = $scope.totalIncome + parseInt(element.amount);
         }, this);
     }
     
     $scope.calculateExpense = function(){
-        ExpenseData.forEach(function(element) {
+        $scope.ExpenseData.forEach(function(element) {
             $scope.totalExpense = $scope.totalExpense + parseInt(element.amount);
         }, this);
     }
