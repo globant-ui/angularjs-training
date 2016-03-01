@@ -1,0 +1,170 @@
+<div class = "homeContainer" >
+<pre>
+    <h4>     Total Income = <span ng-bind = "money.income"></span>                          Total Expense = {{money.expense}}                          Total saving = {{money.savings}}</h4>
+</pre>
+<div align='center'>
+    <ul>
+        <form>
+            <input id="expense" type="button" name="content" class="btn btn-primary" ng-click="show_expense()" value=" Show/Hide Expense">
+        </form>
+    </ul>
+</div>
+<div class="alignment" id="incomeForm" ng-show="toggleVariable">
+    <form class="form-horizontal" role="form" ng-submit="addIncome()" name="IncomeIn">
+        <h3 align='center'>Add Income</h3>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Amount</label>
+            <div class="col-md-3">
+                <input type="number" class="form-control" name="name" ng-model="gain.amount" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required/>
+            </div>
+            <div role="alert">
+                <span class="error" ng-show="IncomeIn.name.$invalid">Enter positive integer only upto 2 decimal places!</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Type of Income</label>
+            <div class="col-md-3">
+                <select class="form-control" ng-options="name for name in income_types" ng-model="gain.subcategory"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Date of Income</label>
+            <div class="col-md-3">
+                <input type="datetime-local" class="form-control" ng-model="gain.date" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Mode of Payment</label>
+            <div class="col-md-3">
+                <select class="form-control" ng-options="name for name in mode" ng-model="gain.mode"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Payer</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" ng-model="gain.person" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Notes</label>
+            <div class="col-md-3">
+                <input type="textarea" class="form-control" name="notes" ng-model="gain.notes" ng-maxlength="20" />
+            </div>
+            <div role="alert">
+                <span class="error" ng-show="IncomeIn.notes.$error.maxlength">
+        Notes field is Too long!</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div style="padding-left:290px">
+                <input type="submit" value="Submit Income" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>
+<div class="alignment" id="expenseForm" ng-hide="toggleVariable">
+    <form class="form-horizontal" role="form" ng-submit="addExpense()" name="expenseIn">
+        <h3 align='center'>Add Expenses</h3>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Amount</label>
+            <div class="col-md-3">
+                <input type="number" class="form-control" name="name" ng-model="spent.amount" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required/>
+            </div>
+            <div role="alert">
+                <span class="error" ng-show="expenseIn.name.$invalid">
+        Enter positive integer only upto 2 decimal places!</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Type Of Expense</label>
+            <div class="col-md-3">
+                <select class="form-control" ng-options="name for name in expense_types" ng-model="spent.subcategory"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Date of Expense</label>
+            <div class="col-md-3">
+                <input type="datetime-local" class="form-control" ng-model="spent.date" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Mode of Payment</label>
+            <div class="col-md-3">
+                <select class="form-control" ng-options="name for name in mode" ng-model="spent.mode"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Payee</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" ng-model="spent.person" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Notes</label>
+            <div class="col-md-3">
+                <input type="textarea" class="form-control" name="notes" ng-model="spent.notes" ng-maxlength="20" />
+            </div>
+            <div role="alert">
+                <span class="error" ng-show="expenseIn.notes.$error.maxlength">
+        Notes field is Too long!</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div style="padding-left:290px">
+                <input type="submit" value="Submit Expense" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>
+<div id='Income-table' ng-show="toggleVariable">
+    <table id='tab1' class="table">
+        <tr>
+            <th>Income</th>
+            <th>Amount</th>
+            <th>Mode of Payment</th>
+            <th>Date</th>
+            <th>Payer</th>
+            <th>Options</th>
+        </tr>
+        <tr ng-repeat="ar in income">
+            <td>{{ar.subcategory}}</td>
+            <td>{{ar.amount}}</td>
+            <td>{{ar.mode}}</td>
+            <td>{{ar.date}}</td>
+            <td>{{ar.person}}</td>
+            <td>
+                <input type="button" value="Edit" class="btn btn-primary" ng-click="editIncome(ar.id)" />
+            </td>
+            <td>
+                <input type="button" value="Remove" class="btn btn-primary" ng-click="removeIncome(ar.id)" />
+            </td>
+        </tr>
+    </table>
+</div>
+<div id='Expense-table' ng-hide="toggleVariable">
+    <table id="tab2" class="table">
+        <tr>
+            <th>Expense</th>
+            <th>Amount</th>
+            <th>Mode of Payment</th>
+            <th>Date</th>
+            <th>Payee</th>
+            <th>Options</th>
+        </tr>
+        <tr ng-repeat="ar in expense">
+            <td>{{ar.subcategory}}</td>
+            <td>{{ar.amount}}</td>
+            <td>{{ar.mode}}</td>
+            <td>{{ar.date}}</td>
+            <td>{{ar.person}}</td>
+            <td>
+                <input type="button" value="Edit" class="btn btn-primary" ng-click="editExpense(ar.id)" />
+            </td>
+            <td>
+                <input type="button" value="Remove" class="btn btn-primary" ng-click="removeExpense(ar.id)" />
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+</div>

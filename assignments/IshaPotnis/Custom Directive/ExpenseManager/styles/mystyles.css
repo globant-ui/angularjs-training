@@ -1,0 +1,24 @@
+.alignment {
+    margin-left: 350px;
+    border: 3px solid #428bca;
+    padding: 10px;
+}
+            
+.control-label{
+    margin-left: 150px;
+}
+
+.card{
+    width: 250px;
+    height: 250px;
+    background: #99B9D4;
+    border: 1px solid;
+    padding: 5px;
+    margin:20px;
+   float: left;   
+}
+
+.homeContainer{
+	position: absolute;
+	margin-top: 290px;
+}

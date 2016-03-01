@@ -1,0 +1,47 @@
+TimeKeyIdForm.js:
+  url: function () {
+                if(app.flags.isApplianceSpecific) {
+                    return  app.constants.APP_ROOT + app.constants.NCS_ROOT + '/devices/device/' +
+                        app.common.contextService().getContext('appContexts').get('contextData').deviceName +
+                        '/config/ntp';
+                } else {
+                   return  app.constants.APP_ROOT + app.constants.NCS_ROOT + "/devices/template/" +
+                        self.templateName+"/config/ntp";
+                }
+            },
+
+
+TimeKeyIdGridSchema.js:
+
+      url: function (contextData) {
+            var url="";
+            if(app.flags.isApplianceSpecific) {
+                url =  app.constants.APP_ROOT + app.constants.NCS_ROOT + "/devices/device/{deviceName}/config/ntp/key?deep";
+            } else {
+                url =  app.constants.APP_ROOT + app.constants.NCS_ROOT + "/devices/template/{templateName}/config/ntp/key?deep";
+            }
+            return url;
+        },
+        editurl: function (contextData) {
+            var url="";
+            if(app.flags.isApplianceSpecific) {
+                url =  app.constants.APP_ROOT + app.constants.NCS_ROOT + "/devices/device/{deviceName}/config/ntp/key?deep";
+            } else {
+                url =  app.constants.APP_ROOT + app.constants.NCS_ROOT + "/devices/template/{templateName}/config/ntp/key?deep";
+            }
+            return url;
+        }
+
+
+TimeSettingsView.js:
+
+            var requestUrl =  app.constants.APP_ROOT + app.constants.NCS_ROOT + '/devices/device/' +
+                        applianceName + '/config/system:system/time-zone';
+                app.flags.isTemplateSpecific && (requestUrl = app.utils.getTemplateSpecificURL(requestUrl));
+
+                $.ajax({
+                    url:requestUrl,
+
+
+For filter in requesturls:
+http://192.168.2.98:9182/api/config/nms/assets/asset?deep=true&format=json&filters=jsonpath{$asset[?(@.organization == 'AIRTEL-CHILD')]}&offset=0&limit=25
