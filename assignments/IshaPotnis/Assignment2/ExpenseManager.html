@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+<title>Assignment 1: Expense Manager</title>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="controller.js"></script>
+</head>
+<body>
+    <div class="main-container" ng-controller="main">
+        Total Income = {{income_money}}<br>
+        Total Expense = {{expense_money}}<br>
+        Total saving = {{savings}}
+
+        <ul>
+            <form> 
+                <label for="income">Show Income</label>
+                <input id="income" type="button" ng-click ="show_income()" value ='Income'><br>
+                
+                <label for="expense">Show Expenses</label>
+               <input id="expense" type="button" name="content" ng-click="show_expense()" value="Expense">
+            </form>
+        </ul>
+        <div id = 'Income-table'  ng-show="income1">
+            <table id="tab1">
+                <thead>
+                    <tr><th>Income</th><th>Amount</th></tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ar in income">
+                        <td>{{ar.name}}</td><td>{{ar.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id = 'Expense-table' ng-show="expense1">
+            <table id="tab2">
+                <thead>
+                    <tr><th>Expense</th><th>Amount</th><th>Mode of Payment</th><th>Date</th><th>Payee</th></tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ar in expense">
+                        <td>{{ar.category}}</td><td>{{ar.value}}</td><td>{{ar.mode}}</td><td>{{ar.date}}</td><td>{{ar.payee}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<div class="card" ng-repeat="transaction in listcolumns |limitTo:4">
+     <p><span>Category:{{transaction.category}}</span></p>
+     <p><span>Amount:{{transaction.amount}}</span></p>
+     <p><span>Date:{{transaction.date| date:'dd MMMM yyyy @ h:mma'}}</span></p>
+     <p><span>Type:{{transaction.type}}</span></p>
+     <p><span>Recurring Type:{{transaction.type}}</span></p>
+     <!-- <p align="center"><span><a href="#" ng-click="addRecurringTransaction($index);">Add {{transaction.category}}</a></span></p>
+     <p align="center"><span><a href="#" ng-click="deleteRecurringTransaction($index);">Dismiss Notification</a></span></p> -->
+</div> 

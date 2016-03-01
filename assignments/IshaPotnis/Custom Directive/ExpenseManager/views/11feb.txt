@@ -1,0 +1,26 @@
+Transclusion: ng-transclude --> key:true
+
+
+function- put anywhere in div element:$scope.$parent
+
+require key
+controller in link function
+
+scope:true
+compile function 
+
+
+compile function custom directive for validation
+
+Link compile
+
+pre post link function
+
+
+
+Performance optimization for $digest cycles:
+$watch and $filter
+One time binding
+Batarang
+
+One time binding :   {{::title}}

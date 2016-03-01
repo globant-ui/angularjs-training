@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+<title>Assignment 1: Expense Manager</title>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<!--<script src="controller.js"></script>-->
+<script src="services.js"></script>
+</head>
+<body>
+    <div class="main-container" ng-controller="main">
+        <h1 align='center'>Expense Manager</h1>
+        <pre><h4>     Total Income = {{income_money}}                                Total Expense = {{expense_money}}                          Total saving = {{savings}}</h4></pre>
+<div class = "alignment">
+        <form class="form-horizontal" role="form" ng-submit="addIncome()">
+            <h3 align ='center'>Add Income</h3>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Amount</label>
+                <div class="col-md-3">   
+                    <input type="number" class="form-control" name="name" ng-model="incomeAmount" />
+                </div>  
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Type of income</label>
+                <div class="col-md-3">
+                     <select class="form-control" ng-options="name for name in income_types" ng-model="incomeType"></select>
+                </div>
+            </div>
+            <div class="form-group">                                
+                <div style="padding-left:350px">
+                    <input type="submit" value="Submit Income" class="btn btn-primary"/>
+                </div>
+            </div>
+        </form>
+</div>
+<div class = "alignment">
+<form class="form-horizontal" role="form" ng-submit="addExpense()">
+    <h3 align ='center'>Add Expenses</h3>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Amount</label>
+        <div class="col-md-3">
+            <input type="number" class="form-control" name="name" ng-model="expenseAmount" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Type Of Expense</label>
+        <div class="col-md-3">
+             <select class="form-control" ng-options="name for name in expense_types" ng-model="expenseType"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Date of Expense</label>
+        <div class="col-md-3">
+            <input type="date" class="form-control" ng-model="expenseDate" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Mode of Payment</label>
+        <div class="col-md-3">
+            <select class="form-control" ng-options="name for name in mode" ng-model="modes"></select>
+        </div>
+    </div>
+<div class="form-group">
+        <label class="col-md-2 control-label">Payee</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="payee" />
+        </div>
+    </div>
+    <div class="form-group">                                
+        <div style="padding-left:350px">
+            <input type="submit" value="Submit Expense" class="btn btn-primary"/>
+        </div>
+    </div>
+</form>
+</div>
+        <ul>
+            <form>  
+               <input id="income" type="button" class="btn btn-primary" ng-click ="show_income()" value ='Show/Hide Income'>
+               <input id="expense" type="button" name="content" class="btn btn-primary" ng-click="show_expense()" value=" Show/Hide Expense">
+            </form>
+        </ul>
+        <div id = 'Income-table'  ng-show="income1">
+            <table id = 'tab1'class="table">
+            <tr>
+                <th>Income</th>
+                <th>Amount</th>
+                <th>Options</th>
+            </tr>
+            <tr ng-repeat="ar in income">
+            <td>{{ar.name}}</td>
+            <td>{{ar.value}}</td>
+            <td><input type="button" value="Edit" class="btn btn-primary" ng-click="editRow1(ar.name)"/></td>
+            <td><input type="button" value="Remove" class="btn btn-primary" ng-click="removeIncome(ar.name)"/></td>
+            </tr>
+            </table>
+        </div>
+        <div id = 'Expense-table' ng-show="expense1">
+            <table id="tab2" class="table">
+                <tr>
+                    <th>Expense</th>
+                    <th>Amount</th>
+                    <th>Mode of Payment</th>
+                    <th>Date</th>
+                    <th>Payee</th>
+                    <th>Options</th>
+                </tr>
+                <tr ng-repeat="ar in expense">
+                    <td>{{ar.category}}</td>
+                    <td>{{ar.value}}</td>
+                    <td>{{ar.mode}}</td>
+                    <td>{{ar.date}}</td>
+                    <td>{{ar.payee}}</td>
+                    <td><input type="button" value="Edit" class="btn btn-primary" ng-click="editRow2(ar.name)"/></td>
+                    <td><input type="button" value="Remove" class="btn btn-primary" ng-click="removeExpense(ar.name)"/></td>
+                </tr>
+            </table>
+        </div>
+      
+    </div>
+</body>
+</html>

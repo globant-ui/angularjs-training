@@ -1,0 +1,9 @@
+{
+  "income": [
+   {"_id":"568cf80642a3efe50bf4edda","payment_date":"2016-01-04T18:30:00.000Z","amount":15000,"payer":"Globant","category":"salary","payment_mode":"electronic-transfer","description":"reward","__v":0},{"_id":"56bd7b4310a9e4af466cbc86","payment_date":"2016-02-13T08:00:00.000Z","amount":345,"payer":"Versa","category":"part-time-work","payment_mode":"credit-card","description":"asdsf","__v":0},{"_id":"56bd815031ca08fc3358db9e","payment_date":"2016-01-04T18:30:00.000Z","amount":7000,"payer":"Globant","category":"salary","payment_mode":"electronic-transfer","description":"reward","__v":0}
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 }
+  ],
+  "profile": { "name": "typicode" }
+}
