@@ -1,0 +1,44 @@
+<div id="view" ng-hide="add">
+    <div class="page-header">
+        <h2>{{type}}</h2>
+    </div>
+    <div class="row">
+         <table class="table">
+            <thead>
+                <tr>
+                    <th>TransID</th>
+                    <th>Payer</th>
+                    <th>Payee</th>
+                    <th>Category</th>
+                    <th>SubCategory</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>ModeOfPayment</th>
+                    <th>Notes</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="x in TransValue">
+                   <div>
+                        <td>{{ x.transactionId }}</td>
+                        <td>{{ x.payer }}</td>
+                        <td>{{ x.payee }}</td>
+                        <td>{{ x.category }}</td>
+                        <td>{{ x.subCategory }}</td>
+                        <td>{{ x.amount }}</td>
+                        <td>{{ x.date }}</td>
+                        <td>{{ x.modeOfPayment }}</td>
+                        <td>{{ x.notes }}</td>
+                        <td>{{ x.type }}</td>
+                        <td>
+                            <a class="btn btn-warning" href="" ng-href="#/{{x.type}}/{{x.transactionId}}/edit">Modify</a>
+                            <a class="btn btn-danger" href="" ng-href="#/{{x.type}}/{{x.transactionId}}/delete">Delete</a>
+                        </td>
+                   </div>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<div>

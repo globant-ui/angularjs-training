@@ -1,0 +1,63 @@
+<div>
+    <div class="page-header">
+        <h2>Reports</h2>
+    </div>
+    <div class="row form-group">
+        <div class="span2">
+            <label>Types : </label>
+        </div>
+        <div class="span3">
+            <select ng-model="type" class="form-control" ng-change="changeType()">
+                <option ng-value="income">income</option>
+                <option ng-value="expense">expense</option>
+            </select>
+        </div>
+        <div class="span4"></div>
+    </div>
+    <div class="row form-group">
+        <div class="span2">
+            <label>Category : </label>
+        </div>
+        <div class="span3">
+            <select class="form-control" ng-model="category" ng-options="c for c in categoryList" ng-change="changeCategory()"></select>
+        </div>
+        <div class="span4"></div>
+    </div>
+    <div class="page-header">
+        <h3>Total {{}} : {{total}}</h3>
+    </div>
+    <div class="row">
+         <table class="table">
+            <thead>
+                <tr>
+                    <th>TransID</th>
+                    <th>Payer</th>
+                    <th>Payee</th>
+                    <th>Category</th>
+                    <th>SubCategory</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>ModeOfPayment</th>
+                    <th>Notes</th>
+                    <th>Type</th>
+                 </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="x in TransValue">
+                   <div>
+                        <td>{{ x.transactionId }}</td>
+                        <td>{{ x.payer }}</td>
+                        <td>{{ x.payee }}</td>
+                        <td>{{ x.category }}</td>
+                        <td>{{ x.subCategory }}</td>
+                        <td>{{ x.amount }}</td>
+                        <td>{{ x.date }}</td>
+                        <td>{{ x.modeOfPayment }}</td>
+                        <td>{{ x.notes }}</td>
+                        <td>{{ x.type }}</td>
+                   </div>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
