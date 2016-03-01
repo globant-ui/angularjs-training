@@ -1,0 +1,26 @@
+<div>
+    <table style="width : 80%" id="report">
+        <tr>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Mode of Payment</th>
+            <th>Notes</th>
+            <th>Interval</th>
+        </tr>
+        <tr ng-repeat="expense in rec_expenses track by $index" ng-if="current_date < expense.only_date && expense.interval === 'Monthly'">
+            <td>{{expense.amount}}</td>
+            <td>{{expense.category}}</td>
+            <td>{{expense.payment}}</td>
+            <td>{{expense.notes}}</td>
+            <td>{{expense.interval}}</td>
+        </tr>
+        <tr ng-repeat="expense in rec_expenses track by $index" ng-if="current_month === expense.only_month && expense.interval === 'Yearly' && current_date < expense.only_date">
+            <td>{{expense.amount}}</td>
+            <td>{{expense.category}}</td>
+            <td>{{expense.payment}}</td>
+            <td>{{expense.notes}}</td>
+            <td>{{expense.interval}}</td>
+        </tr>
+    </table>
+    </div>
+</div>
