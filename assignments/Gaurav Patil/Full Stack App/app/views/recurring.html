@@ -1,0 +1,20 @@
+<div id="recurringShow" ng-controller="controller">
+         <form name="recur_form" ng-submit="addRecurringTransaction()">
+               <b>Recurring Category</b><br>
+               <select ng-model="recur_temp.category"required>
+                  <option value="Income">Income</option>
+                  <option value="Expense">Expense</option>
+               </select><br><br>
+               <b>Recurring Amount</b><br>
+               <input type="text" ng-model="recur_temp.amount"></input><br><br>
+               <b>Recurring Date</b><br>
+               <input type="date" ng-model="recur_temp.date"></input><br><br>
+               <b>Recurring Interval</b><br>
+              <select ng-model="recur_temp.type" required>
+                 <option value="Monthly">Monthly</option>
+                  <option value="Yearly">Yearly</option>
+              </select><br> <br>
+           <input type="submit" class="btn" ng-disabled="recur_form.$invalid" value="Add Recurring">
+         </form>
+
+</div>      

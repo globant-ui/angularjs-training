@@ -1,0 +1,142 @@
+<html ng-app="expensesApp">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body background="display.jpg" style="position:absolute">
+    <div ng-controller="controller">
+        <div id="table">
+            <center>
+                <h2>Expenses Application</h2>
+                <h3>
+                  Total Income :   <span ng-bind="total_income()"></span>
+               </h3>
+                <h3>
+                  Total Expenses :  <span ng-bind="total_exp()"></span>
+               </h3>
+                <h3>
+                  Total Balance :  <span ng-bind="total_bal()"></span>
+               </h3>
+        </div>
+        <p>
+            <div id="table2">
+                <button class="btn" ng-click="in = true">Show/Hide Income</button>
+                <button class="btn" ng-click="in = false">Show/Hide Expenses</button>
+            </div>
+            <br>
+            <form name="myForm" ng-submit="addIncome()">
+                <div id="income">
+                    <b>Income Category</b>
+                    <select id="inc_cat" ng-options="name for name in income_category" ng-model="income_temp.category" required> </select>
+                    <!-- <div ng-show="myForm.inc_cat.$invalid">Please select Income category</div> -->
+                    <br><b> Date </b>
+                    <input type="date" ng-model="income_temp.date" required>
+                    <br>
+                    <b>Income Value</b>
+                    <input name="amount" type="number" ng-pattern="/^\s*(?=.*[0-9])\d*(?:\.\d{1,2})?\s*$/" ng-model="income_temp.value" required>
+                    <br>
+                    <span style="color:red" ng-show="myForm.amount.$error.pattern">Invalid Amount.</span>
+                    <b>Mode of Payment</b>
+                    <select name="inc_mode" ng-options="name for name in income_mode" ng-model="income_temp.mode"></select>
+                    <br>
+                    <input type="submit" class="btn" ng-disabled="myForm.$invalid" value="Add Income">
+                    <br>
+                </div>
+            </form>
+            <br>
+
+            <form name="exp_form" ng-submit="addExpense()">
+                <div id="expense">
+                    <b>Expense Category</b>
+                    <select ng-options="a for a in exp_category" ng-model="exp_temp.category" required></select>
+                    <br>
+                    <b> Date </b>
+                    <input type="date" ng-model="exp_temp.date" required>
+                    <br>
+                    <b> Expense Value </b>
+                    <input type="number" name="amount_exp" ng-pattern="/^\s*(?=.*[0-9])\d*(?:\.\d{1,2})?\s*$/" ng-model="exp_temp.value" required>
+                    <br>
+                    
+                    <span style="color:red" ng-show="exp_form.amount_exp.$error.pattern">Invalid Amount.</span>
+                    <b> Payee</b>
+                    <input type="text" ng-model="exp_temp.payee">
+                    <br>
+                    <input type="submit" class="btn" ng-disabled="exp_form.$invalid" value="Add Expense">
+                </div>
+            </form>
+            <br>
+            <br>
+            <table class="datagrid" align="center" ng-show="in" width="900">
+                <td><b>Income Type</b>
+                </td>
+                <td><b>Value</b>
+                </td>
+                <td><b>Date</b>
+                </td>
+                <td><b>Mode</b>
+                </td>
+                <td><b>Edit Type</b>
+                </td>
+                <td><b>Delete</b>
+                </td>
+                <tr ng-repeat="x in income_array">
+                    <td><b><span ng-bind="x.category"></span></b>
+                    </td>
+                    <td><b><span ng-bind="x.value"></span></b>
+                    </td>
+                    <td><b>{{x.date | date:"MM/dd/yyyy 'at' h:mma"}}</b>
+                    </td>
+                    <td><b><span ng-bind="x.mode"></span></b>
+                    </td>
+                    <td>
+                        <button class="btn" ng-click="editIncome($index)">Edit</button>
+                    </td>
+                    <td>
+                        <button class="btn" ng-click="deleteIncome()">Delete</button>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <table class="datagrid" align="center" ng-show="!in" width="900">
+                <td><b>Expenses Type</b>
+                </td>
+                <td><b>Value</b>
+                </td>
+                <td><b>Date</b>
+                </td>
+                <td><b>Payee</b>
+                </td>
+                <td><b>Edit</b>
+                </td>
+                <td><b>Delete</b>
+                </td>
+                <tr ng-repeat="x in exp_array">
+                    <td><b><span ng-bind="x.category"></b>
+                        </span>
+                    </td>
+                    <td><b><span ng-bind="x.value"></b>
+                        </span>
+                    </td>
+                    <td><b>
+         {{x.date | date:"MM/dd/yyyy 'at' h:mma"}}</b>
+                    </td>
+                    <td><b><span ng-bind="x.payee"></b>
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn" ng-click="editExpense($index)">Edit</button>
+                    </td>
+                    <td>
+                        <button class="btn" ng-click="deleteExpense()">Delete</button>
+                    </td>
+                </tr>
+            </table>
+    </div>
+    </center>
+    </p>
+    <script src="controller.js"></script>
+</body>
+
+</html>
