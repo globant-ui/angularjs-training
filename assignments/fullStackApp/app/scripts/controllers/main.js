@@ -14,6 +14,10 @@ angular.module('myApp').controller('MainCtrl',function($scope,updateService) {
   $scope.user = {};
   $scope.master = {};
 
+    /**
+    Function to update income record
+    @param: user record object to update
+    */
     $scope.updateIncome = function(user) {
         console.log("update income"+$scope.userForm.$valid);
         var isUpdateIncome = true;
@@ -21,13 +25,21 @@ angular.module('myApp').controller('MainCtrl',function($scope,updateService) {
             updateService.update(isUpdateIncome,user);
             console.log("reset");
             $scope.reset();
+        }else {
+          alert("Form is invalid");
         }
     }
 
+    /**
+    Function to update expense record
+    @param: user record object to update
+    */
     $scope.updateExpense = function(user) {
         if($scope.userForm.$valid) {
             updateService.update(false,user);
             $scope.reset();
+        } else {
+          alert("Form is invalid");
         }
     }
 
@@ -37,13 +49,16 @@ angular.module('myApp').controller('MainCtrl',function($scope,updateService) {
         console.log("form submit called");
     }
 
+    /**
+    Function to reset form fields
+    */
     $scope.reset = function() {
         $scope.user = angular.copy($scope.master);
     };
- /*Created expenses array*/
+ /*Service call to get expense records*/
   $scope.expenses = updateService.getExpenseRecords();
   
-  /*Created income array*/
+  /*Service call to get income records*/
   $scope.incomes = updateService.getIncomeRecords();
 });
 
