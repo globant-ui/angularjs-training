@@ -6,7 +6,7 @@
 'use strict';
 
 angular.module('myApp')
-    .factory('updateService', function () {
+    .factory('updateService', ['$location',function ($location) {
 
         var expenseRecords = [
     {
@@ -100,25 +100,45 @@ angular.module('myApp')
     noteType:"income"
   }];
 
-        var updateService = {
-/*Get expense record array service*/
+  var isRecordExist = function(array,user){
+                    for(var i = 0; i < array.length; i++) {
+                    if(user.transactionId == array[i].transactionId) {
+                        array[i] = user;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                 }
+            }
+
+    var updateService = {
+            /*Get expense record array service*/
             getExpenseRecords:function(){
 
                 return expenseRecords;
             },
-/*Get Income record array service*/
- getIncomeRecords:function(){
+
+            /*Get Income record array service*/
+             getIncomeRecords:function(){
 
                 return incomeRecords;
             },
+            /*Update record array service*/
             update:function(isUpdateIncome,user){
                 console.log("update service called");
                 if(isUpdateIncome) {
-                    incomeRecords.push(user);
+                    if(!isRecordExist(incomeRecords,user)){
+                        incomeRecords.push(user);
+                    }
+                    $location.path('/incomeDetails');
                 } else {
-                    expenseRecords.push(user);
+                    if(!isRecordExist(expenseRecords,user)){
+                        expenseRecords.push(user);
+                    }
+                    $location.path('/expenseDetails');
                 }
             },
+            /*Delete record array service*/
             delete:function(records,record){
                 console.log("delete service called");
                 var index = -1;
@@ -131,4 +151,4 @@ angular.module('myApp')
             }
         };
         return updateService;
-    });
+    }]);
