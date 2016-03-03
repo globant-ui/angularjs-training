@@ -6,15 +6,15 @@
 'use strict';
 
 angular.module('myApp')
-    .factory('updateService', ['$location','$rootScope',function ($location,$rootScope) {
+    .factory('updateService', ['$location','$rootScope','$http',function ($location,$rootScope,$http) {
 
         var expenseRecords = [
     {
     transactionId:1,
     payer:"vijay",
     payee:"abc",
-    category:"payement",
-    subCategory:"subcategory",
+    category:"category1",
+    subCategory:"subcategory1",
     amount:"200",
     date:"5-9-2015",
     modeOfPayment:"online",
@@ -24,8 +24,8 @@ angular.module('myApp')
     transactionId:2,
     payer:"ajay",
     payee:"abc",
-    category:"payement",
-    subCategory:"subcategory",
+    category:"category1",
+    subCategory:"subcategory1",
     amount:"180",
     date:"8-1-2016",
     modeOfPayment:"cash",
@@ -35,8 +35,8 @@ angular.module('myApp')
     transactionId:3,
     payer:"ramesh",
     payee:"abc",
-    category:"payement",
-    subCategory:"subcategory",
+    category:"category1",
+    subCategory:"subcategory1",
     amount:"200",
     date:"1-1-2016",
     modeOfPayment:"cash",
@@ -46,8 +46,8 @@ angular.module('myApp')
     transactionId:4,
     payer:"umesh",
     payee:"airtel",
-    category:"payement",
-    subCategory:"subcategory",
+    category:"category1",
+    subCategory:"subcategory1",
     amount:"180",
     date:"1-8-2015",
     modeOfPayment:"cash",
@@ -59,8 +59,8 @@ angular.module('myApp')
     transactionId:1,
     payer:"vijay",
     payee:"company name",
-    category:"payement",
-    subCategory:"subcategory",
+    category:"category1",
+    subCategory:"subcategory1",
     amount:"2000",
     date:"1-2-2016",
     modeOfPayment:"online credit",
@@ -70,7 +70,7 @@ angular.module('myApp')
     transactionId:2,
     payer:"ajay",
     payee:"abc",
-    category:"payement2",
+    category:"category1",
     subCategory:"subcategory1",
     amount:"1000",
     date:"8-9-2016",
@@ -81,8 +81,8 @@ angular.module('myApp')
     transactionId:3,
     payer:"ramesh",
     payee:"abc",
-    category:"payement",
-    subCategory:"subcategory",
+    category:"category1",
+    subCategory:"subcategory1",
     amount:"2000",
     date:"1-1-2016",
     modeOfPayment:"cash",
@@ -92,8 +92,8 @@ angular.module('myApp')
     transactionId:4,
     payer:"umesh",
     payee:"abc",
-    category:"payement",
-    subCategory:"subcategory",
+    category:"category1",
+    subCategory:"subcategory1",
     amount:"5000",
     date:"9-1-2015",
     modeOfPayment:"cash",
@@ -157,7 +157,20 @@ angular.module('myApp')
                 }
                 
                 
-            }
+            },
+
+            listIncome : function(){
+            //var self = this;
+            return $http({
+                        method: 'GET',
+                        url: 'http://demo1468896.mockable.io/income'
+                }).then(function successCallback(response){
+                    console.log(response);
+
+                }, function errorCallback(error){
+                    console.log("error");
+                });
+        }
         };
         return updateService;
     }]);

@@ -1,4 +1,4 @@
-angular.module('myApp').controller('ExpenseDetailsCtrl',function($scope,$ngBootbox,updateService,PopupService) {
+angular.module('myApp').controller('ExpenseDetailsCtrl',function($scope,$ngBootbox,$rootScope,$location,$timeout,updateService,PopupService) {
   $scope.user = {};
   $scope.master = {};
   
@@ -7,6 +7,8 @@ angular.module('myApp').controller('ExpenseDetailsCtrl',function($scope,$ngBootb
   
   /*Created income array*/
   $scope.incomes = updateService.getIncomeRecords();
+
+  updateService.listIncome();
 
   $scope.deleteExpenseRecord = function(expense) {
     	
@@ -19,6 +21,18 @@ angular.module('myApp').controller('ExpenseDetailsCtrl',function($scope,$ngBootb
       $ngBootbox.customDialog(popupOption);
         
     }
+
+  $scope.editExpenseRecord = function(expense) {
+    console.log("broadcasted");
+    
+    $location.path('/addDetails');
+
+    $timeout(function() {
+      $rootScope.$broadcast('record edited', expense);
+        console.log('update with timeout fired')
+    }, 300);
+    
+  }  
 });
 
 

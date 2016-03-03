@@ -65,6 +65,19 @@ angular.module('myApp').controller('MainCtrl',function($scope,updateService) {
   
   /*Service call to get income records*/
   $scope.incomes = updateService.getIncomeRecords();
+
+  $scope.$on('record edited',function(event,expense){
+    
+      $scope.user.transactionId = expense.transactionId;
+      $scope.user.category = expense.category;
+      $scope.user.subCategory = expense.subCategory;
+      $scope.user.amount = parseInt(expense.amount);
+      $scope.user.modeOfPayment = expense.modeOfPayment;
+      $scope.user.date = expense.date;
+      $scope.user.payer = expense.payer;
+      $scope.user.payee = expense.payee;
+      $scope.user.noteType = expense.noteType;
+    });
 });
 
 

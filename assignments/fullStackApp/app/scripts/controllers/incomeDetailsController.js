@@ -12,7 +12,7 @@
 /**
 Defined income details controller
 */
-angular.module('myApp').controller('IncomeDetailsCtrl',function($scope,$ngBootbox,updateService,PopupService) {
+angular.module('myApp').controller('IncomeDetailsCtrl',function($scope,$ngBootbox,$rootScope,$location,$timeout,updateService,PopupService) {
   $scope.user = {};
   $scope.master = {};
   
@@ -40,6 +40,18 @@ angular.module('myApp').controller('IncomeDetailsCtrl',function($scope,$ngBootbo
       $ngBootbox.customDialog(popupOption);
         
     }
+
+    $scope.editIncomeRecord = function(income) {
+    console.log("broadcasted");
+    
+    $location.path('/addDetails');
+
+    $timeout(function() {
+      $rootScope.$broadcast('record edited', income);
+        console.log('update with timeout fired')
+    }, 300);
+    
+  }  
     
 });
 

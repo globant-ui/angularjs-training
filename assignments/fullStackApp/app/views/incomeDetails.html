@@ -25,7 +25,10 @@
     <td>{{income.date}}</td>
     <td>{{income.modeOfPayment}}</td>
     <td>{{income.noteType}}</td>
-    <td><button class="btn btn-danger" ng-click = "deleteIncomeRecord(income)">Delete</button></td>
+    <td>
+        <button class="btn btn-danger" ng-click = "deleteIncomeRecord(income)">Delete</button>
+        <button class="btn btn-info" ng-click = "editIncomeRecord(income)">EDIT</button>
+    </td>
   </tr>
 </table>
 </div>
