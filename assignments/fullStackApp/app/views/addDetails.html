@@ -1,41 +1,40 @@
 <h1>Add Details</h1>
 
-<form class="form-horizontal form-group" role="form" name="userForm" ng-submit="submitForm()" novalidate>
+<form class="form-horizontal form-group" role="form" name="userForm" ng-submit="submitForm()" align="center" novalidate>
 
       <label class="control-label idField">ID: </label>
       <input  name = "id" style="margin-top: 10px" type="number" ng-model="user.transactionId" required />
-      <span ng-show="userForm.id.$dirty && userForm.id.$error.required">This field is Required</span><br />
+      <span class = "errorClass" ng-show="userForm.id.$dirty && userForm.id.$error.required">This field is Required</span><br />
 
       <label class="control-label">Payer: </label>
       <input name = "payer" style="margin-top: 10px" type="text" ng-model="user.payer" required/>
-      <span ng-show="userForm.payer.$dirty && userForm.payer.$error.required">This field is Required</span><br />
+      <span class = "errorClass" ng-show="userForm.payer.$dirty && userForm.payer.$error.required">This field is Required</span><br />
 
       <label class="control-label">Payee: </label>
       <input name="payee" style="margin-top: 10px" type="text" ng-model="user.payee" required />
-      <span ng-show="userForm.payee.$dirty && userForm.payee.$error.required">This field is Required</span><br />
+      <span  class = "errorClass" ng-show="userForm.payee.$dirty && userForm.payee.$error.required">This field is Required</span><br />
 
       <label class="control-label categoryField">Category: </label>
       <select name = "category" style="margin-top: 10px" ng-model="user.category" required>
           <option value="category1">Category1</option>
           <option value="category2">Category2</option>
       </select>
-      <span ng-show="userForm.category.$dirty && userForm.category.$error.required">This field is Required</span><br />
+      <span  class = "errorClass" ng-show="userForm.category.$dirty && userForm.category.$error.required">This field is Required</span><br />
 
       <label class="control-label subcategoryField">Subcategory: </label>
       <select name = "subcategory" style="margin-top: 10px" ng-model="user.subCategory" required>
           <option value="subcategory1">Sub category1</option>
           <option value="subcategory2">Sub category2</option>
       </select>
-      <span ng-show="userForm.subcategory.$dirty && userForm.subcategory.$error.required">This field is Required</span><br />
+      <span  class = "errorClass" ng-show="userForm.subcategory.$dirty && userForm.subcategory.$error.required">This field is Required</span><br />
 
       <label class="control-label amountField">Amount: </label>
-      <input  style="margin-top: 10px" type="number" name = "amount"  ng-model="user.amount" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required/><br />
-      <span ng-show = "!userForm.amount.$valid" class="error-block" >Invalid amount! </span>
-      <span ng-show="userForm.amount.$dirty && userForm.amount.$error.required">This field is Required</span><br/>
+      <input  style="margin-top: 10px" type="number" name = "amount"  ng-model="user.amount" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required/>
+      <span  class = "errorClass" ng-show = "!userForm.amount.$valid">Invalid amount! </span><br />
 
       <label class="control-label dateField">Date: </label>
-      <input name = "date" style="margin-top: 10px" type="datetime-local" ng-model="user.date" placeholder="yyyy-MM-ddTHH:mm:ss" min="2001-01-01T00:00:00" max="2016-12-31T00:00:00" required />
-      <span ng-show="userForm.date.$dirty && userForm.date.$error.required">This field is Required</span><br />
+      <input name = "date" style="margin-top: 10px" type="shortDate" ng-model="user.date" placeholder="yyyy-MM-dd" required />
+      <span class = "errorClass" ng-show="userForm.date.$dirty && userForm.date.$error.required">This field is Required</span><br />
 
       <label class="control-label mopField">Mode of payement: </label>
       <select name="mop" style="margin-top: 10px" ng-model="user.modeOfPayment" required>
@@ -44,14 +43,15 @@
           <option value="cheque">cheque</option>
           <option value="credit_card">Credit card</option>
       </select>
-      <span ng-show="userForm.mop.$dirty && userForm.mop.$error.required">This field is Required</span><br />
+      <span class = "errorClass" ng-show="userForm.mop.$dirty && userForm.mop.$error.required">This field is Required</span><br />
 
       <label class="control-label noteTypeField">Note type: </label>
       <input name = "noteType" style="margin-top: 10px" type="text" ng-model="user.noteType" ng-maxlength="20" required/><br />
-      <p ng-show="userForm.noteType.$error.maxlength" class="error-block">Note type exceed 20 char limit</p>
+      <p class = "errorClass" ng-show="userForm.noteType.$error.maxlength" class="error-block">Note type exceed 20 char limit</p>
+      <span class = "errorClass" ng-show="userForm.noteType.$dirty && userForm.noteType.$error.required">This field is Required</span><br />
       <input style="margin-top: 10px" type="button" class="btn btn-success" ng-click="reset()" value="Reset" />
-      <input style="margin-top: 10px" type="submit" class="btn btn-success" ng-click="updateIncome(user)" value="Save to Income" />
-      <input style="margin-top: 10px" type="submit" class="btn btn-success" ng-click="updateExpense(user)" value="Save to Expense" />
-      <span ng-show="userForm.noteType.$dirty && userForm.noteType.$error.required">This field is Required</span><br />
+      <input ng-disabled="userForm.$invalid" style="margin-top: 10px" type="submit" class="btn btn-success" ng-click="updateIncome(user)" value="Save to Income" />
+      <input ng-disabled="userForm.$invalid" style="margin-top: 10px" type="submit" class="btn btn-success" ng-click="updateExpense(user)" value="Save to Expense" />
+      
 
   </form>

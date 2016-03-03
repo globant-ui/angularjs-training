@@ -14,6 +14,11 @@ angular.module('myApp').controller('MainCtrl',function($scope,updateService) {
   $scope.user = {};
   $scope.master = {};
 
+  /*Default selection*/
+  $scope.user.category = "category1";
+  $scope.user.subCategory = "subcategory1";
+  $scope.user.amount = 0;
+  $scope.user.modeOfPayment = "cash";
     /**
     Function to update income record
     @param: user record object to update
@@ -39,7 +44,7 @@ angular.module('myApp').controller('MainCtrl',function($scope,updateService) {
             updateService.update(false,user);
             $scope.reset();
         } else {
-          alert("Form is invalid");
+          alert("Form is invalid ");
         }
     }
 

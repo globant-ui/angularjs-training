@@ -6,7 +6,7 @@
 'use strict';
 
 angular.module('myApp')
-    .factory('updateService', ['$location',function ($location) {
+    .factory('updateService', ['$location','$rootScope',function ($location,$rootScope) {
 
         var expenseRecords = [
     {
@@ -125,6 +125,7 @@ angular.module('myApp')
             },
             /*Update record array service*/
             update:function(isUpdateIncome,user){
+                
                 console.log("update service called");
                 if(isUpdateIncome) {
                     if(!isRecordExist(incomeRecords,user)){
@@ -137,6 +138,8 @@ angular.module('myApp')
                     }
                     $location.path('/expenseDetails');
                 }
+
+                $rootScope.$broadcast('update found');
             },
             /*Delete record array service*/
             delete:function(records,record){
@@ -144,10 +147,16 @@ angular.module('myApp')
                 var index = -1;
                 for(var i = 0; i < records.length; i++) {
                     if(record.transactionId == records[i].transactionId) {
+                        console.log("record found");
                         index = i;
+                        records.splice(index,1);
+                        console.log("record deleted");
+                        $rootScope.$broadcast('update found');
+                        break;
                     }
                 }
-                records.splice(index,1);
+                
+                
             }
         };
         return updateService;
