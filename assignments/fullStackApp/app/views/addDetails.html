@@ -3,7 +3,7 @@
 <form class="form-horizontal form-group" role="form" name="userForm" ng-submit="submitForm()" align="center" novalidate>
 
       <label class="control-label idField">ID: </label>
-      <input  name = "id" style="margin-top: 10px" type="number" ng-model="user.transactionId" required />
+      <input  name = "id" style="margin-top: 10px" type="number" ng-model="user.transactionId" min = "0" required />
       <span class = "errorClass" ng-show="userForm.id.$dirty && userForm.id.$error.required">This field is Required</span><br />
 
       <label class="control-label">Payer: </label>
@@ -53,5 +53,4 @@
       <input ng-disabled="userForm.$invalid" style="margin-top: 10px" type="submit" class="btn btn-success" ng-click="updateIncome(user)" value="Save to Income" />
       <input ng-disabled="userForm.$invalid" style="margin-top: 10px" type="submit" class="btn btn-success" ng-click="updateExpense(user)" value="Save to Expense" />
       
-
   </form>
