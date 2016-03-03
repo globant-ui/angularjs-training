@@ -1,0 +1,22 @@
+<div>
+    <h1>
+      Dashboard
+    </h1>
+</div>
+
+<table  style=" margin-left:20px;" border="1">
+    
+        <tr>
+            <th>Total Income</th>
+            <th>Total Expense</th>
+            <th>Total Balance</th>
+        </tr>
+    
+    
+        <tr>
+            <td ng-bind="incomeTotal"></td>
+            <td ng-bind="expenseTotal"></td>
+            <td ng-bind="incomeTotal - expenseTotal"></td>
+        </tr>
+   
+</table>
