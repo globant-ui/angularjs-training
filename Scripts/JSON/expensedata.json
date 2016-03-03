@@ -7,7 +7,7 @@
         "category": "Movie",
         "amount": 2000,
         "date": "15-10-2015",
-        "modeOfPayment": "online"
+        "modeofpayment": "online"
 
   },
     {
@@ -16,8 +16,8 @@
         "payee": "rocky",
         "category": "Shopping",
         "amount": 1000,
-        "date": "18-1-2016",
-        "modeOfPayment": "cash"
+        "date": "18-01-2016",
+        "modeofpayment": "cash"
 
    },
     {
@@ -26,8 +26,8 @@
         "payee": "robb",
         "category": "Entertainment",
         "amount": 2000,
-        "date": "11-1-2016",
-        "modeOfPayment": "cash"
+        "date": "11-01-2016",
+        "modeofpayment": "cash"
 
   }
 ]

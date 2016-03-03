@@ -20,8 +20,8 @@
                 <td>{{list.payee}}</td>
                 <td>{{list.category}}</td>
                 <td>{{list.amount}}</td>
-                <td>{{list.date}}</td>
-                <td>{{list.modeOfPayment}}</td>
+                <td>{{list.date | date:'dd-MM-yyyy'}}</td>
+                <td>{{list.modeofpayment}}</td>
                 <td>
                     <button ng-click="compose(list)">Edit</button>
                 </td>
@@ -87,7 +87,7 @@
               <label> Category</label>
             </td>
             <td>
-              <input type="text"  name="categorytype" ng-model="expDetails.categorytype" placeholder="Enter Category Type...!" required/>
+              <input type="text"  name="categorytype" ng-model="expDetails.category" placeholder="Enter Category Type...!" required/>
             </td>
             <td>
               <span ng-show="expensedetailForm.categorytype.$error.required && expensedetailForm.categorytype.$dirty">Category required</span>
@@ -112,8 +112,9 @@
               <label> Date</label>
             </td>
             <td>
+               <input type="date"   ng-model="expDetails.date" placeholder="10-09-15" required> 
+              <!--<input type="text" ng-model="expDetails.date" placeholder="10-09-15" required> -->  
               
-              <input type="text" ng-model="expDetails.date" placeholder="10-09-15" required>
             </td>
             <td>
               <span ng-show="expensedetailForm.dates.$error.required  && expensedetailForm.dates.$dirty">Date required</span>
@@ -136,7 +137,7 @@
           
            <tr>
             <td>
-              <button type="submit" ng-click="addExpense(expDetails);" ng-disabled="expensedetailForm.$pristine || expensedetailForm.$dirty && expensedetailForm.$invalid">Add Income</button>
+              <button type="submit" ng-click="addExpense(expDetails);" ng-disabled="expensedetailForm.$pristine || expensedetailForm.$dirty && expensedetailForm.$invalid">Add Expense</button>
             </td>
             
            </tr>
@@ -198,7 +199,7 @@
               <label> Category</label>
             </td>
             <td>
-                <input type="text"  name="categorytype" ng-model="expDetailsEdit.categorytype" placeholder="Enter Category Type...!" required/>
+                <input type="text"  name="categorytype" ng-model="expDetailsEdit.category" placeholder="Enter Category Type...!" required/>
               
             </td>
             <td>
@@ -224,7 +225,9 @@
               <label> Date</label>
             </td>
             <td>
-              <input type="text" ng-model="expDetailsEdit.date" placeholder="10-09-15" required>        
+               <!-- <input type="text"   ng-model="expDetailsEdit.date" placeholder="10-09-15" required> -->
+              <input type="date" ng-model="expDetailsEdit.date" placeholder="10-09-15" required>        
+                   
             
             </td>
             <td>
@@ -247,7 +250,7 @@
           
            <tr>
             <td>
-              <button type="submit" ng-click="saveComposition();" >Save Income</button>
+              <button type="submit" ng-click="saveComposition();" >Save Expense</button>
             </td>
             
            </tr>

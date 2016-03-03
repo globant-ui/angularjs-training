@@ -14,14 +14,12 @@
                          
                          ];
     
-    $scope.addNotification = function (notifyData) {
-        
-        console.log("hello");
+    $scope.addNotification = function (notifyData) { 
                 console.log(notifyData);
         
                 $scope.notifyArray.push(notifyData);
                 $scope.notifyData = {};
-                console.log(notifyArray);
+                console.log($scope.notifyArray);
                 
                
             }
@@ -30,15 +28,3 @@
 
 
 
-app.directive("notification", function(){
-    console.log("Inside Directive ... ");
-    return {       
-        restrict:"E",
-        require: '^ngModel',
-        scope: {
-                data:'='
-                },
-
-        templateUrl:"views/notification.html"
-    }
-});

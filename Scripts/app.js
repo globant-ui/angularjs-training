@@ -26,3 +26,14 @@ app.config(['$routeProvider', function($routeProvider) {
         redirectTo: '/Views/Dashboard.html'
       });
   }]);
+
+
+app.directive("notification", function(){  
+    return {       
+        restrict:'E', 
+        scope: {
+                data:'='
+                },
+        templateUrl:"views/notification.html" 
+    }
+});

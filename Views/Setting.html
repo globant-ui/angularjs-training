@@ -17,7 +17,9 @@
                       <option value="Maintenance">Maintenance</option>
                   </select>
             </td>
-            
+            <td>
+              <span ng-show="settingForm.category.$error.required && settingForm.category.$dirty">category required</span>
+            </td>
            </tr>
                  
          
@@ -38,7 +40,9 @@
                       <option value="Vehicle">Vehicle</option>
                   </select>
             </td>
-            
+            <td>
+              <span ng-show="settingForm.subcat.$error.required && settingForm.subcat.$dirty">SubCategory required</span>
+            </td>
            </tr>            
                        
                 
@@ -54,7 +58,9 @@
                       <option value="expense">Expense</option>
                   </select>
             </td>
-            
+            <td>
+              <span ng-show="settingForm.transtype.$error.required && settingForm.transtype.$dirty">Transaction Type required</span>
+            </td>
            </tr>             
                                 
                
@@ -69,13 +75,15 @@
                       <option value="Yearly">Yearly</option>
                   </select>
             </td>
-            
+            <td>
+              <span ng-show="settingForm.reccur.$error.required && settingForm.reccur.$dirty">Recurring Type required</span>
+            </td>
            </tr>   
          
              
           <tr>
             <td>
-              <button type="submit" ng-click="addNotification(notify);">Add Income</button>
+              <button type="submit" ng-click="addNotification(notify)"  ng-disabled="settingForm.$pristine || settingForm.$dirty && settingForm.$invalid">Add Income</button>
             </td>
             
            </tr>

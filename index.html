@@ -8,7 +8,8 @@
    
 
    
-    <div ng-app="myApp" ng-controller="DashboardCtrl" >
+    <div ng-app="myApp"  >
+        <div ng-controller="DashboardCtrl"> 
         <table style=" margin-left:20px; padding:10px; width:700px;"   >
             <tr>
         <th><p><a href = "#dashboard">Expanse Manager</a></p></th>
@@ -22,12 +23,12 @@
            
            
        </div>
-         <div  ng-controller="settingCtrl">
-                
-                    <notification  data="notifyArray"></notification>
-                
-            </div>
-        
+      </div>
+       
+        <div ng-controller="settingCtrl"> 
+        <notification  data="notifyArray"></notification>
+       
+    </div>
     </div>
      
   </body>
