@@ -46,7 +46,7 @@
       <span class = "errorClass" ng-show="userForm.mop.$dirty && userForm.mop.$error.required">This field is Required</span><br />
 
       <label class="control-label noteTypeField">Note type: </label>
-      <input name = "noteType" style="margin-top: 10px" type="text" ng-model="user.noteType" ng-maxlength="20" required/><br />
+      <input name = "noteType" style="margin-top: 10px; margin-left: 4%;" type="text" ng-model="user.noteType" ng-maxlength="20" required/><br />
       <p class = "errorClass" ng-show="userForm.noteType.$error.maxlength" class="error-block">Note type exceed 20 char limit</p>
       <span class = "errorClass" ng-show="userForm.noteType.$dirty && userForm.noteType.$error.required">This field is Required</span><br />
       <input style="margin-top: 10px" type="button" class="btn btn-success" ng-click="reset()" value="Reset" />
