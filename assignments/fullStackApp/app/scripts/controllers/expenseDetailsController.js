@@ -33,6 +33,10 @@ angular.module('myApp').controller('ExpenseDetailsCtrl',function($scope,$ngBootb
     }, 300);
     
   }  
+
+  $scope.$watch($scope.searchText, function(newValue,oldValue){
+    
+  });
 });
 
 
