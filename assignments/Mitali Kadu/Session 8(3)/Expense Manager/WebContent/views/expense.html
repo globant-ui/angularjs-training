@@ -1,0 +1,101 @@
+<!-- Input table for expenses -->
+<p class="tabs">Total income : <span ng-bind="total_income"></span></p>
+<p class="tabs">Total expense : <span ng-bind="total_expense"></span></p>
+<p class="tabs">Total balance : <span ng-bind="total_balance"></span></p>
+<p class="block_letters">Add expenses</p>
+<form name="expense_form">
+    <table class="input_tables">
+        <tr>
+            <td>Payer</td>
+            <td><input type="text" name="" placeholder="Enter the payer" ng-model="temp.payer" required></td>
+        </tr>
+        <tr>
+            <td>Payee</td>
+            <td><input type="text" name="" placeholder="Enter the payee" ng-model="temp.payee" required></td>
+        </tr>
+
+
+        <tr>
+            <td>Enter the amount :</td>
+            <td><input type="number" name="expense_amount" ng-pattern="/^([^-]?[0-9]*(\.[0-9]([0-9])?)?)$/" placeholder="Enter the expense" ng-model="temp.amount" min="0.01">
+                <span ng-show="!temp.amount" class="error_msg">*</span>
+            <span ng-messages="expense_form.expense_amount.$error" class="error_msg">
+            <span ng-message="pattern">Enter only positive numbers upto 2 decimals</span>
+            </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Category :</td>
+            <td>
+                <select name="expense" ng-model="temp.category">
+                    <option value="">-- select --</option>
+                    <option>Rent</option>
+                    <option>Travel</option>
+                    <option>Party</option>
+                    <option>Office</option>
+                    <option>Study</option>
+                    <option>Shopping</option>
+                </select>
+                <span ng-show="!temp.category" class="error_msg">*</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Mode of payment :</td>
+            <td>
+                <select name="mode_of_payment" ng-model="temp.payment">
+                    <option value="">------ select ------</option>
+                    <option>Credit Card</option>
+                    <option>Cash</option>
+                    <option>Electronic transfer</option>
+                </select>
+                <span ng-show="!temp.payment" class="error_msg">*</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Date :</td>
+            <td><input type="datetime-local" name="date" ng-model="temp.date"/>
+                <span ng-show="!temp.date" class="error_msg">*</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Notes :</td>
+            <td><input type="text" name="expense_notes" ng-model="temp.notes" ng-maxlength="20"/>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="button" value="Add"
+                       ng-disabled="!temp.date || !temp.amount || !temp.category || !temp.payment"
+                       ng-click="add_expense()"
+                       style="width: 120px;"></td>
+            <td><input type="button" value="Expense Table" ng-click="show_expense()"
+                       style="width: 120px;"></td>
+        </tr>
+    </table>
+</form>
+<div ng-show="expense_table">
+    <p class="block_letters" style="width:100%;">Expense Table</p>
+    <table style="width : 80%" id="report">
+        <tr>
+            <th>Date</th>
+            <th>Payer</th>
+            <th>Payee</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Mode of Payment</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Notes</th>
+        </tr>
+        <tr ng-repeat="expense in expenses track by $index">
+            <td>{{expense.date | date: 'yyyy-MM-dd (HH:mm)'}}</td>
+            <td>{{expense.payer}}</td>
+            <td>{{expense.payee}}</td>
+            <td>{{expense.amount}}</td>
+            <td>{{expense.category}}</td>
+            <td>{{expense.payment}}</td>
+            <td><input type="button" ng-click="edit_expense_form($index)" value = "Edit" /></td>
+            <td><input type="button" ng-click="delete_expense_form($index)" value = "Delete" /></td>
+            <td>{{expense.notes}}</td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,77 @@
+<p class="tabs">Total income : <span ng-bind="total_income"></span></p>
+<p class="tabs">Total expense : <span ng-bind="total_expense"></span></p>
+<p class="tabs">Total balance : <span ng-bind="total_balance"></span></p>
+<form name="income_form" novalidate>
+    <p class="block_letters">Add income</p>
+    <!-- Input table for income -->
+    <table class="input_tables">
+        <tr>
+            <td>Payer</td>
+            <td><input type="text" name="" placeholder="Enter the payer" ng-model="temp_2.payer" required></td>
+        </tr>
+        <tr>
+            <td>Payee</td>
+            <td><input type="text" name="" placeholder="Enter the payee" ng-model="temp_2.payee" required></td>
+        </tr>
+
+        <tr>
+            <td>Enter the amount :</td>
+            <td><input type="number" name="income_amount" ng-pattern="/^([^-]?[0-9]*(\.[0-9]([0-9])?)?)$/" placeholder="Enter the income" ng-model="temp_2.amount" required>
+                <span ng-show="!temp_2.amount" class="error_msg">*</span>
+            <span ng-messages="income_form.income_amount.$error" class="error_msg">
+            <span ng-message="pattern">Enter only positive numbers upto 2 decimals</span>
+            </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Income Type :</td>
+            <td>
+                <select name="income" ng-model="temp_2.type">
+                    <option value="">-- select --</option>
+                    <option>Salary</option>
+                    <option>Business</option>
+                    <option>interest</option>
+                </select>
+                <span ng-show="!temp_2.type" class="error_msg">*</span>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Add" ng-disabled="!temp_2.type || !temp_2.amount"
+                       ng-click="add_income()"
+                       style="width: 100px;"></td>
+            <td>
+                <input type="button" value="Income Table" ng-click="show_income()"
+                       style="width: 100px;">
+            </td>
+        </tr>
+    </table>
+</form>
+<div ng-show="income_table">
+    <p class="block_letters" style="width:100%;">Income Table</p>
+    <table style="width : 50%;" id="report">
+        <tr>
+            <th>Payer</th>
+            <th>Payee</th>
+            <th>Income Amount</th>
+            <th>Income Source</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr ng-repeat="income in incomes track by $index">
+            <td border: 1px solid black;>
+                {{income.payer}}
+            </td>
+            <td border: 1px solid black;>
+                {{income.payee}}
+            </td><td border: 1px solid black;>
+                {{income.amount}}
+            </td>
+            <td border: 1px solid black;>
+                {{income.type}}
+            </td>
+            <td><input type="button" ng-click="edit_income_form($index)" value = "Edit" /></td>
+            <td><input type="button" ng-click="delete_income_form($index)" value = "Delete" /></td>
+        </tr>
+        </tr>
+    </table>
+</div>
