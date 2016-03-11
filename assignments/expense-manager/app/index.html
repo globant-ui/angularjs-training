@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+
+<script type="text/javascript" src="lib/angular/angular.js"></script>
+<script type="text/javascript" src="lib/angular/angular-route.js"></script>
+<script type="text/javascript" src="lib/dialog/ngDialog.js"></script>
+
+
+<script type="text/javascript" src="scripts/controllers/myapp.js"></script>
+<script type="text/javascript" src="scripts/controllers/mainController.js"></script>
+<script type="text/javascript" src="scripts/controllers/reportController.js"></script>
+<script type="text/javascript" src="scripts/controllers/showIncomeExpenseController.js"></script>
+<script type="text/javascript" src="scripts/controllers/addIncomeExpenseController.js"></script>
+<script type="text/javascript" src="scripts/controllers/manipulateIncomeExpenseController.js"></script>
+
+
+
+<script type="text/javascript" src="scripts/services/CRUD.js"></script>
+<script type="text/javascript" src="scripts/directives/expenseManagerNotificationDirective.js"></script>
+
+
+<link rel="stylesheet" href="styles/expenseManagerStyle.css">
+
+<link rel="stylesheet" href="styles/dialog/ngDialog.css">
+<link rel="stylesheet" href="styles/dialog/ngDialog-theme-default.css">
+
+</head>
+<body novalidate>
+<center>
+<div ng-app="expenseManagerApp" style="width:1000px" class= "panel panel-default">
+	<div class="panel-heading text-center"><h2>Expense Manager Application</h2> </div>
+	<div ng-controller="mainController">
+		<table class="table table-stripped" style="width:1000px">
+			<tr>
+				<th class="text-center">Total Income</th>
+				<th class="text-center">Total Expenses</th>
+				<th class="text-center">Total Balance</th>	
+			</tr>
+			<tr>
+				<td class="text-center">{{totalIncome}}</td>
+				<td class="text-center">{{totalExpense}}</td>
+				<td class="text-center">{{balance}}</td>
+			</tr>
+		</table>
+		
+  		<nav class="navbar navbar-default">
+		  <ul class="nav nav-pills nav-justified">
+		      <li><a href="#/showIncomeExpenseDetails/income" class="view">View Income</a>
+			  </li>
+		      <li ><a href="#/showIncomeExpenseDetails/expense" class="view">View Expenses</a></li>
+		      <li><a href="#/addIncomeExpenseDetails/income" class="view add">Add Income</a></li>
+		      <li><a href="#/addIncomeExpenseDetails/expense" class="view add">Add Expense</a></li>
+		      <li><a href="#/addIncomeExpenseDetails/recurring" class="view last">Recurring</a></li>
+		      <li><a href="#/showReportsDetails" class="view last">Reports</a></li>
+		      
+		    </ul>
+		</nav>
+  		<ng-view></ng-view>
+
+		<script type="text/ng-template" id="formEmpty">
+		        Please fill in the highlighted required details.
+		</script>
+	</div>
+</div>
+</center>
+</body>
+</html>

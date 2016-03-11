@@ -1,0 +1,35 @@
+<!-- Showing sorted income and expense details according to payer and category keys-->
+<div class="panel panel-default">
+	<div class="panel-heading text-center"><h3 class="panel-heading">Income Details Source Wise</h3></div>
+	<table class="table table-stripped" style="width:1000px">
+		<tr>
+			<th class="text-center">Payer</th>
+			<th class="text-center">Amount</th>
+			<th class="text-center">Date</th>
+			<th class="text-center">Mode Of Payment</th>	
+		</tr>
+		<tr ng-repeat="income in sortedIncomeResult">
+			<td ng-bind="income.payer"></td>
+			<td ng-bind="income.amount"></td>
+			<td ng-bind="income.date| date:'yyyy-MM-dd'"></td>
+			<td ng-bind="income.modeOfPayment"></td>
+		</tr>
+	</table>
+
+<div class="panel-heading text-center"><h3 class="panel-heading">Expense Details Category Wise</h3></div>
+<table class="table table-stripped" style="width:1000px">
+	<tr>
+		<th class="text-center">Payee</th>
+		<th class="text-center">Amount</th>
+		<th class="text-center">Date</th>
+		<th class="text-center">Mode Of Payment</th>	
+		
+	</tr>
+	<tr ng-repeat="expense in sortedExpenseResult">
+		<td ng-bind="expense.payee"></td>
+		<td ng-bind="expense.amount"></td>
+		<td ng-bind="expense.date| date:'yyyy-MM-dd'"></td>
+		<td ng-bind="expense.modeOfPayment"></td>
+	</tr>
+</table>
+</div>

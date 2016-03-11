@@ -1,0 +1,37 @@
+<div>
+<h3 ng-show="noTransactionData">Oops! No <span ng-bind="transType.substring(0,1).toUpperCase()+transType.substring(1)"></span> details found!!!</h3>
+<div ng-show="showTransaction" class="panel panel-default">
+	<div class="search">
+		<label>Search: <input class="search-input" ng-model="searchText"></label>
+	</div>
+	<div class="panel-heading text-center"><h3 class="panel-heading"><span ng-bind="transType.substring(0,1).toUpperCase()+transType.substring(1)"></span>  Details</h3></div>
+	
+	<br>
+	<!-- Showing income/expense details-->
+	<table class="table table-stripped" style="width:1000px">
+		<tr>
+			<th class="text-center" ng-show="showPayer">Payer</th>
+			<th class="text-center" ng-show="showPayee">Payee</th>
+			<th class="text-center">Amount</th>
+			<th class="text-center">Date</th>
+			<th class="text-center">Mode Of Payment</th>	
+			<th class="text-center"></th>
+			<th class="text-center"></th>
+		</tr>
+		<tr ng-repeat="transData in transactionData | filter:searchText" ng-controller="manipulateIncomeExpenseController">
+			<td ng-show="showPayer"><span ng-bind="transData.payer"></span></td>
+			<td ng-show="showPayee"><span ng-bind="transData.payee"></span></td>
+			<td><span ng-bind="transData.amount"></span></td>
+			<td><span ng-bind="transData.date"></span></td>
+			<td><span ng-bind="transData.modeOfPayment"></span></td>
+			<td><a href="#/manipulateIncomeExpenseDetails/{{transType}}/edit/{{$index}}"><i class="glyphicon glyphicon-edit"></i></a></td>
+			<td ng-click="deleteTransaction($index)"><i class="glyphicon glyphicon-trash"></i></td>
+		</tr>
+	</table>
+
+	<!-- Custom Directive -->
+	<notification-panel ng-show="showDirective"></notification-panel>
+</div>
+
+
+</div>

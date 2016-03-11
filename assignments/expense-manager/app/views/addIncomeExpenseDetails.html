@@ -1,0 +1,100 @@
+<!-- Same view for add and edit transactions -->
+<div ng-controller="addIncomeExpenseController">
+	<!-- Showing income/expense options in case of Add recurring transactions-->
+	<div ng-show="showRecurring" class="text-center">
+		<button type="button" class="btn btn-primary" ng-click="showRecurringTransaction(0)">Add Income</button>
+		<button type="button" class="btn btn-primary" ng-click="showRecurringTransaction(1)">Add Expense</button>
+	</div>
+
+	<!-- Add income/expense details-->
+	<div ng-show="showAddTransaction" class="panel panel-default text-center">
+		<form name="transactionForm">
+			<div ng-controller="manipulateIncomeExpenseController">
+			<div class="panel-heading text-center"><h3 class="panel-heading">Add {{transType.substring(0,1).toUpperCase()+transType.substring(1)}} Details</h3></div>
+			<table class="table table-stripped" style="width:1000px">
+				<tr>
+					<td ng-if="showPayer">
+						<input type="text" name="incomeExpensePayer" ng-model="addNew.payer" placeholder="Enter Payer Name" required ng-pattern="/^[a-zA-Z\s]*$/" >
+						<span style="color:red" ng-show="transactionForm.incomeExpensePayer.$dirty && transactionForm.incomeExpensePayer.$invalid">
+		                	Payer should be string
+		           		</span>
+		            	<input ng-model="addNew.payee" hidden ng-value="{{selfData}}">
+
+		        	</td>
+
+		        	<td ng-if="showPayee">
+		        		<input type="text" name="incomeExpensePayee" ng-model="addNew.payee" placeholder="Enter Payee Name" required ng-pattern="/^[a-zA-Z\s]*$/" data-fv-notempty-message="The Payee is required">
+						<span style="color:red" ng-show="transactionForm.incomeExpensePayee.$dirty && transactionForm.incomeExpensePayee.$invalid">
+		               		Payee should be string
+		            	</span>
+		            	<input ng-model="addNew.payer" hidden ng-value="{{selfData}}">
+						
+		            </td>
+					
+				</tr>
+
+				<!-- Showing recurring duration details-->
+				<tr ng-show="showRecurringDuration">
+					<td>
+						<input type="radio" ng-model="selectedRecurringType.name" value="Monthly" />Monthly
+		                <input type="radio"  ng-model="selectedRecurringType.name" value="Yearly" />Yearly
+		                
+			    	</td>
+				</tr>
+
+				<tr>
+					<td>
+						<select ng-model="addNew.category">
+						  <option value="">Enter Category Name</option>
+				          <option ng-repeat="types in category" value="{{types}}">
+				            {{types}}
+				          </option>
+				        </select>
+			    	</td>
+				</tr>
+				<tr>
+					<td>
+						<select ng-model="addNew.subcategory">
+							<option value="">Enter Sub-Category</option>
+				          <option ng-repeat="types in subcategory" value="{{types}}">
+				            {{types}}
+				          </option>
+				        </select>
+			    	</td>
+				</tr>
+				<tr>
+					<td><input type="number" name="incomeExpenseAmount" ng-model="addNew.amount" placeholder="Enter Amount" ng-pattern="/^[0-9]{1,7}$/" step="0.01" required><span style="color:red" ng-show="transactionForm.incomeExpenseAmount.$dirty && transactionForm.incomeExpenseAmount.$invalid">
+		                Amount is invalid
+		            </span></td>
+				</tr>
+				<tr>
+					<td><input type="text" name="incomeExpenseDate" ng-model="addNew.date" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" placeholder="Date YYYY-MM-DD" required><span style="color:red" ng-show="transactionForm.incomeExpenseDate.$dirty && transactionForm.incomeExpenseDate.$invalid">
+		                Enter Valid date
+		            </span></td>
+				</tr>
+				<tr>
+					<td>
+						<select name="incomeModeOfPayment" ng-model="addNew.modeOfPayment" required>
+							<option value="">Enter Mode Of Payment</option>
+				          <option ng-repeat="modes in modeOfPayment" value="{{modes}}">
+				            {{modes}}
+				          </option>
+				        </select>
+			    	<span style="color:red" ng-show="transactionForm.incomeModeOfPayment.$dirty && transactionForm.incomeModeOfPayment.$invalid">
+		                Mode of Payment is required
+		            </span></td>
+				</tr>
+				<tr>
+					<td><input name="notes" ng-model="addNew.notes" placeholder="Enter Notes" ng-maxlength="20">
+					<span style="color:red" ng-show="transactionForm.notes.$dirty && transactionForm.notes.$invalid">
+		                Notes should not exceed 20 characters
+		            </span></td>
+				</tr>
+				<tr><td><button ng-click="addTransactionSave()" ng-hide="addNew.indexData"  class="btn-primary">Submit</button></td></tr>
+
+				<!-- Showing Done button only in case of edit-->
+				<tr><td><button ng-click="updateTransaction()" ng-show="addNew.indexData" class="btn-primary">Done</button></td></tr>
+			</table>
+		</form>
+	</div>
+</div>
