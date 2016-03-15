@@ -1,0 +1,59 @@
+          <div class="jumbotron" id="formcontainer" style="padding-top:0; padding-left:0" ng-show="startTrans===true">
+              <h4> Transaction Form </h4>
+                <form name="trForm" ng-submit=" addTrans(newTrans)" novalidate >
+                  <label  style=" width: 200px;">Enter Transaction Id</label> <input style="width: 175px;" type=text name="transId" ng-model="newTrans.transactionId" required>                  
+                  <span ng-show="trForm.transId.$dirty && trForm.transId.$invalid" style="color:red "></span>
+                  <span ng-show="trForm.transId.$dirty  && trForm.transId.$error.required" >Transaction Id rquired. </span>
+                  <br>
+
+                  <label  style=" width: 200px;" >Payer</label>  <input type=text  style="width: 175px;" name="payer" ng-model="newTrans.payer" required>
+                  <span ng-show="trForm.payer.$dirty && trForm.payer.$invalid" style="color:red "></span>
+                  <span ng-show="trForm.payer.$dirty && trForm.payer.$error.required" >Payer Name rquired. </span>
+                  <br>
+
+                  <label  style=" width: 200px;" >Payee</label> <input type=text  style="width: 175px;" name="payee" ng-model="newTrans.payee">
+                  <span ng-show="trForm.payee.$dirty && trForm.payee.$invalid" style="color:red "></span>
+                  <span ng-show="trForm.payee.$dirty && trForm.payee.$error.required" >Payee Name rquired. </span>
+                  <br>
+
+                  <label  style=" width: 200px;">Category</label>  <input type=text name="category"  style="width: 175px;"  ng-model="newTrans.category" > 
+                  <span ng-show="trForm.category.$dirty && trForm.category.$invalid" style="color:red "></span>
+                  <span ng-show="trForm.category.$dirty && trForm.category.$error.required" >Category rquired. </span>
+                  <br>
+
+                  
+                  <label  style=" width: 200px;" >SubCategory</label> <input type=text  style="width: 175px;" name=subcat ng-model="newTrans.subCategory">
+                  <span ng-show="trForm.subcat.$dirty && trForm.subcat.$invalid" style="color:red "></span>
+                  <span ng-show="trForm.subcat.$dirty && trForm.subcat.$error.required" >Subcategory rquired. </span>
+                  <br>
+
+                  <label  style=" width: 200px;">Ammount</label> <input type=number  style="width: 175px;" name=ammount min=1 ng-model="newTrans.amount" >
+                  <span ng-show="trForm.ammount.$dirty && trForm.ammount.$invalid" style="color:red "></span>
+                  <span ng-show="trForm.ammount.$dirty && trForm.ammount.$error.required" >Ammount rquired. </span>
+                  <br>
+
+                  <label  style=" width: 200px;">Date</label>  <input type=text  style="width: 175px;" name=fdate  ng-model="newTrans.date">
+                  <span ng-show="trForm.fdate.$dirty && trForm.fdate.$invalid" style="color:red "></span>
+                  <span ng-show="trForm.fdate.$dirty && trForm.fdate.$error.required" >Date rquired. </span>
+                  <br>
+                  <label style=" width: 200px;" >Mode Of Payment</label>  <input name=paymode  style="width: 175px;" ng-model="newTrans.modeOfPayment"  type=text >
+                  <span ng-show="trForm.paymode.$dirty && trForm.paymode.$invalid" style="color:red "></span>
+                  <span ng-show="trForm.paymode.$dirty && trForm.paymode.$error.required" >Mode of payment rquired. </span>
+
+                  <br>
+                  <label style=" width: 200px;" >Transaction Type</label> 
+                  <select name="transtype" ng-model="newTrans.type"  style="width: 175px;"  >
+                      <option value="">--Transaction type -- </option>
+                      <option value="income">Income</option>
+                      <option value="expense">Expense</option>                  
+                  </select>
+                  <span ng-show="trForm.transtype.$dirty && trForm.transtype.$invalid" style="color:red "></span>
+                  <span ng-show="trForm.transtype.$dirty && trForm.transtype.$error.required" >Transaction Type rquired. </span>
+                  <br><br>
+                  <span style="margin-left: 200px; ">
+                  <input type="reset"> 
+                  <input type="submit" style="margin-left : 10px" > </input> 
+                  </span>                  
+                </form>
+          </div>
+          <hr style="width:100%">

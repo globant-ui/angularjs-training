@@ -1,0 +1,35 @@
+<table  name="income"  ng-hide=exvisible >
+                <caption style="text-align: center;font-weight: bold; font-size: 18px">Income information</caption>                
+                <tr>
+                  <th>TransactionId  </th>
+                  <th style="padding-left:10px; font-weight: bold">Payer  </th>
+                  <th style="padding-left:10px; font-weight: bold">Payee  </th>
+                  <th style="padding-left:10px; font-weight: bold">Category  </th>
+                  <th style="padding-left:10px; font-weight: bold">SubCategory  </th>
+                  <th style="padding-left:10px; font-weight: bold">Amount  </th>
+                  <th style="padding-left:20px; font-weight: bold">Date  </th>
+                  <th style="padding-left:10px; font-weight: bold">ModeOfPayment  </th>
+                  <th style="padding-left:10px; font-weight: bold">Type  </th> 
+                  <th></th>
+                  <th></th>         
+                </tr>
+                
+                <tbody class="table-striped">        
+                <tr ng-repeat=" key in Transaction.data | filter:'income'">
+                  <td  ng-bind="key.transactionId"> </td>
+                  <td  ng-bind="key.payer" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.payee" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.category" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.subCategory" style="padding-left:10px"> </td>
+                  <td  style="padding-left:10px">{{ key.amount | number:2}} </td>
+                  <td  ng-bind="key.date" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.modeOfPayment" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.transType" > </td>
+                  <td  ng-click="editTrans(key.transactionId)"  style="padding-left:10px" ><button>Edit </button></td>
+                  <td ng-click="deleteTransaction(key.transactionId)" style="padding-left:10px"><button>Delete</button></td>
+                </tr>
+                </tbody> 
+
+                <tr style="height:20px"></tr>
+
+</table> 

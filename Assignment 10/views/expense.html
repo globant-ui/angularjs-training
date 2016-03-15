@@ -1,0 +1,34 @@
+
+
+<table name="exp" ng-show="exvisible ">
+       <caption style="text-align: center;font-weight: bold; font-size: 18px">Expense information</caption>
+       <tr>
+                <th>transactionId  </th>
+                <th style="padding-left:10px; font-weight: bold">Payer  </th>
+                <th style="padding-left:10px; font-weight: bold">Payee  </th>
+                <th style="padding-left:10px; font-weight: bold">Category  </th>
+                <th style="padding-left:10px; font-weight: bold">SubCategory  </th>
+                <th style="padding-left:10px; font-weight: bold">Amount  </th>
+                <th style="padding-left:20px; font-weight: bold">Date  </th>
+                <th style="padding-left:10px; font-weight: bold">ModeOfPayment  </th>
+                <th style="padding-left:10px; font-weight: bold">Type  </th>    
+                <th></th>
+                <th></th>        
+        </tr>
+        <div>
+
+        <tr ng-repeat=" key in Transaction.data | filter:'expense' " >
+	        <td  ng-bind="key.transactionId"> </td>
+                <td  ng-bind="key.payer" style="padding-left:10px"> </td>
+                <td  ng-bind="key.payee" style="padding-left:10px"> </td>
+                <td  ng-bind="key.category" style="padding-left:10px"> </td>
+                <td  ng-bind="key.subCategory" style="padding-left:10px"> </td>
+                <td  style="padding-left:10px">{{ key.amount | number:2}}  </td>
+                <td  ng-bind="key.date" style="padding-left:10px"> </td>
+                <td  ng-bind="key.modeOfPayment" style="padding-left:10px"> </td>
+                <td  ng-bind="key.transType" > </td>
+                <td  ng-click="editTrans(key.transactionId);startTrans=true;" style="padding-left:10px" ><button>Edit </button></td>
+                <td style="padding-left:10px"><button ng-click="deleteTransaction(key.transactionId)" >Delete</button></td>
+        </tr>
+        </div> 
+</table>

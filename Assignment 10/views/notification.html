@@ -1,0 +1,12 @@
+<div style="text-align: center;font-weight: bold; font-size: 18px; width: 76%;">Upcoming Transactions</div> 
+<div  ng-repeat=" notify in data ">
+                <div style="float:left; border:1px solid grey; margin-left:10px ">
+                  <span style="clear: both; float: left; padding: 4px; width: 127px;">Category :</span><span  ng-bind="notify.category"  style="float: left; padding: 4px; width: 127px;" > </span><br>
+                  <span style="clear: both; float: left; padding: 4px; width: 127px;">SubCategory : </span><span  ng-bind="notify.subCategory"  style="float: left; padding: 4px; width: 127px;" > </span><br>
+                  <span style="clear: both; float: left; padding: 4px; width: 127px;">Amount : </span><span   style="float: left; padding: 4px; width: 127px;"  ng-bind="notify.amount"> </span><br>
+                  <span style="clear: both; float: left; padding: 4px; width: 127px;">Date : </span><span    style="float: left; padding: 4px; width: 127px;" ng-bind="notify.date| date:'yyyy-MM-dd' "> </span><br>
+                  <span style="clear: both; float: left; padding: 4px; width: 127px;">Transaction Type :</span> <span  ng-bind="notify.transType"  style="float: left; padding: 4px; width: 127px;" > </span><br>
+                  <span style="clear: both; float: left; padding: 4px; width: 127px;">Reccurance :</span><span  ng-bind="notify.reccur"  style="float: left; padding: 4px; width: 127px;" > </span><br>
+                </div> 
+
+</div> 

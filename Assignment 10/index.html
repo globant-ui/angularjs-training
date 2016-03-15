@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <title>Expense Manager </title>
+      <!-- Angular app related Javascript -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+      <script src="https://code.angularjs.org/1.4.9/angular-route.js"></script>
+      
+<!--      <script src="controllers\exApp.js"></script> -->
+      <script src="controllers/exApp.js"></script>
+      <script src="services/expFactory.js"></script>        
+      <script src="controllers/exCtrl.js"></script>
+      <script src="controllers/notifyCtrl.js"></script>
+        
+      <!-- Bootstrap core CSS -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+      <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+      <!-- Custom styles for this template -->
+      <link href="css/expcss.css" rel="stylesheet">
+
+  <style>
+  table, th, td {
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  th {
+      height: 50px;
+  }
+
+  th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+  }
+
+
+  tr:nth-child(even){background-color: #f2f2f2}
+
+  tr:hover{background-color:#f5f5f5}
+
+
+  </style>
+  </head>
+
+  <body  ng-app="exManager" ng-controller="expensecntr as excontrol">
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Expense Mmanager</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+
+    <div class="container"  style="margin-left: 0;margin-right: 0;padding-left: 0;padding-right: 0; width:1320px">
+      <div class="row row-offcanvas row-offcanvas-right" style="float: left;display: inline-block;width: 76%;;min-height: 500px;">
+        <div class="col-xs-12 col-sm-9" style="width:100%">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p> 
+<!-- Balance Information  <p>StarAdd Ans startEdit {{ startAdd}} --- {{startEdit}}</p>-->
+          <div class="jumbotron" style="padding:0; background-color:#fff">
+            <div class="row" style="padding-left: 75px;" >
+              <br> 
+              <label> Total Income : </label> <span style="margin-left:20px"  ng-bind="sum.sum_income| number : 2"  >  </span>
+              <label style="margin-left:120px"> Total Expense : </label> <span style="margin-left:20px" ng-bind= "sum.sum_expense| number : 2" >  </span>
+              <label style="margin-left:120px"> Total Balance : </label> <span style="margin-left:20px" ng-bind= "sum.total| number : 2"  > </span><br>
+            </div><!--/row-->
+          </div> <!--jumbotron ends here -->
+<!-- Balance Information Ends Here-->
+
+<!--searchBox -->
+          <div ng-show="searchForm===true"  style=" padding: 60px; ">
+              <lable>Enter transaction ID </lable>
+              <input type="text" style="border: 1px solid #337ab7;" style="border: 1px solid #337ab7;width: 250px;text-align: left;margin-left: 20px;padding-left: 10px;" ng-model="searchTrans"> </input>
+              <button ng-click="editTrans(searchTrans); startTrans=true;">Submit</button>
+          </div>
+<!-- SearchBox Ends here -->  
+
+<!--form -->
+
+          <div  style="padding-left: 60px;" ng-show="startTrans===true" >
+                <div class="form-group row">
+                  <label  class="col-sm-2 form-control-label" ng-show="trForm.$valid && trForm.$submitted"  style="color:red ">Valid data... </label>
+                  <label  class="col-sm-2 form-control-label" ng-show="trForm.$invalid && trForm.$submitted"  style="color:red ">Please Enter Corret Information</label>
+                </div>            
+            <form  name="trForm" ng-submit="trForm.$valid && addTrans(newTrans)" novalidate>
+                <div class="form-group row">
+                  <label  class="col-sm-2 form-control-label">Enter Transaction Id</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-maxlength="20" placeholder="Enter Transaction Id" name="transId" ng-model="newTrans.transactionId" required>
+                  </div>
+                  <span ng-show="trForm.transId.$error.required && trForm.transId.$touched "  style="color:red">Transaction Id rquired. </span>
+                  <span ng-show="trForm.transId.$error.maxlength  && !trForm.transId.$pristine"  style="color:red">Maxlength reached. </span>                  
+                </div>
+
+
+                <div class="form-group row">
+                  <label  class="col-sm-2 form-control-label">Payer</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-maxlength="20"   placeholder="Payer" name="payer" ng-model="newTrans.payer"  required>
+                  </div>
+                  <span ng-show=" trForm.payer.$error.required && trForm.payer.$touched "  style="color:red, margin-left: 170px;  " style="color:red ">Payer Name rquired.</span>
+                  <span ng-show="trForm.payer.$error.maxlength  && !trForm.payer.$pristine"  style="color:red, margin-left: 170px;  ">Maxlength reached. </span>                  
+                </div>
+
+                <div class="form-group row">
+                  <label  class="col-sm-2 form-control-label">Payee</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-maxlength="20"   placeholder="Payee"  name="payee" ng-model="newTrans.payee"  required>
+                  </div>
+                  <span ng-show="trForm.payee.$error.required && trForm.payee.$touched " style="color:red; margin-left: 170px;  ">Payee Name rquired. </span>
+                  <span ng-show="trForm.payee.$error.maxlength  && !trForm.payee.$pristine"  style="color:red; margin-left: 170px;  ">Maxlength reached. </span>              
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 form-control-label">Category</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" placeholder="Category"  name="category" ng-model="newTrans.category" >
+                      <option value="" selected>Open this select menu</option>
+                      <option value="Interest">Interest</option>
+                      <option value="Shares">Shares</option>
+                      <option value="Health">Health</option>
+                      <option value="Travel">Travel</option>
+                      <option value="Food">Food</option>
+                      <option value="Maintenance">Maintenance</option>
+                  </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 form-control-label">SubCategory</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" placeholder="SubCategory"   name=subcat ng-model="newTrans.subCategory" >
+                      <option value="" selected>Open this select menu</option>
+                      <option value="Fix Deposite">Fix Deposite</option>
+                      <option value="Equity">Equity</option>
+                      <option value="Commodity">Commodity</option>                      
+                      <option value="Family">Family</option>
+                      <option value="Business Trip">Business Trip</option>
+                      <option value="Hotel">Hotel</option>
+                      <option value="Party">Party</option>
+                      <option value="Vehicle">Vehicle</option>
+                  </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label  class="col-sm-2 form-control-label">Amount</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" ng-maxlength="20"   placeholder="Enter Amount" name=amount min=0 ng-model="newTrans.amount" required>
+                  </div>
+                  <span  ng-show="trForm.amount.$error.required  && trForm.amount.$touched"  style="color:red;margin-left: 170px; ">Amount rquired. </span>
+                  <span  style="margin-left: 170px;" ng-show="trForm.amount.$error.maxlength  && !trForm.amount.$pristine"  style="color:red;margin-left: 170px; ">Maxlength reached. </span>                                               
+                </div>
+
+
+                <div class="form-group row">
+                  <label  class="col-sm-2 form-control-label">Date</label>
+                  <div class="col-sm-10">
+                    <input type="date" class="form-control" placeholder="dd-mm-yy:--:--" name=date  ng-model="newTrans.date" required>
+                  </div>
+                  <span   ng-show="trForm.date.$error.required  && trForm.amount.$touched"  style="color:red; margin-left: 170px;  ">Date rquired. </span> 
+                  <span  ng-show="trForm.date.$error.maxlength  && !trForm.date.$pristine"  style="color:red; margin-left: 170px;  ">Maxlength reached. </span>
+                </div>                
+
+                <div class="form-group row">
+                  <label class="col-sm-2 form-control-label">Mode Of Payment</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" placeholder="Mode Of Payment"  name="paymode" ng-model="newTrans.modeOfPayment" >
+                      <option value="" selected>Open this select menu</option>
+                      <option value="Cash">Cash</option>
+                      <option value="Online">Online</option>
+                      <option value="Cheque">Cheque</option>
+                  </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 form-control-label">Transaction Type</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" placeholder="Transaction Type"  name="transtype" ng-model="newTrans.transType" >
+                      <option value="" selected>Open this select menu</option>
+                      <option value="income">Income</option>
+                      <option value="expense">Expense</option>
+                  </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="reset" ng-click="reset();" class="btn btn-secondary">Reset</button>
+                    <button type="button" ng-show="startDelete==true && startAdd==false" ng-click="deleteTransaction(newTrans.transactionId);" ng-show="searchForm===true"  class="btn btn-secondary" style="padding-left:10px">Delete</button> 
+                    <button type="submit" ng-click="formsub=true;" class="btn btn-secondary" style="padding-left:10px">Submit</button>
+                  </div>
+                </div>
+
+              </form>              
+          </div>      
+          <div ng-view></div>
+
+        </div><!--/.col-xs-12.col-sm-9-->
+      </div><!--/row    -->
+
+<!-- Right pannel -->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" style="float:right">
+          <div class="list-group" ng-init="tab=0" style="padding-top:15px;">
+            <a href="#income"  class="list-group-item"  ng-class="{ 'active':tab===1 }" ng-click= "exvisible=false; clicked=true; tab=1; searchForm=false; startTrans=false;">Income</a>
+            <a href="#expense"  class="list-group-item" ng-class="{ 'active':tab===2 }" ng-click= "exvisible= true; clicked=true; tab=2; searchForm=false; startTrans=false; " >Expense</a>
+            <a href="#form"  class="list-group-item" ng-class="{ 'active':tab===3 }" ng-click= "tab=3; startAdd=true; startDelete=false;  startEdit=false; startTrans=true;  searchForm=false;" >Add Transaction</a>
+            <a href="#search"  class="list-group-item" ng-class="{ 'active':tab===4 }" ng-click= "tab=4; startAdd=false; startEdit=true;startDelete=false;  searchForm=true; startTrans=false;" >Edit Transaction</a>
+            <a href="#search"  class="list-group-item"  ng-class="{ 'active':tab===5 }" ng-click= "tab=5; searchForm=true; startDelete=true;startAdd=false; startTrans=false;" >Delete Transaction</a>             
+            <a href="#report"  class="list-group-item" ng-class="{ 'active':tab===6 }" ng-click= "tab=6;  startTrans=false; searchForm=false;" >Show Report</a> 
+            <a href="#catreport"  class="list-group-item" ng-class="{ 'active':tab===7 }" ng-click= "tab=7;  startTrans=false; searchForm=false;" >Show Report By Category</a>
+            <a href="#setting"  class="list-group-item" ng-class="{ 'active':tab===8 }" ng-click= "tab=8;  startTrans=false; searchForm=false;" >Settings</a>
+<!--            <a href="#monthreport"  class="list-group-item" ng-class="{ 'active':tab===8 }" ng-click= "tab=8;  startTrans=false; searchForm=false;" >Month Report</a>    -->        
+
+          </div>       
+
+        </div><!--/.sidebar-offcanvas-->
+       
+        <div ng-controller="notifyctrl">
+            <div style="clear:both">
+                <notification  data="notifyArr"></notification>
+            </div>
+        </div>
+      
+      <div>
+      </div>
+ <!--     
+    <div ng-controller="notifyctrl">
+        <div my-directive class='directive'></div>
+        
+    </div>
+      -->
+      <hr style="clear:both; margin-top: 180px;">
+
+      <footer style="float:right">
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+
+    </div><!--/.container-->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>    
+    <script src="scripts/expense.js"></script>
+  </body>
+</html>

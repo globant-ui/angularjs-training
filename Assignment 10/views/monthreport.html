@@ -1,0 +1,60 @@
+<div class="form-group row" style="padding-left: 60px;">
+<label class="col-sm-2 form-control-label">Month Report</label>
+<div class="col-sm-10">
+  <select class="form-control" style="width: 250px;" placeholder="Select Category"  name="monthreport" ng-model="monthreport" >
+      <option value=" " selected>Select Month</option>
+      <option value="01">january</option>
+      <option value="02">February</option>
+      <option value="03">March</option>
+      <option value="04">April</option>
+      <option value="05">May</option>
+      <option value="06">June</option>
+      <option value="07">Jully</option>
+      <option value="08">August</option>
+      <option value="09">Septembet</option>
+      <option value="10">october</option>
+      <option value="11">November</option>                        
+      <option value="12">December</option>       
+   </select>
+</div>
+</div>
+
+<p>This is Selected Month {{monthreport }}</p>
+<p>This is Month in Table {{key.date }}</p>
+<table >
+                <caption style="text-align: center;font-weight: bold; font-size: 18px">Transaction information</caption>                
+                <tr>
+                  <th>TransactionId  </th>
+                  <th style="padding-left:10px; font-weight: bold">Payer  </th>
+                  <th style="padding-left:10px; font-weight: bold">Payee  </th>
+                  <th style="padding-left:10px; font-weight: bold">Category  </th>
+                  <th style="padding-left:10px; font-weight: bold">SubCategory  </th>
+                  <th style="padding-left:10px; font-weight: bold">Amount  </th>
+                  <th style="padding-left:20px; font-weight: bold">Date  </th>
+                  <th style="padding-left:10px; font-weight: bold">ModeOfPayment  </th>
+                  <th style="padding-left:10px; font-weight: bold">Type  </th> 
+                  <th></th>
+                  <th></th>         
+                </tr>
+
+<!-- <p>Income {{ Transaction.data }}"</p>         
+  -->   
+                <tbody class="table-striped">        
+                <tr ng-repeat=" key in Transaction.data | filter: {key.date: monthreport}" >
+                  <td  ng-bind="key.transactionId"> </td>
+                  <td  ng-bind="key.payer" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.payee" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.category" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.subCategory" style="padding-left:10px"> </td>
+                  <td  style="padding-left:10px">{{ key.amount | number:2}} </td>
+                  <td  ng-bind="key.date" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.modeOfPayment" style="padding-left:10px"> </td>
+                  <td  ng-bind="key.transType" > </td>
+                  <td  ng-click=" editTrans(key.transactionId)"  style="padding-left:10px" ><button>Edit </button></td>
+                  <td  ng-click="deleteTransaction(key.transactionId)" style="padding-left:10px"><button>Delete</button></td>
+                </tr>
+                </tbody> 
+
+                <tr style="height:20px"></tr>
+
+</table> 
