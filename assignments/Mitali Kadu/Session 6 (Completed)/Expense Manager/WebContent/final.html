@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+    <title>Expense Manager</title>
+    <link type="text/css" rel="stylesheet" href="final.css"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet"
+       href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+       -->
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script
+            src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script
+            src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.4.9/angular-messages.js"></script>
+    <script type="text/javascript" src="report.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="income.js"></script>
+    <script type="text/javascript" src="expense.js"></script>
+    <link type="text/css" rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script type="text/javascript"
+            src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+    <script
+            src="//cdn.rawgit.com/tonystar/bootstrap-hover-tabs/master/bootstrap-hover-tabs.js"></script>
+</head>
+<body>
+<div ng-app="myApp" class="main">
+    <div id="upper">
+        <p class="heading">Expense Manager</p>
+    </div>
+    <div id="lower" ng-controller="mainController">
+        <div id="panel">
+            <a href="#/income"><input class="navigation" type="button" value="Income" /></a>
+            <a href="#/expense"><input class="navigation" type="button" value="Expense" /></a>
+            <a href="#/report"><input class="navigation" type="button" value="Report" /></a>
+        </div>
+        <div class="line"></div>
+        <div ng-view></div>
+        <!-- Display income table -->
+        <!-- Display expense table -->
+    </div>
+</div>
+</body>
+</html>

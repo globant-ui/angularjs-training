@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<head>
+    <title>Expense Manager</title>
+    <link type="text/css" rel="stylesheet" href="final.css"/>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet"
+        href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+     -->
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script
+            src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script
+            src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.min.js"></script>
+
+
+    <script type="text/javascript" src="app.js"></script>
+
+    <link type="text/css" rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+
+    <script type="text/javascript"
+            src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+    <script
+            src="//cdn.rawgit.com/tonystar/bootstrap-hover-tabs/master/bootstrap-hover-tabs.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.4.9/angular-messages.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="mainController" class="main">
+    <div id="upper">
+        <p class="heading">Expense Manager</p>
+
+    </div>
+
+    <div id="lower">
+        <p class="tabs">Total income : <span ng-bind="total_income"></span></p>
+
+        <p class="tabs">Total expense : <span ng-bind="total_expense"></span></p>
+
+        <p class="tabs">Total balance : <span ng-bind="total_balance"></span></p>
+
+        <form name="income_form" novalidate>
+            <p class="block_letters">Add income</p>
+
+            <!-- Input table for income -->
+            <table class="input_tables">
+                <tr>
+                    <td>Enter the amount :</td>
+                    <td><input type="number" name="income_amount" ng-pattern="/^([^-]?[0-9]*(\.[0-9]([0-9])?)?)$/" placeholder="Enter the income" ng-model="temp_2.amount" required>
+                        <span ng-show="!temp_2.amount" class="error_msg">*</span>
+                        <span ng-messages="income_form.income_amount.$error" class="error_msg">
+                            <span ng-message="pattern">Enter only positive numbers upto 2 decimals</span>
+                        </span>
+
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td>Income Type :</td>
+                    <td><select name="income" ng-model="temp_2.type">
+                        <option value="">-- select --</option>
+                        <option>Salary</option>
+                        <option>Business</option>
+                        <option>interest</option>
+                    </select>
+                        <span ng-show="!temp_2.type" class="error_msg">*</span>
+                    </td>
+
+
+                </tr>
+
+                <tr>
+
+                    <td><input type="submit" value="Add" ng-disabled="!temp_2.type || !temp_2.amount"
+                               ng-click="add_income()"
+                               style="width: 100px;"></td>
+                    <td>
+                        <input type="button" value="Income Table" ng-click="show_income()"
+                               style="width: 100px;">
+
+                    </td>
+
+                </tr>
+            </table>
+        </form>
+
+
+        <!-- Input table for expenses -->
+        <br>
+
+        <p class="block_letters">Add expenses</p>
+        <form name="expense_form">
+        <table class="input_tables">
+            <tr>
+                <td>Enter the amount :</td>
+                <td><input type="number" name="expense_amount" ng-pattern="/^([^-]?[0-9]*(\.[0-9]([0-9])?)?)$/" placeholder="Enter the expense" ng-model="temp.amount" min="0.01">
+                    <span ng-show="!temp.amount" class="error_msg">*</span>
+                     <span ng-messages="expense_form.expense_amount.$error" class="error_msg">
+                            <span ng-message="pattern">Enter only positive numbers upto 2 decimals</span>
+                        </span>
+
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>Category :</td>
+                <td><select name="expense" ng-model="temp.category">
+                    <option value="">-- select --</option>
+
+                    <option>Rent</option>
+                    <option>Travel</option>
+                    <option>Party</option>
+                    <option>Office</option>
+                    <option>Study</option>
+                    <option>Shopping</option>
+                </select>
+                    <span ng-show="!temp.category" class="error_msg">*</span>
+                </td>
+
+            </tr>
+            <tr>
+                <td>Mode of payment :</td>
+                <td><select name="mode_of_payment" ng-model="temp.payment">
+                    <option value="">------ select ------</option>
+
+                    <option>Credit Card</option>
+                    <option>Cash</option>
+                    <option>Electronic transfer</option>
+                </select>
+                    <span ng-show="!temp.payment" class="error_msg">*</span>
+                </td>
+
+
+            </tr>
+            <tr>
+                <td>Date :</td>
+                <td><input type="datetime-local" name="date" ng-model="temp.date"/>
+                    <span ng-show="!temp.date" class="error_msg">*</span>
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td><input type="button" value="Add"
+                           ng-disabled="!temp.date || !temp.amount || !temp.category || !temp.payment"
+                           ng-click="add_expense()"
+                           style="width: 120px;"></td>
+                <td><input type="button" value="Expense Table" ng-click="show_expense()"
+                           style="width: 120px;"></td>
+
+
+            </tr>
+        </table>
+        </form>
+
+
+        <!-- Display income table -->
+        <div ng-show="income_table">
+            <p class="block_letters" style="width:100%;">Income Table</p>
+
+            <table style="width : 50%;" id="report">
+                <tr>
+                    <th>Income Amount</th>
+                    <th>Income Source</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr ng-repeat="income in incomes">
+                    <td border: 1px solid black;>
+                        {{income.amount}}
+                    </td>
+                    <td border: 1px solid black;>
+                        {{income.type}}
+                    </td>
+
+                    <td><input type="button" ng-click="edit_income_form($index)" value = "Edit" /></td>
+                    <td><input type="button" ng-click="delete_income_form($index)" value = "Delete" /></td>
+                 </tr>
+                </tr>
+
+             </table>
+        </div>
+
+
+        <!-- Display expense table -->
+
+        <div ng-show="expense_table">
+            <p class="block_letters" style="width:100%;">Expense Table</p>
+
+            <table style="width : 80%" id="report">
+
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Mode of Payment</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+
+                <tr ng-repeat="expense in expenses | filter : selected_date">
+                    <td>{{expense.date | date: 'yyyy-MM-dd (HH:mm)'}}</td>
+                    <td>{{expense.amount}}</td>
+                    <td>{{expense.category}}</td>
+                    <td>{{expense.payment}}</td>
+                    <td><input type="button" ng-click="edit_expense_form($index)" value = "Edit" /></td>
+                    <td><input type="button" ng-click="delete_expense_form($index)" value = "Delete" /></td>
+
+                </tr>
+
+            </table>
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>
