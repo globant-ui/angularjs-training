@@ -1,17 +1,21 @@
 
-myapp.service("CRUD",function($http,$q,$timeout){
+angular.module("expenseManagerApp").service("CRUD",function($http,$q,$timeout,usSpinnerService,toaster){
 
 	//the only service responsible for adding ,editing, deleting, income-expense details and showing and hiding views.
 	// storing the income -expense details in variables that are available in all controllers, hence reducing the server calls.
+	this.incomeData 			= this.expenseData = {};
+	this.lastFiveTransactions 	= [];
+	
+	var that 					= this;
 
-	this.incomeData = this.expenseData = {};
-	var that = this;
-	this.recurringIncomeData = this.recurringExpenseData = [];
+	this.recurringIncomeData 	= this.recurringExpenseData = [];
 
-	this.incomeUrl = 'https://api.myjson.com/bins/4esbx';
-	this.expenseUrl = 'https://api.myjson.com/bins/4h045';
-	this.recurringIncomeUrl = 'https://api.myjson.com/bins/3wbg3';
-	this.recurringExpenseUrl = 'https://api.myjson.com/bins/4o6j7';
+	this.incomeUrl 				= 'https://api.myjson.com/bins/58x0u';
+	this.expenseUrl 			= 'https://api.myjson.com/bins/48vc6';
+	this.recurringIncomeUrl 	= 'https://api.myjson.com/bins/3wbg3';
+	this.recurringExpenseUrl 	= 'https://api.myjson.com/bins/4o6j7';
+	this.lastFiveUrl			= 'https://api.myjson.com/bins/1d354';
+
 
 	this.showIncomeExpenseDetails = function(scope){
 		scope.showTransaction = true;
@@ -23,17 +27,34 @@ myapp.service("CRUD",function($http,$q,$timeout){
 		scope.addNew = {transactionId:"",payer:"",payee:"",category:"",subcategory:"",amount:"",date:"",modeOfPayment:"",notes:"",transType:""};	
 	}
 
-	this.addTransactionSave = function(scope) {	
-		scope.transactionData.push(scope.addNew);	
-		
+	var saveLastFiveTransactions = function(lastFiveUrl,lastFiveTransactions) {
+		console.log(lastFiveTransactions);
 		$http({
 			method: 'PUT',
+			url: lastFiveUrl,
+			data: angular.toJson(lastFiveTransactions)
+		})
+		.then(function(response){		
+			console.log("done");
+		});
+	}
+
+	this.addTransactionSave = function(scope) {	
+		var lastFiveUrl			 = this.lastFiveUrl;
+		var lastFiveTransactions = this.lastFiveTransactions;
+		scope.transactionData.push(scope.addNew);	
+		toaster.pop({type: 'wait', title: "Adding Record", body:""});
+
+		$http({
+			method: 'POST',
 			url: scope.data_source,
 			data: angular.toJson(scope.transactionData)
 		})
 		.then(function(response){
-			console.log("done");
+			saveLastFiveTransactions(lastFiveUrl,lastFiveTransactions);			
+			return true;
 		});
+
 	}
 
 	this.editTransaction = function(scope,index){
@@ -44,16 +65,19 @@ myapp.service("CRUD",function($http,$q,$timeout){
 		scope.addNew.indexData = true;
 	}
 	this.deleteTransaction = function(scope,index) {
+	
 		scope.transactionData.splice(index,1);
 		$http({
-			method: 'PUT',
+			method: 'DELETE',
 			url: scope.data_source,
 			data: angular.toJson(scope.transactionData)
 		})
 		.then(function(response){
 			console.log("done");
+			scope.addNew = {transactionId:"",payer:"",payee:"",category:"",subcategory:"",amount:"",date:"",modeOfPayment:"",notes:"",transType:""};	
+			return true;
 		});
-		scope.addNew = {transactionId:"",payer:"",payee:"",category:"",subcategory:"",amount:"",date:"",modeOfPayment:"",notes:"",transType:""};	
+		
 	}
 
 	this.updateTransaction = function(scope) {
@@ -65,6 +89,7 @@ myapp.service("CRUD",function($http,$q,$timeout){
 		})
 		.then(function(response){
 			console.log("done");
+			return true;
 		});
 		
 	}
@@ -123,7 +148,7 @@ myapp.service("CRUD",function($http,$q,$timeout){
 	var calculateTotal = function(arrObj,transType) {
 		var sum=0;
 		arrObj = arrObj.filter(function( obj ) {
-					sum = sum + obj.amount;
+					sum = sum + eval(obj.amount);
 				 // return sum;
 				});	
 		console.log(sum);
@@ -160,19 +185,30 @@ myapp.service("CRUD",function($http,$q,$timeout){
 			} 
 			scope.balance = scope.totalIncome - scope.totalExpense;
 		});
+
+		scope.data_source = this.lastFiveUrl;
+		this.getIncomeExpenseData(scope)
+		.then(function(data){
+			this.lastFiveTransactions = data;
+			that.lastFiveTransactions = data;
+			scope.lastFiveTransactions = data;
+			return true;
+		});
 	}
 
 	this.showRecurringData = function(transactionType,scope) {
 		// getting recurring income information 
 		this.getIncomeExpenseData(scope)
 		.then(function(data){
+
 			if(typeof data === 'object') {
 				var today = new Date();
 			    var mm = today.getMonth()+1; //January is 0!
 			    if(mm<10){
 			        mm='0'+mm
 			    } 
-			    
+
+
 				scope.recurringData = data.filter(function( obj ) {
 					var recurDate = obj.date;
 					recurDate = recurDate.substring(3, 5);
@@ -191,31 +227,46 @@ myapp.service("CRUD",function($http,$q,$timeout){
 	}
 
 	this.getTransactionData = function(transactionType,scope) {
-		scope.tempData = {};
+
+	
+		transData = eval('this.'+transactionType+'Data');
+		scopeTransData = eval('scope.'+transactionType+'Data');
 		
-		if(transactionType == 'income') {
-			scope.incomeData = this.incomeData;
-			scope.transactionData = scope.incomeData;
-			scope.showPayer = true;
-			scope.recurringData = this.recurringIncomeData;
-			scope.data_source = this.recurringIncomeUrl;
-				
-		} else if(transactionType == 'expense') {
-			scope.expenseData = this.getExpenseData();
-			scope.transactionData =  scope.expenseData;
-			scope.showPayee = true;
-			scope.recurringData = this.recurringExpenseData;
-			scope.data_source = this.recurringExpenseUrl;
+		if(Object.keys(transData).length === 0){
+			console.log("cms here");
+			scope.data_source = eval('this.'+transactionType+'Url');
+			this.getIncomeExpenseData(scope)
+			.then(function(data){
+				transData = data;
+			});
 		}
+
+		$timeout( function(){
+			scopeTransData = transData;
+			scope.transactionData = scopeTransData;
+
+			if(transactionType == 'income'){
+				scope.showPayer = true;
+			} else if( transactionType == 'expense') {
+				scope.showPayee = true;
+			} 
+			usSpinnerService.stop('spinner-1');
+		}, 3000);
 		
+		scope.recurringData = eval('this.recurring'+transactionType+'Data');
+		if(transactionType == 'income'){
+			scope.data_source = this.recurringIncomeUrl;
+		} else if( transactionType == 'expense') {
+			scope.data_source = this.recurringExpenseUrl;
+		} 	
 		
+
 		if(scope.recurringData == undefined || scope.recurringData.length == 0) {
 			this.showRecurringData(transactionType,scope);
 		} else {	
 			scope.showDirective= true;	
 			this.showIncomeExpenseDetails(scope);
 		}
-		
 	}
 
 	this.validate = function(scope) {

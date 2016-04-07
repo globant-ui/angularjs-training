@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+	<div class="panel-heading text-center"><h3 class="panel-heading">Mini Statement</h3></div>
+	<br>
+
+	<div class="panel panel-default text-center">
+		<table class="table table-stripped text-center" style="width:1000px">
+			<tr>
+				<th class="text-center">Payer</th>
+				<th class="text-center">Payee</th>
+				<th class="text-center">Amount</th>
+				<th class="text-center">Date</th>
+				<th class="text-center">Mode Of Payment</th>	
+				<th class="text-center">Transaction Type</th>	
+			</tr>
+
+			<tr ng-repeat="transData in main.lastFiveTransactions">
+				<td class="text-center" ><span ng-bind="transData.payer"></span></td>
+				<td class="text-center" ><span ng-bind="transData.payee"></span></td>
+				<td class="text-center" ><span ng-bind="transData.amount"></span></td>
+				<td class="text-center" ><span ng-bind="transData.date"></span></td>
+				<td class="text-center" ><span ng-bind="transData.modeOfPayment"></span></td>
+				<td class="text-center" ><span ng-bind="transData.transType"></span></td>
+			</tr>
+		</table>
+	</div>
+</div>

@@ -1,51 +1,56 @@
-myapp.controller("addIncomeExpenseController",['$scope','$http','CRUD','$routeParams','ngDialog','$location',function($scope,$http,CRUD,$routeParams,ngDialog,$location){
-
+angular.module("expenseManagerApp").controller("addIncomeExpenseController",['$scope','$http','CRUD','$routeParams','ngDialog','$location','$rootScope','toaster','$timeout',function(vm,$http,CRUD,$routeParams,ngDialog,$location,$rootScope,toaster,$timeout){
 	//initiallizing variables
-	$scope.transactionData = [];
-	$scope.transType = $routeParams.transactionType;	 
-	$scope.selfData = "Ashwini";	
-	$scope.showAddTransaction = true;
-
-	if($scope.transType == 'income'){
-		$scope.showPayer = true;
-		$scope.showPayee = false;
-		$scope.transactionData = CRUD.getIncomeData();
+	var vm = this;
+	vm.transactionData = {};
+	vm.transType = $routeParams.transactionType;	 
+	vm.selfData = "Ashwini";	
+	vm.showAddTransaction = true;
 	
-		if(Object.keys($scope.transactionData).length === 0){
-			$scope.data_source =  CRUD.incomeUrl;
-			CRUD.getIncomeExpenseData($scope)
+	if($rootScope.routes != $location.$$path){
+		$rootScope.routes = $location.$$path;
+	}	
+
+	if(vm.transType == 'income'){
+		vm.showPayer = true;
+		vm.showPayee = false;
+		vm.transactionData = CRUD.getIncomeData();
+	
+		if(Object.keys(vm.transactionData).length === 0){
+			vm.data_source =  CRUD.incomeUrl;
+			CRUD.getIncomeExpenseData(vm)
 			.then(function(data){
 				if(typeof data === 'object') {
-					$scope.transactionData = data;
-					$scope.incomeData = data;
-					CRUD.storeIncomeData($scope);
+					vm.transactionData = data;
+					vm.incomeData = data;
+					CRUD.storeIncomeData(vm);
 				} 
 			});
 		}
 	} else {
-		$scope.showPayee = true;
-		$scope.showPayer = false;
-		$scope.transactionData = CRUD.getExpenseData();
-		if(Object.keys($scope.transactionData).length === 0){
-			$scope.data_source = CRUD.expenseUrl;
-			CRUD.getIncomeExpenseData($scope)
+		vm.showPayee = true;
+		vm.showPayer = false;
+		vm.transactionData = CRUD.getExpenseData();
+		if(Object.keys(vm.transactionData).length === 0){
+			vm.data_source = CRUD.expenseUrl;
+			CRUD.getIncomeExpenseData(vm)
 			.then(function(data){
 				if(typeof data === 'object') {
-					$scope.transactionData = data;
-					$scope.expenseData = data;
+					vm.transactionData = data;
+					vm.expenseData = data;
 				} 
 			});
 		}
 	}
 
 	// first method to be called when controller initialized. Shows view according to normal add/ recurring add  
-	$scope.addTransaction = function(){
+	vm.addTransaction = function(index){
 		if($routeParams.transactionType == 'recurring') {
-			$scope.showRecurring = true;
-			$scope.showAddTransaction = false;
+			vm.showRecurring = true;
+			vm.showAddTransaction = false;
 			return false;
 		}
-		CRUD.addTransaction($scope);		
+		
+		CRUD.addTransaction(vm);		
 	}
 
 	//seperated out common code required for adding transactions based on the type. either recurring or normal transactions.
@@ -53,76 +58,91 @@ myapp.controller("addIncomeExpenseController",['$scope','$http','CRUD','$routePa
 	function callAddRecurringTransactionSave(data,transactionType,isRecurring){
 
 		if(isRecurring == true && data!=null) {
-			$scope.transactionData = data;
-			$scope.addNew.recurringType = $scope.selectedRecurringType.name;
+			vm.transactionData = data;
+			vm.addNew.recurringType = vm.selectedRecurringType.name;
 		}
 		
 		if(transactionType == 'income'){
-			$scope.addNew.payee="Ashwini";
-			$scope.addNew.transType="income";
+			vm.addNew.payee="Ashwini";
+			vm.addNew.transType="income";
 		} else {
-			$scope.addNew.payer="Ashwini";
-			$scope.addNew.transType="expense";
+			vm.addNew.payer="Ashwini";
+			vm.addNew.transType="expense";
 		}
 
-		$scope.addNew.transactionId = $scope.transactionData.length + 1;						
+		vm.addNew.transactionId = vm.transactionData.length + 1;						
 		
-		if(Object.keys($scope.transactionData).length === 0){
-			$scope.transactionData = [];
+		if(Object.keys(vm.transactionData).length === 0){
+			vm.transactionData = [];
 		}
-		CRUD.addTransactionSave($scope);
-		return true;
+		
+		if(CRUD.lastFiveTransactions.length<5){
+			CRUD.lastFiveTransactions.push(vm.addNew);
+		} else {
+			CRUD.lastFiveTransactions.shift();
+			CRUD.lastFiveTransactions.push(vm.addNew);
+		}
+
+		CRUD.addTransactionSave(vm);
+		
 	}
 
-	$scope.addTransactionSave = function(){
-		if(CRUD.validate($scope) == true){
-			ngDialog.open({ template: 'formEmpty' });
+	vm.addTransactionSave = function(){
+		
+		if(CRUD.validate(vm) == true){
+			ngDialog.open({ template: './views/dialogTemplates/alertFormCompletion.html' });
 		    return false;
 		}
 		
 		if($routeParams.transactionType == 'income') {
-			$scope.data_source = CRUD.incomeUrl;
+			vm.data_source = CRUD.incomeUrl;
 			callAddRecurringTransactionSave(null,'income',false);
 		} else if($routeParams.transactionType == 'expense') {
-			$scope.data_source = CRUD.expenseUrl;
+			vm.data_source = CRUD.expenseUrl;
 			callAddRecurringTransactionSave(null,'expense',false);
 		} else if($routeParams.transactionType == 'recurring') {
-			if( $scope.recurringType == 'income' ) { //income
-				$scope.data_source = CRUD.recurringIncomeUrl;
-				CRUD.getIncomeExpenseData($scope)
+			if( vm.recurringType == 'income' ) { //income
+				vm.data_source = CRUD.recurringIncomeUrl;
+				CRUD.getIncomeExpenseData(vm)
 				.then(function(data){
-					if(typeof data === 'object') {
+					if(typeof data === 'object') {		
 						callAddRecurringTransactionSave(data,'income',true);
 					} 
+					
 				});
 			} else { // expense
-				$scope.data_source = CRUD.recurringExpenseUrl;
-				CRUD.getIncomeExpenseData($scope)
+				vm.data_source = CRUD.recurringExpenseUrl;
+				CRUD.getIncomeExpenseData(vm)
 				.then(function(data){
 					if(typeof data === 'object') {
 						callAddRecurringTransactionSave(data,'expense',true);
 					} 
+
 				});
 			}
 
 		}
-		$location.path('/showIncomeExpenseDetails/'+$scope.addNew.transType);	
+		
+		$timeout( function(){
+			$location.path('/showIncomeExpenseDetails/'+vm.addNew.transType);	
+		}, 2000);
+		
 	}
 
 	//showing add or expense view according to the option selected for add recurring transactions 
-	$scope.showRecurringTransaction = function(index){
-		$scope.showRecurringDuration = true;
+	vm.showRecurringTransaction = function(index){
+		vm.showRecurringDuration = true;
 		if(index == 0){
-			$scope.showPayer = true;
-			$scope.showPayee = false;
-			$scope.recurringType = 'income';
+			vm.showPayer = true;
+			vm.showPayee = false;
+			vm.recurringType = 'income';
 		} else {
-			$scope.showPayee = true;
-			$scope.showPayer = false;
-			$scope.recurringType = 'expense';
+			vm.showPayee = true;
+			vm.showPayer = false;
+			vm.recurringType = 'expense';
 		}	
-		CRUD.addTransaction($scope);		
+		CRUD.addTransaction(vm);		
 	}
 
-	$scope.addTransaction(); // calls add transaction 
+	vm.addTransaction(); // calls add transaction 
 }]);

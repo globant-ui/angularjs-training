@@ -1,5 +1,8 @@
-myapp.controller("showReportController",['$scope','CRUD',function($scope,CRUD){
+angular.module("expenseManagerApp").controller("showReportController",['$scope','CRUD','$location','$rootScope',function($scope,CRUD,$location,$rootScope){
 
+	if($rootScope.routes != $location.$$path){
+		$rootScope.routes = $location.$$path;
+	}	
 	//function to sort an array of objects based on key
 	function keysrt(key) {
 	  return function(a,b){

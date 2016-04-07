@@ -1,0 +1,44 @@
+<center>
+<div style="width:1000px" class= "panel panel-default">
+	<div class="panel-heading text-center"><h2>Expense Manager Application</h2> </div>
+	<div ng-controller="mainController as main">
+		<table class="table table-stripped" style="width:1000px">
+			<tr>
+				<th class="text-center">Total Income</th>
+				<th class="text-center">Total Expenses</th>
+				<th class="text-center">Total Balance</th>	
+			</tr>
+			<tr>
+				<td class="text-center">{{main.totalIncome}}</td>
+				<td class="text-center">{{main.totalExpense}}</td>
+				<td class="text-center">{{main.totalIncome - main.totalExpense}}</td>
+			</tr>
+		</table>
+		
+  		<nav class="navbar navbar-default">
+		  <ul class="nav nav-pills nav-justified">
+
+		      <li><a href="#/showIncomeExpenseDetails/income" class="view" ng-class="{viewactive: routes == '/showIncomeExpenseDetails/income'}">View Income</a>
+			  </li>
+
+		      <li ><a href="#/showIncomeExpenseDetails/expense" class="view" ng-class="{viewactive: routes == '/showIncomeExpenseDetails/expense'}">View Expenses</a></li>
+
+		      <li><a href="#/addIncomeExpenseDetails/income" class="view" ng-class="{viewactive: routes == '/addIncomeExpenseDetails/income'}">Add Income</a></li>
+
+		      <li><a href="#/addIncomeExpenseDetails/expense" class="view" ng-class="{viewactive: routes == '/addIncomeExpenseDetails/expense'}">Add Expense</a></li>
+
+		      <li><a href="#/addIncomeExpenseDetails/recurring" class="view" ng-class="{viewactive: routes == '/addIncomeExpenseDetails/recurring'}">Recurring</a></li>
+
+		      <li><a href="#/showReportsDetails" class="view" ng-class="{viewactive: routes == '/showReportsDetails'}">Reports</a></li>
+		      
+		    </ul>
+		</nav>
+		<div ng-if="routes==''">
+			<ng-include src="'views/showLastFiveTransactions.html'"> </ng-include>
+		</div>
+  		
+  		<ng-view class="ng-cloak"></ng-view>
+
+	</div>
+</div>
+</center>

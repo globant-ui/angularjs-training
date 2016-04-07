@@ -1,7 +1,7 @@
-myapp.directive('notificationPanel',function(){
+angular.module("expenseManagerApp").directive('notificationPanel',function(){
 	return {
 		restrict: 'E',
 		scope: true,
-		templateUrl: 'views/content.html'
+		templateUrl: 'views/directives/notification/showRecurringDetails.html'
 	};
 });
