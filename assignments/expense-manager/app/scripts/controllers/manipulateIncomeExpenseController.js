@@ -1,35 +1,43 @@
-angular.module("expenseManagerApp").controller("manipulateIncomeExpenseController",['$scope','$http','CRUD','$routeParams','ngDialog','$location','$rootScope',function($scope,$http,CRUD,$routeParams,ngDialog,$location,$rootScope){
+angular.module("expenseManagerApp").controller("manipulateIncomeExpenseController",['$scope','$http','CRUD','$routeParams','ngDialog','$location','$rootScope',function(vm,$http,CRUD,$routeParams,ngDialog,$location,$rootScope){
+
+	var vm = this;
 	
 	if($rootScope.routes != $location.$$path){
 		$rootScope.routes = $location.$$path;
 	}	
 
 	//editing transaction
-	$scope.editTransaction = function(index){
-		console.log($scope.data_source);
-		CRUD.editTransaction($scope,index);		
+	vm.editTransaction = function(index){
+		if(vm.data_source == CRUD.incomeUrl){
+			vm.transactionData = CRUD.incomeData;
+		} else if(vm.data_source == CRUD.expenseUrl) {
+			vm.transactionData = CRUD.expenseData;
+		}
+		
+		CRUD.editTransaction(vm,index);		
 	}
 
 	//updating transaction after editing
-	$scope.updateTransaction = function(){
-		CRUD.updateTransaction($scope);	
-		$location.path('/showIncomeExpenseDetails/'+$scope.addNew.transType);
+	vm.updateTransaction = function(){
+
+		CRUD.updateTransaction(vm);	
+		$location.path('/showIncomeExpenseDetails/'+vm.addNew.transType);
 	}
 
 	//deleting transaction
-	$scope.deleteTransaction = function(index){
+	vm.deleteTransaction = function(index){
 		console.log("comes here");
 
 		 ngDialog.openConfirm({
             template: './views/dialogTemplates/confirmDeletion.html',
             className: 'ngdialog-theme-default'
         }).then(function (value) {
-			if($scope.transType == 'income'){
-				$scope.data_source = CRUD.incomeUrl;
+			if(vm.transType == 'income'){
+				vm.data_source = CRUD.incomeUrl;
 			} else {
-				$scope.data_source = CRUD.expenseUrl;
+				vm.data_source = CRUD.expenseUrl;
 			}
-			CRUD.deleteTransaction($scope,index);	
+			CRUD.deleteTransaction(vm,index);	
         }, function (reason) {
             console.log('Modal promise rejected. Reason: ', reason);
         });			
@@ -38,25 +46,26 @@ angular.module("expenseManagerApp").controller("manipulateIncomeExpenseControlle
 	//invoking the methods according to the user input action and initializing respective myjson urls and respective data
 	if($routeParams.action == 'edit'){
 		if($routeParams.transactionType == 'income' || $routeParams.transactionType == 'recurincome'){
-			$scope.showPayer = true;
-			$scope.transactionData = CRUD.incomeData;
+			vm.showPayer = true;
+			vm.transactionData = CRUD.incomeData;
 			if($routeParams.transactionType == 'income') {
-				$scope.data_source = CRUD.incomeUrl;
+				vm.data_source = CRUD.incomeUrl;
 			} else {
-				$scope.data_source = CRUD.recurringIncomeUrl;
+				vm.data_source = CRUD.recurringIncomeUrl;
 			}
 			
 		} else if($routeParams.transactionType == 'expense' || $routeParams.transactionType == 'recurexpense'){
-			$scope.showPayee = true;
-			$scope.transactionData = CRUD.expenseData;
+			vm.showPayee = true;
+			vm.transactionData = CRUD.expenseData;
 			if($routeParams.transactionType == 'expense') {
-				$scope.data_source = CRUD.expenseUrl;
+				vm.data_source = CRUD.expenseUrl;
 			} else {
-				$scope.data_source = CRUD.recurringExpenseUrl;
+				vm.data_source = CRUD.recurringExpenseUrl;
 			}
 		}
-		$scope.editTransaction($routeParams.index);
+		vm.editTransaction($routeParams.index);
 	} else if($routeParams.action == 'delete') {
-		$scope.deleteTransaction($routeParams.index);
+		vm.deleteTransaction($routeParams.index);
 	}
+	
 }]);

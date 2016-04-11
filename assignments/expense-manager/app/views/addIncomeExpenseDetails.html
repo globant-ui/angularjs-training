@@ -1,24 +1,24 @@
 <!-- Same view for add and edit transactions -->
-<div ng-controller="addIncomeExpenseController" novalidate>
+<div ng-controller="addIncomeExpenseController as addCtrl" novalidate>
 	<toaster-container toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-center'}"></toaster-container>
                 
 	<!-- Showing income/expense options in case of Add recurring transactions-->
-	<div ng-show="showRecurring" class="text-center">
-		<button type="button" class="btn btn-primary" ng-click="showRecurringTransaction(0)">Add Income</button>
-		<button type="button" class="btn btn-primary" ng-click="showRecurringTransaction(1)">Add Expense</button>
+	<div ng-show="addCtrl.showRecurring" class="text-center">
+		<button type="button" class="btn btn-primary" ng-click="addCtrl.showRecurringTransaction(0)">Add Income</button>
+		<button type="button" class="btn btn-primary" ng-click="addCtrl.showRecurringTransaction(1)">Add Expense</button>
 	</div>
 
 	<!-- Add income/expense details-->
-	<div ng-show="showAddTransaction" class="panel panel-default text-center">
-		<form name="transactionForm" novalidate>
+	<div ng-show="addCtrl.showAddTransaction" class="panel panel-default text-center">
+		<form name="addCtrl.transactionForm" novalidate>
 			<div ng-controller="manipulateIncomeExpenseController">
 			<div class="panel-heading text-center"><h3 class="panel-heading">Add {{transType.substring(0,1).toUpperCase()+transType.substring(1)}} Details</h3></div>
 			<center>
 			<table class="table table-hover" style="width:600px">
 				<tr class="text-center">
-					<td ng-if="showPayer"> <label>Payer :</label> </td>
-					<td ng-if="showPayer">
-						<input type="text" name="incomeExpensePayer" ng-model="addNew.payer" placeholder="Enter Payer Name" required ng-pattern="/^[a-zA-Z\s]*$/" >
+					<td ng-if="addCtrl.showPayer"> <label>Payer :</label> </td>
+					<td ng-if="addCtrl.showPayer">
+						<input type="text" name="incomeExpensePayer" ng-model="addCtrl.addNew.payer" placeholder="Enter Payer Name" required ng-pattern="/^[a-zA-Z\s]*$/" >
 						<span style="color:red" ng-show="transactionForm.incomeExpensePayer.$dirty && transactionForm.incomeExpensePayer.$invalid">
 		                	Payer should be string
 		           		</span>
@@ -28,7 +28,7 @@
 
 		        	<td ng-if="showPayee"><label>Payee :</label> </td>
 		        	<td ng-if="showPayee">
-		        		<input type="text" name="incomeExpensePayee" ng-model="addNew.payee" placeholder="Enter Payee Name" required ng-pattern="/^[a-zA-Z\s]*$/" data-fv-notempty-message="The Payee is required">
+		        		<input type="text" name="incomeExpensePayee" ng-model="addCtrl.addNew.payee" placeholder="Enter Payee Name" required ng-pattern="/^[a-zA-Z\s]*$/" data-fv-notempty-message="The Payee is required">
 						<span style="color:red" ng-show="transactionForm.incomeExpensePayee.$dirty && transactionForm.incomeExpensePayee.$invalid">
 		               		Payee should be string
 		            	</span>
@@ -42,8 +42,8 @@
 				<tr class="text-center" ng-show="showRecurringDuration">
 					<td> <label>Recurring Type :</label> </td>
 					<td>
-						<input type="radio" ng-model="selectedRecurringType.name" value="Monthly" />Monthly
-		                <input type="radio"  ng-model="selectedRecurringType.name" value="Yearly" />Yearly
+						<input type="radio" ng-model="addCtrl.selectedRecurringType.name" value="Monthly" />Monthly
+		                <input type="radio"  ng-model="addCtrl.selectedRecurringType.name" value="Yearly" />Yearly
 		                
 			    	</td>
 				</tr>
@@ -51,7 +51,7 @@
 				<tr class="text-center">
 					<td> <label>Category :</label> </td>
 					<td>
-						<select ng-model="addNew.category">
+						<select ng-model="addCtrl.addNew.category">
 						  <option value="">Enter Category Name</option>
 				          <option ng-repeat="types in main.category" value="{{types}}">
 				            {{types}}
@@ -63,7 +63,7 @@
 				<tr class="text-center">
 					<td> <label>Sub-category :</label> </td>
 					<td>
-						<select ng-model="addNew.subcategory">
+						<select ng-model="addCtrl.addNew.subcategory">
 							<option value="">Enter Sub-Category</option>
 				          <option ng-repeat="types in main.subcategory" value="{{types}}">
 				            {{types}}
@@ -74,7 +74,7 @@
 
 				<tr class="text-center">
 					<td> <label>Amount : </label></td>
-					<td><input type="number" name="incomeExpenseAmount" ng-model="addNew.amount" placeholder="Enter Amount" ng-pattern="/^[0-9]{1,7}$/" step="0.01"><span style="color:red" ng-show="transactionForm.incomeExpenseAmount.$dirty && transactionForm.incomeExpenseAmount.$invalid">
+					<td><input type="number" name="incomeExpenseAmount" ng-model="addCtrl.addNew.amount" placeholder="Enter Amount" ng-pattern="/^[0-9]{1,7}$/" step="0.01"><span style="color:red" ng-show="transactionForm.incomeExpenseAmount.$dirty && transactionForm.incomeExpenseAmount.$invalid">
 		                Amount is invalid
 		            </span></td>
 				</tr>
@@ -86,7 +86,7 @@
 		            	<datepicker date-format="yyyy-MM-dd" 
 						      button-prev='<i class="fa fa-arrow-circle-left"></i>'
 						      button-next='<i class="fa fa-arrow-circle-right"></i>'>
-      						  <input ng-model="addNew.date" type="text" class="angular-datepicker-input"/>
+      						  <input ng-model="addCtrl.addNew.date" type="text" class="angular-datepicker-input"/>
     					</datepicker>
     					<span style="color:red" ng-show="transactionForm.incomeExpenseDate.$dirty  && transactionForm.incomeExpenseDate.$invalid">
 		                Enter Valid date
@@ -99,7 +99,7 @@
 					<td>
 						<label ng-repeat="modes in main.modeOfPayment"> 
 							<input type="radio" value="{{modes}}"
-					   		ng-model="addNew.modeOfPayment"
+					   		ng-model="addCtrl.addNew.modeOfPayment"
 					    	name="incomeModeOfPayment">
 					    	{{modes}} &nbsp
 						</label>				
@@ -109,7 +109,7 @@
 
 				<tr class="text-center">
 					<td>  <label>Notes : </label> </td>
-					<td><input name="notes" ng-model="addNew.notes" placeholder="Enter Notes" ng-maxlength="20">
+					<td><input name="notes" ng-model="addCtrl.addNew.notes" placeholder="Enter Notes" ng-maxlength="20">
 					<span style="color:red" ng-show="transactionForm.notes.$dirty && transactionForm.notes.$invalid">
 		                Notes should not exceed 20 characters
 		            </span></td>
@@ -118,7 +118,7 @@
 				<tr class="text-center">
 					<td> </td>
 					<td>
-						<button ng-click="addTransactionSave()" ng-hide="addNew.indexData"  class="btn-primary">Submit</button>
+						<button ng-click="addCtrl.addTransactionSave()" ng-hide="addNew.indexData"  class="btn-primary">Submit</button>
 					</td>
 				</tr>
 

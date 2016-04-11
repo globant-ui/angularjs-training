@@ -37,6 +37,7 @@ angular.module("expenseManagerApp").controller("addIncomeExpenseController",['$s
 				if(typeof data === 'object') {
 					vm.transactionData = data;
 					vm.expenseData = data;
+					CRUD.storeExpenseData(vm);
 				} 
 			});
 		}

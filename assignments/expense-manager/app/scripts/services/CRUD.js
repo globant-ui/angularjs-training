@@ -44,9 +44,9 @@ angular.module("expenseManagerApp").service("CRUD",function($http,$q,$timeout,us
 		var lastFiveTransactions = this.lastFiveTransactions;
 		scope.transactionData.push(scope.addNew);	
 		toaster.pop({type: 'wait', title: "Adding Record", body:""});
-
+		
 		$http({
-			method: 'POST',
+			method: 'PUT',
 			url: scope.data_source,
 			data: angular.toJson(scope.transactionData)
 		})
