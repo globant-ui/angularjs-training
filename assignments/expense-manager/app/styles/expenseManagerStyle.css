@@ -55,3 +55,7 @@ input.ng-dirty.ng-invalid{
 table.table.table-hover {
     border: 2px solid black;
 }
+
+.no-data{
+    color: red;
+}

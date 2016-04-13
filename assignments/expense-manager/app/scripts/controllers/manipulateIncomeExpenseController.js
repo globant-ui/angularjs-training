@@ -6,14 +6,15 @@ angular.module("expenseManagerApp").controller("manipulateIncomeExpenseControlle
 		$rootScope.routes = $location.$$path;
 	}	
 
+	
+
 	//editing transaction
 	vm.editTransaction = function(index){
 		if(vm.data_source == CRUD.incomeUrl){
-			vm.transactionData = CRUD.incomeData;
+		 	vm.transactionData = CRUD.incomeData;
 		} else if(vm.data_source == CRUD.expenseUrl) {
 			vm.transactionData = CRUD.expenseData;
 		}
-		
 		CRUD.editTransaction(vm,index);		
 	}
 
@@ -25,19 +26,22 @@ angular.module("expenseManagerApp").controller("manipulateIncomeExpenseControlle
 	}
 
 	//deleting transaction
-	vm.deleteTransaction = function(index){
-		console.log("comes here");
-
+	vm.deleteTransaction = function(transactionData,index){
+		
 		 ngDialog.openConfirm({
             template: './views/dialogTemplates/confirmDeletion.html',
             className: 'ngdialog-theme-default'
         }).then(function (value) {
-			if(vm.transType == 'income'){
-				vm.data_source = CRUD.incomeUrl;
-			} else {
-				vm.data_source = CRUD.expenseUrl;
-			}
-			CRUD.deleteTransaction(vm,index);	
+        	if(transactionData.length>0){
+        		if(transactionData[0].transType == 'income'){
+					vm.data_source = CRUD.incomeUrl;
+				} else if(transactionData[0].transType == 'expense') {
+					vm.data_source = CRUD.expenseUrl;
+				}
+				vm.transactionData = transactionData;
+				
+				CRUD.deleteTransaction(vm,index);
+        	}
         }, function (reason) {
             console.log('Modal promise rejected. Reason: ', reason);
         });			

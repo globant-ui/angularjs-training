@@ -26,8 +26,8 @@
 
 		        	</td>
 
-		        	<td ng-if="showPayee"><label>Payee :</label> </td>
-		        	<td ng-if="showPayee">
+		        	<td ng-if="addCtrl.showPayee"><label>Payee :</label> </td>
+		        	<td ng-if="addCtrl.showPayee">
 		        		<input type="text" name="incomeExpensePayee" ng-model="addCtrl.addNew.payee" placeholder="Enter Payee Name" required ng-pattern="/^[a-zA-Z\s]*$/" data-fv-notempty-message="The Payee is required">
 						<span style="color:red" ng-show="transactionForm.incomeExpensePayee.$dirty && transactionForm.incomeExpensePayee.$invalid">
 		               		Payee should be string

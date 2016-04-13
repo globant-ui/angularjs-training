@@ -8,40 +8,47 @@ angular.module("expenseManagerApp").controller("addIncomeExpenseController",['$s
 	
 	if($rootScope.routes != $location.$$path){
 		$rootScope.routes = $location.$$path;
-	}	
+	}
 
-	if(vm.transType == 'income'){
-		vm.showPayer = true;
-		vm.showPayee = false;
-		vm.transactionData = CRUD.getIncomeData();
-	
-		if(Object.keys(vm.transactionData).length === 0){
-			vm.data_source =  CRUD.incomeUrl;
-			CRUD.getIncomeExpenseData(vm)
-			.then(function(data){
-				if(typeof data === 'object') {
-					vm.transactionData = data;
-					vm.incomeData = data;
-					CRUD.storeIncomeData(vm);
-				} 
-			});
-		}
-	} else {
-		vm.showPayee = true;
-		vm.showPayer = false;
-		vm.transactionData = CRUD.getExpenseData();
-		if(Object.keys(vm.transactionData).length === 0){
-			vm.data_source = CRUD.expenseUrl;
-			CRUD.getIncomeExpenseData(vm)
-			.then(function(data){
-				if(typeof data === 'object') {
-					vm.transactionData = data;
-					vm.expenseData = data;
-					CRUD.storeExpenseData(vm);
-				} 
-			});
+	function getAndShowIncomeExpenseData(transactionType){
+		if( vm.transType == 'income' || vm.transType == 'expense' ){
+			transData = eval('this.'+transactionType+'Data');
+			
+			if(vm.transType == 'income'){
+				vm.showPayer = true;
+				vm.showPayee = false;
+				vm.transactionData = CRUD.getIncomeData();
+			}
+			else {
+				vm.showPayee = true;
+				vm.showPayer = false;
+				vm.transactionData = CRUD.getExpenseData();
+			}
+			//vm.transactionData = eval('CRUD.get'+transactionType.substring(0,1).toUpperCase()+transactionType.substring(1)+'Data()');
+		
+			if(Object.keys(vm.transactionData).length === 0){
+				
+				vm.data_source =  eval('CRUD.'+vm.transType+'Url');
+				CRUD.getIncomeExpenseData(vm)
+				.then(function(data){
+					if(typeof data === 'object') {
+						vm.transactionData = data;
+						if(vm.transType == 'income'){
+							vm.incomeData = data;
+							CRUD.storeIncomeData();
+						}
+						else {
+							vm.expenseData = data;
+							CRUD.storeExpenseData();
+						}
+					} 
+				});
+			}
 		}
 	}
+	
+	
+	getAndShowIncomeExpenseData(vm.transType);
 
 	// first method to be called when controller initialized. Shows view according to normal add/ recurring add  
 	vm.addTransaction = function(index){
@@ -70,8 +77,7 @@ angular.module("expenseManagerApp").controller("addIncomeExpenseController",['$s
 			vm.addNew.payer="Ashwini";
 			vm.addNew.transType="expense";
 		}
-
-		vm.addNew.transactionId = vm.transactionData.length + 1;						
+		vm.addNew.transactionId = _.reduce(vm.transactionData, function(memo, num){ if(memo.transactionId>num.transactionId) { return memo.transactionId+1;} else { return num.transactionId+1;} }, 0);
 		
 		if(Object.keys(vm.transactionData).length === 0){
 			vm.transactionData = [];

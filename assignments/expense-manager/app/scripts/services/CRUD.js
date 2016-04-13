@@ -1,5 +1,5 @@
 
-angular.module("expenseManagerApp").service("CRUD",function($http,$q,$timeout,usSpinnerService,toaster){
+angular.module("expenseManagerApp").service("CRUD",['$http','$q','$timeout','usSpinnerService','toaster','serverCall',function($http,$q,$timeout,usSpinnerService,toaster,serverCall){
 
 	//the only service responsible for adding ,editing, deleting, income-expense details and showing and hiding views.
 	// storing the income -expense details in variables that are available in all controllers, hence reducing the server calls.
@@ -29,12 +29,8 @@ angular.module("expenseManagerApp").service("CRUD",function($http,$q,$timeout,us
 
 	var saveLastFiveTransactions = function(lastFiveUrl,lastFiveTransactions) {
 		console.log(lastFiveTransactions);
-		$http({
-			method: 'PUT',
-			url: lastFiveUrl,
-			data: angular.toJson(lastFiveTransactions)
-		})
-		.then(function(response){		
+		serverCall.putData(lastFiveUrl,lastFiveTransactions)
+		.then(function(data){
 			console.log("done");
 		});
 	}
@@ -45,16 +41,12 @@ angular.module("expenseManagerApp").service("CRUD",function($http,$q,$timeout,us
 		scope.transactionData.push(scope.addNew);	
 		toaster.pop({type: 'wait', title: "Adding Record", body:""});
 		
-		$http({
-			method: 'PUT',
-			url: scope.data_source,
-			data: angular.toJson(scope.transactionData)
-		})
-		.then(function(response){
+		serverCall.putData(scope.data_source,scope.transactionData)
+		.then(function(data){
 			saveLastFiveTransactions(lastFiveUrl,lastFiveTransactions);			
 			return true;
 		});
-
+		
 	}
 
 	this.editTransaction = function(scope,index){
@@ -67,11 +59,7 @@ angular.module("expenseManagerApp").service("CRUD",function($http,$q,$timeout,us
 	this.deleteTransaction = function(scope,index) {
 	
 		scope.transactionData.splice(index,1);
-		$http({
-			method: 'DELETE',
-			url: scope.data_source,
-			data: angular.toJson(scope.transactionData)
-		})
+		serverCall.putData(scope.data_source,scope.transactionData)
 		.then(function(response){
 			console.log("done");
 			scope.addNew = {transactionId:"",payer:"",payee:"",category:"",subcategory:"",amount:"",date:"",modeOfPayment:"",notes:"",transType:""};	
@@ -81,25 +69,16 @@ angular.module("expenseManagerApp").service("CRUD",function($http,$q,$timeout,us
 	}
 
 	this.updateTransaction = function(scope) {
-
-		$http({
-			method: 'PUT',
-			url: scope.data_source,
-			data: angular.toJson(scope.transactionData)
-		})
+		serverCall.putData(scope.data_source,scope.transactionData)
 		.then(function(response){
 			console.log("done");
 			return true;
 		});
-		
 	}
 
 	this.getIncomeExpenseData = function(scope){
-		
-		return $http({
-					method: 'GET',
-					url: scope.data_source
-				})
+
+		return serverCall.getData(scope.data_source)
 				.then(function(response){
 					if(typeof response.data === 'object' ) {
 						return response.data;
@@ -163,6 +142,7 @@ angular.module("expenseManagerApp").service("CRUD",function($http,$q,$timeout,us
 	this.getTotalDetails = function(scope) {
 		//getting income data from service
 		scope.data_source = this.incomeUrl;
+		
 		this.getIncomeExpenseData(scope)
 		.then(function(data){
 			var processData = data;
@@ -227,20 +207,19 @@ angular.module("expenseManagerApp").service("CRUD",function($http,$q,$timeout,us
 	}
 
 	this.getTransactionData = function(transactionType,scope) {
-
-	
+		
 		transData = eval('this.'+transactionType+'Data');
 		scopeTransData = eval('scope.'+transactionType+'Data');
 		
-		if(Object.keys(transData).length === 0){
+		if(typeof transData == undefined || Object.keys(transData).length === 0){
 			console.log("cms here");
 			scope.data_source = eval('this.'+transactionType+'Url');
 			this.getIncomeExpenseData(scope)
 			.then(function(data){
 				transData = data;
+				
 			});
 		}
-
 		$timeout( function(){
 			scopeTransData = transData;
 			scope.transactionData = scopeTransData;
@@ -267,6 +246,8 @@ angular.module("expenseManagerApp").service("CRUD",function($http,$q,$timeout,us
 			scope.showDirective= true;	
 			this.showIncomeExpenseDetails(scope);
 		}
+
+		
 	}
 
 	this.validate = function(scope) {
@@ -279,4 +260,4 @@ angular.module("expenseManagerApp").service("CRUD",function($http,$q,$timeout,us
 		return false;
 	}
 
-});
+}]);

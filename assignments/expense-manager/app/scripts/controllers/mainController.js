@@ -5,6 +5,7 @@ angular.module("expenseManagerApp").controller("mainController",['$scope','CRUD'
 		vm.category = CATEGORY;
 		vm.subcategory = SUB_CATEGORY;
 		vm.selectedRecurringType = SELECTED_RECURRING_TYPE;
+		
 		vm.success = CRUD.getTotalDetails(vm); //getting the total income, expense and balance.
 		
 	}
