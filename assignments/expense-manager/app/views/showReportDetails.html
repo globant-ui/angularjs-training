@@ -1,0 +1,64 @@
+<div class="search">
+	<label>Search: <input class="search-input" ng-model="searchText"></label>
+	<label><a href="javascript:window.print()" class="btn primary large no-print"><span class="glyphicon glyphicon-print"></span></a></label>
+	<div class="btn-group" data-ng-class="{open: open}">
+    <button class="btn">Filter by:</button>
+    <button class="btn dropdown-toggle" data-ng-click="open=!open"><span class="caret"></span>
+
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+        <li><a data-ng-click="selectedFilter=[];"><i class="icon-remove-sign"></i>  Uncheck All</a>
+        </li>
+        <li class="divider"></li>
+        <li data-ng-repeat="modes in MODE_OF_PAYMENT"> <a data-ng-click="setSelectedFilter(modes)">{{modes}}<span data-ng-class="isChecked(modes)"></span></a>
+        <li data-ng-repeat="category in CATEGORY"> <a data-ng-click="setSelectedFilter(category)">{{category}}<span data-ng-class="isChecked(category)"></span></a>
+        
+        </li>
+    </ul>
+	</div>
+</div>
+
+
+<!-- Showing sorted income and expense details according to payer and category keys-->
+<div class="panel panel-default">
+	<div class="panel-heading text-center"><h3 class="panel-heading">Income Details</h3></div>
+	<table ng-show="filteredIncome.length" class="table table-stripped" style="width:1000px">
+		<tr>
+			<th class="text-center">Payer</th>
+			<th class="text-center">Amount</th>
+			<th class="text-center">Date</th>
+			<th class="text-center">Category</th>
+			<th class="text-center">Mode Of Payment</th>	
+		</tr>
+
+		<tr ng-repeat="income in filteredIncome = (incomeData| keySortFilter:selectedFilter)">
+			<td class="text-center" ng-bind="income.payer"></td>
+			<td class="text-center" ng-bind="income.amount"></td>
+			<td class="text-center" ng-bind="income.date| date:'yyyy-MM-dd'"></td>
+			<td class="text-center" ng-bind="income.category"></td>
+			<td class="text-center" ng-bind="income.modeOfPayment"></td>
+		</tr>
+	</table>
+	<p ng-hide="filteredIncome.length" class="no-data">Nothing here!</p>
+
+<div class="panel-heading text-center"><h3 class="panel-heading">Expense Details</h3></div>
+<table ng-show="filteredExpense.length" class="table table-stripped" style="width:1000px">
+	<tr>
+		<th class="text-center">Payee</th>
+		<th class="text-center">Amount</th>
+		<th class="text-center">Date</th>
+		<th class="text-center">Category</th>
+		<th class="text-center">Mode Of Payment</th>	
+		
+	</tr>
+	<tr ng-repeat="expense in filteredExpense = (expenseData| keySortFilter:selectedFilter)">
+		<td class="text-center" ng-bind="expense.payee"></td>
+		<td class="text-center" ng-bind="expense.amount"></td>
+		<td class="text-center" ng-bind="expense.date| date:'yyyy-MM-dd'"></td>
+		<td class="text-center" ng-bind="expense.category"></td>
+		<td class="text-center" ng-bind="expense.modeOfPayment"></td>
+	</tr>
+	
+</table>
+<p ng-hide="filteredExpense.length" class="no-data">Nothing here!</p>
+</div>

@@ -1,0 +1,113 @@
+<div ng-controller="manipulateIncomeExpenseController as maniCtrl">
+	<!-- Manipulate income/expense details-->
+	<div ng-show="maniCtrl.showAddTransaction" class="panel panel-default text-center">
+		<form name="maniCtrl.transactionForm" novalidate>
+			<div >
+			<div class="panel-heading text-center"><h3 class="panel-heading">Update {{transType.substring(0,1).toUpperCase()+transType.substring(1)}} Details</h3></div>
+			<center>
+			<table class="table table-hover" style="width:600px">
+				<tr class="text-center">
+					<td ng-if="maniCtrl.showPayer"> <label>Payer :</label> </td>
+					<td ng-if="maniCtrl.showPayer">
+						<input type="text" name="incomeExpensePayer" ng-model="maniCtrl.addNew.payer" placeholder="Enter Payer Name" required ng-pattern="/^[a-zA-Z\s]*$/" >
+						<span style="color:red" ng-show="transactionForm.incomeExpensePayer.$dirty && transactionForm.incomeExpensePayer.$invalid">
+		                	Payer should be string
+		           		</span>
+		            	<input ng-model="addNew.payee" hidden ng-value="{{selfData}}">
+
+		        	</td>
+
+		        	<td ng-if="showPayee"><label>Payee :</label> </td>
+		        	<td ng-if="showPayee">
+		        		<input type="text" name="incomeExpensePayee" ng-model="maniCtrl.addNew.payee" placeholder="Enter Payee Name" required ng-pattern="/^[a-zA-Z\s]*$/" data-fv-notempty-message="The Payee is required">
+						<span style="color:red" ng-show="transactionForm.incomeExpensePayee.$dirty && transactionForm.incomeExpensePayee.$invalid">
+		               		Payee should be string
+		            	</span>
+		            	<input ng-model="addNew.payer" hidden ng-value="{{selfData}}">
+						
+		            </td>
+					
+				</tr>
+
+
+				<tr class="text-center">
+					<td> <label>Category :</label> </td>
+					<td>
+						<select ng-model="maniCtrl.addNew.category">
+						  <option value="">Enter Category Name</option>
+				          <option ng-repeat="types in main.category" value="{{types}}">
+				            {{types}}
+				          </option>
+				        </select>
+			    	</td>
+				</tr>
+
+				<tr class="text-center">
+					<td> <label>Sub-category :</label> </td>
+					<td>
+						<select ng-model="maniCtrl.addNew.subcategory">
+							<option value="">Enter Sub-Category</option>
+				          <option ng-repeat="types in main.subcategory" value="{{types}}">
+				            {{types}}
+				          </option>
+				        </select>
+			    	</td>
+				</tr>
+
+				<tr class="text-center">
+					<td> <label>Amount : </label></td>
+					<td><input type="number" name="incomeExpenseAmount" ng-model="maniCtrl.addNew.amount" placeholder="Enter Amount" ng-pattern="/^[0-9]{1,7}$/" step="0.01"><span style="color:red" ng-show="transactionForm.incomeExpenseAmount.$dirty && transactionForm.incomeExpenseAmount.$invalid">
+		                Amount is invalid
+		            </span></td>
+				</tr>
+
+				<tr class="text-center">
+					<td> <label>Date : </label> </td>
+					
+		            <td> 
+		            	<datepicker date-format="yyyy-MM-dd" 
+						      button-prev='<i class="fa fa-arrow-circle-left"></i>'
+						      button-next='<i class="fa fa-arrow-circle-right"></i>'>
+      						  <input ng-model="maniCtrl.addNew.date" type="text" class="angular-datepicker-input"/>
+    					</datepicker>
+    					<span style="color:red" ng-show="transactionForm.incomeExpenseDate.$dirty  && transactionForm.incomeExpenseDate.$invalid">
+		                Enter Valid date
+		            	</span>
+		            </td>
+				</tr>
+
+				<tr class="text-center">
+					<td> <label>Mode of payment : </label> </td>
+					<td>
+						<label ng-repeat="modes in main.modeOfPayment"> 
+							<input type="radio" value="{{modes}}"
+					   		ng-model="maniCtrl.addNew.modeOfPayment"
+					    	name="incomeModeOfPayment">
+					    	{{modes}} &nbsp
+						</label>				
+				
+		        	</td>
+				</tr>
+
+				<tr class="text-center">
+					<td>  <label>Notes : </label> </td>
+					<td><input name="notes" ng-model="maniCtrl.addNew.notes" placeholder="Enter Notes" ng-maxlength="20">
+					<span style="color:red" ng-show="transactionForm.notes.$dirty && transactionForm.notes.$invalid">
+		                Notes should not exceed 20 characters
+		            </span></td>
+				</tr>
+
+				<!-- Showing Done button only in case of edit-->
+				<tr class="text-center">
+					<td> </td>
+					<td>
+						<button ng-click="maniCtrl.updateTransaction()" ng-show="maniCtrl.addNew.indexData" class="btn-primary">Done</button>
+					</td>
+				</tr>
+
+			</table>
+			</center>
+		</form>
+	</div>
+</div>
+</div>

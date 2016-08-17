@@ -1,0 +1,46 @@
+<div ng-cloak>
+<span us-spinner="{left:'50%' ,top:'80%' }" spinner-theme="bigBlue" style="left:50%;top:80%;" spinner-key="spinner-1" spinner-start-active="true"></span>
+
+<h3 ng-show="noTransactionData">Oops! No <span ng-bind="transType.substring(0,1).toUpperCase()+transType.substring(1)"></span> details found!!!</h3>
+<div ng-show="showTransaction" class="panel panel-default">
+	<div class="search">
+		<label>Search: <input class="search-input" ng-model="searchText"></label>
+		
+	</div>
+	<div class="panel-heading text-center"><h3 class="panel-heading"><span ng-bind="transType.substring(0,1).toUpperCase()+transType.substring(1)"></span>  Details</h3></div>
+	
+	<br>
+	<!-- Showing income/expense details-->
+	<table ng-show="filteredData.length" class="table table-stripped" style="width:1000px">
+		<tr>
+			<th class="text-center" ng-show="showPayer">Payer</th>
+			<th class="text-center" ng-show="showPayee">Payee</th>
+			<th class="text-center">Amount</th>
+			<th class="text-center">Date</th>
+			<th class="text-center">Mode Of Payment</th>	
+			<th class="text-center"></th>
+			<th class="text-center"></th>
+		</tr>
+
+		<tr ng-repeat="transData in filteredData = (transactionData| filter: searchText)" ng-controller="manipulateIncomeExpenseController as maniCtrl">
+			<!-- <inline-edit accessor="accessor"></inline-edit> -->
+
+			<td class="text-center" ng-show="showPayer"><span inline-edit accessor="accessor" type="text" transaction="{{transType}}" data="{{transData}}" entiredata="{{transactionData}}" ng-bind="transData.payer"></span></td>
+			<td class="text-center" ng-show="showPayee"><span inline-edit accessor="accessor" type="text" transaction="{{transType}}" data="{{transData}}" entiredata="{{transactionData}}" ng-bind="transData.payee"></span></td>
+			<td class="text-center" ><span inline-edit accessor="accessor" type="number" transaction="{{transType}}" data="{{transData}}" entiredata="{{transactionData}}" ng-bind="transData.amount"></span></td>
+			<td class="text-center" ><span inline-edit accessor="accessor" type="date" transaction="{{transType}}" data="{{transData}}" entiredata="{{transactionData}}" ng-bind="transData.date"></span></td>
+			<td class="text-center" ><span inline-edit accessor="accessor" type="radio" transaction="{{transType}}" data="{{transData}}" entiredata="{{transactionData}}" ng-bind="transData.modeOfPayment"></span></td>
+
+			<td class="text-center" ng-click="viewTransaction($index)"><i class="glyphicon glyphicon-info-sign"></i></td>
+			<td class="text-center" ><a href="#/manipulateIncomeExpenseDetails/{{transType}}/edit/{{$index}}"><i class="glyphicon glyphicon-edit"></i></a></td>
+			<td  class="text-center" ng-click="maniCtrl.deleteTransaction(transactionData,$index)"><i class="glyphicon glyphicon-trash"></i></td>
+		</tr>
+	</table>
+	<p ng-hide="filteredData.length" class="no-data">Nothing here!</p>
+
+	<!-- Custom Directive -->
+	<notification-panel ng-show="showDirective"></notification-panel>
+</div>
+
+
+</div>
