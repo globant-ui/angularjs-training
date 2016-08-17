@@ -1,0 +1,36 @@
+<!-- /*Income Details View*/ -->
+<h1>Income Details</h1>
+<div>
+    <input class="searchField" ng-model="searchText" type="text" placeholder="Search">
+</div>
+<div class="table-responsive">  
+  <table class="table table-striped table-hover">
+  <tr>
+    <th>Id</th>
+    <th>payer</th>
+    <th>payee</th>
+    <th>category</th>
+    <th>subCategory</th>
+    <th>amount</th>
+    <th>date</th> 
+    <th>modeOfPayment</th>
+    <th>noteType</th>
+    <th>Operation</th>
+  </tr>
+  <tr ng-repeat="income in incomes | filter:searchText">
+    <td>{{income.transactionId}}</td>
+    <td>{{income.payer}}</td> 
+    <td>{{income.payee}}</td>
+    <td>{{income.category}}</td>
+    <td>{{income.subCategory}}</td>
+    <td>{{income.amount}}</td>
+    <td>{{income.date}}</td>
+    <td>{{income.modeOfPayment}}</td>
+    <td>{{income.noteType}}</td>
+    <td>
+        <button class="btn btn-danger" ng-click = "deleteIncomeRecord(income)">Delete</button>
+        <button class="btn btn-info" ng-click = "editIncomeRecord(income)">EDIT</button>
+    </td>
+  </tr>
+</table>
+</div>
